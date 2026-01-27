@@ -3,7 +3,7 @@
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| Nerea Blázquez | n.blazquez.2024@alumnos.urjc.es  | User1 |
+| Nerea Blázquez | n.blazquez.2024@alumnos.urjc.es  | Nereablz |
 | Inés Sebastián | i.sebastian.2024@alumnos.urjc.es | User2 |
 |  Sara García   | s.garcial.2024@alumnos.urjc.es   | User3 |
 | Camila Montero | ci.montero.2022@alumnos.urjc.es | User4 |
