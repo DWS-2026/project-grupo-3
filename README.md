@@ -6,22 +6,21 @@
 | Nerea Blázquez | n.blazquez.2024@alumnos.urjc.es  | User1 |
 | Inés Sebastián | i.sebastian.2024@alumnos.urjc.es | User2 |
 |  Sara García   | s.garcial.2024@alumnos.urjc.es   | User3 |
-| Camila Montero Huerto | ci.montero.2022@alumnos.urjc.es | [User4] |
+| Camila Montero Huerto | ci.montero.2022@alumnos.urjc.es | User4 |
 
 ---
 
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
-
+Vamos a crear una aplicación sobre plantas y sus cuidados de manera que cualquier usuario pueda acceder a esta información, además los usuarios registrados podrán añadir nuevas plantas y luego editar su publicación. En esta aplicaión habrá una tienda en la que podrán comprar accesorios para las plantas y un carrito de compra.
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. **[Entidad 1]**: Usuario
+2. **[Entidad 2]**: Producto de la compra
+3. **[Entidad 3]**: Pedido
+4. **[Entidad 4]**: Plantas
 
 **Relaciones entre entidades:**
 - [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
