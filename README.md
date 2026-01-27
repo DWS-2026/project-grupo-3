@@ -17,10 +17,10 @@ Vamos a crear una aplicación sobre plantas y sus cuidados de manera que cualqui
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: Usuario
-2. **[Entidad 2]**: Producto de la compra
-3. **[Entidad 3]**: Pedido
-4. **[Entidad 4]**: Plantas
+1. **Entidad 1**: Usuario
+2. **Entidad 2**: Producto de la compra
+3. **Entidad 3**: Pedido
+4. **Entidad 4**: Plantas
 
 **Relaciones entre entidades:**
 - [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
