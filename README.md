@@ -5,8 +5,8 @@
 |:--- |:--- |:--- |
 | Nerea Blázquez | n.blazquez.2024@alumnos.urjc.es  | Nereablz |
 | Inés Sebastián | i.sebastian.2024@alumnos.urjc.es | iness-1810 |
-|  Sara García   | s.garcial.2024@alumnos.urjc.es   | cmont20 |
-| Camila Montero | ci.montero.2022@alumnos.urjc.es | User4 |
+|  Sara García   | s.garcial.2024@alumnos.urjc.es   | User3 |
+| Camila Montero | ci.montero.2022@alumnos.urjc.es | cmont20 |
 
 ---
 
