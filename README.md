@@ -1,11 +1,11 @@
-# [Nombre de la Aplicación]
+# GreenCare
 
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
 | Nerea Blázquez | n.blazquez.2024@alumnos.urjc.es  | Nereablz |
 | Inés Sebastián | i.sebastian.2024@alumnos.urjc.es | iness-1810 |
-|  Sara García   | s.garcial.2024@alumnos.urjc.es   | User3 |
+|  Sara García   | s.garcial.2024@alumnos.urjc.es   | cmont20 |
 | Camila Montero | ci.montero.2022@alumnos.urjc.es | User4 |
 
 ---
@@ -23,32 +23,54 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 4. **Entidad 4**: Plantas
 
 **Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+- Usuario - Pedido: Un usuario puede realizar múltiples pedidos y cada pedido pertenece a un único usuario (1:N)
+- Pedido - Producto: Un pedido puede contener varios productos y un producto puede aparecer en muchos pedidos distintos (N:M)
+- Usuario - Planta: Un usuario puede registrar múltiples plantas y una planta puede pertenecer a muchos usuarios (N:M)
+- Planta - Producto: Una planta puede necesitar o usar varios productos y un mismo producto puede ser útil para distintas plantas (N:M)
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
 * **Usuario Anónimo**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
+  - Permisos:
+      - Visualizar el catálogo de plantas
+      - Visualizar el catálogo de productos
+      - Buscar plantas y productos
+      - Registrarse 
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permisos:
+      - Gestionar su perfil
+      - Añadir plantas del catálogo a su colección
+      - Ver y gestionar sus propias plantas
+      - Realizar pedidos de productos
+      - Ver el historial de sus pedidos
+      - Consultar productos recomendados para sus plantas 
+  - Es dueño de:
+      - Su perfil de usuario
+      - Sus plantas
+      - Sus propios pedidos
 
 * **Administrador**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permisos:
+      - Gestión completa del catálogo de plantas
+      - Gestión completa del catálogo de productos
+      - Gestión de usuarios
+      - Visualización y gestión de todos los pedidos
+      - Gestión de las relaciones entre plantas y productos
+  - Es dueño de:
+      - Las plantas del catálogo
+      - Los productos
+      - Todos los pedidos
+      - Todos los usuarios
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- **[Entidad con imágenes 1]**: Usuario - Una imagen de avatar por usuario
+- **[Entidad con imágenes 2]**: Planta - Una imagen o varias imágenes por planta
+- **[Entidad con imágenes 3]**: Producto - Múltiples imágenes por producto
 
 ---
 
