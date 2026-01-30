@@ -4,14 +4,7 @@
     box-sizing: border-box;
 }
 
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #E8F5E9;
-    font-family: 'Poppins', sans-serif;
-}
+
 
 
 h1 {
@@ -69,22 +62,4 @@ h1 {
     flex-wrap: wrap;
 }
 
-/*boton*/
-.main-button {
-    padding: 15px 28px;
-    background-color: #66BB6A;
-    color: #fff;
-    border-radius: 30px;
 
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/*Para que cambie de color cuando te pones encima*/
-.main-button:hover {
-    background-color: #388E3C;
-    transform: translateY(-2px);
-}
