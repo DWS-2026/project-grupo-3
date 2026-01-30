@@ -32,6 +32,7 @@ body {
 
 .main-button:hover {
   background-color: #388E3C;
+  border-color: #388E3C;
     transform: translateY(-2px);
   color: #fff;
 }
