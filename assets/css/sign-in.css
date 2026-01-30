@@ -13,27 +13,7 @@ body {
   border-color: #E8F5E9 !important;
   color: #2E7D32;
 }
-.btn-iniciar {
-  background-color: #E8F5E9;
-  border-color: #E8F5E9;
-  color: #2E7D32;
-    border-radius: 50px;
-    box-shadow: none;
-}
 
-.btn-iniciar:hover {
-  background-color: #2E7D32;
-  border-color: #2E7D32;
-  color: #fff;
-  box-shadow: none;
-}
-
-.btn-iniciar:active {
-  background-color: #2E7D32
-  border-color: #2E7D32;
-  color: #fff;
-  box-shadow: none;
-}
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
