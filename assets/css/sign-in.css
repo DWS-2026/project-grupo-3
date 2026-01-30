@@ -2,6 +2,8 @@ html,
 body {
   height: 100%;
   justify-content: center;
+  background-color: #E8F5E9 !important;
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-signin {
@@ -10,10 +12,14 @@ body {
 }
 .btn-primary {
   background-color: #E8F5E9 !important;
-  border-color: #E8F5E9 !important;
+  border-color: #2E7D32 !important;
   color: #2E7D32;
 }
-
+.btn-primary:hover {
+  background-color: #2E7D32 !important;
+  border-color: #2E7D32 !important;
+  color: #FFFFFF;
+}
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
@@ -30,13 +36,6 @@ body {
   border-top-right-radius: 0;
 }
 
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
 
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
@@ -84,35 +83,4 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.btn-bd-primary {
-  --bd-violet-bg: #E8F5E9;
-  --bd-violet-rgb: 232, 245, 233;
 
-  --bs-btn-font-weight: 600;
-  --bs-btn-color: #000;
-  --bs-btn-bg: var(--bd-violet-bg);
-  --bs-btn-border-color: var(--bd-violet-bg);
-
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #C8E6C9;
-  --bs-btn-hover-border-color: #C8E6C9;
-
-  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-
-  --bs-btn-active-color: #000;
-  --bs-btn-active-bg: #A5D6A7;
-  --bs-btn-active-border-color: #A5D6A7;
-}
-
-.bd-mode-toggle {
-  z-index: 1500;
-}
-
-.bd-mode-toggle .bi {
-  width: 1em;
-  height: 1em;
-}
-
-.bd-mode-toggle .dropdown-menu .active .bi {
-  display: block !important;
-}
