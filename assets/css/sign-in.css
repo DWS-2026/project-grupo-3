@@ -1,13 +1,33 @@
 html,
 body {
   height: 100%;
+  justify-content: center;
 }
 
 .form-signin {
   max-width: 330px;
   padding: 1rem;
 }
+.btn-primary {
+  background-color: #E8F5E9 !important;
+  border-color: #E8F5E9 !important;
+  color: #000;
+}
+.btn-iniciar {
+  background-color: #2E7D32;
+  border-color: #2E7D32;
+  color: #fff;
+}
 
+.btn-iniciar:hover {
+  background-color: #256428;
+  border-color: #256428;
+}
+
+.btn-iniciar:active {
+  background-color: #1B5E20;
+  border-color: #1B5E20;
+}
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
@@ -78,7 +98,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* 🔽 AQUÍ ESTABA EL AZUL / VIOLETA */
 .btn-bd-primary {
   --bd-violet-bg: #E8F5E9;
   --bd-violet-rgb: 232, 245, 233;
