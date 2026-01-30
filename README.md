@@ -5,7 +5,7 @@
 |:--- |:--- |:--- |
 | Nerea Blázquez | n.blazquez.2024@alumnos.urjc.es  | Nereablz |
 | Inés Sebastián | i.sebastian.2024@alumnos.urjc.es | iness-1810 |
-|  Sara García   | s.garcial.2024@alumnos.urjc.es   | User3 |
+|  Sara García   | s.garcial.2024@alumnos.urjc.es   | SGL23 |
 | Camila Montero | ci.montero.2022@alumnos.urjc.es | cmont20 |
 
 ---
@@ -18,14 +18,14 @@ Vamos a crear una aplicación sobre plantas y sus cuidados de manera que cualqui
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
 1. **Entidad 1**: Usuario
-2. **Entidad 2**: Producto de la compra
+2. **Entidad 2**: Producto
 3. **Entidad 3**: Pedido
 4. **Entidad 4**: Plantas
 
 **Relaciones entre entidades:**
 - Usuario - Pedido: Un usuario puede realizar múltiples pedidos y cada pedido pertenece a un único usuario (1:N)
 - Pedido - Producto: Un pedido puede contener varios productos y un producto puede aparecer en muchos pedidos distintos (N:M)
-- Usuario - Planta: Un usuario puede registrar múltiples plantas y una planta puede pertenecer a muchos usuarios (N:M)
+- Usuario - Planta: Un usuario puede registrar múltiples plantas y una planta pertenece a un usuario (N:1)
 - Planta - Producto: Una planta puede necesitar o usar varios productos y un mismo producto puede ser útil para distintas plantas (N:M)
 
 ### **Permisos de los Usuarios**
@@ -36,17 +36,16 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
       - Visualizar el catálogo de plantas
       - Visualizar el catálogo de productos
       - Buscar plantas y productos
-      - Registrarse 
+      - Registrarse
+      - Loguearse
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
   - Permisos:
       - Gestionar su perfil
-      - Añadir plantas del catálogo a su colección
       - Ver y gestionar sus propias plantas
       - Realizar pedidos de productos
       - Ver el historial de sus pedidos
-      - Consultar productos recomendados para sus plantas 
   - Es dueño de:
       - Su perfil de usuario
       - Sus plantas
@@ -54,13 +53,10 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 
 * **Administrador**: 
   - Permisos:
-      - Gestión completa del catálogo de plantas
       - Gestión completa del catálogo de productos
       - Gestión de usuarios
       - Visualización y gestión de todos los pedidos
-      - Gestión de las relaciones entre plantas y productos
   - Es dueño de:
-      - Las plantas del catálogo
       - Los productos
       - Todos los pedidos
       - Todos los usuarios

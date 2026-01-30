@@ -1,11 +1,17 @@
 html,
 body {
   height: 100%;
+  justify-content: center;
 }
 
 .form-signin {
   max-width: 330px;
   padding: 1rem;
+}
+.btn-primary {
+  background-color: #E8F5E9 !important;
+  border-color: #E8F5E9 !important;
+  color: #2E7D32;
 }
 
 .form-signin .form-floating:focus-within {
@@ -78,7 +84,6 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* 🔽 AQUÍ ESTABA EL AZUL / VIOLETA */
 .btn-bd-primary {
   --bd-violet-bg: #E8F5E9;
   --bd-violet-rgb: 232, 245, 233;
