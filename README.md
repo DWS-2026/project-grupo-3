@@ -19,7 +19,7 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 
 1. **Entidad 1**: Usuario
 2. **Entidad 2**: Producto
-3. **Entidad 3**: Pedido
+3. **Entidad 3**: Pedido (carrito de la compra)
 4. **Entidad 4**: Plantas
 
 **Relaciones entre entidades:**
