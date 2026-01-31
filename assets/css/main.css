@@ -3,10 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-
-
-
 h1 {
     font-size: 4rem;
     font-weight: 500;
@@ -22,7 +18,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/*boton*/
+
 .main-button {
   background-color: #66BB6A;
   border-color: #66BB6A;
@@ -37,8 +33,28 @@ body {
   color: #fff;
 }
 
-@media (min-width: 768px) {
+/*Contenedor de botones*/
+.buttons-container {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/*Parte responsive*/
+@media (max-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
+  .main-button {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+  .buttons-container {
+        flex-wrap: wrap;
+        width: 100%;
+  }
 }
+

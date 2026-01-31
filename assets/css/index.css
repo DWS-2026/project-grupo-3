@@ -39,13 +39,6 @@
   text-decoration: none; /* quita subrayado del link */
 }
 
-/*Contenedor de botones*/
-.buttons-container {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+
 
 
