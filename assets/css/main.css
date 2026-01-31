@@ -1,13 +1,8 @@
+/*general*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-h1 {
-    font-size: 4rem;
-    font-weight: 500;
-    color: #2E7D32;
-    letter-spacing: 2px;
 }
 body {
     height: 100vh;
@@ -18,7 +13,17 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+h1 {
+    font-size: 4rem;
+    font-weight: 500;
+    color: #2E7D32;
+    letter-spacing: 2px;
+}
+.change-color{
+  color: #2E7D32 !important;
+}
 
+/*botones*/
 .main-button {
   background-color: #66BB6A;
   border-color: #66BB6A;
