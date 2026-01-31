@@ -11,7 +11,7 @@
 </head>
 <body class="d-flex align-items-center py-4">
 </div>
-<main class="form-signin w-100 m-auto">
+<main class="form-signin w-100 m-auto" id="login-form">
     <form>
         <img
                 class="mb-4"
@@ -21,17 +21,16 @@
                 height="57"
         />
         <h3 class="h3 mb-3 fw-normal change-color">Por favor, inicia sesión o regístrate</h3>
-        <div class="form-floating">
+        <div class="form-floating" id="email">
             <input
                     type="email"
                     class="form-control"
                     id="floatingInput"
                     placeholder=""
-                    pattern=".*@.*" required
             />
             <label for="floatingInput">Dirección Email</label>
         </div>
-        <div class="form-floating">
+        <div class="form-floating" id="password">
             <input
                     type="password"
                     class="form-control"
@@ -53,11 +52,31 @@
         </div>
         <div class="buttons-container">
             <button href="index.html" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Iniciar Sesión / Registrarse</button>
-            <a href="index.html" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Volver al inicio</a>
         </div>
         
         <p class="mt-5 mb-3 text-body-secondary">&copy; 2026</p>
     </form>
 </main>
+<script>
+    // Seleccionar el formulario
+    const loginForm = document.getElementById('login-form');
+    
+    
+    loginForm.addEventListener('submit', function(event) {// cuando envias el formulario
+        event.preventDefault();  // Evitar recarga de página
+        
+        const username = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        
+        if (username !==  null && password !== null) {  
+            localStorage.setItem('isLoggedIn', 'true');
+            window.location.href = 'index.html';  // Redirigir al inicio
+        } else {
+            alert('Credenciales incorrectas');
+        }
+    });
+</script>
+
 </body>
 </html>
