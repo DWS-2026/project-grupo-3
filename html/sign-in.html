@@ -26,7 +26,7 @@
                     type="email"
                     class="form-control"
                     id="floatingInput"
-                    placeholder=""
+                    placeholder="" required
             />
             <label for="floatingInput">Dirección Email</label>
         </div>
@@ -35,7 +35,7 @@
                     type="password"
                     class="form-control"
                     id="floatingPassword"
-                    placeholder=""
+                    placeholder="" required
             />
             <label for="floatingPassword">Contraseña</label>
         </div>
@@ -69,12 +69,9 @@
         const password = document.getElementById('password').value;
         
         
-        if (username !==  null && password !== null) {  
             localStorage.setItem('isLoggedIn', 'true');
             window.location.href = 'index.html';  // Redirigir al inicio
-        } else {
-            alert('Credenciales incorrectas');
-        }
+
     });
 </script>
 
