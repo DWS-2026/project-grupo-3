@@ -19,8 +19,13 @@
     z-index: 1000;
 }
 
+.topbar-btn {
+    display: flex;
+    align-items: center;      /* centra vertical */
+    justify-content: center;  /* centra horizontal */
+    max-height: 40px;
+}
 
-/*Para el circulo del avatar*/
 
 .user-avatar {
     width: 35px;
