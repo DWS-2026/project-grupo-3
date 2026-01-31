@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<header class="top-bar">
+<header class="top-bar" id="user-options">
     <a href="user.html" class="user-avatar" aria-label="Ir a perfil de usuario">
         👤
     </a>
@@ -36,7 +36,7 @@
 </div>
 <script>
     const logoutbtn = document.getElementById('logout-btn');
-
+    const useroptions = document.getElementById('user-options');
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';// ¿usuario logueado?
     
     if (isLoggedIn) {
@@ -45,7 +45,7 @@
             loginBtn.style.display = 'none';
         }
     } else {
-        logoutbtn.style.display = 'none';
+        useroptions.style.display = 'none';
     }
 
     if (logoutbtn) {
