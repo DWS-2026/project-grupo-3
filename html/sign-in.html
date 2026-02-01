@@ -68,9 +68,10 @@
         const password = document.getElementById('floatingPassword').value;
         
         
-        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('isLoggedIn', 'true'); //NO hacer, quitar super inseguro
         if(username==="admin@gmail.com" && password === "admin"){
-            localStorage.setItem('isAdmin', 'true');
+            localStorage.setItem('isAdmin', 'true'); //SE puede crear esta variable con este nombre y ponerlo a true
+            //SUPER PELIGROSO, eliminar cuanto antes y hacerlo en el backend sin variables locales pochas
         }
         window.location.href = 'index.html';  // Redirigir al inicio
 
