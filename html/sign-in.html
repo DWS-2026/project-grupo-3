@@ -10,7 +10,6 @@
 
 </head>
 <body class="d-flex align-items-center py-4">
-</div>
 <main class="form-signin w-100 m-auto" id="login-form">
     <form>
         <img
@@ -58,19 +57,25 @@
     </form>
 </main>
 <script>
-    // Seleccionar el formulario
+
     const loginForm = document.getElementById('login-form');
     
     
     loginForm.addEventListener('submit', function(event) {// cuando envias el formulario
         event.preventDefault();  // Evitar recarga de página
         
-        const username = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const username = document.getElementById('floatingInput').value;
+        const password = document.getElementById('floatingPassword').value;
         
         
-            localStorage.setItem('isLoggedIn', 'true');
-            window.location.href = 'index.html';  // Redirigir al inicio
+        localStorage.setItem('isLoggedIn', 'true');
+        if(username==="admin@gmail.com" && password === "admin"){
+            localStorage.setItem('isAdmin', 'true');
+        }
+        window.location.href = 'index.html';  // Redirigir al inicio
+
+
+
 
     });
 </script>
