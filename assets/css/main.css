@@ -126,6 +126,7 @@ h1 {
 .footer-global {
     background-color: #2E7D32;
     color: #ffffff;
+    margin-top: auto;
     padding: 15px 10px;
     front-size: 0.9rem;
     margin-top: 0;
