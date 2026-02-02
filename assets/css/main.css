@@ -55,7 +55,9 @@ h1 {
 .icons {
     width: 35px;
     height: 35px;
+    box-shadow: none !important;
     background-color: #fff;
+    border-color: #fff;
     border-radius: 50%;
 
     display: flex;

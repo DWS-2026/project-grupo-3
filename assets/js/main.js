@@ -1,11 +1,10 @@
 	function ocultarOpciones() {
 
-		if (window.location.pathname.includes('sign-in.html')) {
-			const changeuser = document.getElementById('changeuser-btn');
-			if (changeuser) {
-				changeuser.style.display = 'none';
+		if (window.location.pathname.includes('catalogoProductos.html')) {
+			const productos= document.getElementById('productos');
+			if (productos) {
+				productos.style.display = 'none';
 			}
-
 		}
 
 		if (window.location.pathname.includes('index.html')) {
@@ -19,7 +18,19 @@
 					loginbtn.style.display = 'none';
 				}
 			}
+			const productos= document.getElementById('productos');
+			if (productos) {
+				productos.style.display = 'none';
+			}
 		}
+
+		if (window.location.pathname.includes('sign-in.html')) {
+			const changeuser = document.getElementById('changeuser-btn');
+			if(changeuser){
+				changeuser.style.display = 'none';
+			}
+		}
+		
 
 		if (window.location.pathname.includes('carroCompra.html')) {
 			const cartbtn = document.getElementById('cart-options');
@@ -27,6 +38,7 @@
 				cartbtn.style.display = 'none';
 			}
 		}
+
 	}
 	
 	$(function(){   
