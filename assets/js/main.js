@@ -42,7 +42,7 @@
 	}
 	
 	$(function(){   
-		$("#footer-placeholder").load("footer.html");
+		$("#footer-global").load("footer.html");
 		ocultarOpciones();
 	});
     $(function(){   
