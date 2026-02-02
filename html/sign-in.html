@@ -69,7 +69,7 @@
         
         
         localStorage.setItem('isLoggedIn', 'true'); //NO hacer, quitar super inseguro
-        if(username==="admin@gmail.com" && password === "admin"){
+        if(username==="admin@gmail.com" && password === "admin"){ //NO contraseñas en claro
             localStorage.setItem('isAdmin', 'true'); //SE puede crear esta variable con este nombre y ponerlo a true
             //SUPER PELIGROSO, eliminar cuanto antes y hacerlo en el backend sin variables locales pochas
         }
