@@ -1,32 +1,5 @@
 
 
-/*Barra superior*/
-
-.top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 50px;
-
-    background-color: #C8E6C9;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 20px;
-
-    z-index: 1000;
-}
-
-.topbar-btn {
-    display: flex;
-    align-items: center;      /* centra vertical */
-    justify-content: center;  /* centra horizontal */
-    max-height: 40px;
-}
-
-
 .user-avatar {
     width: 35px;
     height: 35px;

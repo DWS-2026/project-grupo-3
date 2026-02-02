@@ -17,7 +17,9 @@
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';// ¿usuario logueado?
         const isAdmin = localStorage.getItem('isAdmin') === 'true';// ¿usuario logueado?
         if (isLoggedIn) {
+            if(loginbtn){
                 loginbtn.style.display = 'none';
+            }
             if(!isAdmin){
                 adminbtn.style.display = 'none';
             }
