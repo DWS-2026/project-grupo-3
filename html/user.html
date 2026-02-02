@@ -36,24 +36,31 @@
 
             <!-- Botones debajo de los datos -->
             <div class="botones">
-                <button class="editar">Editar perfil</button>
-                <button class="compartir">Compartir</button>
+                <button class="main-button">Editar perfil</button>
+                <button class="main-button">Publicar</button>
             </div>
         </div>
     </div>
 
-    <!-- Galería de fotos -->
-    <div class="galeria">
-        <div class="foto-item">
-            <img src="foto1.jpg" alt="Foto 1">
-            <p class="descripcion">Descripción de la foto 1</p>
-        </div>
+<!-- Galería de fotos -->
+<div class="galeria row g-3">
 
-        <div class="foto-item">
-            <img src="foto2.jpg" alt="Foto 2">
-            <p class="descripcion">Descripción de la foto 2</p>
-        </div>
+    <div class="col-md-20">
+        <button type="button" class="btn btn-light w-100 p-0 foto-item">
+            <img src="foto1.jpg" alt="Foto 1" class="img-fluid rounded">
+            <p class="descripcion mt-2 mb-0">Descripción de la foto 1</p>
+        </button>
     </div>
+
+    <div class="col-md-9">
+        <button type="button" class="btn btn-light w-100 p-0 foto-item">
+            <img src="foto2.jpg" alt="Foto 2" class="img-fluid rounded">
+            <p class="descripcion mt-2 mb-0">Descripción de la foto 2</p>
+        </button>
+    </div>
+
+</div>
+
 
 </div>
 </body>

@@ -99,8 +99,3 @@ body {
     background-color: #4CAF50;
     color: white;
 }
-
-/* Efecto hover */
-.botones button:hover {
-    opacity: 0.9;
-}
