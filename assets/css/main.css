@@ -5,11 +5,16 @@
     box-sizing: border-box;
 }
 body {
-    height: 100vh;
+    padding-top: 50px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #E8F5E9;
     font-family: 'Poppins', sans-serif;
+}
+
+-main-content{
+    flex: 1;
 }
 
 h1 {
@@ -120,7 +125,7 @@ h1 {
 .footer-global {
     background-color: #2E7D32;
     color: #ffffff;
-    margin-top: 80px;
+    margin-top: 0;
     font-family: 'Poppins', sans-serif;
 }
 
