@@ -6,6 +6,7 @@
                     👤
                 </a>
                 <a href="index.html" id="goback-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Volver al inicio</a>
+                <a href="sign-in.html" id="changeuser-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Cambiar de usuario</a>
                 <button id="logout-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Log out</button>
                 <button id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Admin panel</button>
             </header>
@@ -16,7 +17,8 @@
         const adminbtn = document.getElementById('admin-btn');
         const useroptions = document.getElementById('user-options');
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';// ¿usuario logueado?
-        const isAdmin = localStorage.getItem('isAdmin') === 'true';// ¿usuario logueado?
+        const isAdmin = localStorage.getItem('isAdmin') === 'true';// ¿es admin?
+        const changeuser = document.getElementById('changeuser-btn');
         if (isLoggedIn) {
             if(loginbtn){
                 loginbtn.style.display = 'none';
@@ -28,8 +30,19 @@
             useroptions.style.display = 'none';
             adminbtn.style.display = 'none';
             logoutbtn.style.display = 'none';
-        }
+            changeuser.style.display = 'none';
 
+        }
+        if (window.location.pathname.includes('sign-in.html')) {
+            if (changeuser) {
+                changeuser.style.display = 'none';
+            }
+        }
+        if (window.location.pathname.includes('index.html')) {
+            if (document.getElementById('goback-btn')) {
+               document.getElementById('goback-btn').style.display = 'none';
+            }
+        }
         if (logoutbtn) {
             logoutbtn.addEventListener('click', function() {
                 localStorage.removeItem('isLoggedIn');
