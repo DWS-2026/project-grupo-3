@@ -22,6 +22,10 @@
 			if (productos) {
 				productos.style.display = 'none';
 			}
+			const plantitas= document.getElementById('plantitas');
+			if (plantitas) {
+				plantitas.style.display = 'none';
+			}
 		}
 
 		if (window.location.pathname.includes('sign-in.html')) {
@@ -36,6 +40,13 @@
 			const cartbtn = document.getElementById('cart-options');
 			if(cartbtn){
 				cartbtn.style.display = 'none';
+			}
+		}
+
+		if (window.location.pathname.includes('catalogoPlantas.html')) {
+			const plantitas= document.getElementById('plantitas');
+			if (plantitas) {
+				plantitas.style.display = 'none';
 			}
 		}
 

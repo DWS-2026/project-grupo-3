@@ -41,7 +41,7 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
         <div class="col">
-          <div class="card shadow-sm h-100" data-precio="12.99">
+          <div class="card shadow-sm h-100 planta">
             <div class="card-img-container">
               <img src="../images/plantas/suculenta.webp" class="card-img-top" alt="Fertilizante" />
             </div>
@@ -62,7 +62,12 @@
         star.classList.toggle('bi-star-fill');  // si está vacía la cambia a rellena
         star.classList.toggle('estrella-favorito'); //si no está dorada la pone a dorada y viceversa
     });
-});
+  });
+  if(localStorage.getItem('isLoggedIn') !== 'true'){
+    document.querySelectorAll('.planta').forEach(elem => {
+        elem.style.display = 'none';
+    });
+  }
 </script>
 </body>
 </html>
