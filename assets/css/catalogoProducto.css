@@ -1,0 +1,42 @@
+.card {
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body .mt-auto {
+    margin-top: auto;
+}
+
+
+/* Anular el body centrado de main.css para esta página */
+body {
+    height: auto !important;
+    display: block !important;
+    justify-content: unset !important;
+    align-items: unset !important;
+}
+
+.card-img-container {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+.card-img-container img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+
