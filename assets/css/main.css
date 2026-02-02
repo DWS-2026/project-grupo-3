@@ -45,6 +45,23 @@ h1 {
     justify-content: center;  /* centra horizontal */
     max-height: 40px;
 }
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+
+  text-decoration: none; /* quita subrayado del link */
+}
 .change-color{
   color: #2E7D32 !important;
 }
