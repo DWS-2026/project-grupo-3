@@ -45,8 +45,14 @@ h1 {
     justify-content: center;  /* centra horizontal */
     max-height: 40px;
 }
+.icon-group {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* separación limpia y responsive */
+}
 
-.user-avatar {
+
+.icons {
     width: 35px;
     height: 35px;
     background-color: #fff;
@@ -61,6 +67,9 @@ h1 {
     cursor: pointer;
 
   text-decoration: none; /* quita subrayado del link */
+}
+.icons:hover {
+    transform: translateY(-2px);
 }
 .change-color{
   color: #2E7D32 !important;
