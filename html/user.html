@@ -22,23 +22,26 @@
 <body>
 <div id="header-global"></div>
 <div class="perfil">
+    <h2 class="titulo-perfil">Mi Perfil</h2>
+
 
     <!-- CABECERA PERFIL -->
     <div class="perfil-header mb-4">
-        <img src="perfil.jpg" alt="Foto de perfil" class="foto-perfil">
+        <div class="foto-perfil">
+        </div>
 
         <div class="info-principal">
-            <h1 class="nombre-usuario">NombreUsuario</h1>
+            <h1 class="nombre-usuario">Nombre Usuario</h1>
 
-            <div class="datos">
-                <p>Edad: 20 años</p>
-                <p>Ciudad: Madrid</p>
-                <p>Intereses: Programación, diseño web</p>
+            <div class="datos-box">
+                <textarea id="descripcion-usuario" placeholder="Añade una descripción sobre ti." disabled></textarea>
             </div>
 
+
+
             <div class="botones">
-                <button class="editar">Editar perfil</button>
-                <button class="compartir">Publicar</button>
+                <button class="main-button">Editar perfil</button>
+                <button class="main-button">Publicar</button>
             </div>
         </div>
     </div>
@@ -66,22 +69,6 @@
     </button>
 </div>
 
-
-        <!-- MIS PEDIDOS -->
-        <div class="col-md-6 col-lg-4">
-            <button class="card card-publicacion w-100 text-start">
-                <div class="card-body d-flex">
-                    <div class="icono me-3">
-                        🛒
-                    </div>
-                    <div>
-                        <h5>Mis pedidos</h5>
-                        <p>Gestiona aquí tus pedidos.</p>
-                    </div>
-                </div>
-            </button>
-        </div>
-
         <!-- NUEVA PUBLICACIÓN -->
         <div class="col-md-6 col-lg-4">
             <button class="card card-publicacion w-100 text-start">
@@ -92,6 +79,21 @@
                     <div>
                         <h5>Nueva publicación</h5>
                         <p>Sube una imagen y añade una descripción.</p>
+                    </div>
+                </div>
+            </button>
+        </div>
+        
+        <!-- MIS PEDIDOS -->
+        <div class="col-md-6 col-lg-4">
+            <button class="card card-publicacion w-100 text-start">
+                <div class="card-body d-flex">
+                    <div class="icono me-3">
+                        🛒
+                    </div>
+                    <div>
+                        <h5>Mis pedidos</h5>
+                        <p>Gestiona aquí tus pedidos.</p>
                     </div>
                 </div>
             </button>
