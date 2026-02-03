@@ -21,21 +21,12 @@
     <script>
         const logoutbtn = document.getElementById('logout-btn');
         const adminbtn = document.getElementById('admin-btn');
-        ocultarOpciones();
-
-        if (localStorage.getItem('isLoggedIn') === 'true') { //¿está logueado?
-            const isAdmin = localStorage.getItem('isAdmin') === 'true';// ¿es admin?
-            if(!isAdmin){
-                adminbtn.style.display = 'none';
-            }
-        } else { //querySelectorAll te devuelve directamente una lista enlazada con los elementos de esa clase
+        if(localStorage.getItem('isLoggedIn') !== 'true') { //querySelectorAll te devuelve directamente una lista enlazada con los elementos de esa clase
             document.querySelectorAll('.login-options').forEach(el => { //selecciona todos los elem de la clase login-options
                 el.style.display = 'none';
             });
 
         }
-        
-
 
         if (logoutbtn) {
             logoutbtn.addEventListener('click', function() {
