@@ -17,13 +17,13 @@
     <link rel="stylesheet" href="../assets/css/main.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="../assets/js/main.js"></script>
-    <link rel="stylesheet" href="../assets/css/editProfile.css">
+        <link rel="stylesheet" href="../assets/css/forms-general.css">
 </head>
 <body>
 <div id="header-global"></div>
 
-<main class="header-main d-flex justify-content-center align-items-center flex-column">
-
+<main class="form-signin m-auto">
+<form class="text-center" action="index.html" enctype="multipart/form-data">
     <h2 class="titulo-perfil">Editar perfil</h2>
 
     <!-- FOTO DE PERFIL -->
@@ -32,12 +32,28 @@
         <span>+</span>
     </label>
 
-    <!-- NOMBRE -->
-    <div class="campo-edicion">
-        <label>Nombre Usuario</label>
-        <input type="text" placeholder="Escribe tu nombre de usuario">
-        <label>Descripción</label>
-        <textarea placeholder="Cuéntanos algo sobre ti..."></textarea>
+
+    <!-- Nombre de la planta -->
+    <div class="form-floating mb-3">
+      <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Escribe tu nombre de usuario"
+      />
+      <label for="username">Nombre de Usuario</label>
+    </div>
+
+    <!-- Descripción -->
+    <div class="form-floating mb-3">
+        <textarea
+                class="form-control"
+                placeholder="Descripción"
+                id="plantDescription"
+                style="height: 120px"
+                required
+        ></textarea>
+      <label for="Description">Descripción</label>
     </div>
 
     <!-- BOTONES -->
@@ -45,7 +61,7 @@
         <button class="btn btn-success rounded-pill px-4 py-3 main-button">Guardar cambios</button>
         <a href="user.html" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
     </div>
-
+</form>
 </main>
 
 <div id="footer-global"></div>

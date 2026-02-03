@@ -1,4 +1,4 @@
-	function hideOptionsAdmin(cartbtn,headerbtnToCatalogPlants){
+	function hideOptionsForAdmin(cartbtn,headerbtnToCatalogPlants){
 		if(localStorage.getItem('isAdmin') === 'true'){
 			if(cartbtn){
 				cartbtn.style.display = 'none';
@@ -13,9 +13,9 @@
 			document.querySelectorAll('.addToCartbtn').forEach(btn => { //esto es para eliminar flechas si solo hay una imagen
 				btn.style.display = 'none';
 			});
-		} else{
-			const adminbtn = document.getElementById('admin-btn');
-			adminbtn.style.display = 'none';
+		} else{ //si no eres el admin, entonces no tienes panel de admin
+			const adminPanel = document.getElementById('admin-btn');
+			adminPanel.style.display = 'none';
 		}
 	}
 	function hideOptionsMainPage(){
@@ -43,7 +43,8 @@
 	function hideOptions() {
 		const cartbtn = document.getElementById('cart-options');
 		const headerbtnToCatalogPlants= document.getElementById('plantitas');
-		hideOptionsAdmin(cartbtn,headerbtnToCatalogPlants);
+
+		hideOptionsForAdmin(cartbtn,headerbtnToCatalogPlants);
 		hideOptionsMainPage();
 
 		if (window.location.pathname.includes('catalogoProductos.html')) {
@@ -78,7 +79,6 @@
 	
 	$(function(){   
 		$("#footer-global").load("footer.html");
-		hideOptions();
 	});
     $(function(){   
 		$("#header-global").load("header.html");
