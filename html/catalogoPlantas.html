@@ -230,6 +230,14 @@
     });
 
   }
+  document.querySelectorAll('.carousel').forEach(carousel => {
+    const items = carousel.querySelectorAll('.carousel-item');
+    const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+
+    if (items.length <= 1) {
+      controls.forEach(control => control.style.display = 'none');
+    }
+  });
 </script>
 
 <div id="footer-global"></div>
