@@ -5,6 +5,11 @@ body {
     justify-content: unset !important;
     align-items: unset !important;
 }
+main {
+    max-width: 1000px; /* ancho máximo para que no se salga */
+    margin: 0 auto; /* centrar */
+    padding: 20px;
+}
 .carrito-card {
     display: flex;
     align-items: center;
