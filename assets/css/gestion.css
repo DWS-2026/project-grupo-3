@@ -12,6 +12,9 @@
   border: 1px solid rgba(112.520718, 44.062154, 249.437846, .3);
 }
 table {
-  width: 70%;        /* o 60%, 50%… */
-  margin: 0 auto;    /* margen izqda y dcha automático */
+  width: 70%;          /* Ocupa solo el 70% de la pantalla */
+  max-width: 900px;
+  margin: 40px auto;  /* Centrada con margen arriba y abajo */
+  background-color: white;
+  overflow: hidden;
 }
