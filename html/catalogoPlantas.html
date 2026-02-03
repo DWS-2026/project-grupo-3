@@ -46,7 +46,7 @@
               <img src="../images/plantas/suculenta.webp" class="card-img-top" alt="Fertilizante" />
             </div>
             <div class="card-body d-flex flex-column">
-              <h5 class="h5 change-color">Suculenta</h5>
+              <h5 class="h5 change-color">Plantita ejemplo 1: Suculenta</h5>
               <p class="card-text">Plantita que no requiere de mucha atención parecida al cactus.</p>
               <p class="card-text fw-bold">Regar cada 5 días</p>
                 <i class="bi bi-star"></i>
@@ -55,6 +55,41 @@
             </div>
           </div>
         </div>
+    </div>
+  </div>
+   <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+                <div class="col">
+                  <div class="card shadow-sm h-100 planta-example">
+                    <div class="card-img-container">
+                      <img src="../images/plantas/suculenta.webp" class="card-img-top" alt="Fertilizante" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="h5 change-color">Plantita ejmplo 1: Suculenta</h5>
+                      <p class="card-text">Plantita que no requiere de mucha atención parecida al cactus.</p>
+                      <p class="card-text fw-bold">Regar cada 5 días</p>
+                        <i class="bi bi-star"></i>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm h-100 planta-example">
+                    <div class="card-img-container">
+                      <img src="../images/plantas/suculenta.webp" class="card-img-top" alt="Fertilizante" />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                      <h5 class="h5 change-color">Plantita ejemplo 2: Suculenta</h5>
+                      <p class="card-text">Plantita que no requiere de mucha atención parecida al cactus.</p>
+                      <p class="card-text fw-bold">Regar cada 5 días</p>
+                        <i class="bi bi-star"></i>
+
+                    </div>
+                  </div>
+                </div>
+      </div>
     </div>
   </div>
 </main>
@@ -70,6 +105,11 @@
     document.querySelectorAll('.planta').forEach(elem => {
         elem.style.display = 'none';
     });
+  } else{
+    document.querySelectorAll('.planta-example').forEach(elem => {
+        elem.style.display = 'none';
+    });
+
   }
 </script>
 
