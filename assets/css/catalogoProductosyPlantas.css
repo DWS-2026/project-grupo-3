@@ -43,4 +43,15 @@ body {
     color: gold;
 }
 
+.trash-icon {
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s ease;
+}
+
+.trash-icon.active {
+    color: #d32f2f; 
+}
+
 
