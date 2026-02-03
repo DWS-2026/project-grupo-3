@@ -1,8 +1,0 @@
-.form-planta {
-    max-width: 630px;
-    padding: 1rem;
-}
-
-.form-planta .form-floating:focus-within {
-    z-index: 2;
-}
