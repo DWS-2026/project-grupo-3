@@ -11,12 +11,13 @@
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
   <!-- CSS propio -->
   <link rel="stylesheet" href="../assets/css/main.css">
-  <link rel="stylesheet" href="../assets/css/catalogoProductosyPlantas.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/catalogoProducto.css">
+
+  <!--Iconos bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"> 
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   <script src="../assets/js/main.js"></script>
@@ -37,7 +38,7 @@
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
                     <div class="col">
                       <div class="card shadow-sm h-100 plant">
@@ -226,7 +227,6 @@
     </div>
   </div>
 </main>
-<footer id="footer-global"></footer>
 <script>
   document.querySelectorAll('.bi-star').forEach(star => {
     star.addEventListener('click', () => { //toggle cambia la clase de un elemento y funciona como un interruptor
@@ -235,35 +235,14 @@
         star.classList.toggle('estrella-favorito'); //si no está dorada la pone a dorada y viceversa
     });
   });
-
-  document.querySelectorAll('.trash-icon').forEach(icon => {
-    icon.addEventListener('click', () => {
-      icon.classList.toggle('active');
-    });
-  });
-
-
   if(localStorage.getItem('isLoggedIn') !== 'true'){
-    document.querySelectorAll('.plant').forEach(elem => {
+    document.querySelectorAll('.planta').forEach(elem => {
         elem.style.display = 'none';
     });
-  } else{
-    document.querySelectorAll('.plant-example').forEach(elem => {
-        elem.style.display = 'none';
-    });
-
   }
-  document.querySelectorAll('.carousel').forEach(carousel => { //esto es para eliminar flechas si solo hay una imagen
-    const items = carousel.querySelectorAll('.carousel-item'); //imágenes que hay
-    const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
-
-    if (items.length <= 1) {
-      controls.forEach(control => control.style.display = 'none');
-    }
-  });
 </script>
 
-
+<div id="footer-global"></div>
 
 </body>
 </html>
