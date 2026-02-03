@@ -19,10 +19,9 @@
     <script src="../assets/js/main.js"></script>
 </head>
 <body>
-
 <div id="header-global"></div>
-<main>
-<div class="header-main">
+
+<main class="header-main d-flex flex-column">
     <h1 class="mb-4">Tu Carrito</h1>
     <div id="carrito-container"></div>
     <p id="total" class="total-container"></p>
@@ -30,8 +29,10 @@
         <a href="pago.html" class="btn pago-btn main-button">Procesar al pago</a>
     </div>
 
-</div>
 </main>
+
+<div id="footer-global"></div>
+
 <script>
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const container = document.getElementById('carrito-container');
@@ -95,8 +96,6 @@
     // Render inicial
     renderCarrito();
 </script>
-
-<footer id="footer-global" class="footer-global"></footer>
 
 </body>
 </html>
