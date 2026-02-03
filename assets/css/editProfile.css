@@ -60,3 +60,17 @@
     border-color: #4CAF50;
     background-color: #fff;
 }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #E8F5E9;
+    color: #2E7D32;
+    margin: 0;
+
+    /* CENTRADO */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    padding: 20px;
+}
