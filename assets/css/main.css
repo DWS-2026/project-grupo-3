@@ -125,13 +125,6 @@ h1 {
 
   }
 }
-footer{
-   position:fixed;
-   left:0px;
-   bottom:0px;
-   height:30px;
-   width:100%;
-}
 /* Footer*/
 .footer-global {
     background-color: #1B5E20;
@@ -140,6 +133,9 @@ footer{
     padding: 15px 10px;
     font-size: 0.9rem;
     font-family: 'Poppins', sans-serif;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 
 .footer-top {
