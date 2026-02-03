@@ -130,7 +130,7 @@ h1 {
 
 /* Footer*/
 .footer-global {
-    background-color: #2E7D32;
+    background-color: #1B5E20;
     color: #ffffff;
     margin-top: auto;
     padding: 15px 10px;
@@ -142,9 +142,8 @@ h1 {
 .footer-top {
     display: flex;
     justify-content: space-between;
-    background-color: #E8F5E9;
-    gap: 40px;
-    padding: 50px 10%;
+    background-color: #1B5E20;
+    color: #ffffff;
     flex-wrap: wrap;
 }
 
@@ -154,33 +153,33 @@ h1 {
 }
 
 .footer-section h3{
-  color: #000000;
+  color: #ffffff;
 }
 .footer-section h4 {
     margin-bottom: 15px;
-    color: #000000;
+    color: #ffffff;
 }
 
 .footer-section p{
-  color: #000000
+  color: #ffffff
 }
 .footer-section li {
     font-size: 0.95rem;
     line-height: 1.6;
-      color: #000000;
+      color: #ffffff;
 
 }
 
 .footer-section ul {
     list-style: none;
-      color: #000000;
+      color: #ffffff;
 
     padding: 0;
 }
 
 .footer-section li {
     margin-bottom: 8px;
-      color: #000000;
+      color: #ffffff;
 
 }
 
