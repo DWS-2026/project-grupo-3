@@ -125,7 +125,13 @@ h1 {
 
   }
 }
-
+footer{
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+}
 /* Footer*/
 .footer-global {
     background-color: #1B5E20;
@@ -133,7 +139,6 @@ h1 {
     margin-top: auto;
     padding: 15px 10px;
     font-size: 0.9rem;
-    margin-top: 0;
     font-family: 'Poppins', sans-serif;
 }
 
