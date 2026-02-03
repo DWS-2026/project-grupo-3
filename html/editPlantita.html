@@ -20,24 +20,28 @@
     <link rel="stylesheet" href="../assets/css/editProfile.css">
 </head>
 <body>
-<div id="header-global"></div>
+<nav id="header-global"></nav>
 
 <main class="header-main d-flex justify-content-center align-items-center flex-column">
 
     <h2 class="titulo-perfil">Editar plantita</h2>
 
     <!-- FOTO DE PERFIL -->
+             <a>Cambiar foto principal</a>
     <label class="foto-editar">
+
         <input type="file" hidden>
         <span>+</span>
     </label>
 
     <!-- NOMBRE -->
     <div class="campo-edicion">
-        <label>Nombre Usuario</label>
+        <label>Nombre Nuevo de Plantita</label>
         <input type="text" placeholder="Cambia el nombre a tu plantita">
+        <label>¿Cada cuánto hay que regarla?</label>
+        <textarea placeholder="Incluye días, tipo de abono..."></textarea>
         <label>Descripción</label>
-        <textarea placeholder="¿Cada cuánto hay que regarla?..."></textarea>
+        <textarea placeholder="Incluye días, tipo de abono..."></textarea>
     </div>
 
     <!-- BOTONES -->
