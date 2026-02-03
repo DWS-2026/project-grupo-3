@@ -19,13 +19,15 @@
     <script src="../assets/js/main.js"></script>
 </head>
 <body>
+
 <div id="header-global"></div>
-<div class="container py-5">
+<main>
+<div class="header-main">
     <h1 class="mb-4">Tu Carrito</h1>
     <div id="carrito-container"></div>
     <p id="total" class="total-container"></p>
 </div>
-
+</main>
 <script>
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const container = document.getElementById('carrito-container');
