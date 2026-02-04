@@ -13,7 +13,7 @@
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-Vamos a crear una aplicación sobre plantas y sus cuidados de manera que cualquier usuario pueda acceder a esta información, además los usuarios registrados podrán añadir nuevas plantas y luego editar su publicación. En esta aplicaión habrá una tienda en la que podrán comprar accesorios para las plantas y un carrito de compra.
+Vamos a crear una aplicación sobre plantas y sus cuidados de manera que cualquier usuario pueda acceder a esta información, además los usuarios registrados podrán añadir nuevas plantas, editar su publicación y poder ver sus pedidos realizados. En esta aplicación habrá una tienda en la que podrán comprar productos para las plantas y un carrito de compra.
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
@@ -33,9 +33,9 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 
 * **Usuario Anónimo**: 
   - Permisos:
-      - Visualizar el catálogo de plantas
+      - Visualizar el catálogo de plantas disponible para un usuario anónimo
       - Visualizar el catálogo de productos
-      - Buscar plantas y productos
+      - Realizar pedidos de productos
       - Registrarse
       - Loguearse
   - No es dueño de ninguna entidad
@@ -66,7 +66,7 @@ Indicar qué entidades tendrán asociadas una o varias imágenes:
 
 - **[Entidad con imágenes 1]**: Usuario - Una imagen de avatar por usuario
 - **[Entidad con imágenes 2]**: Planta - Una imagen o varias imágenes por planta
-- **[Entidad con imágenes 3]**: Producto - Múltiples imágenes por producto
+- **[Entidad con imágenes 3]**: Producto - Una imagen por producto
 
 ---
 
