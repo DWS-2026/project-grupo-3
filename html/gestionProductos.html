@@ -113,6 +113,40 @@
     </div>
 </main>
 
+<script>
+    document.getElementById("edit-selected").addEventListener("click", () => {
+        const filas = document.querySelectorAll("#product-table tr");
+        let seleccionado = null;
+
+        filas.forEach(fila => {
+            const checkbox = fila.querySelector("input[type='checkbox']");
+            if (checkbox && checkbox.checked) {
+                if (seleccionado) {
+                    alert("Solo puedes editar un producto a la vez");
+                    seleccionado = null;
+                    return;
+                }
+                seleccionado = fila;
+            }
+        });
+
+        if (!seleccionado) {
+            alert("Selecciona un producto para editar");
+            return;
+        }
+
+        const producto = {
+            nombre: seleccionado.children[1].innerText,
+            precio: seleccionado.children[2].innerText.replace("€", ""),
+            imagen: seleccionado.children[3].querySelector("img").src
+        };
+
+        sessionStorage.setItem("productoEditar", JSON.stringify(producto));
+        window.location.href = "editProduct.html";
+    });
+</script>
+
+
 <footer id="footer-global"></footer>
 
 </body>
