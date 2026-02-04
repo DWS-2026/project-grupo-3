@@ -49,6 +49,7 @@ form{
     font-size: 36px;
     color: #2E7D32;
     transition: background-color 0.2s;
+    text-decoration: none;
 }
 
 .circle-edition:hover {
