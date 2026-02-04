@@ -23,12 +23,7 @@
         const logoutbtn = document.getElementById('logout-btn');
         const adminbtn = document.getElementById('admin-btn');
         hideOptions();
-        if(localStorage.getItem('isLoggedIn') !== 'true') { //querySelectorAll te devuelve directamente una lista enlazada con los elementos de esa clase
-            document.querySelectorAll('.login-options').forEach(el => { //selecciona todos los elem de la clase login-options
-                el.style.display = 'none';
-            });
 
-        }
 
         if (logoutbtn) {
             logoutbtn.addEventListener('click', function() {
@@ -40,12 +35,6 @@
         if (adminbtn) {
             adminbtn.addEventListener('click', function() {
                 window.location.href = 'index.html'; //necesita una actualización para volver a cargar la página
-            });
-        }
-
-        if (localStorage.getItem('isAdmin') === 'true') {
-            document.querySelectorAll('.user-only').forEach(el => {
-                el.style.display = 'none';
             });
         }
 

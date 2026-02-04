@@ -1,5 +1,4 @@
 	function hideOptionsForAdmin(cartbtn,headerbtnToCatalogPlants){
-		if(localStorage.getItem('isAdmin') === 'true'){
 			if(cartbtn){
 				cartbtn.style.display = 'none';
 			}
@@ -13,10 +12,14 @@
 			document.querySelectorAll('.addToCartbtn').forEach(btn => { //esto es para eliminar flechas si solo hay una imagen
 				btn.style.display = 'none';
 			});
-		} else{ //si no eres el admin, entonces no tienes panel de admin
-			const adminPanel = document.getElementById('admin-btn');
-			adminPanel.style.display = 'none';
-		}
+			if(window.location.pathname.includes('admin-panel.html')){
+				const adminPanel = document.getElementById('admin-btn');
+				adminPanel.style.display = 'none';
+			}
+			document.querySelectorAll('.user-only').forEach(el => {
+                el.style.display = 'none';
+            });
+
 	}
 	function hideOptionsMainPage(){
 		if (window.location.pathname.includes('index.html')) {
@@ -44,9 +47,23 @@
 		const cartbtn = document.getElementById('cart-options');
 		const headerbtnToCatalogPlants= document.getElementById('plantitas');
 
-		hideOptionsForAdmin(cartbtn,headerbtnToCatalogPlants);
-		hideOptionsMainPage();
+		
 
+		if(localStorage.getItem('isLoggedIn') === 'true') { //querySelectorAll te devuelve directamente una lista enlazada con los elementos de esa clase
+			if(localStorage.getItem('isAdmin') === 'true'){
+				hideOptionsForAdmin(cartbtn,headerbtnToCatalogPlants);
+			}else{
+				const adminPanel = document.getElementById('admin-btn');
+				adminPanel.style.display = 'none';
+			}
+
+        }else{
+			document.querySelectorAll('.login-options').forEach(el => { //selecciona todos los elem de la clase login-options
+                el.style.display = 'none';
+            });
+		}
+		
+		hideOptionsMainPage();
 		if (window.location.pathname.includes('catalogoProductos.html')) {
 			const productos= document.getElementById('productos');
 			if (productos) {
