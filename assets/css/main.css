@@ -41,6 +41,8 @@ h1 {
     row-gap: 6px;    
     z-index: 1000;
     padding-right: 20px;/*mueve solo el contenido*/
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .topbar-btn {
