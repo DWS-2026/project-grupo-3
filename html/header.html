@@ -3,7 +3,7 @@
     <div id="header-global">
             <header class="top-bar" >
                 <div class="icon-group">
-                    <a href="user.html" class="icons login-options" aria-label="Ir a perfil de usuario">
+                    <a href="user.html" class="icons login-options user-only" aria-label="Ir a perfil de usuario">
                         👤
                     </a>
                     <a href="carroCompra.html" id="cart-options" class="icons" aria-label="Ir al carrito">
@@ -13,7 +13,8 @@
                     <a href="catalogoPlantas.html" id="plantitas" class="icons">🪴</a>
                 </div>
                 <button id="logout-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Log Out</button>
-                <a href="catalogoProductos.html"id="productos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
+                <a href="catalogoProductos.html" id="productos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
+                <a href="pedidosUsuario.html" id="pedidos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options user-only">Mis pedidos</a>
                 <a href="sign-in.html" id="changeuser-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Cambiar usuario</a>
                 <a href="admin-panel.html" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
             </header>
@@ -41,5 +42,12 @@
                 window.location.href = 'index.html'; //necesita una actualización para volver a cargar la página
             });
         }
+
+        if (localStorage.getItem('isAdmin') === 'true') {
+            document.querySelectorAll('.user-only').forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+
     </script>
 </body>
