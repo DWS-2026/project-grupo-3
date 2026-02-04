@@ -254,6 +254,11 @@
         controls.forEach(control => control.style.display = 'none');
       }
     });
+    document.querySelectorAll('.trash-icon').forEach(star => {
+    star.addEventListener('click', () => { //toggle cambia la clase de un elemento y funciona como un interruptor
+        star.classList.toggle('active');  //así se ponen las clases compuestas(loquesea.subclase)     
+    });
+  });
 </script>
 
 
