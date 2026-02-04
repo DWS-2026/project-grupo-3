@@ -38,7 +38,7 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
       - Realizar pedidos de productos
       - Registrarse
       - Loguearse
-  - No es dueño de ninguna entidad
+  - Es dueño de su pedido
 
 * **Usuario Registrado**: 
   - Permisos:
