@@ -28,3 +28,30 @@ form{
     outline: 0 !important;                   /* quitar el borde azul por defecto */
     box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important; /* borde fluorescente verde */
 }
+/* CONTENEDOR EDICIÓN */
+.editar-perfil {
+    max-width: 500px;
+    text-align: center;
+}
+
+
+/* FOTO PERFIL EDITABLE */
+.circle-edition {
+    width: 120px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 25px;
+    background-color: #C8E6C9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 36px;
+    color: #2E7D32;
+    transition: background-color 0.2s;
+}
+
+.circle-edition:hover {
+    background-color: #A5D6A7;
+}
+
