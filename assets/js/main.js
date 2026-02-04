@@ -99,6 +99,5 @@
 	});
     $(function(){   
 		$("#header-global").load("header.html");
-		hideOptions();
 	});
 
