@@ -77,7 +77,7 @@ Indicar qué entidades tendrán asociadas una o varias imágenes:
 ### **Diagrama de Navegación**
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-![Diagrama de Navegación](images/Navegación-entre-pantallas.jpg)
+![Diagrama de Navegación](images/navigation-diagram.jpg)
 
 > Hay páginas que accedes dependiendo del nivel de autorización que tenga el usuario. Por ejemplo, mis pedidos, solo se accede si eres un usuario registrado, al igual que las subpáginas para editar las plantas y subir una nueva planta, además de la posibilidad de visualizar tu perfil y poder modificarlo. Las pantallas del carrito, de pago, y el muestrario de las plantas, son accesibles por todos los usuarios excepto el administrador (admin). El admin es el único que puede acceder al panel del admin y como consecuencia a la gestión de pedidos, usuarios y productos, teniendo esta última una opción para agregar nuevos productos y otra para editarlos. Las únicas pantallas que puede navegar todos los usuarios son la de registro (o cambio de usuario) y la de productos.
 
@@ -143,47 +143,52 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Pantalla que permite al usuario actualizar su información personal, incluyendo nombre, foto de perfil y descripción. Dispone de campos editables y botones para guardar los cambios o cancelar y volver al perfil. Mantiene la barra de navegación y pie de página con opciones visibles según el estado de login.
 
-#### **13. Registrar nueva planta**
+#### **13. Configurar usuario**
+![Página de editar perfil del usuario](images/pantallas/usuarioRegistrado/configuracion.png)
+
+> Pantalla que permite al usuario cambiar su contraseña y su email. Dispone de campos editables y botones para guardar los cambios o cancelar y volver al perfil. Mantiene la barra de navegación y pie de página con opciones visibles según el estado de login.
+
+#### **14. Registrar nueva planta**
 ![Página de registro de una nueva planta](images/pantallas/usuarioRegistrado/nuevaPlanta.png)
 
 > Pantalla que permite al usuario registrar una nueva planta en su jardín personal. Incluye campos para nombre, cuidados específicos, descripción y subida de imagen de la planta. Dispone de botones para guardar la nueva planta o cancelar y volver al catálogo. Mantiene la barra de navegación y pie de página con opciones visibles según el estado de login.
 
-#### **14. Página de inicio para administrador**
+#### **15. Página de inicio para administrador**
 ![Página de inicio para administrador](images/pantallas/admin/home-page.png)
 
 > Página de inicio para usuarios con permisos de administrador. Muestra las opciones principales del sistema, pero oculta elementos que no son necesarios para el admin, como carrito, catálogo de plantas y perfil de usuario. Incluye la barra de navegación y pie de página con las opciones visibles según el estado de login y privilegios de administrador por eso se agrega la opción de admin panel.
 
-#### **15. Catálogo de productos para administrador**
+#### **16. Catálogo de productos para administrador**
 ![Página de catálogo de productos para administrador](images/pantallas/admin/catalogoProductos.png)
 
 > Página que muestra todos los productos disponibles con su imagen, nombre, descripción y precio. Para administradores, se ocultan los botones de “Añadir al carrito”, dejando visible únicamente la información de los productos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **16. Panel de Administrador**
+#### **17. Panel de Administrador**
 ![Página del panel de administrador](images/pantallas/admin/panelAdmin.png)
 
 > Pantalla principal del administrador donde se accede a las distintas áreas de gestión: usuarios, productos y pedidos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **17. Gestión de usuarios**
+#### **18. Gestión de usuarios**
 ![Página de la gestión de usuarios](images/pantallas/admin/gestiosUsuarios.png)
 
 > Pantalla que permite al administrador visualizar y gestionar todos los usuarios registrados en el sistema. Incluye una tabla con la información básica de cada usuario como el nombre, ID y link al perfil y opciones para seleccionar y eliminar usuarios. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **18. Gestión de productos**
+#### **19. Gestión de productos**
 ![Página de la gestión de productos](images/pantallas/admin/gestionProductos.png)
 
 > Pantalla que permite al administrador visualizar, añadir, editar o eliminar productos del catálogo de la tienda. Incluye una tabla con información básica de cada producto (nombre, precio e imagen) y checkboxes para selección múltiple. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **19. Registrar nuevo producto**
+#### **20. Registrar nuevo producto**
 ![Página del registro de un nuevo producto](images/pantallas/admin/nuevoProducto.png)
 
 > Página que contiene un formulario que permite al administrador registrar un nuevo producto en la tienda. Incluye campos para el nombre, descripción, precio e imagen del producto. Dispone de botones para guardar los cambios o cancelar y volver al catálogo de productos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **20. Editar producto**
+#### **21. Editar producto**
 ![Página de edición de un producto](images/pantallas/admin/editarProducto.png)
 
 > Página que contiene un formulario que permite al administrador modificar los datos de un producto existente en la tienda. Se pueden actualizar el nombre, el precio y, de manera opcional, la imagen del producto. Incluye botones para guardar los cambios o cancelar y volver a la pantalla de gestión de productos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **21. Gestión de pedidos**
+#### **22. Gestión de pedidos**
 ![Página de edición de un producto](images/pantallas/admin/gestionPedidos.png)
 
 > Página del administrador donde se visualizan todos los pedidos realizados por los usuarios. Muestra el nombre del usuario, los productos pedidos (con cantidad) y permite actualizar el estado del pedido mediante un selector desplegable (En proceso, Enviado, Entregado). Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
@@ -204,17 +209,17 @@ Al principio me encargaba de la página de inicio sesión junto con toda la lóg
 
 ---
 
-#### **Alumno 2 - [Sara García Lopo]**
+#### **Alumno 2 - Sara García Lopo**
 
-[Me he encargado de la página de perfil del usuario y la sección de edición del perfil, encargándome de la maquetación, los estilos visuales y la organización del contenido. Además, he aplicado principios de diseño responsive para asegurar una correcta visualización en distintos dispositivos, como estilos para mejorar la usabilidad y la experiencia del usuario.]
+Me he encargado de la página de perfil del usuario, la sección de edición del perfil y la configuración del perfil, encargándome de la maquetación, los estilos visuales y la organización del contenido. Además, he aplicado principios de diseño responsive para asegurar una correcta visualización en distintos dispositivos, como estilos para mejorar la usabilidad y la experiencia del usuario.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Creación página edición del usuario](URL_commit_1)  | [Edición Perfil](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Añadir las funcionalidades de editar y publicar](https://github.com/DWS-2026/project-grupo-3/commit/c62529b165b5b33cd927112e6a1821cae8e3f2cb#diff-283e184f66f273bc8dbb436c152027dbcc3b0842891ff43fb9d91054c43e2424)  | [editProfile.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/editProfile.html)   |
+|2| [Añadir funciones a la pagina del perfil para poder ver pedidos y añadir planta](https://github.com/DWS-2026/project-grupo-3/commit/5d54176af6329c7b8a6d5c1501db76f991178370#diff-604ee7395973716cdf9c4cacf305fb0dca839dc52697b7920e631a71a4352b50)  | [user.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/user.html)   |
+|3| [Eliminar el botón de Publicar para cambiarlo por configuración](https://github.com/DWS-2026/project-grupo-3/commit/4ad7b789bb3bc6a6e724476bb13abc7a61b9e62e)  | [user.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/user.html)   |
+|4| [Cambiar botón para cambiar la foto de perfil](https://github.com/DWS-2026/project-grupo-3/commit/067d5faca35221e4f803ca88667b90ee632e3506)  | [configuration.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/configuration.html)   |
+|5| [Añadí una sección para poder cambiar el correo y la contraseña](https://github.com/DWS-2026/project-grupo-3/commit/14b3284416dd1efeac7b1e0380f0738b361e359c)  | [configuration.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/configuration.html)   |
 
 ---
 
@@ -233,17 +238,17 @@ Me he encargado de desarrollar la parte relacionada con la tienda: desde el cat�
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Nerea Blázquez Zayas**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+He desarrollado la página principal de la aplicación, encargándome de su maquetación y estilos para definir la primera vista del usuario. También ayude a implementar el footer global, asegurando su correcta integración y reutilización en las distintas páginas. Además, participé en el desarrollo del panel de administración, creando el formulario para registrar y editar productos, así como la pantalla de gestión de pedidos, restringiendo su acceso exclusivamente a usuarios con rol de administrador.
 
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+| Nº |                                                                                                   Commits                                                                                                    |                                                 Files                                                 |
+|:--:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|
+| 1  |                     [Implementación final de la página principal y su respectivo CSS](https://github.com/DWS-2026/dws-2026-project-base/commit/4e905e8f29ee5266713b5a57073688044ffe30de)                     |          [index.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/index.html)          |
+| 2  | [Implementación del footer anterior al actual, el cual le hemos quitado información, y su respectivo CSS](https://github.com/DWS-2026/dws-2026-project-base/commit/0c3fb0de3e17858ab1048f739a3917109b3827a8) |                                     [footer.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/footer.html)                                      |
+| 3  |                  [Implementación para crear un nuevo producto desde el panel del admin](https://github.com/DWS-2026/dws-2026-project-base/commit/06ac44fe82576026ba751a4e032698e03dd7419b)                   |  [nuevoProducto.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/nuevoProducto.html)  |
+| 4  |            [Implementación de una pantalla de gestión de los pedidos desde el panel del admin](https://github.com/DWS-2026/dws-2026-project-base/commit/c3d2dc62218fa0c09c54b37e5b904641e3018761)            | [gestionPedidos.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/gestionPedidos.html) |
+| 5  |           [Implementación de una pantalla para la edición del producto desde el panel de admin](https://github.com/DWS-2026/dws-2026-project-base/commit/b480c4ff2a57e429c2772d90e20c5632b40d08f3)           |    [eidtProduct.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/editProduct.html)    |
 
 ---
 

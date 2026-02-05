@@ -23,7 +23,8 @@ form{
   border-top-right-radius: 0;
 }
 .form-signin .form-floating input:focus,
-.form-signin .form-floating textarea:focus {
+.form-signin .form-floating textarea:focus,
+form .form-control:focus {
     border-color: #4CAF50 !important;        
     outline: 0 !important;                   /* quitar el borde azul por defecto */
     box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important; /* borde fluorescente verde */

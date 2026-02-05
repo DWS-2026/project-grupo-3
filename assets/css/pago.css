@@ -8,6 +8,11 @@ main {
     padding: 20px;
 }
 
+form {
+  padding-top: 0;
+}
+
+
 /* Formulario y carrito */
 .col-md-5, .col-md-7 {
     padding-left: 10px;
