@@ -238,17 +238,17 @@ Me he encargado de desarrollar la parte relacionada con la tienda: desde el cat�
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Nerea Blázquez Zayas**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+| Nº |                                                                                                   Commits                                                                                                    |                                                 Files                                                 |
+|:--:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|
+| 1  |                     [Implementación final de la página principal y su respectivo CSS](https://github.com/DWS-2026/dws-2026-project-base/commit/4e905e8f29ee5266713b5a57073688044ffe30de)                     |          [index.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/index.html)          |
+| 2  | [Implementación del footer anterior al actual, el cual le hemos quitado información, y su respectivo CSS](https://github.com/DWS-2026/dws-2026-project-base/commit/0c3fb0de3e17858ab1048f739a3917109b3827a8) |                                     [footer.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/footer.html)                                      |
+| 3  |                  [Implementación para crear un nuevo producto desde el panel del admin](https://github.com/DWS-2026/dws-2026-project-base/commit/06ac44fe82576026ba751a4e032698e03dd7419b)                   |  [nuevoProducto.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/nuevoProducto.html)  |
+| 4  |            [Implementación de una pantalla de gestión de los pedidos desde el panel del admin](https://github.com/DWS-2026/dws-2026-project-base/commit/c3d2dc62218fa0c09c54b37e5b904641e3018761)            | [gestionPedidos.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/gestionPedidos.html) |
+| 5  |           [Implementación de una pantalla para la edición del producto desde el panel de admin](https://github.com/DWS-2026/dws-2026-project-base/commit/b480c4ff2a57e429c2772d90e20c5632b40d08f3)           |    [eidtProduct.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/editProduct.html)    |
 
 ---
 
