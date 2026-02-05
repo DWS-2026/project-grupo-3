@@ -240,7 +240,7 @@ Me he encargado de desarrollar la parte relacionada con la tienda: desde el cat�
 
 #### **Alumno 4 - Nerea Blázquez Zayas**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+He desarrollado la página principal de la aplicación, encargándome de su maquetación y estilos para definir la primera vista del usuario. También ayude a implementar el footer global, asegurando su correcta integración y reutilización en las distintas páginas. Además, participé en el desarrollo del panel de administración, creando el formulario para registrar y editar productos, así como la pantalla de gestión de pedidos, restringiendo su acceso exclusivamente a usuarios con rol de administrador.
 
 | Nº |                                                                                                   Commits                                                                                                    |                                                 Files                                                 |
 |:--:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------:|
