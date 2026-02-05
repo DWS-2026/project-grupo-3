@@ -77,7 +77,7 @@ Indicar qué entidades tendrán asociadas una o varias imágenes:
 ### **Diagrama de Navegación**
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-![Diagrama de Navegación](images/Navegación-entre-pantallas.jpg)
+![Diagrama de Navegación](images/navigation-diagram.jpg)
 
 > Hay páginas que accedes dependiendo del nivel de autorización que tenga el usuario. Por ejemplo, mis pedidos, solo se accede si eres un usuario registrado, al igual que las subpáginas para editar las plantas y subir una nueva planta, además de la posibilidad de visualizar tu perfil y poder modificarlo. Las pantallas del carrito, de pago, y el muestrario de las plantas, son accesibles por todos los usuarios excepto el administrador (admin). El admin es el único que puede acceder al panel del admin y como consecuencia a la gestión de pedidos, usuarios y productos, teniendo esta última una opción para agregar nuevos productos y otra para editarlos. Las únicas pantallas que puede navegar todos los usuarios son la de registro (o cambio de usuario) y la de productos.
 
@@ -143,47 +143,52 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Pantalla que permite al usuario actualizar su información personal, incluyendo nombre, foto de perfil y descripción. Dispone de campos editables y botones para guardar los cambios o cancelar y volver al perfil. Mantiene la barra de navegación y pie de página con opciones visibles según el estado de login.
 
-#### **13. Registrar nueva planta**
+#### **13. Configurar usuario**
+![Página de editar perfil del usuario](images/pantallas/usuarioRegistrado/configuracion.png)
+
+> Pantalla que permite al usuario cambiar su contraseña y su email. Dispone de campos editables y botones para guardar los cambios o cancelar y volver al perfil. Mantiene la barra de navegación y pie de página con opciones visibles según el estado de login.
+
+#### **14. Registrar nueva planta**
 ![Página de registro de una nueva planta](images/pantallas/usuarioRegistrado/nuevaPlanta.png)
 
 > Pantalla que permite al usuario registrar una nueva planta en su jardín personal. Incluye campos para nombre, cuidados específicos, descripción y subida de imagen de la planta. Dispone de botones para guardar la nueva planta o cancelar y volver al catálogo. Mantiene la barra de navegación y pie de página con opciones visibles según el estado de login.
 
-#### **14. Página de inicio para administrador**
+#### **15. Página de inicio para administrador**
 ![Página de inicio para administrador](images/pantallas/admin/home-page.png)
 
 > Página de inicio para usuarios con permisos de administrador. Muestra las opciones principales del sistema, pero oculta elementos que no son necesarios para el admin, como carrito, catálogo de plantas y perfil de usuario. Incluye la barra de navegación y pie de página con las opciones visibles según el estado de login y privilegios de administrador por eso se agrega la opción de admin panel.
 
-#### **15. Catálogo de productos para administrador**
+#### **16. Catálogo de productos para administrador**
 ![Página de catálogo de productos para administrador](images/pantallas/admin/catalogoProductos.png)
 
 > Página que muestra todos los productos disponibles con su imagen, nombre, descripción y precio. Para administradores, se ocultan los botones de “Añadir al carrito”, dejando visible únicamente la información de los productos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **16. Panel de Administrador**
+#### **17. Panel de Administrador**
 ![Página del panel de administrador](images/pantallas/admin/panelAdmin.png)
 
 > Pantalla principal del administrador donde se accede a las distintas áreas de gestión: usuarios, productos y pedidos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **17. Gestión de usuarios**
+#### **18. Gestión de usuarios**
 ![Página de la gestión de usuarios](images/pantallas/admin/gestiosUsuarios.png)
 
 > Pantalla que permite al administrador visualizar y gestionar todos los usuarios registrados en el sistema. Incluye una tabla con la información básica de cada usuario como el nombre, ID y link al perfil y opciones para seleccionar y eliminar usuarios. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **18. Gestión de productos**
+#### **19. Gestión de productos**
 ![Página de la gestión de productos](images/pantallas/admin/gestionProductos.png)
 
 > Pantalla que permite al administrador visualizar, añadir, editar o eliminar productos del catálogo de la tienda. Incluye una tabla con información básica de cada producto (nombre, precio e imagen) y checkboxes para selección múltiple. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **19. Registrar nuevo producto**
+#### **20. Registrar nuevo producto**
 ![Página del registro de un nuevo producto](images/pantallas/admin/nuevoProducto.png)
 
 > Página que contiene un formulario que permite al administrador registrar un nuevo producto en la tienda. Incluye campos para el nombre, descripción, precio e imagen del producto. Dispone de botones para guardar los cambios o cancelar y volver al catálogo de productos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **20. Editar producto**
+#### **21. Editar producto**
 ![Página de edición de un producto](images/pantallas/admin/editarProducto.png)
 
 > Página que contiene un formulario que permite al administrador modificar los datos de un producto existente en la tienda. Se pueden actualizar el nombre, el precio y, de manera opcional, la imagen del producto. Incluye botones para guardar los cambios o cancelar y volver a la pantalla de gestión de productos. Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
 
-#### **21. Gestión de pedidos**
+#### **22. Gestión de pedidos**
 ![Página de edición de un producto](images/pantallas/admin/gestionPedidos.png)
 
 > Página del administrador donde se visualizan todos los pedidos realizados por los usuarios. Muestra el nombre del usuario, los productos pedidos (con cantidad) y permite actualizar el estado del pedido mediante un selector desplegable (En proceso, Enviado, Entregado). Incluye barra de navegación y pie de página con opciones ajustadas según los permisos de administrador.
