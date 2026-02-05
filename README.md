@@ -219,7 +219,7 @@ Al principio me encargaba de la página de inicio sesión junto con toda la lóg
 |2| [Añadir funciones a la pagina del perfil para poder ver pedidos y añadir planta](https://github.com/DWS-2026/project-grupo-3/commit/5d54176af6329c7b8a6d5c1501db76f991178370#diff-604ee7395973716cdf9c4cacf305fb0dca839dc52697b7920e631a71a4352b50)  | [user.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/user.html)   |
 |3| [Eliminar el botón de Publicar para cambiarlo por configuración](https://github.com/DWS-2026/project-grupo-3/commit/4ad7b789bb3bc6a6e724476bb13abc7a61b9e62e)  | [user.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/user.html)   |
 |4| [Cambiar botón para cambiar la foto de perfil](https://github.com/DWS-2026/project-grupo-3/commit/067d5faca35221e4f803ca88667b90ee632e3506)  | [configuration.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/configuration.html)   |
-|5| [Descripción commit 5](https://github.com/DWS-2026/project-grupo-3/commit/14b3284416dd1efeac7b1e0380f0738b361e359c)  | [configuration.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/configuration.html)   |
+|5| [Añadí una sección para poder cambiar el correo y la contraseña](https://github.com/DWS-2026/project-grupo-3/commit/14b3284416dd1efeac7b1e0380f0738b361e359c)  | [configuration.html](https://github.com/DWS-2026/project-grupo-3/blob/main/html/configuration.html)   |
 
 ---
 
