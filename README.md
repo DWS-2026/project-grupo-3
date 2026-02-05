@@ -204,9 +204,9 @@ Al principio me encargaba de la página de inicio sesión junto con toda la lóg
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - [Sara García Lopo]**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+[Me he encargado de la página de perfil del usuario y la sección de edición del perfil, encargándome de la maquetación, los estilos visuales y la organización del contenido. Además, he aplicado principios de diseño responsive para asegurar una correcta visualización en distintos dispositivos, como estilos para mejorar la usabilidad y la experiencia del usuario.]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
