@@ -13,7 +13,43 @@
     <script src="../assets/js/main.js"></script>
 </head>
 <body>
+<nav id="header-global"></nav>
 
+<main class="form-signin m-auto">
+<form class="text-center" action="index.html" enctype="multipart/form-data">
+    <h2 class="titulo-perfil">Configuración</h2>
+
+
+
+    <!-- Nombre de la planta -->
+    <div class="form-floating mb-3">
+      <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Escribe tu nombre de usuario"
+      />
+      <label for="username">Nombre de Usuario</label>
+    </div>
+
+    <!-- Descripción -->
+    <div class="form-floating mb-3">
+        <textarea
+                class="form-control"
+                placeholder="Descripción"
+                id="plantDescription"
+                style="height: 120px"
+                required
+        ></textarea>
+      <label for="plantDescription">Descripción</label>
+    </div>
+
+    <!-- BOTONES -->
+    <div class="botones mt-3">
+        <button class="btn btn-success rounded-pill px-4 py-3 main-button">Guardar cambios</button>
+        <a href="user.html" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
+    </div>
+</form>
 </main>
 
 <footer id="footer-global"></footer>
