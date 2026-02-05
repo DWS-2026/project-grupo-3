@@ -201,11 +201,11 @@ Al principio me encargaba de la página de inicio sesión junto con toda la lóg
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Este fue el último retoque a la página de inicio sesión, en este commit tuve que añadir padding para separar el texto del header que estaba chocando](https://github.com/DWS-2026/project-grupo-3/commit/a93020a60b6a75cd74271b369600781044bd1839)  | [Sign-in](https://github.com/DWS-2026/project-grupo-3/blob/main/html/sign-in.html)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Aquí terminé con el catálogo de plantas, añadí un sistema para puntuar las plantas y unifiqué estilos y clases](https://github.com/DWS-2026/project-grupo-3/commit/db93e8647590dab7c3bf32db9800379a25d6f1ea)  | [Catálogo_de_plantas](https://github.com/DWS-2026/project-grupo-3/blob/main/html/catalogoPlantas.html)  |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Aquí ya conseguí que el header fuera global y se incluyera en otros documentos con solo poner el id header-global](https://github.com/DWS-2026/project-grupo-3/commit/05ecf4aa845443b312b485d6a896608196f2eb68) | [Header_global](https://github.com/DWS-2026/project-grupo-3/blob/main/html/header.html)   |
+|2| [En este momento fijé el estilo de la página para iniciar sesión y lo moví a un archivo externo css, quedando más bonito el código y asentando las bases para futuras modificaciones](https://github.com/DWS-2026/project-grupo-3/commit/ce1fca407e3d33c27ffca1ef3e32027bc1b9d70d) | [Sign-in](https://github.com/DWS-2026/project-grupo-3/blob/main/html/sign-in.html)   |
+|3| [En este commit se creó el catálogo de plantitas, asentando la base del html y permitiendo posteriormente que editara el html para configurarse según el usuario que visitaba la página](https://github.com/DWS-2026/project-grupo-3/commit/2de46f354d1bf9a72fe7657294c9107965d617cd) | [Catálogo_de_plantas](https://github.com/DWS-2026/project-grupo-3/blob/main/html/catalogoPlantas.html)  |
+|4| [Con este commit tenemos una pantalla de gestión de usuarios](https://github.com/DWS-2026/project-grupo-3/commit/0b816628f24c9a4e17b5f475b3aca776a2ca9d2b) | [Gestion_de_usuarios](https://github.com/DWS-2026/project-grupo-3/blob/main/html/gestionUsuarios.html)   |
+|5| [También una parte muy importante de mi aportación fue unificar los estilos para que todo quedara uniforme y no se repitiera código innecesario, sobretodo esto se puede ver en el css para los forms](https://github.com/DWS-2026/project-grupo-3/commit/db93e8647590dab7c3bf32db9800379a25d6f1ea)  | [Forms_general](https://github.com/DWS-2026/project-grupo-3/blob/main/assets/css/forms-general.css)  |
 
 ---
 
