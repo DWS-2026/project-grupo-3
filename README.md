@@ -210,11 +210,11 @@ Al principio me encargaba de la página de inicio sesión junto con toda la lóg
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Creación página edición del usuario](URL_commit_1)  | [Edición Perfil](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Añadir las funcionalidades de editar y publicar](https://github.com/DWS-2026/project-grupo-3/commit/04e49175618e1be0cda3e23187564817c1324eb2)  | [Edición Perfil](https://github.com/DWS-2026/project-grupo-3/blob/main/html/user.html)   |
+|2| [Añadir funciones a la pagina del perfil para poder ver pedidos y añadir planta](https://github.com/DWS-2026/project-grupo-3/commit/5d54176af6329c7b8a6d5c1501db76f991178370#diff-604ee7395973716cdf9c4cacf305fb0dca839dc52697b7920e631a71a4352b50)  | [Archivo2](https://github.com/DWS-2026/project-grupo-3/blob/main/html/user.html)   |
+|3| [Eliminar el botón de Publicar para cambiarlo por configuración](https://github.com/DWS-2026/project-grupo-3/commit/4ad7b789bb3bc6a6e724476bb13abc7a61b9e62e)  | [Archivo3](https://github.com/DWS-2026/project-grupo-3/blob/main/html/user.html)   |
+|4| [Cambiar botón para cambiar la foto de perfil](https://github.com/DWS-2026/project-grupo-3/commit/067d5faca35221e4f803ca88667b90ee632e3506)  | [Archivo4](https://github.com/DWS-2026/project-grupo-3/blob/main/html/configuration.html)   |
+|5| [Descripción commit 5](https://github.com/DWS-2026/project-grupo-3/commit/14b3284416dd1efeac7b1e0380f0738b361e359c)  | [Archivo5](https://github.com/DWS-2026/project-grupo-3/blob/main/html/configuration.html)   |
 
 ---
 
