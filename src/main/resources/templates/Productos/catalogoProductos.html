@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Catálogo de Productos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="/web_ejer7/src/main/resources/assets/css/main.css">
+  <link rel="stylesheet" href="/web_ejer7/src/main/resources/assets/css/catalogoProductosyPlantas.css">
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+          integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="/web_ejer7/src/main/resources/assets/js/main.js"></script>
+</head>
+<body>
+<nav id="header-global"></nav>
+
+<main class="pt-5">
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light change-color">Catálogo de Productos</h1>
+        <p class="lead text-body-secondary">
+          Encuentra los mejores productos para el cuidado de tus plantas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="12.99">
+            <div class="card-img-container">
+              <img src="/images/productos/fertilizante.jpg" class="card-img-top" alt="Fertilizante" />
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Fertilizante</h5>
+              <p class="card-text">Nutre tus plantas de manera rápida y efectiva.</p>
+              <p class="card-text fw-bold">Precio: €12.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="9.99">
+            <div class="card-img-container">
+              <img src="/images/productos/tierracompostada.jpg" class="card-img-top" alt="Tierra Compostada" />
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Tierra Compostada</h5>
+              <p class="card-text">Perfecta para macetas y jardineras decorativas.</p>
+              <p class="card-text fw-bold">Precio: €9.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="5.99">
+            <div class="card-img-container">
+              <img src="/images/productos/maceta.jpg" class="card-img-top" alt="Maceta" />
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Maceta</h5>
+              <p class="card-text">Diseño moderno y perfecto para tus plantas.</p>
+              <p class="card-text fw-bold">Precio: €5.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="11.99">
+            <div class="card-img-container">
+                <img src="/images/productos/insecticidanatural.jpg" class="card-img-top" alt="Insecticida Natural" />
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Insecticida Natural</h5>
+              <p class="card-text">Protege tus plantas sin químicos dañinos.</p>
+              <p class="card-text fw-bold">Precio: €11.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="1.99">
+            <div class="card-img-container">
+              <img src="/images/productos/semillas.jpg" class="card-img-top" alt="Semillas" />
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Semillas</h5>
+              <p class="card-text">Variedad de semillas para tu huerto casero.</p>
+              <p class="card-text fw-bold">Precio: €1.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="4.99">
+            <div class="card-img-container">
+              <img src="/images/productos/guantes.jpg" class="card-img-top" alt="Guantes" />
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Guantes</h5>
+              <p class="card-text">Cómodos y resistentes para trabajar tu jardín</p>
+              <p class="card-text fw-bold">Precio: €4.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="8.99">
+            <div class="card-img-container">
+              <img src="/images/productos/regadera.jpg" alt="Regadera Ecológica">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Regadera</h5>
+              <p class="card-text">Liviana y práctica para el riego diario.</p>
+              <p class="card-text fw-bold">Precio: €8.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="13.99">
+            <div class="card-img-container">
+              <img src="/images/productos/abono.jpg" alt="Abono">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Abono</h5>
+              <p class="card-text">Mantén tus plantas saludables naturalmente.</p>
+              <p class="card-text fw-bold">Precio: €13.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm h-100" data-precio="7.99">
+            <div class="card-img-container">
+              <img src="/images/productos/sustratouniversal.jpg" alt="Sustrato para Plantas">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="h5 change-color">Sustrato Universal</h5>
+              <p class="card-text">Ideal para todo tipo de plantas de interior y exterior</p>
+              <p class="card-text fw-bold">Precio: €7.99</p>
+              <div class="mt-auto">
+                <button class="btn btn-success rounded-pill px-4 py-2 main-button w-100 addToCartbtn">Añadir al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Array que representa el carrito
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+  // Función para actualizar el carrito en localStorage
+  function guardarCarrito() {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  }
+
+  // Añadir funcionalidad a los botones
+  const botones = document.querySelectorAll('.main-button');
+  botones.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      const nombre = card.querySelector('h5').innerText;
+      const precio = parseFloat(card.getAttribute('data-precio'));
+
+      // Revisar si ya existe el producto en el carrito
+      const itemExistente = carrito.find(item => item.nombre === nombre);
+      if(itemExistente){
+        itemExistente.cantidad += 1;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1 });
+      }
+
+      guardarCarrito();
+      alert(`${nombre} agregado al carrito`);
+      console.log(carrito);
+    });
+  });
+</script>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer id="footer-global"></footer>
+
+</body>
+</html>
