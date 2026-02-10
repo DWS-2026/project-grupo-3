@@ -9,6 +9,12 @@
 			if (botonForSeeingPlants) {
 				botonForSeeingPlants.style.display = 'none';
 			}
+
+			const botonForSeeingQuiz= document.getElementById('Quizz')
+			if (botonForSeeingQuiz) {
+				botonForSeeingQuiz.style.display = 'none';
+			}
+
 			document.querySelectorAll('.addToCartbtn').forEach(btn => { //esto es para eliminar flechas si solo hay una imagen
 				btn.style.display = 'none';
 			});
@@ -93,11 +99,16 @@
 		}
 
 	}
-	
-	$(function(){   
-		$("#footer-global").load("/html/footer.html");
+
+	$(function(){
+		$("#header-global").load("src/main/resources/templates/header.html", function() {
+			hideOptions();
+		});
 	});
-    $(function(){   
-		$("#header-global").load("/html/header.html");
+
+	$(function(){
+		$("#footer-global").load("src/main/resources/templates/footer.html", function() {
+			hideOptions();
+		});
 	});
 

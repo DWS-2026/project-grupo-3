@@ -19,13 +19,12 @@
 </head>
 <body>
 {{>header}}
-  <nav id="header-global"></nav>
 
   <main class="pt-5">
     <section class="py-5 text-center container">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-          <h2 class="fw-light change-color">Tablón de reviews 🌟</h1>
+          <h2 class="fw-light change-color">Tablón de reviews 🌟</h2>
             <div class="dropdown d-flex justify-content-start mt-3">
               <button class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
                 Filtrar
@@ -85,7 +84,7 @@
                           <div class="col">
                     <div class="card shadow-sm h-100 planta">
                         <div class="card-img-container">
-                            <a href="newreview.html" class="circle-edition">
+                            <a href="/Reviews/newreview" class="circle-edition">
                                 <span>+</span>
                             </a>
 
@@ -100,7 +99,6 @@
         </div>
       </div>
   </main>
-  <footer id="footer-global"></footer>
 <script>
     document.querySelectorAll('.trash-icon').forEach(star => {
         star.addEventListener('click', () => { //toggle cambia la clase de un elemento y funciona como un interruptor
@@ -108,17 +106,6 @@
       });
   });
 </script>
-<footer id="footer-global"></footer>
-<main class="header-main d-flex justify-content-center align-items-center flex-column">
-    <h1>Green Care</h1>
-
-    <div class="buttons-container">
-        <a href="/html/Plantas/catalogoPlantas.html" id="Plantscatalog" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de plantas</a>
-        <a href="/html/Productos/catalogoProductos.html" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de productos</a>
-        <a href="/html/quizzPlants.html" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Averigua que plantita eres</a>
-        <a href="/html/sign-in.html" id="login-btn" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Iniciar sesión / Registrarse</a>
-    </div>
-</main>
 
 {{>footer}}
 </body>

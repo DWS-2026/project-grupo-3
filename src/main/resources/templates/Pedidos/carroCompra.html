@@ -14,25 +14,21 @@
     <!-- CSS externo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/carroCompra.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="/assets/js/main.js"></script>
 </head>
 <body>
 {{>header}}
-<nav id="header-global"></nav>
-
 <main class="header-main d-flex flex-column">
     <h1 class="mb-4">Tu Carrito</h1>
     <div id="carrito-container"></div>
     <p id="total" class="total-container"></p>
     <div class="buttons-container">
-        <a href="pago.html" class="btn pago-btn main-button">Proceder al pago</a>
+        <a href="/Pedidos/pago" class="btn pago-btn main-button">Proceder al pago</a>
     </div>
 
 </main>
-
-<footer id="footer-global"></footer>
-
 <script>
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const container = document.getElementById('carrito-container');
@@ -48,7 +44,7 @@
             card.classList.add('carrito-card');
 
             card.innerHTML = `
-            <img src="/images/productos/${item.nombre.toLowerCase().replace(/\s/g,'')}.jpg" alt="${item.nombre}">
+            <img src="/assets/images/productos/${item.nombre.toLowerCase().replace(/\s/g,'')}.jpg" alt="${item.nombre}">
             <div class="item-info">
                 <h5>${item.nombre}</h5>
                 <p>€${item.precio.toFixed(2)}</p>
@@ -96,18 +92,6 @@
     // Render inicial
     renderCarrito();
 </script>
-<footer id="footer-global"></footer>
-<main class="header-main d-flex justify-content-center align-items-center flex-column">
-    <h1>Green Care</h1>
-
-    <div class="buttons-container">
-        <a href="/html/Plantas/catalogoPlantas.html" id="Plantscatalog" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de plantas</a>
-        <a href="/html/Productos/catalogoProductos.html" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de productos</a>
-        <a href="/html/quizzPlants.html" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Averigua que plantita eres</a>
-        <a href="/html/sign-in.html" id="login-btn" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Iniciar sesión / Registrarse</a>
-    </div>
-</main>
-
 {{>footer}}
 </body>
 </html>

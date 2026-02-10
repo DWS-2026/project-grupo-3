@@ -14,15 +14,14 @@
     <!-- CSS externo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/forms-general.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="/assets/js/main.js"></script>
 </head>
 <body>
 {{>header}}
-<nav id="header-global"></nav>
-
 <main class="form-signin m-auto">
-<form class="text-center" action="index.html" enctype="multipart/form-data">
+<form class="text-center" action="/" enctype="multipart/form-data">
     <h2 class="titulo-perfil">Editar plantita</h2>
 
     <!-- FOTO DE PERFIL -->
@@ -68,22 +67,10 @@
     <!-- BOTONES -->
     <div class="botones mt-3">
         <button class="btn btn-success rounded-pill px-4 py-3 main-button">Guardar cambios</button>
-        <a href="catalogoPlantas.html" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
+        <a href="/Plantas/catalogoPlantas" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
     </div>
 </form>
 </main>
-<footer id="footer-global"></footer>
-<main class="header-main d-flex justify-content-center align-items-center flex-column">
-    <h1>Green Care</h1>
-
-    <div class="buttons-container">
-        <a href="/html/Plantas/catalogoPlantas.html" id="Plantscatalog" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de plantas</a>
-        <a href="/html/Productos/catalogoProductos.html" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de productos</a>
-        <a href="/html/quizzPlants.html" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Averigua que plantita eres</a>
-        <a href="/html/sign-in.html" id="login-btn" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Iniciar sesión / Registrarse</a>
-    </div>
-</main>
-
 {{>footer}}
 
 </body>

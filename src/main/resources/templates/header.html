@@ -2,23 +2,22 @@
 <nav id="header-global">
             <header class="top-bar" >
                 <div class="icon-group">
-                    <a href="/html/User/user.html" class="icons login-options user-only" aria-label="Ir a perfil de usuario">
+                    <a href="/User/user" class="icons login-options user-only" aria-label="Ir a perfil de usuario">
                         👤
                     </a>
-                    <a href="/html/Pedidos/carroCompra.html" id="cart-options" class="icons" aria-label="Ir al carrito">
+                    <a href="/Pedidos/carroCompra" id="cart-options" class="icons" aria-label="Ir al carrito">
                         🛒
                     </a>
-                    <a href="/html/index.html" id="goback-btn" class="icons">🏡</a>
+                    <a href="/" id="goback-btn" class="icons">🏡</a>
                     <a href="/Plantas/catalogoPlantas" id="plantitas" class="icons">🪴</a>
-                    <a href="/html/Reviews/foro.html" id="foro" class="icons">💬</a>
+                    <a href="/quizzPlants" id="quizz" class="icons user-only">💬</a>
                 </div>
                 <button id="logout-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Log Out</button>
-                <a href="/html/Productos/catalogoProductos.html" id="productos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
-                <a href="/html/User/pedidosUsuario.html" id="pedidos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options user-only">Mis pedidos</a>
-                <a href="/html/sign-in.html" id="changeuser-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Cambiar usuario</a>
-                <a href="/html/Admin/admin-panel.html" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
+                <a href="/Productos/catalogoProductos" id="productos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
+                <a href="/User/pedidosUsuario" id="pedidos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options user-only">Mis pedidos</a>
+                <a href="/sign-in" id="changeuser-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Cambiar usuario</a>
+                <a href="/Admin/admin-panel" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
             </header>
-    </div>
     <script>
         const logoutbtn = document.getElementById('logout-btn');
         const adminbtn = document.getElementById('admin-btn');
@@ -29,7 +28,7 @@
             logoutbtn.addEventListener('click', function() {
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('isAdmin');
-                window.location.href = 'index.html'; //necesita una actualización para volver a cargar la página
+                window.location.href = '/'; //necesita una actualización para volver a cargar la página
             });
         }
 

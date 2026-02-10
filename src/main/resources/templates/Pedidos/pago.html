@@ -14,15 +14,15 @@
     <!-- CSS externo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/forms-small.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="/assets/js/main.js"></script>
 </head>
 <body>
 {{>header}}
-<nav id="header-global"></nav>
 <main>
   <div class="py-5 text-center">
-    <img class="d-block mx-auto mb-4" src="/images/temporal-icon.png " alt="" width="72" height="57">
+    <img class="d-block mx-auto mb-4" src="/assets/images/temporal-icon.png " alt="" width="72" height="57">
     <h1 class="h2">Formulario de Pago</h1>
     <p class="lead">Revisa tu carrito y completa los datos para finalizar tu compra.</p>
   </div>
@@ -43,7 +43,7 @@
         <strong id="cart-total">€0.00</strong>
       </div>
       <hr class="my-4">
-      <a href="carroCompra.html" class="btn eliminar-btn w-100">Volver al carrito</a>
+      <a href="/Pedidos/carroCompra" class="btn eliminar-btn w-100">Volver al carrito</a>
     </div>
 
     <!-- Formulario de facturación -->
@@ -136,7 +136,7 @@
           </div>
         </div>
         <hr class="my-4">
-        <button class="btn btn-success w-100 main-button" type="submit" href="index.html">Procesar pago</button>
+        <button class="btn btn-success w-100 main-button" type="submit" href="/">Procesar pago</button>
 
       </form>
     </div>
@@ -187,22 +187,9 @@
       return;
     }
 
-    window.location.href = 'index.html'; // redirige al inicio
+    window.location.href = '/'; // redirige al inicio
   });
 </script>
-
-<footer id="footer-global"></footer>
-<main class="header-main d-flex justify-content-center align-items-center flex-column">
-    <h1>Green Care</h1>
-
-    <div class="buttons-container">
-        <a href="/html/Plantas/catalogoPlantas.html" id="Plantscatalog" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de plantas</a>
-        <a href="/html/Productos/catalogoProductos.html" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de productos</a>
-        <a href="/html/quizzPlants.html" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Averigua que plantita eres</a>
-        <a href="/html/sign-in.html" id="login-btn" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Iniciar sesión / Registrarse</a>
-    </div>
-</main>
-
 {{>footer}}
 </body>
 </html>
