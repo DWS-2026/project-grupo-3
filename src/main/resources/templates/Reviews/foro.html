@@ -14,8 +14,10 @@
     <!-- CSS externo -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/main.css">
+      <link rel="stylesheet" href="/assets/css/forms-general.css">
+      <link rel="stylesheet" href="/assets/css/forms-small.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <script src="/assets/js/main.js"></script>
+
 </head>
 <body>
 {{>header}}
@@ -25,17 +27,13 @@
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
           <h2 class="fw-light change-color">Tablón de reviews 🌟</h2>
-            <div class="dropdown d-flex justify-content-start mt-3">
-              <button class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
-                Filtrar
-              </button>
 
-              <ul class="dropdown-menu">
-                <li><button class="btn btn-sm main-button dropdown-item">Todas</button></li>
-                <li><button class="btn btn-sm main-button dropdown-item">Plantas</button></li>
-                <li><button class="btn btn-sm main-button dropdown-item">Productos</button></li>
-              </ul>
-            </div>
+                <select class="form-select form-select-sm rounded-pill px-4 py-3" style="height: 50px; width: 125px;">
+                    <option selected>Todo</option>
+                    <option>Planta</option>
+                    <option>Producto</option>
+                </select>
+
 </div>
 
         </div>

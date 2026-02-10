@@ -2,21 +2,58 @@
 <nav id="header-global">
             <header class="top-bar" >
                 <div class="icon-group">
-                    <a href="/User/user" class="icons login-options user-only" aria-label="Ir a perfil de usuario">
+                    {{#userOnly}}
+                        {{#profile}}
+                    <a href="/User/user" class="icons" aria-label="Ir a perfil de usuario">
                         👤
                     </a>
-                    <a href="/Pedidos/carroCompra" id="cart-options" class="icons" aria-label="Ir al carrito">
-                        🛒
-                    </a>
-                    <a href="/" id="goback-btn" class="icons">🏡</a>
-                    <a href="/Plantas/catalogoPlantas" id="plantitas" class="icons">🪴</a>
-                    <a href="/quizzPlants" id="quizz" class="icons user-only">💬</a>
+                        {{/profile}}
+                    {{/userOnly}}
+
+                    {{#shoppingCart}}
+                        <a href="/Pedidos/carroCompra" id="cart-options" class="icons" aria-label="Ir al carrito">
+                            🛒
+                        </a>
+                    {{/shoppingCart}}
+
+                    {{#goBackBtn}}
+                        <a href="/" class="icons">🏡</a>
+                    {{/goBackBtn}}
+
+                    {{#plants}}
+                        <a href="/Plantas/catalogoPlantas" class="icons">🪴</a>
+                    {{/plants}}
+
+                    {{#review}}
+                        <a href="/Reviews/foro" class="icons">💬</a>
+                    {{/review}}
                 </div>
-                <button id="logout-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Log Out</button>
-                <a href="/Productos/catalogoProductos" id="productos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
-                <a href="/User/pedidosUsuario" id="pedidos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options user-only">Mis pedidos</a>
-                <a href="/sign-in" id="changeuser-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Cambiar usuario</a>
-                <a href="/Admin/admin-panel" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
+
+                {{#loginOptions}}
+                    <button id="logout-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Log Out</button>
+                {{/loginOptions}}
+
+                {{#products}}
+                    <a href="/Productos/catalogoProductos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
+                {{/products}}
+
+                {{#userOnly}}
+                    <a href="/User/pedidosUsuario" id="pedidos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Mis pedidos</a>
+                {{/userOnly}}
+
+
+                {{#loginOptions}}
+                    {{#changeUserBtn}}
+                    <a href="/sign-in" id="changeuser-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Cambiar usuario</a>
+                    {{/changeUserBtn}}
+                {{/loginOptions}}
+
+                {{#loginOptions}}
+                    {{#adminBtn}}
+                    <a href="/Admin/admin-panel" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
+                    {{/adminBtn}}
+                {{/loginOptions}}
+
             </header>
     <script>
         const logoutbtn = document.getElementById('logout-btn');

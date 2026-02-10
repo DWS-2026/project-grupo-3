@@ -1,5 +1,6 @@
 package es.codeurjc.board.controller;
-import jakarta.servlet.http.HttpSession;
+import es.codeurjc.board.model.buttonsHeader;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PlantController {
     @GetMapping("/Plantas/catalogoPlantas")
-    public String catalogoPlantas() {
+    public String catalogoPlantas(Model model) {
+        buttonsHeader.hideBtnHeader(model,"plants");
         return "Plantas/catalogoPlantas";
     }
 
