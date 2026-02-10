@@ -95,9 +95,9 @@
 	}
 	
 	$(function(){   
-		$("#footer-global").load("footer.html");
+		$("#footer-global").load("/html/footer.html");
 	});
     $(function(){   
-		$("#header-global").load("header.html");
+		$("#header-global").load("/html/header.html");
 	});
 

@@ -19,7 +19,6 @@
 /* Anular el body centrado de main.css para esta página */
 body {
     height: auto !important;
-    display: block !important;
     justify-content: unset !important;
     align-items: unset !important;
 }
