@@ -78,10 +78,11 @@
             </div>
           </div>
           </div>
-
-                          <div class="col">
+            {{#loginOptions}}
+                {{#userOnly}}
+              <div class="col">
                     <div class="card shadow-sm h-100 planta">
-                        <div class="card-img-container">
+                        <div class="card-img-container"  style="padding-top: 10px">
                             <a href="/Reviews/newreview" class="circle-edition">
                                 <span>+</span>
                             </a>
@@ -93,7 +94,10 @@
                             </h5>
                         </div>
                     </div>
-          </div>  
+              </div>
+                {{/userOnly}}
+            {{/loginOptions}}
+
         </div>
       </div>
   </main>

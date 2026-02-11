@@ -1,13 +1,13 @@
 package es.codeurjc.board.model;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
-@Component
-@ControllerAdvice //se añade siempre que haya un controlador
-public class buttonsHeader {
+@ControllerAdvice //añade acciones antes de ejecutar cualquier controlador y es necesario para poder hacer ModelAttribute
+//NO funciona con @Component
+public class ButtonsHeader {
     @ModelAttribute //esto se añade para que se haga por cada request,
     // por cada model que pidamos y solo afecta al metodo de debajo
     public void buttonsHeader(Model model) {
@@ -26,7 +26,7 @@ public class buttonsHeader {
         model.addAttribute("adminBtn", false); //aquí por defecto no lo mostramos, salvo que sea admin
     }
 
-    public static void hideBtnHeader(Model model, String name) {
+    public void hideBtnHeader(Model model, String name) {
         model.addAttribute(name, false);
     }
 
