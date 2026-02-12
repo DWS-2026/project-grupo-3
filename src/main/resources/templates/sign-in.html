@@ -21,7 +21,7 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto" id="login-form">
-    <form>
+    <form action="/sign-in" method="post">
         <img
                 class="mb-4"
                 src="/assets/images/temporal-icon.png"
@@ -60,36 +60,11 @@
             </label>
         </div>
         <div class="buttons-container">
-            <button href="/" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Iniciar Sesión / Registrarse</button>
+            <button class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Iniciar Sesión / Registrarse</button>
         </div>
         
     </form>
 </main>
-<script>
-
-    const loginForm = document.getElementById('login-form');
-
-    loginForm.addEventListener('submit', function(event) {// cuando envias el formulario
-        event.preventDefault();  // Evitar recarga de página
-        
-        const username = document.getElementById('floatingInput').value;
-        const password = document.getElementById('floatingPassword').value;
-        
-        
-        localStorage.setItem('isLoggedIn', 'true'); //NO hacer, quitar super inseguro
-        if(username==="admin@gmail.com" && password === "admin"){ //NO contraseñas en claro
-            localStorage.setItem('isAdmin', 'true'); //SE puede crear esta variable con este nombre y ponerlo a true
-            //SUPER PELIGROSO, eliminar cuanto antes y hacerlo en el backend sin variables locales pochas
-        } else{
-            localStorage.removeItem('isAdmin');
-        }
-        window.location.href = '/';  // Redirigir al inicio
-
-
-
-
-    });
-</script>
 
 {{>footer}}
 

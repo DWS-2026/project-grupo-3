@@ -308,17 +308,17 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Inés Sebastián Santamaría**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+| Nº    |                                                                                   Commits                                                                                    |                                                  Files                                                   |
+|:------------: |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------:|
+|1| [Conseguir ocultar botones en el header gracias a Mustache y los controladores](https://github.com/DWS-2026/project-grupo-3/commit/08d62f1919846a1f82813625a94271dae3aca686) | [Header](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/templates/header.html) |
+|2|                                                                     [Descripción commit 2](URL_commit_2)                                                                     |                                        [Archivo2](URL_archivo_2)                                         |
+|3|                                                                     [Descripción commit 3](URL_commit_3)                                                                     |                                        [Archivo3](URL_archivo_3)                                         |
+|4|                                                                     [Descripción commit 4](URL_commit_4)                                                                     |                                        [Archivo4](URL_archivo_4)                                         |
+|5|                                                                     [Descripción commit 5](URL_commit_5)                                                                     |                                        [Archivo5](URL_archivo_5)                                         |
 
 ---
 

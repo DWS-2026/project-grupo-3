@@ -29,8 +29,13 @@
                 </div>
 
                 {{#loginOptions}}
-                    <button id="logout-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Log Out</button>
+                    <form action="/logOut" method="post">
+                        <button type="submit" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">
+                            Log Out
+                        </button>
+                    </form>
                 {{/loginOptions}}
+
 
                 {{#products}}
                     <a href="/Productos/catalogoProductos" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
@@ -41,32 +46,10 @@
                 {{/userOnly}}
 
 
-                {{#loginOptions}}
-                    {{#changeUserBtn}}
-                    <a href="/sign-in" id="changeuser-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Cambiar usuario</a>
-                    {{/changeUserBtn}}
-                {{/loginOptions}}
 
-                {{#loginOptions}}
-                    {{#adminBtn}}
+                {{#adminOnly}}
                     <a href="/Admin/admin-panel" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
-                    {{/adminBtn}}
-                {{/loginOptions}}
+                {{/adminOnly}}
 
             </header>
-    <script>
-        const logoutbtn = document.getElementById('logout-btn');
-        const adminbtn = document.getElementById('admin-btn');
-        hideOptions();
-
-
-        if (logoutbtn) {
-            logoutbtn.addEventListener('click', function() {
-                localStorage.removeItem('isLoggedIn');
-                localStorage.removeItem('isAdmin');
-                window.location.href = '/'; //necesita una actualización para volver a cargar la página
-            });
-        }
-
-    </script>
 </nav>
