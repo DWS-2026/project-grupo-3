@@ -1,3 +1,4 @@
+/*
 package es.codeurjc.board.controller;
 
 import es.codeurjc.board.model.Post;
@@ -91,4 +92,4 @@ public class Oldthings {
 
         return "deleted_post";
     }
-}
+}*/

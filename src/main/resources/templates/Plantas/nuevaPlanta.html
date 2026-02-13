@@ -21,7 +21,7 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto">
-  <form class="text-center" action="/" enctype="multipart/form-data">
+  <form class="text-center" action="/plants/new" method="post" enctype="multipart/form-data">
     <img
             class="mb-4"
             src="/assets/images/temporal-icon.png"
@@ -73,6 +73,7 @@
       <label class="form-label change-color fw-medium">Imagen de la planta</label>
       <input
               class="form-control"
+              name="image"
               type="file"
               id="plantImage"
               accept="image/*"
@@ -88,7 +89,6 @@
       <a href="/Plantas/catalogoPlantas" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
     </div>
 
-    <p class="mt-5 mb-3 text-body-secondary">&copy; 2026</p>
   </form>
 
 </main>
