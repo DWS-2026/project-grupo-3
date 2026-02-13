@@ -1,8 +1,8 @@
-/* Anular el body centrado de main.css para esta página */
+/* Override centered body from main.css for this page */
 
 main {
-    max-width: 1000px; /* ancho máximo para que no se salga */
-    margin: 0 auto; /* centrar */
+    max-width: 1000px; /* maximum width so that it does not come out */
+    margin: 0 auto; /* center */
     padding: 20px;
 }
 .carrito-card {

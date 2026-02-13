@@ -16,7 +16,7 @@
 }
 
 
-/* Anular el body centrado de main.css para esta página */
+/* Override centered body from main.css for this page */
 body {
     height: auto !important;
     justify-content: unset !important;
