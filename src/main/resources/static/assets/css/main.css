@@ -27,7 +27,6 @@ h1 {
 /*Barra superior*/
 
 .top-bar {
-    position: flex;
     margin-top: 0%;
     top: 0;
     left: 0;
@@ -50,6 +49,7 @@ h1 {
     align-items: center;      /* centra vertical */
     justify-content: center;  /* centra horizontal */
     max-height: 40px;
+
 }
 .icon-group {
     display: flex;

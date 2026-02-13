@@ -10,7 +10,18 @@ form{
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
+.top-bar form {
+    display: inline-flex;  /* Hace que el form sea un flex item inline, evitando saltos de línea */
+    align-items: center;   /* Alinea el contenido del form verticalmente */
+    margin: 0;            /* Elimina márgenes por defecto */
+    padding: 0;           /* Elimina padding por defecto */
+    flex-shrink: 0;       /* Evita que el form se encoja, manteniendo su tamaño */
+}
 
+/* Quitar el padding-top problemático que bajaba el form */
+form {
+    /* padding-top: 75px; */  /* Comentado/Eliminado: Esto causaba que el form se bajara */
+}
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
