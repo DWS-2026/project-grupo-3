@@ -1,10 +1,10 @@
 .bg-primary{
     background-color: #66BB6A !important;
 }
-/* Contenedor principal */
+/* Main container */
 main {
-    max-width: 1000px; /* ancho máximo para que no se salga */
-    margin: 0 auto; /* centrar */
+    max-width: 1000px; /* maximum width so that it does not come out */
+    margin: 0 auto; /* center */
     padding: 20px;
 }
 
@@ -13,19 +13,19 @@ form {
 }
 
 
-/* Formulario y carrito */
+/* Form and cart */
 .col-md-5, .col-md-7 {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-/* Inputs más pequeños y con más espacio */
+/* Smaller inputs with more space */
 form .form-control {
     font-size: 0.9rem;
     padding: 6px 10px;
 }
 
-/* Ajustar lista del carrito */
+/* Adjust cart list */
 #cart-items li {
     font-size: 0.9rem;
     padding: 6px 10px;

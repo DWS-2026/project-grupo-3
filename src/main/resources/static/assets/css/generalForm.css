@@ -1,7 +1,7 @@
 form{
   padding-top: 75px;
 }
-/*los huecos para rellenar el email y la pasword*/
+/*the gaps to fill in the email and password*/
 .form-signin {
   max-width: 630px;
   padding: 1rem;
@@ -11,16 +11,16 @@ form{
   z-index: 2;
 }
 .top-bar form {
-    display: inline-flex;  /* Hace que el form sea un flex item inline, evitando saltos de línea */
-    align-items: center;   /* Alinea el contenido del form verticalmente */
-    margin: 0;            /* Elimina márgenes por defecto */
-    padding: 0;           /* Elimina padding por defecto */
-    flex-shrink: 0;       /* Evita que el form se encoja, manteniendo su tamaño */
+    display: inline-flex;  /* Makes the form an inline flex item, avoiding line breaks */
+    align-items: center;   /* Align the form content vertically */
+    margin: 0;            /* Remove default margins */
+    padding: 0;           /* Eliminates padding by default */
+    flex-shrink: 0;       /* Prevents the form from shrinking, maintaining its size */
 }
 
-/* Quitar el padding-top problemático que bajaba el form */
+/* Remove the problematic padding-top that lowered the form */
 form {
-    /* padding-top: 75px; */  /* Comentado/Eliminado: Esto causaba que el form se bajara */
+    /* padding-top: 75px; */  /* Commented/Deleted: This caused the form to drop */
 }
 .form-signin input[type="email"] {
   margin-bottom: -1px;
@@ -37,15 +37,15 @@ form {
 .form-signin .form-floating textarea:focus,
 form .form-control:focus {
     border-color: #4CAF50 !important;        
-    outline: 0 !important;                   /* quitar el borde azul por defecto */
-    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important; /* borde fluorescente verde */
+    outline: 0 !important;                   /* remove default blue border */
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important; /* green fluorescent border */
 }
-/* CONTENEDOR EDICIÓN */
+/* CONTAINER EDITION */
 .editar-perfil {
     max-width: 500px;
     text-align: center;
 }
-/* Select (estado pedido, etc.) */
+/* Select (order status, etc.) */
 .form-signin select:focus,
 .form-select:focus {
     border-color: #4CAF50 !important;
@@ -54,7 +54,7 @@ form .form-control:focus {
 }
 
 
-/* FOTO PERFIL EDITABLE */
+/* EDITABLE PROFILE PHOTO */
 .circle-edition {
     width: 120px;
     aspect-ratio: 1 / 1;

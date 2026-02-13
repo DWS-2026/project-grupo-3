@@ -24,7 +24,7 @@ h1 {
     letter-spacing: 2px;
 }
 
-/*Barra superior*/
+/*Top bar*/
 
 .top-bar {
     margin-top: 0%;
@@ -39,22 +39,22 @@ h1 {
     align-items: center;
     row-gap: 6px;    
     z-index: 1000;
-    padding-right: 20px;/*mueve solo el contenido*/
+    padding-right: 20px;/*move only the content*/
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .topbar-btn {
     display: flex;
-    align-items: center;      /* centra vertical */
-    justify-content: center;  /* centra horizontal */
+    align-items: center;      /* vertical center */
+    justify-content: center;  /* center horizontal */
     max-height: 40px;
 
 }
 .icon-group {
     display: flex;
     align-items: center;
-    gap: 12px; /* separación limpia y responsive */
+    gap: 12px; /* clean and responsive separation */
 }
 
 
@@ -74,7 +74,7 @@ h1 {
     font-size: 20px;
     cursor: pointer;
 
-  text-decoration: none; /* quita subrayado del link */
+  text-decoration: none; /* remove underline from link */
 }
 .icons:hover {
     transform: translateY(-2px);
@@ -83,7 +83,7 @@ h1 {
   color: #2E7D32 !important;
 }
 
-/*botones*/
+/*bottons*/
 .main-button {
   background-color: #66BB6A;
   border-color: #66BB6A;
@@ -98,7 +98,7 @@ h1 {
   color: #fff;
 }
 
-/*Contenedor de botones*/
+/*Button container*/
 .buttons-container {
     margin-top: 40px;
     display: flex;
@@ -108,7 +108,7 @@ h1 {
     width: 100%;
 }
 
-/*Parte responsive*/
+/*Responsive part*/
 @media (max-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
@@ -139,7 +139,7 @@ h1 {
     bottom: 0;
     justify-content: center;
     align-items: center;
-    text-align: center; /* <- esto centra todo el texto */
+    text-align: center; /* <- this centers all the text */
   
 }
 
