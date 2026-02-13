@@ -35,4 +35,6 @@ public class GeneralController {
 		return "quizzPlants";
 	}
 
+
+
 }
