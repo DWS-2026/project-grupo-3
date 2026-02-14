@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- Para hacer el diseño responsive -->
+    <!-- To make the design responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Green Care</title>
@@ -11,7 +11,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-    <!-- CSS externo -->
+    <!-- External CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/management.css">
@@ -25,7 +25,7 @@
     <h1>Gestión de Productos</h1>
     <p class="lead">Administra los productos de la tienda: añade, revisa o elimina.</p>
 
-    <!-- TABLA DE PRODUCTOS -->
+    <!-- PRODUCT TABLE -->
     <table class="table table-bordered text-center">
         <thead class="table-success">
         <tr>
@@ -40,69 +40,69 @@
                 <td><input type="checkbox"></td>
                 <td>Fertilizante</td>
                 <td>€12.99</td>
-                <td><img src="/assets/images/productos/fertilizante.jpg" width="50"></td>
+                <td><img src="/assets/images/products/fertilizer.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Tierra Compostada</td>
                 <td>€9.99</td>
-                <td><img src="/assets/images/productos/tierracompostada.jpg" width="50"></td>
+                <td><img src="/assets/images/products/compostedLand.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Maceta</td>
                 <td>€5.99</td>
-                <td><img src="/assets/images/productos/maceta.jpg" width="50"></td>
+                <td><img src="/assets/images/products/flowerpot.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Insecticida Natural</td>
                 <td>€11.99</td>
-                <td><img src="/assets/images/productos/insecticidanatural.jpg" width="50"></td>
+                <td><img src="/assets/images/products/naturalInsecticide.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Semillas</td>
                 <td>€1.99</td>
-                <td><img src="/assets/images/productos/semillas.jpg" width="50"></td>
+                <td><img src="/assets/images/products/seeds.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Guantes</td>
                 <td>€4.99</td>
-                <td><img src="/assets/images/productos/guantes.jpg" width="50"></td>
+                <td><img src="/assets/images/products/gloves.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Regadera</td>
                 <td>€8.99</td>
-                <td><img src="/assets/images/productos/regadera.jpg" width="50"></td>
+                <td><img src="/assets/images/products/wateringCan.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Abono</td>
                 <td>€13.99</td>
-                <td><img src="/assets/images/productos/abono.jpg" width="50"></td>
+                <td><img src="/assets/images/products/manure.jpg" width="50"></td>
             </tr>
 
             <tr>
                 <td><input type="checkbox"></td>
                 <td>Sustrato Universal</td>
                 <td>€7.99</td>
-                <td><img src="/assets/images/productos/sustratouniversal.jpg" width="50"></td>
+                <td><img src="/assets/images/products/universalSubstrate.jpg" width="50"></td>
             </tr>
         </tbody>
 
     </table>
     <div class="mb-3">
-        <a href="/Productos/nuevoProducto" class="text-decoration-none">
+        <a href="/Products/newProduct" class="text-decoration-none">
             <button class="btn main-button" id="add-selected">Añadir producto</button>
         </a>
         <button class="btn main-button" id="edit-selected">Editar seleccionado</button>
@@ -112,34 +112,34 @@
 
 <script>
     document.getElementById("edit-selected").addEventListener("click", () => {
-        const filas = document.querySelectorAll("#product-table tr");
-        let seleccionado = null;
+        const rows = document.querySelectorAll("#product-table tr");
+        let selected = null;
 
-        filas.forEach(fila => {
+        rows.forEach(fila => {
             const checkbox = fila.querySelector("input[type='checkbox']");
             if (checkbox && checkbox.checked) {
-                if (seleccionado) {
+                if (selected) {
                     alert("Solo puedes editar un producto a la vez");
-                    seleccionado = null;
+                    selected = null;
                     return;
                 }
-                seleccionado = fila;
+                selected = fila;
             }
         });
 
-        if (!seleccionado) {
+        if (!selected) {
             alert("Selecciona un producto para editar");
             return;
         }
 
-        const producto = {
-            nombre: seleccionado.children[1].innerText,
-            precio: seleccionado.children[2].innerText.replace("€", ""),
-            imagen: seleccionado.children[3].querySelector("img").src
+        const product = {
+            name: selected.children[1].innerText,
+            price: selected.children[2].innerText.replace("€", ""),
+            image: selected.children[3].querySelector("img").src
         };
 
-        sessionStorage.setItem("productoEditar", JSON.stringify(producto));
-        window.location.href = "/Productos/editProduct";
+        sessionStorage.setItem("productoEditar", JSON.stringify(product));
+        window.location.href = "/Products/editProduct";
     });
 </script>
 {{>footer}}

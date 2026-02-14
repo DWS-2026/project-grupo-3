@@ -26,7 +26,8 @@ import java.util.concurrent.ConcurrentMap;
 public class PlantController {
     @Autowired
     private ButtonsHeader btnsHeader;
-    private static final String PLANTS_FOLDER = "plants";
+
+    public static final String PLANTS_FOLDER = "plants";
 
     @Autowired
     private PlantService plantService;
@@ -38,22 +39,22 @@ public class PlantController {
     private ImageService imageService;
 
 
-    @GetMapping("/Plantas/catalogoPlantas")
+    @GetMapping("/Plants/catalogPlants")
     public String catalogoPlantas(Model model) {
         btnsHeader.hideBtnHeader(model,"plants");
         List<Plant> plants = new ArrayList<>(plantService.findAll());
         model.addAttribute("plants", plants);
-        return "Plantas/catalogoPlantas";
+        return "/Plants/catalogPlants";
     }
 
-    @GetMapping("/Plantas/nuevaPlanta")
-    public String nuevaPlanta() {
-        return "Plantas/nuevaPlanta";
+    @GetMapping("/Plants/newPlant")
+    public String newPlant() {
+        return "Plants/newPlant";
     }
 
-    @GetMapping("/Plantas/editPlantita")
-    public String editPlantita() {
-        return "Plantas/editPlantita";
+    @GetMapping("/Plants/editPlant")
+    public String editPlant() {
+        return "Plants/editPlant";
     }
 
     @PostMapping("/plants/new")

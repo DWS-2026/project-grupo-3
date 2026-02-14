@@ -5,24 +5,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AdminController {
-    @GetMapping("/Admin/admin-panel")
+    @GetMapping("/Admin/adminPanel")
     public String adminPanel() {
-        return "Admin/admin-panel";
+        return "Admin/adminPanel";
     }
 
-    @GetMapping("/Admin/gestionProductos")
-    public String gestionProductos() {
-        return "Admin/gestionProductos";
+    @GetMapping("/Admin/productManagement")
+    public String productManagement() {
+        return "Admin/productManagement";
     }
 
-    @GetMapping("/Admin/gestionPedidos")
-    public String gestionPedidos() {
-        return "Admin/gestionPedidos";
+    @GetMapping("/Admin/managementOrders")
+    public String managementOrders() {
+        return "Admin/managementOrders";
     }
 
-    @GetMapping("/Admin/gestionUsuarios")
-    public String gestionUsuarios() {
-        return "Admin/gestionUsuarios";
+    @GetMapping("/Admin/userManagement")
+    public String userManagement() {
+        return "Admin/userManagement";
     }
 
 

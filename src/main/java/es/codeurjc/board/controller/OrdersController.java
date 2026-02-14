@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class OrdersController {
     @Autowired
     private ButtonsHeader btnsHeader;
-    @GetMapping("/Pedidos/carroCompra")
-    public String carroCompra(Model model) {
+    @GetMapping("/Orders/shoppingCart")
+    public String shoppingCart(Model model) {
         btnsHeader.hideBtnHeader(model,"shoppingCart");
-        return "Pedidos/carroCompra";
+        return "Orders/shoppingCart";
     }
 
-    @GetMapping("/Pedidos/pago")
-    public String pago() {
-        return "Pedidos/pago";
+    @GetMapping("/Orders/payment")
+    public String payment() {
+        return "Orders/payment";
     }
 
 
