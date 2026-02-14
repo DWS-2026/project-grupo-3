@@ -10,20 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PlantController {
     @Autowired
     private ButtonsHeader btnsHeader;
-    @GetMapping("/Plantas/catalogoPlantas")
-    public String catalogoPlantas(Model model) {
+    @GetMapping("/Plants/catalogPlants")
+    public String catalogPlants(Model model) {
         btnsHeader.hideBtnHeader(model,"plants");
-        return "Plantas/catalogoPlantas";
+        return "Plants/catalogPlants";
     }
 
-    @GetMapping("/Plantas/nuevaPlanta")
-    public String nuevaPlanta() {
-        return "Plantas/nuevaPlanta";
+    @GetMapping("/Plants/newPlant")
+    public String newPlant() {
+        return "Plants/newPlant";
     }
 
-    @GetMapping("/Plantas/editPlantita")
-    public String editPlantita() {
-        return "Plantas/editPlantita";
+    @GetMapping("/Plants/editPlant")
+    public String editPlant() {
+        return "Plants/editPlant";
     }
 
 

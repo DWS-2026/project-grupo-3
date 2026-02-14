@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ReviewsController {
     @Autowired
     private ButtonsHeader btnsHeader;
-    @GetMapping("/Reviews/foro")
-    public String foro(Model model) {
+    @GetMapping("/Reviews/forum")
+    public String forum(Model model) {
         btnsHeader.hideBtnHeader(model,"review");
-        return "Reviews/foro";
+        return "Reviews/forum";
     }
 
     @GetMapping("/Reviews/newreview")

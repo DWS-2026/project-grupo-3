@@ -35,10 +35,10 @@ form .form-control {
     padding: 6px 12px;
     font-size: 0.9rem;
 }
-.eliminar-btn {
+.delete-btn {
     background-color: #EF5350;
 }
 
-.eliminar-btn:hover {
+.delete-btn:hover {
     background-color: #C62828;
 }

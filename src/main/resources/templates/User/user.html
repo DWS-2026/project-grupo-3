@@ -5,13 +5,13 @@
     <title>Mi Perfil</title>
     <meta charset="UTF-8">
 
-    <!-- Para hacer el diseño responsive -->
+    <!-- To make the design responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-    <!-- CSS externo -->
+    <!-- External CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/user.css">
@@ -21,25 +21,25 @@
 </head>
 <body>
 {{>header}}
-<div class="perfil">
-    <h2 class="titulo-perfil">Mi Perfil</h2>
+<div class="profile">
+    <h2 class="title-profile">Mi Perfil</h2>
 
 
-    <!-- CABECERA PERFIL -->
-    <div class="perfil-header mb-4">
-        <div class="foto-perfil">
+    <!-- PROFILE HEADER -->
+    <div class="profile-header mb-4">
+        <div class="profile-photo">
         </div>
 
-        <div class="info-principal">
-            <h1 class="nombre-usuario">Nombre Usuario</h1>
+        <div class="main-info">
+            <h1 class="user-name">Nombre Usuario</h1>
 
-            <div class="datos-box">
-                <textarea id="descripcion-usuario" placeholder="Añade una descripción sobre ti." disabled></textarea>
+            <div class="data-box">
+                <textarea id="user-description" placeholder="Añade una descripción sobre ti." disabled></textarea>
             </div>
 
 
 
-            <div class="botones">
+            <div class="buttons">
                 <a href="/User/editProfile" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Editar perfil</a>
                 <a href="/User/configuration" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Configuración</a>
 
@@ -49,20 +49,20 @@
 
     <div class="row g-4">
 
-        <!-- MI PUBLICACIÓN -->
+        <!-- MY PUBLICATION -->
         <div class="col-md-6 col-lg-4">
             <button class="card card-publicacion w-100 text-start p-3">
 
-                <div class="publicacion-contenido">
+                <div class="publication-content">
 
-                    <!-- Subir imagen -->
-                    <label class="publicacion-imagen">
+                    <!-- Upload image -->
+                    <label class="publication-image">
                         <input type="file" hidden>
                         <span>Nueva foto de perfil</span>
                     </label>
 
-                    <!-- Descripción -->
-                    <textarea class="publicacion-texto"
+                    <!-- Description -->
+                    <textarea class="publication-text"
                               placeholder="Escribe una descripción..."></textarea>
 
                 </div>
@@ -70,11 +70,11 @@
             </button>
         </div>
 
-        <!-- NUEVA PUBLICACIÓN -->
+        <!-- NEW PUBLICATION -->
         <div class="col-md-6 col-lg-4">
-            <a href="/Plantas/nuevaPlanta" class="card card-publicacion w-100 text-start text-decoration-none">
+            <a href="/Plants/newPlant" class="card card-publicacion w-100 text-start text-decoration-none">
                 <div class="card-body d-flex">
-                    <div class="icono me-3">
+                    <div class="icoon me-3">
                         ➕
                     </div>
                     <div>
@@ -86,11 +86,11 @@
         </div>
 
 
-        <!-- MIS PEDIDOS -->
+        <!-- MY ORDERS -->
         <div class="col-md-6 col-lg-4">
-            <a href="/User/pedidosUsuario"  id="mis-pedidos-btn" class="card card-publicacion w-100 text-start text-decoration-none login-options">
+            <a href="/User/ordersUser"  id="my-btn-orders" class="card card-publicacion w-100 text-start text-decoration-none login-options">
                 <div class="card-body d-flex">
-                    <div class="icono me-3">
+                    <div class="icoon me-3">
                         🛒
                     </div>
                     <div>

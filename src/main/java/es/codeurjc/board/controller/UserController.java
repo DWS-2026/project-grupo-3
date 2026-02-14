@@ -17,9 +17,9 @@ public class UserController {
         return "User/user";
     }
 
-    @GetMapping("/User/pedidosUsuario")
-    public String pedidosUsuario() {
-        return "User/pedidosUsuario";
+    @GetMapping("/User/ordersUser")
+    public String ordersUser() {
+        return "User/ordersUser";
     }
 
     @GetMapping("/User/configuration")

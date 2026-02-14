@@ -41,7 +41,7 @@ form .form-control:focus {
     box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important; /* green fluorescent border */
 }
 /* CONTAINER EDITION */
-.editar-perfil {
+.edit-profile {
     max-width: 500px;
     text-align: center;
 }
