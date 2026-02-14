@@ -43,48 +43,4 @@ public class FormsController {
         return "redirect:/";
     }
 
-    @PostMapping("/plants/new")
-    public String newPost(Model model, Plant plant, MultipartFile image) throws IOException {
-
-        plantService.save(plant);
-
-        imageService.saveImage(PLANTS_FOLDER, plant.getId(), image);
-
-        userSession.setUser(plant.getUser());
-        userSession.incNumPosts();
-
-        model.addAttribute("numPosts", userSession.getNumPosts());
-
-        return "saved_post";
-    }
-
-
-
-
-
-    @GetMapping("/plants/{id}")
-    public String showPost(Model model, @PathVariable long id) {
-
-        //Post post = plantService.findById(id);
-
-        //model.addAttribute("post", post);
-
-        return "show_post";
-    }
-
-    @GetMapping("/plants/{id}/image")
-    public ResponseEntity<Object> downloadImage(@PathVariable int id) throws MalformedURLException {
-
-        return imageService.createResponseFromImage(PLANTS_FOLDER, id);
-    }
-
-    @PostMapping("/plants/{id}/delete")
-    public String deletePost(Model model, @PathVariable long id) throws IOException {
-
-        plantService.deleteById(id);
-
-        imageService.deleteImage(PLANTS_FOLDER, id);
-
-        return "deleted_post";
-    }
 }

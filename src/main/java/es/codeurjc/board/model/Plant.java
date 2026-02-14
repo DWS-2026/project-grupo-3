@@ -1,29 +1,30 @@
 package es.codeurjc.board.model;
 
+import java.awt.*;
+
 public class Plant {
 
     private Long id;
     private String user;
-    private String title;
-    private String text;
+    private String name;
+    private String cares;
+    private String description;
+    private int counterImages = 0;
 
-    public Plant() {
-
-    }
-
-    public Plant(String user, String title, String text) {
+    public Plant(){}
+    public Plant(String user, String name, String cares) {
         super();
         this.user = user;
-        this.title = title;
-        this.text = text;
+        this.name= name;
+        this.cares = cares;
     }
 
-    public Long getId() {
-        return id;
+    public int getCounterImages() {
+        return counterImages;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCounterImages() {
+        this.counterImages ++;
     }
 
     public String getUser() {
@@ -34,25 +35,42 @@ public class Plant {
         this.user = user;
     }
 
-    public String getTitle() {
-        return title;
+    public Long getId() {
+        return id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getName() {
+        return name;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public String getCares() {
+        return cares;
+    }
+
+    public void setCares(String cares) {
+        this.cares = cares;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
     @Override
     public String toString() {
-        return "Plant [id="+id+", user=" + user + ", title=" + title + ", text=" + text + "]";
+        return "Plant [id="+id+", user=" + user + ", name=" + name + ", cares=" + cares + "]";
     }
 
 }
