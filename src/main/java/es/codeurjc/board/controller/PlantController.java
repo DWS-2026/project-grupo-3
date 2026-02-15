@@ -42,8 +42,7 @@ public class PlantController {
     @GetMapping("/Plants/catalogPlants")
     public String catalogoPlantas(Model model) {
         btnsHeader.hideBtnHeader(model,"plants");
-        List<Plant> plants = new ArrayList<>(plantService.findAll());
-        model.addAttribute("plants", plants);
+        model.addAttribute("plants", plantService.findAll());
         return "/Plants/catalogPlants";
     }
 
@@ -57,21 +56,21 @@ public class PlantController {
         return "Plants/editPlant";
     }
 
-    @PostMapping("/plants/new")
+    @PostMapping("/Plants/new")
     public String newPost(Model model, Plant plant, MultipartFile image) throws IOException {
 
         plantService.save(plant);
 
-        imageService.saveImage(PLANTS_FOLDER, plant.getId(), plant.getCounterImages(),image);
-
+        imageService.saveImage(PLANTS_FOLDER, plant.getId(), plant.getName(), plant.getCounterImages(),image);
+        plant.setCounterImages();
         userSession.setUser(plant.getUser());
         userSession.incNumPosts();
 
         model.addAttribute("numPosts", userSession.getNumPosts());
 
-        return "Plantas/catalogoPlantas";
+        return "redirect:/Plants/catalogPlants";
     }
-
+/*
     @GetMapping("/plants/{id}")
     public String showPost(Model model, @PathVariable long id) {
 
@@ -81,12 +80,12 @@ public class PlantController {
 
         return "show_post";
     }
-/*
+
     @GetMapping("/plants/{id}/image")
     public ResponseEntity<Object> downloadImage(@PathVariable int id) throws MalformedURLException {
         return imageService.createResponseFromImage(PLANTS_FOLDER, id);
-    }*/
-/*
+    }
+
     @PostMapping("/plants/{id}/delete")
     public String deletePost(Model model, @PathVariable long id) throws IOException {
 
