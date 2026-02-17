@@ -44,4 +44,10 @@ public class GeneralController {
 		return "error";
 
 	}
+
+	@GetMapping("/register")
+	public String register() {
+		return "register";
+	}
+
 }
