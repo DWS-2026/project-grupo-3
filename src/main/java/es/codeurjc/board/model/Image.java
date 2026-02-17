@@ -10,5 +10,5 @@ public class Image {
     private Long id;
 
     @ManyToOne
-    private String test;
+    private Plant test;
 }

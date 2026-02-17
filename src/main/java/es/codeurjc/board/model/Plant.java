@@ -1,9 +1,7 @@
 package es.codeurjc.board.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.util.List;
+import jakarta.persistence.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,6 +14,9 @@ public class Plant {
     private String name;
     private String cares;
     private String description;
+
+    @OneToMany(mappedBy="test")
+    private List<Image> image;
 
     public Plant(){}
     public Plant(String user, String name, String cares) {
