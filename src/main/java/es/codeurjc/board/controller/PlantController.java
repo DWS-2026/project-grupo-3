@@ -2,9 +2,11 @@ package es.codeurjc.board.controller;
 import es.codeurjc.board.model.ButtonsHeader;
 
 import es.codeurjc.board.model.Plant;
+import es.codeurjc.board.repositories.PlantRepository;
 import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
 import es.codeurjc.board.service.UserSession;
+import jakarta.annotation.PostConstruct;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,14 @@ import java.util.concurrent.ConcurrentMap;
 public class PlantController {
     @Autowired
     private ButtonsHeader btnsHeader;
+    @Autowired
+    private PlantRepository plantRepository;
 
+    @PostConstruct
+    public void init() {
+        plantRepository.save(new Plant("Pepe", "Vendo moto", "Barata, barata"));
+        plantRepository.save(new Plant("Juan", "Compro coche", "Pago bien"));
+    }
     public static final String PLANTS_FOLDER = "plants";
 
     @Autowired
@@ -61,12 +70,12 @@ public class PlantController {
 
         plantService.save(plant);
 
-        imageService.saveImage(PLANTS_FOLDER, plant.getId(), plant.getName(), plant.getCounterImages(),image);
-        plant.setCounterImages();
-        userSession.setUser(plant.getUser());
-        userSession.incNumPosts();
+        //imageService.saveImage(PLANTS_FOLDER, plant.getId(), plant.getName(),image);
 
-        model.addAttribute("numPosts", userSession.getNumPosts());
+        //userSession.setUser(plant.getUser());
+        //userSession.incNumPosts();
+
+        //model.addAttribute("numPosts", userSession.getNumPosts());
 
         return "redirect:/Plants/catalogPlants";
     }

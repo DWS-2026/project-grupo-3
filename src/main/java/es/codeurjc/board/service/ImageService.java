@@ -20,8 +20,8 @@ public class ImageService {
 
 	private static final Path FILES_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
 
-	private Path createFilePath(long imageId,long plantId, String plantName, Path folder) throws IOException {
-		Path plantFolder = folder.resolve(plantName +String.valueOf(plantId));
+	private Path createFilePath(long imageId,long plantId,  Path folder) throws IOException {
+		Path plantFolder = folder.resolve(String.valueOf(plantId));
 
 
 		if (!Files.exists(plantFolder)) {
@@ -33,22 +33,22 @@ public class ImageService {
 	}
 
 
-	public void saveImage(String folderName,long plantId, String plantName, long imageId, MultipartFile image) throws IOException {
+	public void saveImage(String folderName,long plantId, long imageId, MultipartFile image) throws IOException {
 
 		Path folder = FILES_FOLDER.resolve(folderName);
 
 		Files.createDirectories(folder);
 		
-		Path newFile = createFilePath(imageId, plantId,plantName, folder);
+		Path newFile = createFilePath(imageId, plantId, folder);
 
 		image.transferTo(newFile);
 	}
 
-	public ResponseEntity<Object> createResponseFromImage(String folderName, long plantId, String plantName, long imageId) throws MalformedURLException, IOException {
+	public ResponseEntity<Object> createResponseFromImage(String folderName, long plantId, long imageId) throws MalformedURLException, IOException {
 
 		Path folder = FILES_FOLDER.resolve(folderName);
 		
-		Path imagePath = createFilePath(imageId, plantId, plantName, folder);
+		Path imagePath = createFilePath(imageId, plantId, folder);
 		
 		Resource file = new UrlResource(imagePath.toUri());
 		

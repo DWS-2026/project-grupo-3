@@ -1,38 +1,38 @@
 package es.codeurjc.board.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.awt.*;
-
+import java.util.ArrayList;
+@Entity
 public class Plant {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String user;
+    private String username;
     private String name;
     private String cares;
     private String description;
-    private int counterImages = 0;
 
     public Plant(){}
     public Plant(String user, String name, String cares) {
         super();
-        this.user = user;
+        this.username = user;
         this.name= name;
         this.cares = cares;
     }
 
-    public int getCounterImages() {
-        return counterImages;
+
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setCounterImages() {
-        this.counterImages ++;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Long getId() {
@@ -70,7 +70,7 @@ public class Plant {
 
     @Override
     public String toString() {
-        return "Plant [id="+id+", user=" + user + ", name=" + name + ", cares=" + cares + "]";
+        return "Plant [id="+id+", user=" + username + ", name=" + name + ", cares=" + cares + "]";
     }
 
 }
