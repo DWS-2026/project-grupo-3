@@ -1,0 +1,82 @@
+form{
+  padding-top: 75px;
+}
+/*the gaps to fill in the email and password*/
+.form-signin {
+  max-width: 630px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+.top-bar form {
+    display: inline-flex;  /* Makes the form an inline flex item, avoiding line breaks */
+    align-items: center;   /* Align the form content vertically */
+    margin: 0;            /* Remove default margins */
+    padding: 0;           /* Eliminates padding by default */
+    flex-shrink: 0;       /* Prevents the form from shrinking, maintaining its size */
+}
+
+/* Remove the problematic padding-top that lowered the form */
+form {
+    /* padding-top: 75px; */  /* Commented/Deleted: This caused the form to drop */
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-signin .form-floating input:focus,
+.form-signin .form-floating textarea:focus,
+form .form-control:focus {
+    border-color: #4CAF50 !important;        
+    outline: 0 !important;                   /* remove default blue border */
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important; /* green fluorescent border */
+}
+/* CONTAINER EDITION */
+.edit-profile {
+    max-width: 500px;
+    text-align: center;
+}
+/* Select (order status, etc.) */
+.form-signin select:focus,
+.form-select:focus {
+    border-color: #4CAF50 !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important;
+}
+
+
+/* EDITABLE PROFILE PHOTO */
+.circle-edition {
+    width: 120px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 25px;
+    background-color: #C8E6C9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 36px;
+    color: #2E7D32;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.circle-edition:hover {
+    background-color: #A5D6A7;
+}
+.form-signin input[type="file"]:focus {
+    border-color: #4CAF50 !important;
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.5) !important;
+}
+

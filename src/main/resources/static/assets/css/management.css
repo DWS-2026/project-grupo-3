@@ -1,0 +1,13 @@
+
+table {
+  width: 70%;          /* It takes up only 70% of the screen */
+  max-width: 900px;
+  margin: 40px auto;  /* Centered with margin above and below */
+  background-color: white;
+  overflow: hidden;
+}
+
+table th, table td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+}

@@ -8,20 +8,20 @@ import org.springframework.ui.Model;
 public class ProductController {
     @Autowired
     private ButtonsHeader btnsHeader;
-    @GetMapping("/Productos/catalogoProductos")
-    public String catalogoProductos(Model model) {
+    @GetMapping("/Products/catalogProducts")
+    public String catalogProducts(Model model) {
         btnsHeader.hideBtnHeader(model,"products");
-        return "Productos/catalogoProductos";
+        return "Products/catalogProducts";
     }
 
-    @GetMapping("/Productos/nuevoProducto")
-    public String nuevoProducto() {
-        return "Productos/nuevoProducto";
+    @GetMapping("/Products/newProduct")
+    public String newProduct() {
+        return "Products/newProduct";
     }
 
-    @GetMapping("/Productos/editProduct")
+    @GetMapping("/Products/editProduct")
     public String editProduct() {
-        return "Productos/editProduct";
+        return "Products/editProduct";
     }
 
 
