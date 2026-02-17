@@ -37,4 +37,11 @@ public class GeneralController {
 
 
 
+
+	@GetMapping("/error")
+	public String error() {
+
+		return "error";
+
+	}
 }
