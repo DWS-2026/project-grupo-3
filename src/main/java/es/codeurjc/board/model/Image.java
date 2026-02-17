@@ -9,6 +9,6 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private String test;
+    //@ManyToOne
+    //private String test;
 }

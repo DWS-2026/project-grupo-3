@@ -1,156 +1,98 @@
-/*general*/
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Fondo y centrado general */
 body {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: #E8F5E9;
     font-family: 'Poppins', sans-serif;
+    text-align: center;
 }
 
-main{
-    flex: 1;
+/* Contenedor principal */
+body > * {
+    max-width: 600px;
+    padding: 40px 20px;
 }
 
+/* 404 grande */
 h1 {
-    font-size: 4rem;
-    margin-bottom: 30px;
-    font-weight: 500;
+    font-size: 6rem;
+    font-weight: 600;
     color: #2E7D32;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
 }
 
-/*Top bar*/
+/* Subtítulo */
+h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #388E3C;
+    margin-bottom: 25px;
+}
 
-.top-bar {
-    margin-top: 0%;
-    top: 0;
-    left: 0;
-    flex-wrap: wrap;
-    width: 100%;
-    min-height: 50px;
+/* Línea divisoria */
+hr {
+    border: none;
+    height: 2px;
     background-color: #C8E6C9;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    row-gap: 6px;
-    z-index: 1000;
-    padding-right: 20px;/*move only the content*/
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin: 20px auto;
+    width: 60%;
 }
 
-.topbar-btn {
-    display: flex;
-    align-items: center;      /* vertical center */
-    justify-content: center;  /* center horizontal */
-    max-height: 40px;
-
-}
-.icon-group {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* clean and responsive separation */
+/* Texto */
+p {
+    font-size: 1rem;
+    color: #2F4F2F;
+    margin-bottom: 15px;
 }
 
-
-.icons {
-    width: 35px;
-    height: 35px;
-    box-shadow: none !important;
-    background-color: #fff;
-    border-color: #fff;
-    border-radius: 50%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-
-    text-decoration: none; /* remove underline from link */
-}
-.icons:hover {
-    transform: translateY(-2px);
-}
-.change-color{
-    color: #2E7D32 !important;
-}
-
-/*bottons*/
-.main-button {
-    background-color: #66BB6A;
-    border-color: #66BB6A;
-    color: #fff;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.main-button:hover {
-    background-color: #388E3C;
-    border-color: #388E3C;
-    transform: translateY(-2px);
-    color: #fff;
-}
-
-/*Button container*/
-.buttons-container {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-/*Responsive part*/
-@media (max-width: 768px) {
-    .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-    }
-    .main-button {
-        font-size: 0.9rem;
-        padding: 1rem;
-    }
-    .buttons-container {
-        flex-wrap: wrap;
-        width: 100%;
-    }
-    .top-bar{
-        justify-content: center;
-
-    }
-}
-
-/* Footer*/
-#footer-wrapper {
-    background-color: #66BB6A;
-    color: #ffffff;
-    margin-top: auto;
-    padding: 10px 10px;
-    font-size: 0.9rem;
-    font-family: 'Poppins', sans-serif;
-    width: 100%;
-    bottom: 0;
-    justify-content: center;
-    align-items: center;
-    text-align: center; /* <- this centers all the text */
-
-}
-
-
-.license {
+/* Botón volver al inicio */
+a {
+    display: inline-block;
     margin-top: 10px;
-    font-size: 0.8rem;
-    color: #C8E6C9;
+    padding: 12px 25px;
+    background-color: #66BB6A;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.license a {
-    color: #E8F5E9;
-    text-decoration: underline;
+a:hover {
+    background-color: #388E3C;
+    transform: translateY(-3px);
+}
+
+/* Texto pequeño */
+small {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #66BB6A;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    a {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
 }
