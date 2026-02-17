@@ -1,7 +1,7 @@
 package es.codeurjc.board.controller;
 
 
-import es.codeurjc.board.model.ButtonsHeader;
+import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import jakarta.servlet.http.HttpSession;
 
 

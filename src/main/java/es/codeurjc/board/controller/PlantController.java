@@ -1,5 +1,5 @@
 package es.codeurjc.board.controller;
-import es.codeurjc.board.model.ButtonsHeader;
+import es.codeurjc.board.modelAttributes.ButtonsHeader;
 
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.repositories.PlantRepository;
@@ -7,34 +7,23 @@ import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
 import es.codeurjc.board.service.UserSession;
 import jakarta.annotation.PostConstruct;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 @Controller
 public class PlantController {
     @Autowired
     private ButtonsHeader btnsHeader;
-    @Autowired
-    private PlantRepository plantRepository;
+
 
     @PostConstruct
     public void init() {
-        plantRepository.save(new Plant("Pepe", "Vendo moto", "Barata, barata"));
-        plantRepository.save(new Plant("Juan", "Compro coche", "Pago bien"));
     }
     public static final String PLANTS_FOLDER = "plants";
 
@@ -66,7 +55,7 @@ public class PlantController {
     }
 
     @PostMapping("/Plants/new")
-    public String newPost(Model model, Plant plant, MultipartFile image) throws IOException {
+    public String newPost(Model model, Plant plant) throws IOException {
 
         plantService.save(plant);
 
