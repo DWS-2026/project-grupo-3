@@ -24,7 +24,6 @@
     <h2 class="text-center mb-4">Editar mis plantitas</h2>
     <!-- BOTTONS -->
     <div class="botones mt-3 m-auto text-center" style="padding-bottom: 20px;">
-        <button class="btn btn-success rounded-pill px-4 py-3 main-button">Guardar cambios</button>
         <a href="/Plants/catalogPlants" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
         <!-- Open lateral forms -->
         <button class="btn btn-success rounded-pill px-4 py-3 main-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#plantFormOffcanvas" aria-controls="plantFormOffcanvas">
@@ -35,7 +34,7 @@
         {{#userOnly}}
         {{#plants}}
 
-        <!-- Panel lateral Offcanvas -->
+        <!-- lateral forms -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="plantFormOffcanvas" aria-labelledby="plantFormOffcanvasLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title " id="plantFormOffcanvasLabel">Editar Plantita</h5>
@@ -44,21 +43,18 @@
             <div class="offcanvas-body">
                 <form action="/" enctype="multipart/form-data">
 
-                    <!-- Plant Name -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="plantName" placeholder="Escribe tu nombre de usuario" />
                         <label for="plantName">Nombre Nuevo de Plantita</label>
                     </div>
 
-                    <!-- Additional Data -->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="dataforPlant" placeholder="Incluye días, tipo de abono..." />
                         <label for="dataforPlant">¿Algún dato nuevo que quieras registrar?</label>
                     </div>
 
-                    <!-- Description -->
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Descripción" id="plantDescription" style="height: 120px" required></textarea>
+                        <textarea class="form-control" placeholder="Descripción" id="plantDescription" style="height: 120px"></textarea>
                         <label for="plantDescription">Cambiar descripción</label>
                     </div>
 
@@ -66,43 +62,7 @@
                 </form>
             </div>
         </div>
-        <!--For one image-->
-            <div class="col">
-                <div class="card shadow-sm h-100 p-3 planta">
-                    <div class="card-img-container">
-                            <img src="/static/assets/images/plants/rosebush.jpg" class="img-fluid rounded">
-                    </div>
-                    <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
-                        <div class="actions d-flex gap-2">
-                            <i class="bi bi-trash3 trash-icon"></i>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-        <div class="col">
-            <div class="card shadow-sm h-100 p-3 planta">
-                <div class="card-img-container">
-                    <img src="/static/assets/images/plants/rosebush.jpg" class="img-fluid rounded">
-                </div>
-                <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
-                    <div class="actions d-flex gap-2">
-                        <i class="bi bi-trash3 trash-icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card shadow-sm h-100 p-3 planta">
-                <div class="card-img-container">
-                    <img src="/static/assets/images/plants/rosebush.jpg" class="img-fluid rounded">
-                </div>
-                <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
-                    <div class="actions d-flex gap-2">
-                        <i class="bi bi-trash3 trash-icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--add image-->
         <div class="col">
             <div class="card shadow-sm h-100 p-3 planta">
                 <div class="card-img-container">
@@ -120,8 +80,43 @@
                 </div>
             </div>
         </div>
-        <!--For one image-->
-
+        <!--images-->
+            <div class="col">
+                <div class="card shadow-sm h-100 p-3 planta">
+                    <div class="card-img-container">
+                            <img src="/assets/images/plants/rosebush.jpg" class="img-fluid rounded">
+                    </div>
+                    <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
+                        <div class="actions d-flex gap-2">
+                            <i class="bi bi-trash3 trash-icon"></i>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100 p-3 planta">
+                    <div class="card-img-container">
+                        <img src="/assets/images/plants/rosebush.jpg" class="img-fluid rounded">
+                    </div>
+                    <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
+                        <div class="actions d-flex gap-2">
+                            <i class="bi bi-trash3 trash-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100 p-3 planta">
+                    <div class="card-img-container">
+                        <img src="/assets/images/plants/rosebush.jpg" class="img-fluid rounded">
+                    </div>
+                    <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
+                        <div class="actions d-flex gap-2">
+                            <i class="bi bi-trash3 trash-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {{/plants}}
         {{/userOnly}}
     </div>
