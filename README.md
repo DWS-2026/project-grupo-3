@@ -24,10 +24,10 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 
 **Relaciones entre entidades:**
 - Usuario - Pedido: Un usuario puede realizar múltiples pedidos y cada pedido pertenece a un único usuario (1:N)
-- Usuario - Carrtio de la compra: un usuario tiene un único carrito de la compra y el carrito de la compra pertenece a un único usuario
+- Usuario - Carrtio de la compra: un usuario tiene un único carrito de la compra y el carrito de la compra pertenece a un único usuario (1:1)
 - Carrito de la compra - Producto: Un pedido puede contener varios productos y un producto puede aparecer en muchos pedidos distintos (N:M)
 - Usuario - Planta: Un usuario puede registrar múltiples plantas y una planta pertenece a un usuario (N:1)
-- Carrito de la compra - Pedido: un carrito de la compra pertenece a un pedido y un pedido pertenece a un carrito de la compra
+- Carrito de la compra - Pedido: un carrito de la compra pertenece a un pedido y un pedido pertenece a un carrito de la compra (1:1)
 - Usuario - Comentarios: un usuario puede escribir múltiples comentarios y un comentario pertenece a un único usuario(1:N)
 
 ### **Permisos de los Usuarios**
