@@ -127,6 +127,15 @@ h1 {
   }
 }
 
+.links {
+    color: #C8E6C9;
+}
+
+.links a {
+    color: #E8F5E9;
+    text-decoration: underline;
+}
+
 /* Footer*/
 #footer-wrapper {
     background-color: #66BB6A;
@@ -147,10 +156,10 @@ h1 {
 .license {
     margin-top: 10px;
     font-size: 0.8rem;
-    color: #C8E6C9;
+    color: #2E7D32;
 }
 
 .license a {
-    color: #E8F5E9;
+    color: #2E7D32;
     text-decoration: underline;
 }

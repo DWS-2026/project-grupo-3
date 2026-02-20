@@ -11,10 +11,10 @@ form{
   z-index: 2;
 }
 .top-bar form {
-    display: inline-flex;  /* Makes the form an inline flex item, avoiding line breaks */
-    align-items: center;   /* Align the form content vertically */
-    margin: 0;            /* Remove default margins */
-    padding: 0;           /* Eliminates padding by default */
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
     flex-shrink: 0;       /* Prevents the form from shrinking, maintaining its size */
 }
 

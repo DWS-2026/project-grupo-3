@@ -19,12 +19,14 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 2. **Entidad 2**: Producto
 3. **Entidad 3**: Pedido (carrito de la compra)
 4. **Entidad 4**: Plantas
+5. **Entidad 5**: Comentarios
 
 **Relaciones entre entidades:**
 - Usuario - Pedido: Un usuario puede realizar múltiples pedidos y cada pedido pertenece a un único usuario (1:N)
 - Pedido - Producto: Un pedido puede contener varios productos y un producto puede aparecer en muchos pedidos distintos (N:M)
 - Usuario - Planta: Un usuario puede registrar múltiples plantas y una planta pertenece a un usuario (N:1)
 - Planta - Producto: Una planta puede necesitar o usar varios productos y un mismo producto puede ser útil para distintas plantas (N:M)
+- Usuario - Comentarios: un usuario puede escribir múltiples comentarios y un comentario pertenece a un único usuario(1:N)
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
@@ -312,13 +314,13 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
-| Nº    |                                                                                   Commits                                                                                    |                                                  Files                                                   |
-|:------------: |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------:|
-|1| [Conseguir ocultar botones en el header gracias a Mustache y los controladores](https://github.com/DWS-2026/project-grupo-3/commit/08d62f1919846a1f82813625a94271dae3aca686) | [Header](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/templates/header.html) |
-|2|                                                                     [Descripción commit 2](URL_commit_2)                                                                     |                                        [Archivo2](URL_archivo_2)                                         |
-|3|                                                                     [Descripción commit 3](URL_commit_3)                                                                     |                                        [Archivo3](URL_archivo_3)                                         |
-|4|                                                                     [Descripción commit 4](URL_commit_4)                                                                     |                                        [Archivo4](URL_archivo_4)                                         |
-|5|                                                                     [Descripción commit 5](URL_commit_5)                                                                     |                                        [Archivo5](URL_archivo_5)                                         |
+| Nº    |                                                                                   Commits                                                                                    |                                                          Files                                                           |
+|:------------: |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------:|
+|1| [Conseguir ocultar botones en el header gracias a Mustache y los controladores](https://github.com/DWS-2026/project-grupo-3/commit/08d62f1919846a1f82813625a94271dae3aca686) |         [Header](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/templates/header.html)         |
+|2|              [Conseguir conectar el proyecto con la base de datos](https://github.com/DWS-2026/project-grupo-3/commit/891ae5a7106975b46c0d23c39060f5ab1d4df902)              | [Aplication Properties](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/application.properties) |
+|3|                        [Construir la entidad plantitas](https://github.com/DWS-2026/project-grupo-3/commit/9898c3c582cc5ad740872e61ac9e438ab2dd82f0)                         |     [Plant](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/model/Plant.java)      |
+|4|                                                                     [Descripción commit 4](URL_commit_4)                                                                     |                                                [Archivo4](URL_archivo_4)                                                 |
+|5|                                          [Modificar la edición de las plantas para que se ajuste a la base de datos](https://github.com/DWS-2026/project-grupo-3/commit/15d6777d1724646f3bdedf8f09b7128598d2082e)                                           |                                               [Edit Plant](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/templates/Plants/editPlant.html)                                                |
 
 ---
 

@@ -1,21 +1,26 @@
 package es.codeurjc.board.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.io.IOException;
+import java.util.List;
+import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
+import javax.sql.rowset.serial.SerialBlob;
 import java.util.ArrayList;
 @Entity
 public class Plant {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+
     private String username;
     private String name;
     private String cares;
     private String description;
+
+    @OneToMany(mappedBy="plant")
+    private List<Image> images = new ArrayList<>();
 
     public Plant(){}
     public Plant(String user, String name, String cares) {
@@ -24,7 +29,6 @@ public class Plant {
         this.name= name;
         this.cares = cares;
     }
-
 
 
     public String getUsername() {
@@ -66,7 +70,6 @@ public class Plant {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     @Override
     public String toString() {

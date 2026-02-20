@@ -50,7 +50,7 @@
 
                                     <div class="carousel-inner">
                                         {{#images}}
-                                        <div class="carousel-item {{#first}}active{{/first}}">
+                                        <div class="carousel-item {{#-first}}active{{/-first}}">
                                             <img src="{{name}}" class="d-block w-100">
                                         </div>
                                         {{/images}}
@@ -93,10 +93,6 @@
                                     </div>
                                 </div>
                                 <div class="buttons-container">
-                                    <label class="btn btn-success rounded-pill px-4 py-3 main-button secondary">
-                                        <input type="file" hidden>
-                                        <span>Subir nueva foto</span>
-                                    </label>
                                     <a href="/Plants/editPlant" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Editar plantita</a>
                                 </div>
                             </div>

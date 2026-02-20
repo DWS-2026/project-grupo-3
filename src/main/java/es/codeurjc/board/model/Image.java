@@ -2,6 +2,8 @@ package es.codeurjc.board.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Blob;
+
 @Entity
 public class Image {
 
@@ -9,6 +11,11 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //@ManyToOne
-    //private String test;
+    @Lob
+    private Blob imageFile;
+
+    @ManyToOne
+    private Plant plant;
+
+
 }

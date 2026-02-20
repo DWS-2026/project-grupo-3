@@ -1,4 +1,4 @@
-package es.codeurjc.board.model;
+package es.codeurjc.board.modelAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
