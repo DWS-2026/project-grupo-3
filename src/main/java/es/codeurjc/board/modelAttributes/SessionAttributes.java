@@ -9,10 +9,11 @@ import java.util.List;
 
 @ControllerAdvice
 public class SessionAttributes {
-    private List<String> attributes = List.of("loginOptions", "userOnly","adminOnly");
+    private List<String> attributes = List.of("loginOptions", "userOnly","adminOnly", "adminPanel");
 //cambiar en un futuro de httpSession a una sesion como tal de un usuario legítimo que además te diga si es admin o no
     private void openOrCloseSession(Model model, HttpSession session){
         boolean isSessionActive;
+
         if(session.getAttribute("isSessionActive") != null){
             isSessionActive = (boolean) session.getAttribute("isSessionActive");
         } else{
@@ -29,5 +30,8 @@ public class SessionAttributes {
 
     }
 
+    public static void hideAdminPanel(Model model){
+        model.addAttribute("adminPanel", false );
+    }
 
 }

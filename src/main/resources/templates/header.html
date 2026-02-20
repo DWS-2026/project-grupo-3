@@ -48,7 +48,9 @@
 
 
                 {{#adminOnly}}
-                    <a href="/Admin/adminPanel" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
+                    {{#adminPanel}}
+                        <a href="/Admin/adminPanel" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
+                    {{/adminPanel}}
                 {{/adminOnly}}
 
             </header>
