@@ -22,7 +22,6 @@ public class Image {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "plant_id")
     private Plant plant;
 
     public Plant getPlant() {
