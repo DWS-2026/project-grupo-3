@@ -1,4 +1,5 @@
 package es.codeurjc.board.controller;
+import es.codeurjc.board.model.Image;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 
 import es.codeurjc.board.model.Plant;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,7 +41,7 @@ public class PlantController {
 
     @GetMapping("/Plants/catalogPlants")
     public String catalogoPlantas(Model model) {
-        btnsHeader.hideBtnHeader(model,"plants");
+        btnsHeader.hideBtnHeader(model,"plantIcon");
         model.addAttribute("plants", plantService.findAll());
         return "/Plants/catalogPlants";
     }
@@ -49,22 +51,24 @@ public class PlantController {
         return "Plants/newPlant";
     }
 
-    @GetMapping("/Plants/editPlant")
-    public String editPlant() {
+    @GetMapping("/Plants/editPlant/{id}")
+    public String editPlant(Model model, @PathVariable Long id) {
+
+        Plant plant = plantService.findById(id);
+        model.addAttribute("plant", plant);
         return "Plants/editPlant";
     }
 
     @PostMapping("/Plants/new")
-    public String newPost(Model model, Plant plant) throws IOException {
-
+    public String newPost(Model model, Plant plant, MultipartFile imageFile) throws IOException {
         plantService.save(plant);
 
-        //imageService.saveImage(PLANTS_FOLDER, plant.getId(), plant.getName(),image);
+        if (!imageFile.isEmpty()) {
+            Image imageOne = imageService.createImage(imageFile);
+            plantService.addImageToPlant(plant.getId(), imageOne);
+        }
 
-        //userSession.setUser(plant.getUser());
-        //userSession.incNumPosts();
 
-        //model.addAttribute("numPosts", userSession.getNumPosts());
 
         return "redirect:/Plants/catalogPlants";
     }

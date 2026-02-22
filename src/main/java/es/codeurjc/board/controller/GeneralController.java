@@ -17,7 +17,7 @@ public class GeneralController {
 	private ButtonsHeader btnsHeader;
 	@GetMapping("/")
 	public String showMainPage(Model model, HttpSession session) {
-		btnsHeader.hideBtnHeader(model,"plants");
+		btnsHeader.hideBtnHeader(model,"plantIcon");
 		btnsHeader.hideBtnHeader(model,"goBackBtn");
 		btnsHeader.hideBtnHeader(model,"products");
 		return "index";

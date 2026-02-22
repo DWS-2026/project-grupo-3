@@ -19,18 +19,24 @@ public class Plant {
     private String cares;
     private String description;
 
-    @OneToMany(mappedBy="plant")
+    @OneToMany(mappedBy="plant", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
 
     public Plant(){}
-    public Plant(String user, String name, String cares) {
+    public Plant(String user, String name, String cares, String description) {
         super();
         this.username = user;
         this.name= name;
         this.cares = cares;
+        this.description = description;
     }
-
-
+    public void addImage(Image image){
+        images.add(image);
+        image.setPlant(this);
+    }
+    public List<Image> getImages() {
+        return images;
+    }
     public String getUsername() {
         return username;
     }

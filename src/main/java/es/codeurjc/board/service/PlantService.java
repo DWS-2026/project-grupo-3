@@ -1,5 +1,6 @@
 package es.codeurjc.board.service;
 
+import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class PlantService {
         }
 
         public Plant findById(long id) {
-            return plantRepository.findAllById(id);
+            return plantRepository.findById(id).orElseThrow();
         }
 
         public void save(Plant plant) {
@@ -32,5 +33,12 @@ public class PlantService {
             plantRepository.deleteById(id);
         }
 
+    public Plant addImageToPlant(long id, Image image) {
+        Plant plant = plantRepository.findById(id).orElseThrow();
+
+        plant.addImage(image);
+
+        return plantRepository.save(plant);
+    }
 
 }
