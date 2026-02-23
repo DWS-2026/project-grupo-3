@@ -8,6 +8,9 @@ import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
 import es.codeurjc.board.service.UserSession;
 import jakarta.annotation.PostConstruct;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,9 +43,17 @@ public class PlantController {
 
 
     @GetMapping("/Plants/catalogPlants")
-    public String catalogoPlantas(Model model) {
+    public String catalogoPlantas(Model model,  @PageableDefault(size = 5) Pageable page) {
         btnsHeader.hideBtnHeader(model,"plantIcon");
-        model.addAttribute("plants", plantService.findAll());
+        Page<Plant> plantsPage = plantService.findAll(page);
+
+        model.addAttribute("plants", plantsPage);
+
+        model.addAttribute("hasPrev", plantsPage.hasPrevious());
+        model.addAttribute("prev", plantsPage.getNumber() - 1);
+
+        model.addAttribute("hasNext", plantsPage.hasNext());
+        model.addAttribute("next", plantsPage.getNumber() + 1);
         return "/Plants/catalogPlants";
     }
 

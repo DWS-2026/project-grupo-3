@@ -25,7 +25,6 @@ public class GeneralController {
 
 	@GetMapping("/sign-in")
 	public String signIn(Model model) {
-		btnsHeader.hideBtnHeader(model,"changeUserBtn");
 		return "sign-in";
 	}
 

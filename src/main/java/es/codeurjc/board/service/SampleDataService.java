@@ -16,9 +16,17 @@ public class SampleDataService {
 
     @PostConstruct
     public void init() {
-        Plant plant = new Plant("Pepito", "Rosa","Regar cada 5 días", "Necesita abono x");
+        for(int i = 0; i < 5; i++) {
+            Plant plant = new Plant("Pepito", "Rosa", "Regar cada 5 días", "Necesita abono x");
 
-        plantRepository.save(plant);
+            plantRepository.save(plant);
+        }
+        for(int i = 0; i < 5; i++) {
+            Plant plant = new Plant("Pepito", "Rosa2", "Regar cada 5 días", "Necesita abono x");
+
+            plantRepository.save(plant);
+        }
+
     }
 }
 

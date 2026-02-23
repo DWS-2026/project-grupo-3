@@ -4,6 +4,8 @@ import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
@@ -17,8 +19,11 @@ public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
-        public List<Plant> findAll() {
-            return plantRepository.findAll();
+        public Page<Plant> findAll(Pageable page) {
+            return plantRepository.findAll(page);
+        }
+        public long count() {
+            return plantRepository.count();
         }
 
         public Plant findById(long id) {
