@@ -16,9 +16,9 @@ import java.sql.SQLException;
 public class ImageController {
     @Autowired
     private ImageService imageService;
-    //@GetMapping("/images/{id}")
-    /*public ResponseEntity<Object> getImageFile(@PathVariable long id) throws SQLException {
-        //Resource imageFile = imageService.getImageFile(id);
+    @GetMapping("/images/{id}")
+    public ResponseEntity<Object> getImageFile(@PathVariable long id) throws SQLException {
+        Resource imageFile = imageService.getImageFile(id);
         MediaType mediaType = MediaTypeFactory
                 .getMediaType(imageFile)
                 .orElse(MediaType.IMAGE_JPEG);
@@ -26,5 +26,5 @@ public class ImageController {
                 .ok()
                 .contentType(mediaType)
                 .body(imageFile);
-    }*/
+    }
 }

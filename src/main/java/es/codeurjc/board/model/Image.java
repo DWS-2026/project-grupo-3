@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import java.io.InputStream;
 import java.sql.Blob;
 
-import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
