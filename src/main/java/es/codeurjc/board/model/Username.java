@@ -19,8 +19,8 @@ public class Username {
     private String description;
     private String profileImage;
 
-    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reviews> reviews =new ArrayList<>();
+    @OneToMany (mappedBy = "username", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reviews> reviews = new ArrayList<>();
 
     public Username() {}
 
