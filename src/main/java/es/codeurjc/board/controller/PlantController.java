@@ -43,11 +43,11 @@ public class PlantController {
 
 
     @GetMapping("/Plants/catalogPlants")
-    public String catalogoPlantas(Model model,  @PageableDefault(size = 5) Pageable page) {
+    public String catalogoPlantas(Model model,  @PageableDefault(size = 6) Pageable page) {
         btnsHeader.hideBtnHeader(model,"plantIcon");
         Page<Plant> plantsPage = plantService.findAll(page);
 
-        model.addAttribute("plants", plantsPage);
+        model.addAttribute("plants", plantsPage.getContent());
 
         model.addAttribute("hasPrev", plantsPage.hasPrevious());
         model.addAttribute("prev", plantsPage.getNumber() - 1);

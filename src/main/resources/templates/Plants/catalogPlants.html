@@ -36,7 +36,11 @@
                 </p>
             </div>
         </div>
+        {{#userOnly}}
+        <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Plants/newPlant">Añadir plantita</a>
+        {{/userOnly}}
     </section>
+
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
@@ -99,24 +103,6 @@
                             </div>
                         </div>
                     {{/plants}}
-
-                    <div class="col">
-                        <div class="card shadow-sm h-100 planta">
-                            <div class="card-img-container">
-
-                                <!-- Plant photo -->
-                                <a href="/Plants/newPlant" class="circle-edition">
-                                    <span>+</span>
-                                </a>
-
-                            </div>
-                            <div class="card-body d-flex align-items-center justify-content-center">
-                                <h5 class="h5 change-color text-center m-0">
-                                    Añadir plantita 🪴
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
                 {{/userOnly}}
 
                 {{^userOnly}}

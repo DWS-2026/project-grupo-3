@@ -4,15 +4,20 @@ import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PlantService {
@@ -37,7 +42,7 @@ public class PlantService {
         public void deleteById(long id) {
             plantRepository.deleteById(id);
         }
-
+    @Transactional
     public Plant addImageToPlant(long id, Image image) {
         Plant plant = plantRepository.findById(id).orElseThrow();
 
@@ -45,5 +50,16 @@ public class PlantService {
 
         return plantRepository.save(plant);
     }
+    @Transactional
+    public Plant addImageToPlant(long id, String source) throws Exception {
+        Plant plant = plantRepository.findById(id).orElseThrow();
+        Image newImage = new Image(source);
+        plant.addImage(newImage);
+
+        return plantRepository.save(plant);
+    }
+
+
+
 
 }

@@ -2,6 +2,7 @@ package es.codeurjc.board.model;
 
 import jakarta.persistence.*;
 
+import java.io.InputStream;
 import java.sql.Blob;
 
 import java.sql.Blob;
@@ -13,6 +14,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import org.springframework.core.io.ClassPathResource;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 @Entity
 public class Image {
@@ -35,11 +39,23 @@ public class Image {
     @Lob
     private Blob imageFile;
 
+    private Blob loadImageAsBlob(String path) throws Exception {
+
+        ClassPathResource resource = new ClassPathResource(path);
+
+        try (InputStream inputStream = resource.getInputStream()) {
+
+            byte[] bytes = inputStream.readAllBytes();
+
+            return new SerialBlob(bytes);
+        }
+    }
+
     public Image() {
     }
 
-    public Image(Blob imageFile) {
-        this.imageFile = imageFile;
+    public Image(String source) throws Exception {
+        this.imageFile = this.loadImageAsBlob(source);
     }
 
     public Long getId() {
