@@ -19,7 +19,7 @@ import org.springframework.core.io.InputStreamResource;
 public class ImageService {
 
 		@Autowired
-		private ImageRepository ImageRepository;
+		private ImageRepository imageRepository;
 		public Image createImage(MultipartFile imageFile) throws IOException {
 			Image image = new Image();
 			try {
@@ -27,11 +27,11 @@ public class ImageService {
 			} catch (Exception e) {
 				throw new IOException("Failed to create image", e);
 			}
-			ImageRepository.save(image);
+			imageRepository.save(image);
 			return image;
 		}
 		public Resource getImageFile(long id) throws SQLException {
-			Image image = ImageRepository.findById(id).orElseThrow();
+			Image image = imageRepository.findById(id).orElseThrow();
 			if (image.getImageFile() != null) {
 				return new InputStreamResource(image.getImageFile().getBinaryStream());
 			} else {
@@ -40,4 +40,7 @@ public class ImageService {
 		}
 
 
+    public void deleteById(long id) {
+			imageRepository.deleteById(id);
+    }
 }

@@ -85,11 +85,13 @@ public class PlantController {
 
         Plant plant = plantService.findById(id);
         model.addAttribute("plant", plant);
+        model.addAttribute("plantID", plant.getId());
         return "Plants/editPlant";
     }
     @PostMapping("/Plants/editPlant/{id}")
-    public String editPlant(Model model, @PathVariable Long id, @RequestParam String name, @RequestParam String cares,@RequestParam String description) throws Exception {
+    public String editPlant( @PathVariable Long id, @RequestParam String name, @RequestParam String cares,@RequestParam String description) throws Exception {
         plantService.editPlant(name, cares , description, id);
+
         return "redirect:/Plants/catalogPlants";
     }
     @PostMapping("/Plants/new")
@@ -113,12 +115,20 @@ public class PlantController {
         return "redirect:/Plants/editPlant/" + id;
     }
 
+    @PostMapping("/delete/image/{plantId}/{imageId}")
+    public String deleteImage(@PathVariable long plantId,@PathVariable long imageId) {
+
+        plantService.deleteImageFromPlant(plantId, imageId);
+
+        return "redirect:/Plants/catalogPlants";
+    }
+
 
 
 
 
     @PostMapping("/plants/{id}/delete")
-    public String deletePost(Model model, @PathVariable long id) throws IOException {
+    public String deletePlant(Model model, @PathVariable long id) throws IOException {
 
         plantService.deleteById(id);
 

@@ -72,6 +72,15 @@ public class PlantService {
             plantRepository.save(plant);
 
     }
+    public void deleteImageFromPlant(long plantId, long imageId) {
+
+        Plant plant = plantRepository.findById(plantId).orElseThrow();
+
+        plant.getImages().removeIf(image -> image.getId() == imageId);
+
+        plantRepository.save(plant);         // orphanRemoval deletes the image that now is without a parent
+
+    }
 
     public Page<Plant> findByIsExample(boolean isExample, Pageable page) {
             return plantRepository.findByExampleEquals(isExample, page);
