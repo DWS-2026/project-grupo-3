@@ -58,8 +58,23 @@ public class PlantService {
 
         return plantRepository.save(plant);
     }
+    public void editPlant(String name, String cares, String description, long id) throws Exception{
+            Plant plant = plantRepository.findById(id).orElseThrow();
+            if(name != null && !name.isBlank()){
+                plant.setName(name);
+            }
+            if(cares != null && !cares.isBlank()){
+                plant.setCares(cares);
+            }
+            if(description != null && !description.isBlank()){
+                plant.setDescription(description);
+            }
+            plantRepository.save(plant);
 
+    }
 
-
+    public Page<Plant> findByIsExample(boolean isExample, Pageable page) {
+            return plantRepository.findByExampleEquals(isExample, page);
+    }
 
 }

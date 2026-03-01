@@ -44,7 +44,6 @@
       <label>Nombre de la planta</label>
     </div>
 
-    <!-- Plant type -->
     <div class="form-floating mb-3">
       <input
               type="text"
@@ -56,17 +55,22 @@
       <label>Cuidados específicos, tipo de abono, cada cuánto hay que regarla...</label>
     </div>
 
-    <!-- Description -->
-    <div class="form-floating mb-3">
-        <textarea
-                class="form-control"
-                placeholder="Descripción"
-                name="description"
-                style="height: 120px"
-                required
-        ></textarea>
-      <label>Descripción</label>
-    </div>
+      <div class="mb-1 text-end">
+          <small id="charCount" class="text-muted">0/200</small>
+      </div>
+
+      <div class="form-floating mb-3"> <!--Number of max chars: max length-->
+            <textarea
+                    class="form-control"
+                    placeholder="Descripción"
+                    name="description"
+                    id="description"
+                    style="height: 100px"
+                    maxlength="136"
+                    required
+            ></textarea>
+          <label>Descripción</label>
+      </div>
 
     <!-- Upload image -->
     <div class="mb-4 text-start">
@@ -90,7 +94,16 @@
     </div>
 
   </form>
+    <script>
+        const textarea = document.getElementById("description");
+        const charCount = document.getElementById("charCount");
+        const maxLength = textarea.maxLength;
 
+        textarea.addEventListener("input", function () {
+            const remaining = maxLength - textarea.value.length;
+            charCount.textContent = remaining + "/200";
+        });
+    </script>
 </main>
 {{>footer}}
 

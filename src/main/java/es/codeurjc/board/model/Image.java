@@ -22,19 +22,12 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private Plant plant;
-
-    public Plant getPlant() {
-        return plant;
-    }
-
-    public void setPlant(Plant plant) {
-        this.plant = plant;
-    }
 
     @Lob
     private Blob imageFile;
+
+
+
 
     private Blob loadImageAsBlob(String path) throws Exception {
 

@@ -18,21 +18,32 @@ public class Plant {
     private String name;
     private String cares;
     private String description;
+    private boolean example = false;
 
-    @OneToMany(mappedBy="plant", cascade = CascadeType.ALL,orphanRemoval = true)
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
     private List<Image> images = new ArrayList<>();
 
+    public boolean isExample() {
+        return example;
+    }
+
+    public void setExample(boolean example) {
+        this.example = example;
+    }
+
+
     public Plant(){}
-    public Plant(String user, String name, String cares, String description) {
+    public Plant(String user, String name, String cares, String description, boolean example) {
         super();
         this.username = user;
         this.name= name;
         this.cares = cares;
         this.description = description;
+        this.example = example;
     }
     public void addImage(Image image){
         images.add(image);
-        image.setPlant(this);
     }
     public List<Image> getImages() {
         return images;

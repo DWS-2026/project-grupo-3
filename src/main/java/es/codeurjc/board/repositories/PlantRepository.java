@@ -10,8 +10,5 @@ import java.util.List;
 
 public interface PlantRepository extends JpaRepository<Plant,Long> {
     Page<Plant> findAll(Pageable page);
-    Plant findAllById(Long id);
-
-    @Override
-    void deleteById(Long aLong);
+    Page<Plant> findByExampleEquals(boolean example, Pageable page);
 }
