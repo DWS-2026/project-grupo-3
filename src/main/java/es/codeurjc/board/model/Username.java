@@ -1,6 +1,7 @@
 package es.codeurjc.board.model;
 
 import jakarta.persistence.*;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,9 @@ public class Username {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
+
     private String email;
     private String password;
     private String username;
@@ -23,6 +27,12 @@ public class Username {
     private List<Reviews> reviews = new ArrayList<>();
 
     public Username() {}
+
+    public Username(String username, String encodedPassword, String... roles) {
+        this.username = username;
+        this.password = encodedPassword;
+        this.roles = List.of(roles);
+    }
 
     public Username(String email, String password, String username, String description) {
         this.email = email;
@@ -78,4 +88,13 @@ public class Username {
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
 }

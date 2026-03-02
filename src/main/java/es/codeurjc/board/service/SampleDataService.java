@@ -1,9 +1,10 @@
 package es.codeurjc.board.service;
 
 import es.codeurjc.board.model.Plant;
+import es.codeurjc.board.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import jakarta.annotation.PostConstruct;
 
 
@@ -13,6 +14,12 @@ public class SampleDataService {
 
     @Autowired
     private PlantService plantService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void init() throws Exception {
