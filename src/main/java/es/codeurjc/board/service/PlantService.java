@@ -86,4 +86,20 @@ public class PlantService {
             return plantRepository.findByExampleEquals(isExample, page);
     }
 
+    public void ratePlant(int rating,long id) {
+            Plant plant = plantRepository.findById(id).orElseThrow();
+            plant.setRating(rating);
+            plantRepository.save(plant);
+    }
+
+    public void favoritePlant(long id){
+            Plant plant = plantRepository.findById(id).orElseThrow();
+            if(plant.isFavorite()){
+                plant.setFavorite(false);
+            }else{
+                plant.setFavorite(true);
+            }
+            plantRepository.save(plant);
+    }
+
 }

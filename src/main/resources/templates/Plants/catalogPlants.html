@@ -79,23 +79,42 @@
                                     <p class="card-text fw-bold">{{cares}}</p>
                                     <p class="card-text">{{description}}</p>
                                     <div class="icon-group d-flex flex-column text-start align-items-start">
+                                        <form action="/Plants/ratingPlant/{{id}}" style="padding-top: 0px; padding-bottom: 0px;" method="post">
 
-                                        <div class="rating">
-                                            Rating:
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
+                                            <div class="rating" style="display:flex; align-items:center; flex-direction:row-reverse;">
+                                                <input value="5" name="rate" id="star5-{{id}}" type="radio" onchange="this.form.submit()"
+                                                       {{#rate5}}checked{{/rate5}}>
+                                                <label for="star5-{{id}}"></label>
 
-                                        <div class="actions d-flex align-items-center">
-                                            <span>Favorito: </span>
-                                            <i class="bi bi-star favorite"></i>
-                                        </div>
+                                                <input value="4" name="rate" id="star4-{{id}}" type="radio" onchange="this.form.submit()"
+                                                       {{#rate4}}checked{{/rate4}}>
+                                                <label for="star4-{{id}}"></label>
+
+                                                <input value="3" name="rate" id="star3-{{id}}" type="radio" onchange="this.form.submit()"
+                                                       {{#rate3}}checked{{/rate3}}>
+                                                <label for="star3-{{id}}"></label>
+
+                                                <input value="2" name="rate" id="star2-{{id}}"type="radio"onchange="this.form.submit()"
+                                                       {{#rate2}}checked{{/rate2}}>
+                                                <label for="star2-{{id}}"></label>
+
+                                                <input value="1" name="rate" id="star1-{{id}}" type="radio" onchange="this.form.submit()" {{#rate1}}checked{{/rate1}}>
+                                                <label for="star1-{{id}}"></label>
+
+                                                <span>Rating: </span>
+                                            </div>
+                                        </form>
+
+                                        <form action="/Plants/favoritePlant/{{id}}" style="padding-top: 0px;" method="post">
+                                            <div class="rating" style="display:flex; align-items:center; flex-direction:row-reverse;">
+                                                <input value="1" name="rate" id="favorite-{{id}}" type="checkbox" onchange="this.form.submit()" {{#favorite}}checked{{/favorite}}>
+                                                <label title="text" for="favorite-{{id}}"></label>
+                                                <span>Favorito: </span>
+                                            </div>
+                                        </form>
                                         {{#userOnly}}
                                             <form style="padding-top: 0px;" action="/plants/{{id}}/delete" method="post">
-                                                <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                                <button type="submit" class="trash-icon bi bi-trash3" ></button>
                                             </form>
                                         {{/userOnly}}
 
@@ -126,42 +145,6 @@
 
 </main>
 <script>
-    document.querySelectorAll('.rating').forEach(rating => {
-
-        const stars = rating.querySelectorAll('i');
-
-        stars.forEach((star, index) => {
-
-            star.addEventListener('click', () => {
-
-                stars.forEach((s, i) => {
-
-                    if (i <= index) {
-                        s.classList.remove('bi-star');
-                        s.classList.add('bi-star-fill', 'star-favorite');
-                    } else {
-                        s.classList.remove('bi-star-fill', 'star-favorite');
-                        s.classList.add('bi-star');
-                    }
-
-                });
-
-            });
-
-        });
-
-    });
-    document.querySelectorAll('.favorite').forEach(star => {
-
-        star.addEventListener('click', () => {
-
-            star.classList.toggle('bi-star');
-            star.classList.toggle('bi-star-fill');
-            star.classList.toggle('star-favorite');
-
-        });
-
-    });
     document.querySelectorAll('.carousel').forEach(carousel => {
       const items = carousel.querySelectorAll('.carousel-item');
       const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');

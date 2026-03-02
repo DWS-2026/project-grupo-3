@@ -9,7 +9,9 @@ import es.codeurjc.board.service.UserSession;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,19 +57,23 @@ public class PlantController {
     @GetMapping("/Plants/catalogPlants")
     public String catalogoPlantas(Model model,  @PageableDefault(size = 6) Pageable page, HttpSession session) {
         btnsHeader.hideBtnHeader(model,"plantIcon");
+        Pageable sortedPage = PageRequest.of(page.getPageNumber(),6, Sort.by(Sort.Order.desc("favorite"),Sort.Order.desc("rating")
+                )
+        );
+
+        Page<Plant> plantsPage;
+
         if(session.getAttribute("isSessionActive") != null){
-            Page<Plant> plantsPage = plantService.findByIsExample(false, page);
-
-            model.addAttribute("plants", plantsPage.getContent());
-
-            model.addAttribute("hasPrev", plantsPage.hasPrevious());
-            model.addAttribute("prev", plantsPage.getNumber() - 1);
-
-            model.addAttribute("hasNext", plantsPage.hasNext());
-            model.addAttribute("next", plantsPage.getNumber() + 1);
-        }else{
-            model.addAttribute("plants", plantService.findByIsExample(true, page).getContent());
+            plantsPage = plantService.findByIsExample(false, sortedPage);
+        } else {
+            plantsPage = plantService.findByIsExample(true, sortedPage);
         }
+
+        model.addAttribute("plants", plantsPage.getContent());
+        model.addAttribute("hasPrev", plantsPage.hasPrevious());
+        model.addAttribute("prev", plantsPage.getNumber() - 1);
+        model.addAttribute("hasNext", plantsPage.hasNext());
+        model.addAttribute("next", plantsPage.getNumber() + 1);
 
 
         return "/Plants/catalogPlants";
@@ -122,8 +128,17 @@ public class PlantController {
 
         return "redirect:/Plants/catalogPlants";
     }
+    @PostMapping("/Plants/ratingPlant/{id}")
+    public String ratingPlant(Model model, @PathVariable long id, @RequestParam int rate) {
+        plantService.ratePlant(rate,id);
+        return "redirect:/Plants/catalogPlants";
+    }
 
-
+        @PostMapping("/Plants/favoritePlant/{id}")
+    public String favoritePlant(Model model, @PathVariable long id) {
+        plantService.favoritePlant(id);
+        return "redirect:/Plants/catalogPlants";
+    }
 
 
 

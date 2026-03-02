@@ -19,6 +19,8 @@ public class Plant {
     private String cares;
     private String description;
     private boolean example = false;
+    private boolean favorite = false;
+    private int rating = 0;
 
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
@@ -50,6 +52,27 @@ public class Plant {
     }
     public String getUsername() {
         return username;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+    public boolean isRate1() { return rating == 1; }
+    public boolean isRate2() { return rating == 2; }
+    public boolean isRate3() { return rating == 3; }
+    public boolean isRate4() { return rating == 4; }
+    public boolean isRate5() { return rating == 5; }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public void setUsername(String username) {
