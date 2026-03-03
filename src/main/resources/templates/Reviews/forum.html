@@ -29,11 +29,18 @@
         <div class="col-lg-6 col-md-8 mx-auto">
           <h2 class="fw-light change-color">Tablón de reviews 🌟</h2>
 
-                <select class="form-select form-select-sm rounded-pill px-4 py-3" style="height: 50px; width: 125px;">
-                    <option selected>Todo</option>
-                    <option>Planta</option>
-                    <option>Producto</option>
+            <form method="get" action="/Reviews/forum">
+                <select name="type"
+                        onchange="this.form.submit()"
+                        class="form-select form-select-sm rounded-pill px-4 py-3"
+                        style="height: 50px; width: 125px;">
+
+                    <option value="">Todo</option>
+                    <option value="PLANT">Planta</option>
+                    <option value="PRODUCT">Producto</option>
+
                 </select>
+            </form>
 
 </div>
 

@@ -1,15 +1,16 @@
 package es.codeurjc.board.model;
 
 import java.io.IOException;
-import java.util.List;
 import jakarta.persistence.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.sql.rowset.serial.SerialBlob;
-import java.util.ArrayList;
 
 @Entity
 public class Reviews {
+
+    public enum ReviewType {
+        PLANT,
+        PRODUCT
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,12 +19,16 @@ public class Reviews {
     private String title;
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    private ReviewType type;
+
     public Reviews(){}
-    public Reviews(String username, String title, String description){
+    public Reviews(String username, String title, String description, ReviewType type){
         super();
         this.username = username;
         this.title = title;
         this.description = description;
+        this.type = type;
     }
 
     public Long getId() {
@@ -57,6 +62,10 @@ public class Reviews {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public ReviewType getType() { return type; }
+
+    public void setType(ReviewType type) { this.type = type; }
 
     @Override
     public String toString(){
