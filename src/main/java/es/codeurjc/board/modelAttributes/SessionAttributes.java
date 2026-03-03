@@ -19,7 +19,7 @@ public class SessionAttributes {
 
         if(principal != null) {
 
-            model.addAttribute("logged", true);
+            model.addAttribute("loginOptions", true);
             model.addAttribute("userName", principal.getName());
             model.addAttribute("admin", request.isUserInRole("ADMIN"));
 

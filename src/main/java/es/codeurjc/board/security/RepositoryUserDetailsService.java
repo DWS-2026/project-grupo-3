@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.codeurjc.board.model.Username;
 import es.codeurjc.board.repositories.UserRepository;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
