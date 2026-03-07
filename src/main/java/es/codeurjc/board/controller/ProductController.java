@@ -42,9 +42,9 @@ public class ProductController {
 
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
         if(session.getAttribute("isAdmin") != null && isAdmin) {
-            productsPage = productService.findAll(sortedPage); // admin watch all products
+            productsPage = productService.findAll(sortedPage); // admin watch all images_example_products
         } else {
-            productsPage = productService.findByIsExample(true, sortedPage); // normal user watch only example products
+            productsPage = productService.findByIsExample(true, sortedPage); // normal user watch only example images_example_products
         }
 
         model.addAttribute("products", productsPage.getContent());

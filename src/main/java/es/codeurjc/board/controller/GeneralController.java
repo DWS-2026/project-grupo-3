@@ -27,7 +27,7 @@ public class GeneralController {
 	public String showMainPage(Model model, HttpSession session) {
 		btnsHeader.hideBtnHeader(model,"plantIcon");
 		btnsHeader.hideBtnHeader(model,"goBackBtn");
-		btnsHeader.hideBtnHeader(model,"products");
+		btnsHeader.hideBtnHeader(model,"images_example_products");
 		return "index";
 	}
 
