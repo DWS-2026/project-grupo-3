@@ -21,10 +21,10 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto" id="login-form">
-    <form action="/sign-in" method="post">
+    <form action="/login" method="post">
         <img
                 class="mb-4"
-                src="/assets/images/temporalIcon.png"
+                src="/assets/images/public/temporalIcon.png"
                 alt=""
                 width="72"
                 height="57"
@@ -34,10 +34,20 @@
             <input
                     type="email"
                     class="form-control"
-                    id="floatingInput"
+                    id="floatingEmail"
                     placeholder="" required
             />
-            <label for="floatingInput">Dirección Email</label>
+            <label for="floatingEmail">Dirección Email</label>
+        </div>
+        <div class="form-floating" id="username">
+            <input
+                    type="text"
+                    class="form-control"
+                    id="floatingUsername"
+                    name="username"
+                    placeholder="" required
+            />
+            <label for="floatingUsername">Introduce tu username</label>
         </div>
         <div class="form-floating" id="password">
             <input
@@ -45,6 +55,7 @@
                     class="form-control"
                     id="floatingPassword"
                     placeholder="" required
+                    name="password"
             />
             <label for="floatingPassword">Contraseña</label>
         </div>
@@ -60,13 +71,13 @@
             </label>
         </div>
         <div class="buttons-container">
-            <button class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Iniciar Sesión</button>
+            <button type="submit" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Iniciar Sesión</button>
         </div>
 
 
         <p class="license">
             Todavía no tiene una cuenta, registrate a continuación
-            <a href="/register" target="_green">Registrarse</a>
+            <a href="/User/register" target="_green">Registrarse</a>
         </p>
 
     </form>

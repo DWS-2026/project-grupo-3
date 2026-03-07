@@ -11,25 +11,6 @@ import org.springframework.ui.Model;
 
 @Controller
 public class FormsController {
-    private static final String PLANTS_FOLDER = "plants";
-    @Autowired
-    private PlantService plantService;
 
-    @Autowired
-    private UserSession userSession;
-
-    @Autowired
-    private ImageService imageService;
-
-    @PostMapping("/logOut") //fijarte en como el form ha redirigido
-    public String logOut(Model model, HttpSession session) {
-        session.invalidate();
-        return "redirect:/sign-in";
-    }
-    @PostMapping("/sign-in") //fijarte en como el form ha redirigido
-    public String logIn(HttpSession session) {
-        session.setAttribute("isSessionActive",true);
-        return "redirect:/";
-    }
 
 }

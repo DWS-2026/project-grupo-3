@@ -32,15 +32,44 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //first condition that match is what it applies
+        http.authenticationProvider(authenticationProvider());
 
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+        http.authorizeHttpRequests(authorize -> authorize
+                        // PUBLIC PAGES
+                        .requestMatchers("/", "/assets/css/**", "/assets/images/public/**").permitAll()
+                        .requestMatchers("/User/register").permitAll()
+                        .requestMatchers("/images/*").permitAll()
+                        .requestMatchers("/Plants/catalogPlants").permitAll()
+                        .requestMatchers("/Plants/favoritePlant/*").permitAll()
+                        .requestMatchers("/Plants/ratingPlant/*").permitAll()
+                        .requestMatchers("/Plants/viewPlant/*").permitAll()
+                        .requestMatchers("/Products/catalogProducts").permitAll()
+                        .requestMatchers("/Reviews/forum").permitAll()
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/quizzPlants").permitAll()
+
+
+                        // PRIVATE PAGES
+                        .requestMatchers("/Admin/*").hasAnyRole("ADMIN")
+                        .requestMatchers("/Plants/*").hasAnyRole("USER")
+                        .requestMatchers("/Products/*").hasAnyRole("USER")
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/loginerror")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll()
                 );
+        http.csrf(csrf -> csrf.disable());
 
         return http.build();
+
     }
 
 }
@@ -76,4 +105,14 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
+
+http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll()
+                );
+
+        return http.build();
+
+
 * */

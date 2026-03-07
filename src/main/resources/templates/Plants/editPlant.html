@@ -31,7 +31,7 @@
             </button>
 
             <!--add image-->
-            <form action="/addImageToPlant/{{id}}" style="padding-top: 0px;" method="post" enctype="multipart/form-data">
+            <form action="/Plants/addImageToPlant/{{id}}" style="padding-top: 0px;" method="post" enctype="multipart/form-data">
                 <input
                         class="d-none"
                         name="newImage"
@@ -101,7 +101,7 @@
                                 <img src="/images/{{id}}" class="img-fluid rounded">
                         </div>
                         <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
-                            <form style="padding-top: 0px;" action="/delete/image/{{plantID}}/{{id}}" method="post">
+                            <form style="padding-top: 0px;" action="/Plants/delete/image/{{plantID}}/{{id}}" method="post">
                                 <button type="submit" class="trash-icon bi bi-trash3"></button>
                             </form>
                         </div>
