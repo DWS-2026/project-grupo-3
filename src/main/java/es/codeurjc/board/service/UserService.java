@@ -26,4 +26,8 @@ public class UserService {
     public boolean seeIfUserIsLoggedIn(HttpServletRequest request){
         return request.getUserPrincipal() != null;
     }
+
+    public boolean isUserAdmin(HttpServletRequest request){
+        return request.isUserInRole("ADMIN");
+    }
 }

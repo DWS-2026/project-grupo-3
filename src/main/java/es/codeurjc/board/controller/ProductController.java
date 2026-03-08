@@ -4,6 +4,8 @@ import es.codeurjc.board.model.Product;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.ProductService;
+import es.codeurjc.board.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,17 +33,18 @@ public class ProductController {
 
     @Autowired
     private ImageService imageService;
-
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/Products/catalogProducts")
-    public String catalogProducts(Model model, @PageableDefault(size = 6) Pageable page, HttpSession session) {
+    public String catalogProducts(Model model, @PageableDefault(size = 6) Pageable page, HttpServletRequest request) {
         btnsHeader.hideBtnHeader(model, "productsOption");
         Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6);
         Page<Product> productsPage;
 
-        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
-        if(session.getAttribute("isAdmin") != null && isAdmin) {
+        boolean isAdmin = userService.isUserAdmin(request);
+        if(isAdmin) {
             productsPage = productService.findAll(sortedPage); // admin watch all images_example_products
         } else {
             productsPage = productService.findByIsExample(true, sortedPage); // normal user watch only example images_example_products
@@ -52,8 +55,6 @@ public class ProductController {
         model.addAttribute("prev", productsPage.getNumber() - 1);
         model.addAttribute("hasNext", productsPage.hasNext());
         model.addAttribute("next", productsPage.getNumber() + 1);
-
-        model.addAttribute("userOnly", isAdmin == null || !isAdmin);
 
         return "/Products/catalogProducts";
     }

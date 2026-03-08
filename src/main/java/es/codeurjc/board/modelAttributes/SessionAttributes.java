@@ -16,7 +16,7 @@ public class SessionAttributes {
     public void addAttributes(Model model, HttpServletRequest request) {
 
         Principal principal = request.getUserPrincipal();
-
+        System.out.println("URI: " + request.getRequestURI());
         if(principal != null) {
             model.addAttribute("loginOptions", true);
             //model.addAttribute("userName", principal.getName());

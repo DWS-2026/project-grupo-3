@@ -65,8 +65,6 @@ public class WebSecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
                 );
         http.csrf(csrf -> csrf.disable());
 
