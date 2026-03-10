@@ -17,9 +17,13 @@ public class Username {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
+    @Column(unique = true)
     private String email;
-    private String password;
+
+    @Column(unique = true)
     private String username;
+
+    private String password;
     private String description;
     private String profileImage;
 
@@ -28,10 +32,11 @@ public class Username {
 
     public Username() {}
 
-    public Username(String username, String encodedPassword, String... roles) {
+    public Username(String username, String email, String encodedPassword, List<String> roles) {
         this.username = username;
         this.password = encodedPassword;
-        this.roles = List.of(roles);
+        this.roles = roles;
+        this.email = email;
     }
 
     public Username(String email, String password, String username, String description) {
