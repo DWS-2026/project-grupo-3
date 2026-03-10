@@ -1,14 +1,15 @@
 package es.codeurjc.board.model;
 
 import jakarta.persistence.*;
-import org.jspecify.annotations.Nullable;
 
+import javax.lang.model.element.Name;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
-public class Username {
+@Table(name = "USERS")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,13 +24,13 @@ public class Username {
     private String description;
     private String profileImage;
 
-    @OneToMany (mappedBy = "username", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reviews> reviews = new ArrayList<>();
 
-    public Username() {}
+    public User() {}
 
 
-    public Username(String email, String password, String username, String description,String... roles) {
+    public User(String email, String password, String username, String description, String... roles) {
         this.email = email;
         this.password = password;
         this.username = username;

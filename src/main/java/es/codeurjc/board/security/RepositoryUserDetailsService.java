@@ -2,9 +2,8 @@ package es.codeurjc.board.security;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.codeurjc.board.model.Username;
+import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.UserRepository;
-import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,7 +22,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String usernameOremail) throws UsernameNotFoundException {
 
-        Username user = userRepository.findByUsername(usernameOremail)
+        User user = userRepository.findByUsername(usernameOremail)
                 .or(() -> userRepository.findByEmail(usernameOremail))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 

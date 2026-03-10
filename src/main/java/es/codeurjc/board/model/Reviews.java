@@ -15,7 +15,7 @@ public class Reviews {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String username;
+    private String user;
     private String title;
     private String description;
 
@@ -25,7 +25,7 @@ public class Reviews {
     public Reviews(){}
     public Reviews(String username, String title, String description, ReviewType type){
         super();
-        this.username = username;
+        this.user = username;
         this.title = title;
         this.description = description;
         this.type = type;
@@ -40,11 +40,11 @@ public class Reviews {
     }
 
     public String getUsername() {
-        return username;
+        return user;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.user = username;
     }
 
     public String getTitle() {
@@ -69,6 +69,6 @@ public class Reviews {
 
     @Override
     public String toString(){
-        return "Review [id ="+id+" user = "+username+ "title = " + title + "description = " + description + "]";
+        return "Review [id ="+id+" user = "+user+ "title = " + title + "description = " + description + "]";
     }
 }

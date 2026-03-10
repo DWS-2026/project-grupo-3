@@ -2,8 +2,7 @@ package es.codeurjc.board.service;
 
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.Product;
-import es.codeurjc.board.model.Username;
-import es.codeurjc.board.repositories.UserRepository;
+import es.codeurjc.board.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -90,10 +89,10 @@ public class SampleDataService {
     }
 
     private void addExampleUsers() throws Exception {
-        Username userEx1 = new Username("hola@gmail.com",passwordEncoder.encode("hola"), "Holi", "Hola", "USER");
-        Username userEx2 = new Username("pepe@gmail.com",passwordEncoder.encode("pepe"), "Pepe", "Soy Pepe", "USER");
-        Username userEx3 = new Username("manolito@gmail.com",passwordEncoder.encode("manolito"), "Manolito", "Soy Manolito", "USER");
-        Username admin = new Username("admin@gmail.com",passwordEncoder.encode("admin"), "Admin", "Soy Admin", "ADMIN");
+        User userEx1 = new User("hola@gmail.com",passwordEncoder.encode("hola"), "Holi", "Hola", "USER");
+        User userEx2 = new User("pepe@gmail.com",passwordEncoder.encode("pepe"), "Pepe", "Soy Pepe", "USER");
+        User userEx3 = new User("manolito@gmail.com",passwordEncoder.encode("manolito"), "Manolito", "Soy Manolito", "USER");
+        User admin = new User("admin@gmail.com",passwordEncoder.encode("admin"), "Admin", "Soy Admin", "ADMIN");
         userService.saveUser(userEx1);
         userService.saveUser(userEx2);
         userService.saveUser(userEx3);

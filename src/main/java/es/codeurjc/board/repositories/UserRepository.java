@@ -1,12 +1,11 @@
 package es.codeurjc.board.repositories;
 
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.model.Username;
+import es.codeurjc.board.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<Username,Long>{
-    Optional<Username> findByUsername(String username);
-    Optional<Username> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User,Long>{
+    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
     boolean existsUsernamesByUsername(String username);
 }

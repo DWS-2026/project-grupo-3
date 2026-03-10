@@ -1,8 +1,7 @@
 package es.codeurjc.board.controller;
-import es.codeurjc.board.model.Username;
+import es.codeurjc.board.model.User;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.service.UserService;
-import jakarta.websocket.Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +54,7 @@ public class UserController {
     @PostMapping("/User/register")
     public String register(Model model,@RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword){
         model.addAttribute("passwords",passwordsDontMatch);
-        Username user = new Username();
+        User user = new User();
         user.setPassword(passwordEncoder.encode(password));
         user.setEmail(email);
         user.setUsername(username);
