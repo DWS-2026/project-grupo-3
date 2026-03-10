@@ -11,7 +11,7 @@ public class ButtonsHeader {
     @ModelAttribute //esto se añade para que se haga por cada request,
     // por cada model que pidamos y solo afecta al metodo de debajo
     public void buttonsHeader(Model model) {
-        List<String> buttons = List.of("goBackBtn", "productsOption", "orders", "plantIcon","profile","shoppingCart","review");
+        List<String> buttons = List.of("goBackBtn", "productsOption", "orders", "plantIcon","profile","shoppingCart","review", "loginButton");
         for(String btn : buttons){
             model.addAttribute(btn, true);
         }

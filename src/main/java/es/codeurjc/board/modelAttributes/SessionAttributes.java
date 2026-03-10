@@ -14,7 +14,7 @@ public class SessionAttributes {
     private List<String> attributes = List.of("loginOptions", "userOnly","adminOnly", "adminPanel");
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
-
+        model.addAttribute("adminPanel", true );
         Principal principal = request.getUserPrincipal();
         System.out.println("URI: " + request.getRequestURI());
         if(principal != null) {

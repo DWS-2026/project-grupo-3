@@ -33,6 +33,7 @@ public class GeneralController {
 
 	@GetMapping("/login")
 	public String signIn(Model model) {
+		btnsHeader.hideBtnHeader(model,"loginButton");
 		return "login";
 	}
 
@@ -47,6 +48,10 @@ public class GeneralController {
 		return "error";
 	}
 
+	@GetMapping("/403")
+	public String accessDeniedPage() {
+		return "accessDenied";
+	}
 
 
 }

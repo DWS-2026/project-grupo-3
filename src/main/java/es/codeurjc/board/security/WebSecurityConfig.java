@@ -48,7 +48,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/Reviews/forum").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/quizzPlants").permitAll()
-
+                        .requestMatchers("/error", "/403", "/404").permitAll()
 
                         // PRIVATE PAGES
                         .requestMatchers("/Admin/*").hasAnyRole("ADMIN")
@@ -67,7 +67,11 @@ public class WebSecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()
+                )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/403")
                 );
+
         http.csrf(csrf -> csrf.disable());
 
         return http.build();
@@ -107,14 +111,6 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
-
-http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
-                );
-
-        return http.build();
 
 
 * */
