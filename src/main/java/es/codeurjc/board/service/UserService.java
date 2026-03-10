@@ -17,6 +17,14 @@ public class UserService {
     }
 
     public boolean usernameExist(String username) {
-        return userRepository.existsUsernamesByUsername(username);
+        return userRepository.existsByUsername(username);
+    }
+
+    public Username findByUsername(String username){
+        return userRepository.findByUsername(username).orElse(null);
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
     }
 }
