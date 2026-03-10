@@ -52,9 +52,10 @@ public class WebSecurityConfig {
 
                         // PRIVATE PAGES
                         .requestMatchers("/Admin/*").hasAnyRole("ADMIN")
+                        .requestMatchers("/User/*").hasAnyRole("USER")
                         .requestMatchers("/Plants/*").hasAnyRole("USER")
+                        .requestMatchers("/Plants/editPlant/*").hasAnyRole("USER")
                         .requestMatchers("/Products/*").hasAnyRole("USER")
-                        .requestMatchers("/User/user").hasAnyRole("USER")
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

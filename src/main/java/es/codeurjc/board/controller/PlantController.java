@@ -54,7 +54,7 @@ public class PlantController {
                 page.getPageNumber(),6, Sort.by(Sort.Order.desc("favorite"),Sort.Order.desc("rating")));
 
         Page<Plant> plantsPage;
-        if(userService.seeIfUserIsLoggedIn(session)){
+        if(userService.isUserUser(session)){ //only allow users to see their plants, neither admin or anonymus can
             plantsPage = plantService.findByIsExample(false, sortedPage);
         } else {
             plantsPage = plantService.findByIsExample(true, sortedPage);

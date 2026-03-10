@@ -28,17 +28,13 @@ public class Username {
 
     public Username() {}
 
-    public Username(String username, String encodedPassword, String... roles) {
-        this.username = username;
-        this.password = encodedPassword;
-        this.roles = List.of(roles);
-    }
 
-    public Username(String email, String password, String username, String description) {
+    public Username(String email, String password, String username, String description,String... roles) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.description = description;
+        this.roles = List.of(roles);
     }
 
     public Long getId() {

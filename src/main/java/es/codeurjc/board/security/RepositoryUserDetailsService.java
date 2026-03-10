@@ -21,16 +21,22 @@ public class RepositoryUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String usernameOremail) throws UsernameNotFoundException {
 
-        Username user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        //orElseThrow is an implementation of Optional so when the object is not present in the DB executes that lambda expression
+        Username user = userRepository.findByUsername(usernameOremail)
+                .or(() -> userRepository.findByEmail(usernameOremail))
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
         List<GrantedAuthority> roles = new ArrayList<>();
         for (String role : user.getRoles()) {
             roles.add(new SimpleGrantedAuthority("ROLE_" + role));
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), roles);
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                roles
+        );
 
     }
 }

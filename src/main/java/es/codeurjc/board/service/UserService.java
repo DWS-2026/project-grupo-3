@@ -27,6 +27,10 @@ public class UserService {
         return request.getUserPrincipal() != null;
     }
 
+    public boolean isUserUser(HttpServletRequest request){
+        return request.isUserInRole("USER");
+    }
+
     public boolean isUserAdmin(HttpServletRequest request){
         return request.isUserInRole("ADMIN");
     }

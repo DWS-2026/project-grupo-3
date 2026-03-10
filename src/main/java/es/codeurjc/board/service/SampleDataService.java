@@ -2,6 +2,7 @@ package es.codeurjc.board.service;
 
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.Product;
+import es.codeurjc.board.model.Username;
 import es.codeurjc.board.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class SampleDataService {
     private PlantService plantService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -87,11 +88,23 @@ public class SampleDataService {
         plantService.save(plant_ex2);
         plantService.addImageToPlant(plant_ex2.getId(), "/static/assets/images/public/images_example_plants/rosebush.jpg");
     }
+
+    private void addExampleUsers() throws Exception {
+        Username userEx1 = new Username("hola@gmail.com",passwordEncoder.encode("hola"), "Holi", "Hola", "USER");
+        Username userEx2 = new Username("pepe@gmail.com",passwordEncoder.encode("pepe"), "Pepe", "Soy Pepe", "USER");
+        Username userEx3 = new Username("manolito@gmail.com",passwordEncoder.encode("manolito"), "Manolito", "Soy Manolito", "USER");
+        Username admin = new Username("admin@gmail.com",passwordEncoder.encode("admin"), "Admin", "Soy Admin", "ADMIN");
+        userService.saveUser(userEx1);
+        userService.saveUser(userEx2);
+        userService.saveUser(userEx3);
+        userService.saveUser(admin);
+    }
     @PostConstruct
     public void init() throws Exception {
 
         this.addExamplePlants();
         this.addExampleProducts();
+        this.addExampleUsers();
     }
 }
 
