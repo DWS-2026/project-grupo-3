@@ -76,11 +76,11 @@
               <p class="card-text fw-bold">{{description}}</p>
               <p class="card-text">Precio: €{{price}}</p>
 
-              {{#userOnly}}
+              {{^adminOnly}}
               <div class="buttons-container">
                 <button class="btn btn-success rounded-pill px-4 py-2 main-button">Añadir al carrito</button>
               </div>
-              {{/userOnly}}
+              {{/adminOnly}}
 
             </div>
           </div>
