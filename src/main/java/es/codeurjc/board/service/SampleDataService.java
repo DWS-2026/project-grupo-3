@@ -4,14 +4,17 @@ import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.Product;
 import es.codeurjc.board.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import jakarta.annotation.PostConstruct;
+import org.springframework.transaction.annotation.Transactional;
 
 
-
-@Service
-public class SampleDataService {
+@Component
+public class SampleDataService  implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private PlantService plantService;
@@ -65,27 +68,17 @@ public class SampleDataService {
 
     private void addExamplePlants() throws Exception {
         for (int i = 0; i < 5; i++) {
-            Plant plant = new Plant("Pepito", "Rosa-" + i, "Regar cada 5 días", "Necesita abono x y la tengo mucho cariño mimimimimimimj", false);
-            plantService.save(plant);
+            Plant plant = new Plant( "Rosa de Pepe-" + i, "Regar cada 5 días", "Necesita abono x y la tengo mucho cariño mimimimimimimj");
+            plantService.save(plant,userService.getUser("Pepe"));
             plantService.addImageToPlant(plant.getId(), "/static/assets/images/public/images_example_plants/rosebush.jpg");
 
         }
         for (int i = 0; i < 5; i++) {
-            Plant plant = new Plant("Pepito", "Rosa2-" + i, "Regar cada 5 días", "Necesita abono x", false);
-            plantService.save(plant);
+            Plant plant = new Plant("Rosa2 de Pepe-" + i, "Regar cada 5 días", "Necesita abono x");
+            plantService.save(plant,userService.getUser("Pepe"));
             plantService.addImageToPlant(plant.getId(), "/static/assets/images/public/images_example_plants/rosebush.jpg");
 
         }
-        Plant plant_ex1 = new Plant("anonimo", "Plantita ejemplo 1: Suculenta", "Regar cada 5 días",
-                "Plantita que no requiere de mucha atención parecida al cactus.", true);
-        plantService.save(plant_ex1);
-        plantService.addImageToPlant(plant_ex1.getId(), "/static/assets/images/public/images_example_plants/succulent.webp");
-        plantService.addImageToPlant(plant_ex1.getId(), "/static/assets/images/public/images_example_plants/succulent2.jpg");
-
-        Plant plant_ex2 = new Plant("anonimo", "Plantita ejemplo 2: Rosal", "Regar cada 5 días",
-                "Plantita que no requiere de mucha atención parecida al cactus.", true);
-        plantService.save(plant_ex2);
-        plantService.addImageToPlant(plant_ex2.getId(), "/static/assets/images/public/images_example_plants/rosebush.jpg");
     }
 
     private void addExampleUsers() throws Exception {
@@ -98,12 +91,17 @@ public class SampleDataService {
         userService.saveUser(userEx3);
         userService.saveUser(admin);
     }
-    @PostConstruct
-    public void init() throws Exception {
 
-        this.addExamplePlants();
-        this.addExampleProducts();
-        this.addExampleUsers();
+    @Override
+    @Transactional
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        try {
+            addExampleUsers();
+            addExamplePlants();
+            addExampleProducts();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

@@ -27,6 +27,9 @@ public class User {
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reviews> reviews = new ArrayList<>();
 
+    @OneToMany (mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Plant> plants = new ArrayList<>();
+
     public User() {}
 
 
@@ -94,4 +97,27 @@ public class User {
         this.roles = roles;
     }
 
+    public List<Plant> getPlants() {
+        return plants;
+    }
+
+    public void setPlants(List<Plant> plants) {
+        this.plants = plants;
+    }
+    public void addPlant(Plant plant) {
+        this.plants.add(plant);
+    }
+
+    public List<Reviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Reviews> reviews) {
+        this.reviews = reviews;
+    }
+
+
+    public void addReview(Reviews review) {
+        this.reviews.add(review);
+    }
 }

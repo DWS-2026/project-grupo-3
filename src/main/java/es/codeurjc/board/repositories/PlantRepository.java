@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PlantRepository extends JpaRepository<Plant,Long> {
-    Page<Plant> findAll(Pageable page);
-    Page<Plant> findByExampleEquals(boolean example, Pageable page);
+    Page<Plant> findPlantsByUserUsername(String username, Pageable pageable);
     Optional<Plant> findById(long id);
 }

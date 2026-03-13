@@ -2,7 +2,9 @@ package es.codeurjc.board.service;
 
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
+import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.PlantRepository;
+import es.codeurjc.board.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
@@ -24,9 +26,8 @@ public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
-
-        public Page<Plant> findAll(Pageable page) {
-            return plantRepository.findAll(page);
+        public Page<Plant> findByUsername(User user, Pageable page) {
+            return plantRepository.findPlantsByUserUsername(user.getUsername(), page);
         }
         public long count() {
             return plantRepository.count();
@@ -36,7 +37,9 @@ public class PlantService {
             return plantRepository.findById(id).orElseThrow();
         }
 
-        public void save(Plant plant) {
+        public void save(Plant plant, User username) {
+            plant.setUser(username);
+            username.addPlant(plant);
             plantRepository.save(plant);
         }
 
@@ -83,9 +86,6 @@ public class PlantService {
 
     }
 
-    public Page<Plant> findByIsExample(boolean isExample, Pageable page) {
-            return plantRepository.findByExampleEquals(isExample, page);
-    }
 
     public void ratePlant(int rating,long id) {
             Plant plant = plantRepository.findById(id).orElseThrow();

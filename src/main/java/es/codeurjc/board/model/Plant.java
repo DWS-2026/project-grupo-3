@@ -13,12 +13,12 @@ public class Plant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    private User user;
 
-    private String username;
     private String name;
     private String cares;
     private String description;
-    private boolean example = false;
     private boolean favorite = false;
     private int rating = 0;
 
@@ -26,32 +26,20 @@ public class Plant {
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
     private List<Image> images = new ArrayList<>();
 
-    public boolean isExample() {
-        return example;
-    }
-
-    public void setExample(boolean example) {
-        this.example = example;
-    }
 
 
     public Plant(){}
-    public Plant(String user, String name, String cares, String description, boolean example) {
+    public Plant(String name, String cares, String description) {
         super();
-        this.username = user;
         this.name= name;
         this.cares = cares;
         this.description = description;
-        this.example = example;
     }
     public void addImage(Image image){
         images.add(image);
     }
     public List<Image> getImages() {
         return images;
-    }
-    public String getUsername() {
-        return username;
     }
 
     public boolean isFavorite() {
@@ -73,10 +61,6 @@ public class Plant {
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public Long getId() {
@@ -111,9 +95,19 @@ public class Plant {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
-        return "Plant [id="+id+", user=" + username + ", name=" + name + ", cares=" + cares + "]";
+        return "Plant [id="+id+", user=" + user.getUsername() + ", name=" + name + ", cares=" + cares + "]";
     }
+
+
 
 }
