@@ -124,7 +124,7 @@ public class PlantController {
         return "redirect:/Plants/editPlant/" + id;
     }
 
-    @PostMapping("/delete/image/{plantId}/{imageId}")
+    @PostMapping("{plantId}/delete/image/{imageId}")
     public String deleteImage(@PathVariable long plantId,
                               @PathVariable long imageId) {
 

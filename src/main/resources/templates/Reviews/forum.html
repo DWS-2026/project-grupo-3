@@ -103,14 +103,14 @@
                         </div>
                     </div>
               </div>
-            <form style="padding-top: 0px;" action="/Plants/{{id}}/delete" method="post">
+            <form style="padding-top: 0px;" action="/Reviews/delete/{id}" method="post">
                 <button type="submit" class="trash-icon bi bi-trash3" ></button>
             </form>
                 {{/userOnly}}
             {{#adminOnly}}
-            <form style="padding-top: 0px;" action="/Reviews/{{id}}/delete" method="post">
-                <button type="submit" class="trash-icon bi bi-trash3" ></button>
-            </form>
+                <form style="padding-top: 0px;" action="/Reviews/delete/{id}" method="post">
+                    <button type="submit" class="trash-icon bi bi-trash3" ></button>
+                </form>
             {{/adminOnly}}
             {{/loginOptions}}
 
