@@ -34,36 +34,36 @@
     <h3 class="h3 mb-4 fw-normal change-color">Escribe tu comentario aquí</h3>
 
 
-    <!-- Name of the review -->
-    <div class="form-floating mb-3">
-      <input
-              type="text"
-              class="form-control"
-              id="reviewName"
-              placeholder="Tipo"
-              required
-      />
-      <label for="reviewName">Nombre de la review</label>
-    </div>
+      <!-- Name of the review -->
+      <div class="form-floating mb-3">
+          <input
+                  type="text"
+                  class="form-control"
+                  id="reviewName{{id}}"
+                  placeholder="Tipo"
+                  value ="{{name}}"
+                  required
+          />
+          <label for="reviewName{{id}}">Nombre de la review</label>
+      </div>
 
+      <!-- Review tipe -->
+      <div class="form-floating mb-3">
+          <select class="form-select form-select-sm">
+              <option value = "PLANT" selected>Planta</option>
+              <option value = "PRODUCT">Producto</option>
+          </select>
+      </div>
 
-    <!-- Review tipe -->
-    <div class="form-floating mb-3">
-      <select class="form-select form-select-sm">
-        <option selected>Planta</option>
-        <option>Producto</option>
-      </select>
-    </div>
-
-    <!-- Description -->
-    <div class="form-floating mb-3">
+      <!-- Description -->
+      <div class="form-floating mb-3">
         <textarea
                 class="form-control"
                 placeholder="Descripción"
                 id="reviewDescription"
                 style="height: 120px"
-                required
-        ></textarea>
+                required>{{description}}
+        </textarea>
       <label for="reviewDescription">Descripción</label>
     </div>
 
