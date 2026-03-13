@@ -1,5 +1,6 @@
 package es.codeurjc.board.controller;
 import es.codeurjc.board.model.Image;
+import es.codeurjc.board.model.User;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 
 import es.codeurjc.board.model.Plant;
@@ -49,23 +50,25 @@ public class PlantController {
     public String catalogPlants(Model model, @PageableDefault(size = 6) Pageable page, HttpServletRequest session) {
 
         btnsHeader.hideBtnHeader(model,"plantIcon");
-
-        Pageable sortedPage = PageRequest.of(
+        if(userService.isUserUser(session)){ //only allow users to see their plants, neither admin or anonymus can
+            Pageable sortedPage = PageRequest.of(
                 page.getPageNumber(),6, Sort.by(Sort.Order.desc("favorite"),Sort.Order.desc("rating")));
 
-        Page<Plant> plantsPage;
-        if(userService.isUserUser(session)){ //only allow users to see their plants, neither admin or anonymus can
-            plantsPage = plantService.findByIsExample(false, sortedPage);
+            Page<Plant> plantsPage;
+
+            plantsPage = plantService.findByUsername(userService.getUser(session),sortedPage);
+
+            model.addAttribute("plants", plantsPage.getContent());
+            model.addAttribute("hasPrev", plantsPage.hasPrevious());
+            model.addAttribute("prev", plantsPage.getNumber() - 1);
+            model.addAttribute("hasNext", plantsPage.hasNext());
+            model.addAttribute("next", plantsPage.getNumber() + 1);
         } else {
-            plantsPage = plantService.findByIsExample(true, sortedPage);
+            model.addAttribute("example",true);
         }
 
 
-        model.addAttribute("plants", plantsPage.getContent());
-        model.addAttribute("hasPrev", plantsPage.hasPrevious());
-        model.addAttribute("prev", plantsPage.getNumber() - 1);
-        model.addAttribute("hasNext", plantsPage.hasNext());
-        model.addAttribute("next", plantsPage.getNumber() + 1);
+
 
         return "Plants/catalogPlants";
     }
@@ -97,9 +100,9 @@ public class PlantController {
     }
 
     @PostMapping("/new")
-    public String newPost(Plant plant, MultipartFile imageFile) throws IOException {
+    public String newPost(Plant plant, MultipartFile imageFile, HttpServletRequest session) throws IOException {
 
-        plantService.save(plant);
+        plantService.save(plant,userService.getUser(session));
 
         if (!imageFile.isEmpty()) {
             Image imageOne = imageService.createImage(imageFile);
@@ -109,7 +112,7 @@ public class PlantController {
         return "redirect:/Plants/catalogPlants";
     }
 
-    @PostMapping("/addImageToPlant/{id}")
+    @PostMapping("/{id}/addImageToPlant")
     public String addImageToPlant(@PathVariable long id,
                                   MultipartFile newImage) throws IOException {
 
