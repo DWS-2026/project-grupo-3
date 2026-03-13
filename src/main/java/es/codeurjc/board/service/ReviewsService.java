@@ -1,5 +1,6 @@
 package es.codeurjc.board.service;
 
+import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.Reviews;
 import es.codeurjc.board.repositories.ReviewsRepository;
 import org.springframework.data.domain.Page;
@@ -36,7 +37,20 @@ public class ReviewsService {
     public void deleteById(long id) {
         reviewsRepository.deleteById(id);
     }
-    public Page<Reviews> findByType(Reviews.ReviewType type, Pageable page){
+
+
+    public void editReview(String title, String description, Reviews.ReviewType type, Long id) throws Exception{
+        Reviews review = reviewsRepository.findById(id).orElseThrow();
+        if (title != null && !title.isBlank()){
+            review.setTitle(title);
+        }
+        if (description !=null && !description.isBlank()){
+            review.setDescription(description);
+        }
+        reviewsRepository.save(review);
+    }
+
+    public Page<Reviews> findByType(Reviews.ReviewType type, Pageable page) {
         return reviewsRepository.findByType(type, page);
     }
 }

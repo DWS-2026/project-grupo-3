@@ -54,6 +54,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/Admin/*").hasAnyRole("ADMIN")
                         .requestMatchers("/User/*").hasAnyRole("USER")
                         .requestMatchers("/Plants/*").hasAnyRole("USER")
+                        .requestMatchers("/Plants/*/addImageToPlant").hasAnyRole("USER")
                         .requestMatchers("/Plants/editPlant/*").hasAnyRole("USER")
                         //.requestMatchers("/Products/*").hasAnyRole("USER")
                         .requestMatchers("/Products/newProduct").hasAnyRole("ADMIN")
