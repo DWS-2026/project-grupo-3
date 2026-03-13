@@ -59,6 +59,7 @@ public class PlantController {
             plantsPage = plantService.findByUsername(userService.getUser(session),sortedPage);
 
             model.addAttribute("plants", plantsPage.getContent());
+
             model.addAttribute("hasPrev", plantsPage.hasPrevious());
             model.addAttribute("prev", plantsPage.getNumber() - 1);
             model.addAttribute("hasNext", plantsPage.hasNext());
@@ -130,14 +131,6 @@ public class PlantController {
 
         plantService.deleteImageFromPlant(plantId, imageId);
 
-        return "redirect:/Plants/catalogPlants";
-    }
-
-    @PostMapping("/ratingPlant/{id}")
-    public String ratingPlant(@PathVariable long id,
-                              @RequestParam int rate) {
-
-        plantService.ratePlant(rate,id);
         return "redirect:/Plants/catalogPlants";
     }
 
