@@ -24,9 +24,6 @@ public class User {
     private String description;
     private String profileImage;
 
-    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reviews> reviews = new ArrayList<>();
-
     public User() {}
 
 
