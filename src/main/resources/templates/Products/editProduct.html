@@ -21,26 +21,32 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto">
-    <form class="text-center" action="/">
+    <form class="text-center" action="/Products/editProduct/{{product.id}}" method="post" enctype="multipart/form-data">
 
         <h3 class="mb-4 change-color">Editar producto</h3>
 
         <!-- Name -->
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="productName" required>
-            <label for="productName">Nombre del producto</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{product.name}}" required>
+            <label for="name">Nombre del producto</label>
+        </div>
+
+        <!-- Description -->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="description" name="description" value="{{product.description}}" required>
+            <label for="description">Descripcion del producto</label>
         </div>
 
         <!-- Price -->
         <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="price" min="0" step="0.01" required>
+            <input type="number" class="form-control" id="price" name="price" value="{{product.price}}" min="0" step="0.01" required>
             <label for="price">Precio (€)</label>
         </div>
 
         <!-- Image -->
         <div class="mb-4 text-start">
             <label class="form-label fw-medium">Cambiar imagen (opcional)</label>
-            <input class="form-control" type="file" id="productImage" accept="image/*">
+            <input class="form-control" type="file" id="productImage" name="imageFile" accept="image/*">
         </div>
 
         <!-- Bottons -->

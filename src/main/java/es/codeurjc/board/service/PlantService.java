@@ -24,6 +24,7 @@ public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
+
         public Page<Plant> findAll(Pageable page) {
             return plantRepository.findAll(page);
         }
@@ -101,5 +102,6 @@ public class PlantService {
             }
             plantRepository.save(plant);
     }
+
 
 }

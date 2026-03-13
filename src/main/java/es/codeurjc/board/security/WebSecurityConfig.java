@@ -32,15 +32,54 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //first condition that match is what it applies
+        http.authenticationProvider(authenticationProvider());
 
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+        http.authorizeHttpRequests(authorize -> authorize
+                        // PUBLIC PAGES
+                        .requestMatchers("/", "/assets/css/**", "/assets/images/public/**").permitAll()
+                        .requestMatchers("/User/register").permitAll()
+                        .requestMatchers("/images/*").permitAll()
+                        .requestMatchers("/Plants/catalogPlants").permitAll()
+                        .requestMatchers("/Plants/favoritePlant/*").permitAll()
+                        .requestMatchers("/Plants/ratingPlant/*").permitAll()
+                        .requestMatchers("/Plants/viewPlant/*").permitAll()
+                        .requestMatchers("/Products/catalogProducts").permitAll()
+                        .requestMatchers("/Reviews/forum").permitAll()
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/quizzPlants").permitAll()
+                        .requestMatchers("/error", "/403", "/404").permitAll()
+
+                        // PRIVATE PAGES
+                        .requestMatchers("/Admin/*").hasAnyRole("ADMIN")
+                        .requestMatchers("/User/*").hasAnyRole("USER")
+                        .requestMatchers("/Plants/*").hasAnyRole("USER")
+                        .requestMatchers("/Plants/editPlant/*").hasAnyRole("USER")
+                        //.requestMatchers("/Products/*").hasAnyRole("USER")
+                        .requestMatchers("/Products/newProduct").hasAnyRole("ADMIN")
+                        .requestMatchers("/Products/new").hasAnyRole("ADMIN")
+                        .requestMatchers("/Products/editProduct/*").hasAnyRole("ADMIN")
+                        .requestMatchers("/products/{id}/delete").hasAnyRole("ADMIN")
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/loginerror")
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll()
+                )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/403")
                 );
 
+        http.csrf(csrf -> csrf.disable());
+
         return http.build();
+
     }
 
 }
@@ -76,4 +115,6 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
+
+
 * */

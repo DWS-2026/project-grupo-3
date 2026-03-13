@@ -27,9 +27,14 @@
                         <a href="/Reviews/forum" class="icons">💬</a>
                     {{/review}}
                 </div>
+                {{#loginButton}}
+                    {{^loginOptions}}
+                        <a href="/login" id="login-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Iniciar sesión</a>
+                    {{/loginOptions }}
+                {{/loginButton}}
 
                 {{#loginOptions}}
-                    <form action="/logOut" method="post">
+                    <form action="/logout" method="post">
                         <button type="submit" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">
                             Log Out
                         </button>
@@ -37,9 +42,9 @@
                 {{/loginOptions}}
 
 
-                {{#products}}
+                {{#productsOption}}
                     <a href="/Products/catalogProducts" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
-                {{/products}}
+                {{/productsOption}}
 
                 {{#userOnly}}
                     <a href="/User/ordersUser" id="orders" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Mis pedidos</a>

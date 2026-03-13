@@ -24,7 +24,7 @@
     <form action="/User/register" method="post">
         <img
                 class="mb-4"
-                src="/assets/images/temporalIcon.png"
+                src="/assets/images/public/temporalIcon.png"
                 alt=""
                 width="72"
                 height="57"
@@ -69,7 +69,7 @@
 
         {{/passwords}}
 
-        <!-- Username -->
+        <!-- User -->
         <div class="form-floating mb-3">
             <input
                     type="text"
@@ -106,11 +106,11 @@
             </label>
         </div>
         <div class="buttons-container">
-            <a href="/sign-in" id="login-btn" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Registrate</a>
+            <button type="submit" id="login-btn" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Registrate</button>
         </div>
         <p class="license">
             ¿Ya tienes cuenta?
-            <a href="/sign-in" target="_green">Iniciar sesión</a>
+            <a href="/login" target="_green">Iniciar sesión</a>
         </p>
 
     </form>

@@ -14,38 +14,22 @@ public class SessionAttributes {
     private List<String> attributes = List.of("loginOptions", "userOnly","adminOnly", "adminPanel");
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
-
+        model.addAttribute("adminPanel", true );
         Principal principal = request.getUserPrincipal();
-
+        System.out.println("URI: " + request.getRequestURI());
         if(principal != null) {
-
             model.addAttribute("loginOptions", true);
-            model.addAttribute("userName", principal.getName());
-            model.addAttribute("admin", request.isUserInRole("ADMIN"));
+            //model.addAttribute("userName", principal.getName());
+            model.addAttribute("adminOnly", request.isUserInRole("ADMIN"));
+            model.addAttribute("userOnly", request.isUserInRole("USER"));
 
         } else {
-            model.addAttribute("logged", false);
+            model.addAttribute("loginOptions", false);
+            model.addAttribute("userOnly", false);
+            model.addAttribute("adminOnly", false);
         }
     }
 
-    private void openOrCloseSession(Model model, HttpSession session){
-        boolean isSessionActive;
-
-        if(session.getAttribute("isSessionActive") != null){
-            isSessionActive = (boolean) session.getAttribute("isSessionActive");
-        } else{
-            isSessionActive = false;
-        }
-        for(String attribute : attributes) {
-                model.addAttribute(attribute, isSessionActive);
-        }
-    }
-
-    @ModelAttribute
-    public void sessionAttributes(Model model, HttpSession session) {
-        this.openOrCloseSession(model, session);
-
-    }
 
     public static void hideAdminPanel(Model model){
         model.addAttribute("adminPanel", false );
