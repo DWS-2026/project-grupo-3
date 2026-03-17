@@ -1,6 +1,6 @@
-  <!DOCTYPE html>
-  <html lang="es">
-  <head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
 
     <!-- To make the design responsive -->
@@ -14,125 +14,123 @@
     <!-- External CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/main.css">
-      <link rel="stylesheet" href="/assets/css/generalForm.css">
-      <link rel="stylesheet" href="/assets/css/smallForms.css">
-      <link rel="stylesheet" href="/assets/css/user.css">
+    <link rel="stylesheet" href="/assets/css/catalogProductsAndPlants.css">
+    <link rel="stylesheet" href="/assets/css/generalForm.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
 </head>
 <body>
 {{>header}}
-
-  <main class="pt-5">
+<main class="pt-5">
     <section class="py-5 text-center container">
-      <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h2 class="fw-light change-color">Tablón de reviews 🌟</h2>
-
-            <form method="get" action="/Reviews/forum">
-                <select name="type"
-                        onchange="this.form.submit()"
-                        class="form-select form-select-sm rounded-pill px-4 py-3"
-                        style="height: 50px; width: 125px;">
-
-                    <option value="">Todo</option>
-                    <option value="PLANT">Planta</option>
-                    <option value="PRODUCT">Producto</option>
-
-                </select>
-            </form>
-
-</div>
-
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light change-color">Tablon de las reviews 🌟</h1>
+            </div>
         </div>
-      </div>
+        {{#userOnly}}
+        <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Reviews/newreview">Añadir Review</a>
+        {{/userOnly}}
+
+        <form method="get" action="/Reviews/forum">
+            <select name="type"
+                    onchange="this.form.submit()"
+                    class="form-select form-select-sm rounded-pill px-4 py-3"
+                    style="height: 50px; width: 125px;">
+
+                <option value="" {{^type}}selected{{/type}}>Todo</option>
+                <option value="PLANT" {{#isPlant}}selected{{/isPlant}}>Planta</option>
+                <option value="PRODUCT" {{#isProduct}}selected{{/isProduct}}>Producto</option>
+
+            </select>
+        </form>
     </section>
 
 
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
 
-          <div class="col">
-            <div class="card shadow-sm  h-100">
-              <div class="card-body d-flex flex-column justify-content-center">
-                <div class="profile-header" style="align-items: center;">
-                  <div class="profile-photo mb-3" style="width: 60px; height: 60px;"> </div>
-                    <p>usuario123</p>
-                </div>
-
-                <p class="card-text fw-bold">Nombre</p>
-                <p class="card-text">Nutre tus plantas de manera rápida y efectiva.</p>
-                <div class="actions d-flex gap-2">
-                    <i class="bi bi-trash3 trash-icon"></i>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card shadow-sm  h-100">
-              <div class="card-body d-flex flex-column justify-content-center">
-                <div class="profile-header" style="align-items: center;">
-                  <div class="profile-photo mb-3" style="width: 60px; height: 60px;"></div>
-                    <p>usuario123</p>
-                  </div>
-                <p class="card-text fw-bold">Nombre</p>
-                <p class="card-text">Nutre tus plantas de manera rápida y efectiva</p>
-                                <div class="actions d-flex gap-2">
-                    <i class="bi bi-trash3 trash-icon"></i>
-                </div>
-
-            </div>
-          </div>
-          </div>
-            {{#loginOptions}}
-                {{#userOnly}}
-              <div class="col">
+                {{#reviews}}
+                <div class="col">
                     <div class="card shadow-sm h-100 planta">
-                        <div class="card-img-container"  style="padding-top: 10px">
-                            <a href="/Reviews/newreview" class="circle-edition">
-                                <span>+</span>
-                            </a>
-
+                        <div class="card-img-container">
                         </div>
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <h5 class="h5 change-color text-center m-0">
-                                Añadir review 💫
-                            </h5>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="h5 change-color">{{title}}</h5>
+                            <p class="card-text fw-bold">{{user}}</p>
+                            <p class="card-text">{{description}}</p>
+                            <div class="icon-group d-flex flex-column text-start align-items-start">
+
+                                {{#userOnly}}
+                                <form style="padding-top: 0px;" action="/Reviews/{{id}}/delete" method="post">
+                                    <button type="submit" class="trash-icon bi bi-trash3" ></button>
+                                </form>
+                                {{/userOnly}}
+
+                            </div>
+                            <div class="buttons-container">
+                                {{#userOnly}}
+                                <a href="/Reviews/editReview/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Editar review</a>
+                                {{/userOnly}}
+                                <a href="/Reviews/viewReviews/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Más detalles 💫</a>
+                            </div>
                         </div>
                     </div>
-              </div>
-            <form style="padding-top: 0px;" action="/Reviews/delete/{id}" method="post">
-                <button type="submit" class="trash-icon bi bi-trash3" ></button>
-            </form>
-                {{/userOnly}}
-            {{#adminOnly}}
-                <form style="padding-top: 0px;" action="/Reviews/delete/{id}" method="post">
-                    <button type="submit" class="trash-icon bi bi-trash3" ></button>
-                </form>
-            {{/adminOnly}}
-            {{/loginOptions}}
+                </div>
+                {{/reviews}}
 
+                {{#example}}
+                <div class="col">
+                    <div class="card shadow-sm  h-100">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <div class="profile-header" style="align-items: center;">
+                                <div class="profile-photo mb-3" style="width: 60px; height: 60px;"> </div>
+                                <p>usuario123</p>
+                            </div>
+
+                            <p class="card-text fw-bold">Nombre</p>
+                            <p class="card-text">Nutre tus plantas de manera rápida y efectiva.</p>
+                            <div class="actions d-flex gap-2">
+                                <i class="bi bi-trash3 trash-icon"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm  h-100">
+                        <div class="card-body d-flex flex-column justify-content-center">
+                            <div class="profile-header" style="align-items: center;">
+                                <div class="profile-photo mb-3" style="width: 60px; height: 60px;"></div>
+                                <p>usuario123</p>
+                            </div>
+                            <p class="card-text fw-bold">Nombre</p>
+                            <p class="card-text">Nutre tus plantas de manera rápida y efectiva</p>
+                            <div class="actions d-flex gap-2">
+                                <i class="bi bi-trash3 trash-icon"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {{/example}}
+
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div style="text-align: center; margin-bottom: 5px !important; margin-top: 5px !important;">
-          <nobr>
-              {{#hasPrev}}<a href="/Reviews/forum?page={{prev}}" class="btn btn-success rounded-pill px-4 py-2 main-button"><- Previous</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
-              {{#hasNext}}<a href="/Reviews/forum?page={{next}}" class="btn btn-success rounded-pill px-4 py-2 main-button">-> Next</a>{{/hasNext}}
-          </nobr>
-      </div>
 
-  </main>
-<script>
-    document.querySelectorAll('.trash-icon').forEach(star => {
-        star.addEventListener('click', () => { //toggle changes the class of an element and works like a switch
-        star.classList.toggle('active');  //This is how composite classes are set (whatever.subclass)
-      });
-  });
-</script>
+
+</main>
 
 {{>footer}}
+
 </body>
 </html>

@@ -3,6 +3,7 @@ import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.Reviews;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
+import es.codeurjc.board.repositories.ReviewsRepository;
 import es.codeurjc.board.service.ReviewsService;
 import es.codeurjc.board.service.UserSession;
 import jakarta.annotation.PostConstruct;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.util.List;
 
 
 @Controller
@@ -35,33 +37,46 @@ public class ReviewsController {
 
     @Autowired
     private ButtonsHeader btnsHeader;
+    @Autowired
+    private ReviewsRepository reviewsRepository;
 
     @GetMapping("/Reviews/forum")
-    public String forum(Model model, @PageableDefault (size = 6) Pageable page, HttpSession sesion, @RequestParam(required =false) Reviews.ReviewType type) {
-        btnsHeader.hideBtnHeader(model,"review");
+    public String forum(Model model,
+                        @RequestParam(required=false) Reviews.ReviewType type) {
 
-        Page<Reviews> reviewsPage = reviewsService.findAll(page);
+        List<Reviews> reviews;
 
-        if (type != null){
-            reviewsPage = reviewsService.findByType(type, page);
-        }else{
-            reviewsPage = reviewsService.findAll(page);
+        if (type != null) {
+            reviews = reviewsRepository.findByType(type);
+        } else {
+            reviews = reviewsRepository.findAll();
         }
 
-        model.addAttribute("reviews", reviewsPage.getContent());
-        model.addAttribute("hasPrev", reviewsPage.hasPrevious());
-        model.addAttribute("prev", reviewsPage.getNumber() - 1);
-        model.addAttribute("hasNext", reviewsPage.hasNext());
-        model.addAttribute("next", reviewsPage.getNumber() + 1);
-        model.addAttribute("reviews", reviewsPage.getContent());
-        model.addAttribute("selectedType", type);
+        model.addAttribute("reviews", reviews);
+
+        model.addAttribute("type", type);
+        model.addAttribute("isPlant", type == Reviews.ReviewType.PLANT);
+        model.addAttribute("isProduct", type == Reviews.ReviewType.PRODUCT);
+
+        if (reviews.isEmpty()) {
+            model.addAttribute("example", true);
+        }
 
         return "Reviews/forum";
     }
 
     @GetMapping("/Reviews/newreview")
-    public String newReview() {
+    public String newReviewForm(Model model) {
+        model.addAttribute("review", new Reviews());
         return "Reviews/newreview";
+    }
+
+    @PostMapping("/Reviews/newreview")
+    public String saveReview(Reviews review) {
+
+        reviewsRepository.save(review);
+
+        return "redirect:/Reviews/forum";
     }
 
     @GetMapping("/editReview/{id}")
@@ -74,12 +89,12 @@ public class ReviewsController {
     }
     @PostMapping("/Reviews/editReview/{id}")
     public String editReview(@PathVariable Long id,@RequestParam String title, @RequestParam String description, @RequestParam Reviews.ReviewType type)throws Exception{
-        reviewsService.editReview(title,description,type,id);
-        return "Reviews/editReview";
+        reviewsService.editReview(title,description,id);
+        return "redirect:/Reviews/forum";
     }
 
-    @PostMapping("Reviews/delete/{id}")
-    public String deleteReview(@PathVariable long id) throws IOException {
+    @PostMapping("/Reviews/{id}/delete")
+    public String deleteReview(@PathVariable long id) {
         reviewsService.deleteById(id);
         return "redirect:/Reviews/forum";
     }

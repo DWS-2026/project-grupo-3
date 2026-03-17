@@ -39,12 +39,12 @@ public class Reviews {
         this.id = id;
     }
 
-    public String getUsername() {
+    public String getUser() {
         return user;
     }
 
-    public void setUsername(String username) {
-        this.user = username;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getTitle() {

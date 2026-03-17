@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ReviewsService {
@@ -39,7 +41,7 @@ public class ReviewsService {
     }
 
 
-    public void editReview(String title, String description, Reviews.ReviewType type, Long id) throws Exception{
+    public void editReview(String title, String description, Long id) throws Exception{
         Reviews review = reviewsRepository.findById(id).orElseThrow();
         if (title != null && !title.isBlank()){
             review.setTitle(title);
@@ -50,7 +52,7 @@ public class ReviewsService {
         reviewsRepository.save(review);
     }
 
-    public Page<Reviews> findByType(Reviews.ReviewType type, Pageable page) {
-        return reviewsRepository.findByType(type, page);
+    public List<Reviews> findByType(Reviews.ReviewType type) {
+        return reviewsRepository.findByType(type);
     }
 }
