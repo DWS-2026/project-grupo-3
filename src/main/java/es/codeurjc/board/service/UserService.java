@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -23,16 +24,19 @@ public class UserService {
     @Autowired
     private PlantRepository plantService;
 
+
+    public void deleteById(long id) { userRepository.findById(id); }
+
     public void saveUser (User user){
         userRepository.save(user);
     }
 
-    public boolean usernameExist(String username) {
-        return userRepository.existsByUsername(username);
+    public boolean userExist(String user) {
+        return userRepository.existsByUsername(user);
     }
 
-    public Username findByUsername(String username){
-        return userRepository.findByUsername(username).orElse(null);
+    public User findByUser(String user){
+        return userRepository.findByUsername(user).orElse(null);
     }
 
     public void deleteUser(Long id){
