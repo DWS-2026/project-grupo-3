@@ -19,14 +19,30 @@
     <link rel="stylesheet" href="/assets/css/generalForm.css">
 </head>
 <body>
-    <h1>404</h1>
-        <h2>Página no encontrada</h2>
+
+<main class="header-main d-flex justify-content-center align-items-center flex-column change-color">
+    <img
+            class="mb-4"
+            src="/assets/images/sadPlant.png"
+            alt=""
+            width="300"
+            height="300"
+    />
+    {{#errorType}}
+        <h2>Error: {{errorType}}</h2>
+    {{/errorType}}
         <hr width="50%">
-        <p>Lo sentimos, la página que estás buscando no existe o fue movida.</p>
-        <p>
-            <a href="/">Volver al inicio</a>
+        <p>Lo sentimos, hubo una excepción.</p>
+        <p class="license" style="font-size: 20px;">
+            <a href="/" target="_green">Volver al inicio</a>
         </p>
         <hr width="50%">
-        <small>Error 404 - Not Found</small>
+    {{#errorMessage}}
+        <small>Más detalles: {{errorMessage}}</small>
+    {{/errorMessage}}
+    {{#statusCode}}
+        <small> Status Code: {{statusCode}}</small>
+    {{/statusCode}}
+</main>
 </body>
 </html>
