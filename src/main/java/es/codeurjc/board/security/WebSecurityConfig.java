@@ -37,12 +37,11 @@ public class WebSecurityConfig {
 
         http.authorizeHttpRequests(authorize -> authorize
                         // PUBLIC PAGES
-                        .requestMatchers("/", "/assets/css/**", "/assets/images/public/**").permitAll()
+                        .requestMatchers("/", "/assets/css/**", "/assets/images/**").permitAll()
                         .requestMatchers("/User/register").permitAll()
                         .requestMatchers("/images/*").permitAll()
                         .requestMatchers("/Plants/catalogPlants").permitAll()
                         .requestMatchers("/Plants/favoritePlant/*").permitAll()
-                        .requestMatchers("/Plants/ratingPlant/*").permitAll()
                         .requestMatchers("/Plants/viewPlant/*").permitAll()
                         .requestMatchers("/Products/catalogProducts").permitAll()
                         .requestMatchers("/Reviews/forum").permitAll()

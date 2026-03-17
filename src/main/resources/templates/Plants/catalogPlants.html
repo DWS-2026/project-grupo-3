@@ -79,50 +79,24 @@
                                     <p class="card-text fw-bold">{{cares}}</p>
                                     <p class="card-text">{{description}}</p>
                                     <div class="icon-group d-flex flex-column text-start align-items-start">
-                                        <form action="/Plants/ratingPlant/{{id}}" style="padding-top: 0px; padding-bottom: 0px;" method="post">
-
-                                            <div class="rating" style="display:flex; align-items:center; flex-direction:row-reverse;">
-                                                <input value="5" name="rate" id="star5-{{id}}" type="radio" onchange="this.form.submit()"
-                                                       {{#rate5}}checked{{/rate5}}>
-                                                <label for="star5-{{id}}"></label>
-
-                                                <input value="4" name="rate" id="star4-{{id}}" type="radio" onchange="this.form.submit()"
-                                                       {{#rate4}}checked{{/rate4}}>
-                                                <label for="star4-{{id}}"></label>
-
-                                                <input value="3" name="rate" id="star3-{{id}}" type="radio" onchange="this.form.submit()"
-                                                       {{#rate3}}checked{{/rate3}}>
-                                                <label for="star3-{{id}}"></label>
-
-                                                <input value="2" name="rate" id="star2-{{id}}"type="radio"onchange="this.form.submit()"
-                                                       {{#rate2}}checked{{/rate2}}>
-                                                <label for="star2-{{id}}"></label>
-
-                                                <input value="1" name="rate" id="star1-{{id}}" type="radio" onchange="this.form.submit()" {{#rate1}}checked{{/rate1}}>
-                                                <label for="star1-{{id}}"></label>
-
-                                                <span>Rating: </span>
-                                            </div>
-                                        </form>
-
-                                        <form action="/Plants/favoritePlant/{{id}}" style="padding-top: 0px;" method="post">
-                                            <div class="rating" style="display:flex; align-items:center; flex-direction:row-reverse;">
-                                                <input value="1" name="rate" id="favorite-{{id}}" type="checkbox" onchange="this.form.submit()" {{#favorite}}checked{{/favorite}}>
-                                                <label title="text" for="favorite-{{id}}"></label>
-                                                <span>Favorito: </span>
-                                            </div>
-                                        </form>
-                                        {{#userOnly}}
-                                            <form style="padding-top: 0px;" action="/Plants/{{id}}/delete" method="post">
-                                                <button type="submit" class="trash-icon bi bi-trash3" ></button>
+                                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 10px;">
+                                            <!-- Formulario de favorito -->
+                                            <form action="/Plants/favoritePlant/{{id}}" style="padding-top: 0px;" method="post">
+                                                    <span class="rating" style="display:flex; align-items:center; flex-direction:row-reverse;">
+                                                        <input value="1" name="rate" id="favorite-{{id}}" type="checkbox" onchange="this.form.submit()" {{#favorite}}checked{{/favorite}}>
+                                                        <label title="text" for="favorite-{{id}}"></label>
+                                                        <span>Favorito: </span>
+                                                    </span>
                                             </form>
-                                        {{/userOnly}}
 
+                                            <!-- Formulario de eliminar -->
+                                            <form style="padding-top: 0px;" action="/Plants/{{id}}/delete" method="post">
+                                                <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                            </form>
+                                        </div>
                                     </div>
                                         <div class="buttons-container">
-                                            {{#userOnly}}
                                             <a href="/Plants/editPlant/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Editar plantita</a>
-                                            {{/userOnly}}
                                             <a href="/Plants/viewPlant/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Más detalles 💫</a>
                                         </div>
                                 </div>

@@ -103,5 +103,8 @@ public class PlantService {
             plantRepository.save(plant);
     }
 
+    public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
+            return user.equals(plant.getUser());
+    }
 
 }

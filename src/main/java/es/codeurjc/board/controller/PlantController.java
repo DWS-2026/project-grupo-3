@@ -37,13 +37,17 @@ public class PlantController {
     @Autowired
     private ImageService imageService;
 
+
     @GetMapping("/viewPlant/{id}")
-    public String showPost(Model model, @PathVariable long id) {
-
+    public String showPost(Model model, @PathVariable long id, HttpServletRequest session) {
         Plant plant = plantService.findById(id);
-        model.addAttribute("plant", plant);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            model.addAttribute("plant", plant);
+            return "Plants/viewPlant";
+        }else{
+            return "/accessDenied";
+        }
 
-        return "Plants/viewPlant";
     }
 
     @GetMapping("/catalogPlants")
@@ -59,6 +63,7 @@ public class PlantController {
             plantsPage = plantService.findByUsername(userService.getUser(session),sortedPage);
 
             model.addAttribute("plants", plantsPage.getContent());
+
             model.addAttribute("hasPrev", plantsPage.hasPrevious());
             model.addAttribute("prev", plantsPage.getNumber() - 1);
             model.addAttribute("hasNext", plantsPage.hasNext());
@@ -79,24 +84,28 @@ public class PlantController {
     }
 
     @GetMapping("/editPlant/{id}")
-    public String editPlant(Model model, @PathVariable Long id) {
-
+    public String editPlant(Model model, @PathVariable Long id, HttpServletRequest session) {
         Plant plant = plantService.findById(id);
-        model.addAttribute("plant", plant);
-        model.addAttribute("plantID", plant.getId());
-
-        return "Plants/editPlant";
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            model.addAttribute("plant", plant);
+            model.addAttribute("plantID", plant.getId());
+            return "Plants/editPlant";
+        }else{
+            return "/accessDenied";
+        }
     }
 
     @PostMapping("/editPlant/{id}")
-    public String editPlant(@PathVariable Long id,
-                            @RequestParam String name,
-                            @RequestParam String cares,
-                            @RequestParam String description) throws Exception {
+    public String editPlant(@PathVariable Long id, @RequestParam String name, @RequestParam String cares,
+                            @RequestParam String description, HttpServletRequest session) throws Exception {
 
-        plantService.editPlant(name, cares , description, id);
-
-        return "redirect:/Plants/catalogPlants";
+        Plant plant = plantService.findById(id);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            plantService.editPlant(name, cares , description, id);
+            return "redirect:/Plants/catalogPlants";
+        }else{
+            return "/accessDenied";
+        }
     }
 
     @PostMapping("/new")
@@ -113,45 +122,54 @@ public class PlantController {
     }
 
     @PostMapping("/{id}/addImageToPlant")
-    public String addImageToPlant(@PathVariable long id,
-                                  MultipartFile newImage) throws IOException {
+    public String addImageToPlant(@PathVariable long id, MultipartFile newImage, HttpServletRequest session) throws IOException {
+        Plant plant = plantService.findById(id);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            if (!newImage.isEmpty()) {
+                Image imageOne = imageService.createImage(newImage);
+                plantService.addImageToPlant(id, imageOne);
+            }
 
-        if (!newImage.isEmpty()) {
-            Image imageOne = imageService.createImage(newImage);
-            plantService.addImageToPlant(id, imageOne);
+            return "redirect:/Plants/editPlant/" + id;
+        }else{
+            return "/accessDenied";
         }
 
-        return "redirect:/Plants/editPlant/" + id;
     }
 
     @PostMapping("{plantId}/delete/image/{imageId}")
-    public String deleteImage(@PathVariable long plantId,
-                              @PathVariable long imageId) {
+    public String deleteImage(@PathVariable long plantId, @PathVariable long imageId, HttpServletRequest session){
 
-        plantService.deleteImageFromPlant(plantId, imageId);
-
-        return "redirect:/Plants/catalogPlants";
-    }
-
-    @PostMapping("/ratingPlant/{id}")
-    public String ratingPlant(@PathVariable long id,
-                              @RequestParam int rate) {
-
-        plantService.ratePlant(rate,id);
-        return "redirect:/Plants/catalogPlants";
+        Plant plant = plantService.findById(plantId);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            plantService.deleteImageFromPlant(plantId, imageId);
+            return "redirect:/Plants/catalogPlants";
+        }else{
+            return "/accessDenied";
+        }
     }
 
     @PostMapping("/favoritePlant/{id}")
-    public String favoritePlant(@PathVariable long id) {
+    public String favoritePlant(@PathVariable long id, HttpServletRequest session) {
+        Plant plant = plantService.findById(id);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            plantService.favoritePlant(id);
+            return "redirect:/Plants/catalogPlants";
+        }else{
+            return "/accessDenied";
+        }
 
-        plantService.favoritePlant(id);
-        return "redirect:/Plants/catalogPlants";
     }
 
     @PostMapping("/{id}/delete")
-    public String deletePlant(@PathVariable long id) throws IOException {
+    public String deletePlant(@PathVariable long id, HttpServletRequest session) throws IOException {
+        Plant plant = plantService.findById(id);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            plantService.deleteById(id);
+            return "redirect:/Plants/catalogPlants";
+        }else{
+            return "/accessDenied";
+        }
 
-        plantService.deleteById(id);
-        return "redirect:/Plants/catalogPlants";
     }
 }
