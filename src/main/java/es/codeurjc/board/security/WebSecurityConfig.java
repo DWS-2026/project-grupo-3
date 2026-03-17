@@ -55,6 +55,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/Products/new").hasAnyRole("ADMIN")
                         .requestMatchers("/Products/editProduct/*").hasAnyRole("ADMIN")
                         .requestMatchers("/products/{id}/delete").hasAnyRole("ADMIN")
+                        .requestMatchers("/Reviews/newreview").hasAnyRole("USER")
+                        .requestMatchers("/Reviews/editReview/*").hasAnyRole("USER")
+                        .requestMatchers("/Reviews/*/delete").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/Products/*").hasAnyRole("USER")
                 )
                 .formLogin(formLogin -> formLogin
