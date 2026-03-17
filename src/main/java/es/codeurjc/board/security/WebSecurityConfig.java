@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 
         http.authorizeHttpRequests(authorize -> authorize
                         // PUBLIC PAGES
-                        .requestMatchers("/", "/assets/css/**", "/assets/images/**").permitAll()
+                        .requestMatchers("/", "/assets/css/**", "/assets/images/**",   "/error", "/403", "/login", "/check").permitAll()
                         .requestMatchers("/User/register").permitAll()
                         .requestMatchers("/images/*").permitAll()
                         .requestMatchers("/Plants/catalogPlants").permitAll()
@@ -45,23 +45,17 @@ public class WebSecurityConfig {
                         .requestMatchers("/Plants/viewPlant/*").permitAll()
                         .requestMatchers("/Products/catalogProducts").permitAll()
                         .requestMatchers("/Reviews/forum").permitAll()
-                        .requestMatchers("/").permitAll()
                         .requestMatchers("/quizzPlants").permitAll()
-                        .requestMatchers("/error", "/403", "/404").permitAll()
 
                         // PRIVATE PAGES
-                        .requestMatchers("/Admin/*").hasAnyRole("ADMIN")
-                        .requestMatchers("/User/*").hasAnyRole("USER")
-                        .requestMatchers("/Plants/*").hasAnyRole("USER")
-                        .requestMatchers("/Plants/*/delete").hasAnyRole("USER")
-                        .requestMatchers("/Plants/*/addImageToPlant").hasAnyRole("USER")
-                        .requestMatchers("/Plants/*/delete/image/*").hasAnyRole("USER")
-                        .requestMatchers("/Plants/editPlant/*").hasAnyRole("USER")
-                        .requestMatchers("/Products/*").hasAnyRole("USER")
+                        .requestMatchers("/Admin/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/User/**").hasAnyRole("USER")
+                        .requestMatchers("/Plants/**").hasAnyRole("USER")
                         .requestMatchers("/Products/newProduct").hasAnyRole("ADMIN")
                         .requestMatchers("/Products/new").hasAnyRole("ADMIN")
                         .requestMatchers("/Products/editProduct/*").hasAnyRole("ADMIN")
                         .requestMatchers("/products/{id}/delete").hasAnyRole("ADMIN")
+                        .requestMatchers("/Products/*").hasAnyRole("USER")
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

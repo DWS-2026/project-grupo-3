@@ -25,7 +25,6 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 - Usuario - Pedido: Un usuario puede realizar múltiples pedidos y cada pedido pertenece a un único usuario (1:N)
 - Pedido - Producto: Un pedido puede contener varios productos y un producto puede aparecer en muchos pedidos distintos (N:M)
 - Usuario - Planta: Un usuario puede registrar múltiples plantas y una planta pertenece a un usuario (N:1)
-- Planta - Producto: Una planta puede necesitar o usar varios productos y un mismo producto puede ser útil para distintas plantas (N:M)
 - Usuario - Comentarios: un usuario puede escribir múltiples comentarios y un comentario pertenece a un único usuario(1:N)
 
 ### **Permisos de los Usuarios**
@@ -43,7 +42,7 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 * **Usuario Registrado**: 
   - Permisos:
       - Gestionar su perfil
-      - Ver y gestionar sus propias plantas (cada usuario solo puede ver sus plantas)
+      - Ver y gestionar sus propias plantas (cada usuario solo puede ver sus propias plantas)
       - Realizar pedidos de productos
       - Ver el historial de sus pedidos
   - Es dueño de:
