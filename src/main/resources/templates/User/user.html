@@ -85,6 +85,34 @@
             </a>
         </div>
 
+        <!-- DELETE USER -->
+        {{#users}}
+        <div>
+            <span>{{username}}</span>
+
+            <form action="/user/deleteUser" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="{{id}}">
+                <button type="submit">Eliminar</button>
+            </form>
+        </div>
+        {{/users}}
+
+        {{#users}}
+        <div class="col-md-6 col-lg-4">
+            <a href="/User/deleteUser"  id="my-btn-orders" class="card card-publicacion w-100 text-start text-decoration-none login-options">
+                <div class="card-body d-flex">
+                    <div class="icoon me-3">
+                        🛒
+                    </div>
+                    <div>
+                        <h5 class="text-dark">Mis pedidos</h5>
+                        <p class="text-muted">Gestiona aquí tus pedidos.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{/users}}
+
 
         <!-- MY ORDERS -->
         <div class="col-md-6 col-lg-4">
