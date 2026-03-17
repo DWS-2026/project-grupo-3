@@ -162,22 +162,30 @@
     text-align: center;
 }
 
+/* Para posicionar elementos dentro */
+.profile {
+    position: relative;
+}
+
+/* Form contenedor */
+.delete-form {
+    position: absolute;
+    top: -270px;
+    right: 0px;
+}
+
+/* Botón papelera */
 .delete-btn {
-    background-color: #C8E6C9;
+    background-color: #2E7D32;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
-    display: inline-flex;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     transition: all 0.2s ease;
-    margin-left: 10px;
-}
-
-.delete-btn:hover {
-    background-color: #2E7D32;
-    transform: scale(1.1);
 }

@@ -43,15 +43,19 @@
                 <a href="/User/editProfile" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Editar perfil</a>
                 <a href="/User/configuration" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Configuración</a>
 
-                <!-- DELETE BUTTON -->
-                <form action="/User/delete/{{id}}" method="post" style="display:inline;">
-                    <button type="submit" class="btn delete-btn">
-                        🗑
-                    </button>
-                </form>
+
             </div>
         </div>
     </div>
+
+    <div class="profile">
+
+        <!-- DELETE BUTTON -->
+
+        <form action="/User/delete/user" method="post" class="delete-form">
+            <button type="submit" class="delete-btn">🗑</button>
+
+        </form>
 
     <div class="row g-4">
 
