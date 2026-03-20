@@ -2,7 +2,7 @@ package es.codeurjc.board.controller;
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
@@ -102,10 +102,7 @@ public class PlantController {
         return "Plants/catalogPlants";
     }
 
-    @GetMapping("/newPlant")
-    public String newPlant() {
-        return "Plants/newPlant";
-    }
+
 
     @GetMapping("/editPlant/{id}")
     public String editPlant(Model model, @PathVariable Long id, HttpServletRequest session) {
@@ -131,20 +128,27 @@ public class PlantController {
             return "/accessDenied";
         }
     }
+    @GetMapping("/new")
+    public String newPlant() {
+        return "Plants/newPlant";
+    }
 
     @PostMapping("/new")
-    public String newPost(Plant plant, MultipartFile imageFile, HttpServletRequest session) throws IOException {
+    public String newPost(Plant plant, MultipartFile imageFile, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
 
+        if(plantService.existsByNamePlant(plant.getName())){
+            redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
+            redirectAttributes.addFlashAttribute("cares", plant.getCares());
+            redirectAttributes.addFlashAttribute("description", plant.getDescription());
+            return "redirect:/Plants/new";
+        }
         plantService.save(plant,userService.getUser(session));
-
-        //model, redirect attributes -> herramienta específica de spring
 
         if (!imageFile.isEmpty()) {
             Image imageOne = imageService.createImage(imageFile);
             plantService.addImageToPlant(plant.getId(), imageOne);
         }
-
-        return "redirect:/Plants/catalogPlants"; //
+        return "redirect:/Plants/catalogPlants";
     }
 
     @PostMapping("/{id}/addImageToPlant")

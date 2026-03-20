@@ -99,7 +99,9 @@ public class PlantService {
             plantRepository.save(plant);
     }
 
-
+    public boolean existsByNamePlant(String name){
+            return plantRepository.existsByNameIgnoreCase(name);
+    }
 
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
             return user.equals(plant.getUser());

@@ -33,6 +33,11 @@
     <h3 class="h3 mb-4 fw-normal change-color">Registra tu nueva planta</h3>
 
     <!-- plant name -->
+      {{#plantNameExists}}
+          <div class="alert alert-danger">
+              Nombre de Planta inválido, ya está en uso.
+          </div>
+      {{/plantNameExists}}
     <div class="form-floating mb-3">
       <input
               type="text"
@@ -51,7 +56,8 @@
               name="cares"
               placeholder="Tipo"
               required
-      />
+              {{#cares}}value="{{cares}}"{{/cares}}
+        />
       <label>Cuidados específicos, tipo de abono, cada cuánto hay que regarla...</label>
     </div>
 
@@ -68,11 +74,16 @@
                     style="height: 100px"
                     maxlength="136"
                     required
-            ></textarea>
+            >{{#description}}{{description}}{{/description}}</textarea>
           <label>Descripción</label>
       </div>
 
     <!-- Upload image -->
+      {{#plantNameExists}}
+          <div class="alert alert-warning">
+              Tienes que volver a seleccionar la imagen.
+          </div>
+      {{/plantNameExists}}
     <div class="mb-4 text-start">
       <label class="form-label change-color fw-medium">Imagen de la planta</label>
       <input
