@@ -76,4 +76,9 @@ public class ProductService {
         return productRepository.findByExampleEquals(example, page);
     }
 
+    public Product getProductByName(String name) {
+        return productRepository.findByName(name)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + name));
+    }
+
 }

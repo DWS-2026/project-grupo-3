@@ -1,7 +1,10 @@
 package es.codeurjc.board.controller;
+import es.codeurjc.board.model.Order;
+import es.codeurjc.board.model.OrderStatus;
 import es.codeurjc.board.model.Product;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.modelAttributes.SessionAttributes;
+import es.codeurjc.board.repositories.OrderRepository;
 import es.codeurjc.board.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,9 @@ public class AdminController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
 
     @GetMapping("/adminPanel")
     public String adminPanel(Model model) {
@@ -37,7 +43,15 @@ public class AdminController {
     }
 
     @GetMapping("/managementOrders")
-    public String managementOrders() {
+    public String managementOrders(Model model) {
+        List<Order> orders = orderRepository.findAll();
+        for (Order order : orders) {
+            order.setProcessing(order.getStatus() == OrderStatus.PENDING);
+            order.setShipped(order.getStatus()   == OrderStatus.SHIPPED);
+            order.setDelivered(order.getStatus() == OrderStatus.DELIVERED);
+            order.setCancelled(order.getStatus() == OrderStatus.CANCELLED);
+        }
+        model.addAttribute("orders", orders);
         return "Admin/managementOrders";
     }
 

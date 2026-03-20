@@ -37,33 +37,34 @@
             </div>
         </div>
         {{#userOnly}}
-            <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Plants/newPlant">Añadir plantita</a>
+            <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Plants/new">Añadir plantita</a>
         {{/userOnly}}
-        <div class="row py-lg-5">
-        <form method="get" action="/Reviews/forum">
-            <select name="type"
-                    onchange="this.form.submit()"
-                    class="form-select form-select-sm rounded-pill px-4 py-3"
-                    style="height: 50px; width: 125px;">
+        <div class="py-lg-5">
+            {{#loginOptions}}
+                <form method="get" action="/Plants/catalogPlants" class="d-flex gap-3">
+                    {{#userOnly}}
+                        <select name="type"
+                                onchange="this.form.submit()"
+                                class="form-select form-select-sm rounded-pill px-4 py-3"
+                                style="height: 50px; width: 200px;">
 
-                <option value="">Todo</option>
-                <option value="PLANT">Planta</option>
-                <option value="PRODUCT">Producto</option>
+                            <option value="" {{#all}}selected{{/all}}>Todo</option>
+                            <option value="misPlantas" {{^all}}selected{{/all}}>Mis Plantas - editar</option>
 
-            </select>
-        </form>
-        <form method="get" action="/Reviews/forum">
-            <select name="type"
-                    onchange="this.form.submit()"
-                    class="form-select form-select-sm rounded-pill px-4 py-3"
-                    style="height: 50px; width: 125px;">
+                        </select>
+                    {{/userOnly}}
+                        <select name="order"
+                                onchange="this.form.submit()"
+                                class="form-select form-select-sm rounded-pill px-4 py-3"
+                                style="height: 50px; width: 175px;">
 
-                <option value="">Todo</option>
-                <option value="PLANT">Planta</option>
-                <option value="PRODUCT">Producto</option>
+                            <option value="" value="" {{^isCreatedAtSort}}selected{{/isCreatedAtSort}}>Rating</option>
+                            <option value="moreRecent" {{#isCreatedAtSort}}selected{{/isCreatedAtSort}}>Más Recientes</option>
 
-            </select>
-        </form>
+                        </select>
+
+                </form>
+            {{/loginOptions}}
         </div>
     </section>
 
@@ -104,32 +105,97 @@
                                     <h5 class="h5 change-color">{{name}}</h5>
                                     <p class="card-text fw-bold">{{cares}}</p>
                                     <p class="card-text">{{description}}</p>
-                                    <div class="icon-group d-flex flex-column text-start align-items-start">
-                                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 10px;">
-                                            <!-- Formulario de favorito -->
-                                            <form action="/Plants/favoritePlant/{{id}}" style="padding-top: 0px;" method="post">
-                                                    <span class="rating" style="display:flex; align-items:center; flex-direction:row-reverse;">
-                                                        <input value="1" name="rate" id="favorite-{{id}}" type="checkbox" onchange="this.form.submit()" {{#favorite}}checked{{/favorite}}>
-                                                        <label title="text" for="favorite-{{id}}"></label>
-                                                        <span>Favorito: </span>
-                                                    </span>
-                                            </form>
+                                    <span class="icon-group d-flex justify-content-between align-items-center">
 
-                                            <!-- Formulario de eliminar -->
-                                            <form style="padding-top: 0px;" action="/Plants/{{id}}/delete" method="post">
-                                                <button type="submit" class="trash-icon bi bi-trash3"></button>
-                                            </form>
+
+                                                <span style="display:flex; flex-direction:row; gap:2px;">
+                                                    <span class="star {{#rate1}}filled{{/rate1}}">&#9733;</span>
+                                                    <span class="star {{#rate2}}filled{{/rate2}}">&#9733;</span>
+                                                    <span class="star {{#rate3}}filled{{/rate3}}">&#9733;</span>
+                                                    <span class="star {{#rate4}}filled{{/rate4}}">&#9733;</span>
+                                                    <span class="star {{#rate5}}filled{{/rate5}}">&#9733;</span>
+                                                </span>
+
+
+                                                <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
+                                                    <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                                </form>
+
+                                        </span>
+                                    <div class="buttons-container">
+                                            <button type="button" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary" onclick="openRatingModal({{id}})">
+                                                Valorar
+                                            </button>
+
+                                            <a href="/Plants/editPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Editar plantita</a>
+                                            <a href="/Plants/viewPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más detalles 💫</a>
                                         </div>
-                                    </div>
-                                        <div class="buttons-container">
-                                            <a href="/Plants/editPlant/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Editar plantita</a>
-                                            <a href="/Plants/viewPlant/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Más detalles 💫</a>
-                                        </div>
+
                                 </div>
                             </div>
                         </div>
                     {{/plants}}
+                    {{#onlySeePlants}}
+                        <div class="col">
+                            <div class="card shadow-sm h-100 planta">
+                                <div class="card-img-container">
+                                    <div id="plantCarousel{{id}}" class="carousel slide" data-bs-ride="false">
 
+                                        <div class="carousel-inner">
+                                            {{#images}}
+                                            <div class="carousel-item {{#-first}}active{{/-first}}">
+                                                <img src="/images/{{id}}" class="d-block w-100">
+                                            </div>
+                                            {{/images}}
+
+                                        </div>
+
+                                        <!-- Arrows -->
+                                        <button class="carousel-control-prev" type="button"
+                                                data-bs-target="#plantCarousel{{id}}" data-bs-slide="prev">
+                                            <span class="bi bi-arrow-left custom-arrow"></span>
+                                        </button>
+
+                                        <button class="carousel-control-next" type="button"
+                                                data-bs-target="#plantCarousel{{id}}" data-bs-slide="next">
+                                            <span class="bi bi-arrow-right custom-arrow"></span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="h5 change-color">{{name}}</h5>
+                                    <p class="card-text fw-bold">{{cares}}</p>
+                                    <p class="card-text">{{description}}</p>
+                                    <span class="icon-group d-flex justify-content-between align-items-center">
+
+
+                                                <span style="display:flex; flex-direction:row; gap:2px;">
+                                                    <span class="star {{#rate1}}filled{{/rate1}}">&#9733;</span>
+                                                    <span class="star {{#rate2}}filled{{/rate2}}">&#9733;</span>
+                                                    <span class="star {{#rate3}}filled{{/rate3}}">&#9733;</span>
+                                                    <span class="star {{#rate4}}filled{{/rate4}}">&#9733;</span>
+                                                    <span class="star {{#rate5}}filled{{/rate5}}">&#9733;</span>
+                                                </span>
+                                            {{#adminOnly}}
+                                            <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
+                                                    <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                                </form>
+                                            {{/adminOnly}}
+                                         </span>
+                                    <div class="buttons-container">
+                                        <button type="button" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary" onclick="openRatingModal({{id}})">
+                                            Valorar
+                                        </button>
+                                        <a href="/Plants/viewPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más detalles 💫</a>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    {{/onlySeePlants}}
                     {{#example}}
                         <div class="col">
                             <div class="card shadow-sm h-100 planta">
@@ -189,7 +255,7 @@
                         </div>
 
                         <div class="col">
-                    <div class="card shadow-sm h-100 planta">
+                            <div class="card shadow-sm h-100 planta">
                         <div class="card-img-container">
                             <div id="plantCarousel3" class="carousel slide" data-bs-ride="false">
                                 <div class="carousel-inner">
@@ -211,7 +277,7 @@
                             <h5 class="h5 change-color">Únete a la comunidad para ver más plantitas y poder valorarlas 🌟</h5>
                         </div>
                     </div>
-                </div>
+                        </div>
 
                     {{/example}}
 
@@ -236,8 +302,70 @@
         controls.forEach(control => control.style.display = 'none');
       }
     });
+
+
+    function openRatingModal(id) {
+        let currentPlantId = id;
+        let selectedRating = 0;
+        document.getElementById('ratingModal').style.display = 'flex';
+        document.getElementById('modalPlantId').value = id;
+        document.getElementById('modalRating').value = 0;
+
+        // Reset stars
+        document.querySelectorAll('#modalStars .rating-star').forEach(star => star.classList.remove('selected'));
+
+
+        document.querySelectorAll('#modalStars .rating-star').forEach(star => {
+            star.onclick = function() {
+                selectedRating = parseInt(this.getAttribute('data-value'));
+                document.getElementById('modalRating').value = selectedRating;
+
+                document.querySelectorAll('#modalStars .rating-star').forEach(s => s.classList.remove('selected'));
+                document.querySelectorAll('#modalStars .rating-star').forEach(s => {
+                    if(parseInt(s.getAttribute('data-value')) <= selectedRating) {
+                        s.classList.add('selected');
+                    }
+                });
+            }
+        });
+    }
+
+    function closeRatingModal() {
+        document.getElementById('ratingModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('ratingModal');
+        if(event.target === modal) {
+            closeRatingModal();
+        }
+    }
 </script>
+{{#loginOptions}}
+<div id="ratingModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeRatingModal()">&times;</span>
+        <h5>Valora esta planta</h5>
+
+        <div id="modalStars" class="rating" style="display:flex; flex-direction:row-reverse; justify-content:center; gap:5px; margin:20px 0;">
+            <span class="rating-star" data-value="5">&#9733;</span>
+            <span class="rating-star" data-value="4">&#9733;</span>
+            <span class="rating-star" data-value="3">&#9733;</span>
+            <span class="rating-star" data-value="2">&#9733;</span>
+            <span class="rating-star" data-value="1">&#9733;</span>
+        </div>
+
+        <form id="ratingForm" action="/Plants/ratingPlant" method="post" style="padding-top: 0px">
+            <input type="hidden" name="plantId" id="modalPlantId" value="">
+            <input type="hidden" name="rating" id="modalRating" value="">
+            <button type="submit" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Enviar</button>
+        </form>
+    </div>
+</div>
+{{/loginOptions}}
+
 {{>footer}}
+
 
 </body>
 </html>

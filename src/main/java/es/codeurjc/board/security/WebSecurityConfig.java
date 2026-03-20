@@ -48,6 +48,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/quizzPlants").permitAll()
 
                         // PRIVATE PAGES
+                        .requestMatchers("/Plants/ratingPlant").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/Plants/*/delete").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/Plants/viewPlant/*").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Admin/**").hasAnyRole("ADMIN")
                         .requestMatchers("/User/**").hasAnyRole("USER")
                         .requestMatchers("/Plants/**").hasAnyRole("USER")
@@ -59,6 +62,15 @@ public class WebSecurityConfig {
                         .requestMatchers("/Reviews/editReview/*").hasAnyRole("USER")
                         .requestMatchers("/Reviews/*/delete").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/Products/*").hasAnyRole("USER")
+                        .requestMatchers("/Orders/*/delete").hasAnyRole("ADMIN")
+                        .requestMatchers("/Orders/*/status").hasAnyRole("ADMIN")
+                        .requestMatchers("/Orders/shoppingCart").hasAnyRole("USER")
+                        .requestMatchers("/Orders/payment").hasAnyRole("USER")
+                        .requestMatchers("/Orders/checkout").hasAnyRole("USER")
+                        .requestMatchers("/Orders/{id}/cancel").hasAnyRole("USER")
+                        .requestMatchers("/Cart/add/*").hasAnyRole("USER")
+                        .requestMatchers("/Cart/remove/*").hasAnyRole("USER")
+                        .requestMatchers("/Cart/clear").hasAnyRole("USER")
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

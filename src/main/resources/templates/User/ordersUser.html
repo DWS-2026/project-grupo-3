@@ -22,58 +22,73 @@
 <body>
 {{>header}}
 <main class="header-main d-flex align-items-center flex-column">
-
   <h1>Mis pedidos</h1>
-  <p class="lead">Aquí puedes consultar el historial de tus compras</p>
+  <p class="lead">Consulta el estado de todos tus pedidos.</p>
 
-  <table class="table table-bordered text-center">
-    <thead class="table-success">
-    <tr>
-      <th>Nº Pedido</th>
-      <th>Fecha</th>
-      <th>Productos</th>
-      <th>Total</th>
-      <th>Estado</th>
-    </tr>
-    </thead>
+  {{^hasOrders}}
+  <div class="mt-5 text-center">
+    <p class="text-muted fs-5">Todavía no has realizado ningún pedido.</p>
+    <a href="/Products/catalogProducts" class="btn btn-success rounded-pill px-4 py-2 main-button mt-2">
+      Ver productos
+    </a>
+  </div>
+  {{/hasOrders}}
 
-    <tbody>
-    <tr>
-      <td>#1001</td>
-      <td>02/02/2026</td>
-      <td>
-        <ul class="list-unstyled mb-0">
-          <li>🌱 Fertilizante (x1)</li>
-          <li>🪴 Maceta (x2)</li>
-        </ul>
-      </td>
-      <td>€32.97</td>
-      <td>
-        <span class="badge bg-warning text-dark">Procesando</span>
-      </td>
-    </tr>
+  {{#hasOrders}}
+  <div class="w-100 px-3">
+    <table class="table table-bordered text-center align-middle">
+      <thead class="table-success">
+      <tr>
+        <th>Nº Pedido</th>
+        <th>Productos</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+        <th>Total (€)</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{#orders}}
+      <tr>
+        <!-- Número de pedido -->
+        <td>{{id}}</td>
 
-    <tr>
-      <td>#1000</td>
-      <td>28/01/2026</td>
-      <td>
-        <ul class="list-unstyled mb-0">
-          <li>🌿 Semillas (x3)</li>
-          <li>💧 Regadera (x1)</li>
-        </ul>
-      </td>
-      <td>€18.98</td>
-      <td>
-        <span class="badge bg-success">Entregado</span>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        <!-- Productos -->
+        <td class="text-start">
+          <ul class="mb-0 ps-3">
+            {{#items}}
+            <li>{{product.name}} (x{{quantity}})</li>
+            {{/items}}
+          </ul>
+        </td>
 
-  <a href="/User/user" class="btn btn-success mt-4 main-button">
-    Volver al perfil
-  </a>
+        <!-- Estado con badge de color -->
+        <td>
+          {{#processing}}
+          <span class="badge bg-warning text-dark fs-6">⏳ En proceso</span>
+          {{/processing}}
+          {{#shipped}}
+          <span class="badge bg-primary fs-6">🚚 Enviado</span>
+          {{/shipped}}
+          {{#delivered}}
+          <span class="badge bg-success fs-6">✅ Entregado</span>
+          {{/delivered}}
+          {{#cancelled}}
+          <span class="badge bg-danger fs-6">❌ Cancelado</span>
+          {{/cancelled}}
+        </td>
 
+        <!-- Fecha -->
+        <td>{{formattedDate}}</td>
+
+        <!-- Precio -->
+        <td>€{{formattedPrice}}</td>
+
+      </tr>
+      {{/orders}}
+      </tbody>
+    </table>
+  </div>
+  {{/hasOrders}}
 </main>
 {{>footer}}
 </body>

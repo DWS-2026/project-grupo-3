@@ -11,5 +11,6 @@ import java.util.Optional;
 
 public interface PlantRepository extends JpaRepository<Plant,Long> {
     Page<Plant> findPlantsByUserUsername(String username, Pageable pageable);
+    boolean existsByNameIgnoreCase(String name);
     Optional<Plant> findById(long id);
 }

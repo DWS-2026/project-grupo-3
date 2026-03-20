@@ -21,7 +21,7 @@ public class ButtonsHeader {
         }
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class) //mínimo: capturar la excepción, cambiar para cada tipo de error, error de servidor: 500
     public String handleError(Exception e, Model model, HttpServletRequest request) {
         if(!e.getClass().getSimpleName().isEmpty()){
             model.addAttribute("errorType", e.getClass().getSimpleName());
@@ -30,7 +30,7 @@ public class ButtonsHeader {
             model.addAttribute("errorMessage", e.getMessage());
         }
         Integer statusCode = (Integer) request.getAttribute(
-                RequestDispatcher.ERROR_STATUS_CODE  // ← 500, 404, 403...
+                RequestDispatcher.ERROR_STATUS_CODE
         );
 
         if(statusCode != null){

@@ -1,7 +1,11 @@
 package es.codeurjc.board.controller;
+import es.codeurjc.board.model.Order;
+import es.codeurjc.board.model.OrderStatus;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
+import es.codeurjc.board.service.OrderService;
 import es.codeurjc.board.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +28,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
+    private boolean passwordsDontMatch= false;
+    private boolean existsUser = false;
 
     @GetMapping("/User/user")
     public String user(Model model) {
@@ -32,7 +41,19 @@ public class UserController {
     }
 
     @GetMapping("/User/ordersUser")
-    public String ordersUser() {
+    public String ordersUser(Model model, HttpServletRequest request) {
+        User user = userService.getUser(request);
+        List<Order> orders = orderService.findByUser(user.getUsername());
+
+        for (Order order : orders) {
+            order.setProcessing(order.getStatus() == OrderStatus.PENDING);
+            order.setShipped(order.getStatus() == OrderStatus.SHIPPED);
+            order.setDelivered(order.getStatus() == OrderStatus.DELIVERED);
+            order.setCancelled(order.getStatus() == OrderStatus.CANCELLED);
+        }
+
+        model.addAttribute("orders", orders);
+        model.addAttribute("hasOrders", !orders.isEmpty());
         return "User/ordersUser";
     }
 

@@ -1,6 +1,7 @@
 package es.codeurjc.board.model;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,12 +16,13 @@ public class Plant {
 
     @ManyToOne
     private User user;
-
+    private LocalDateTime createdAt;
     private String name;
     private String cares;
     private String description;
-    private boolean favorite = false;
     private int rating = 0;
+    private int totalRating = 0;
+    private int count = 0;
 
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
@@ -28,9 +30,11 @@ public class Plant {
 
 
 
-    public Plant(){}
+    public Plant(){
+        this.createdAt = LocalDateTime.now();
+    }
     public Plant(String name, String cares, String description) {
-        super();
+        this.createdAt = LocalDateTime.now();
         this.name= name;
         this.cares = cares;
         this.description = description;
@@ -42,18 +46,11 @@ public class Plant {
         return images;
     }
 
-    public boolean isFavorite() {
-        return favorite;
-    }
-    public boolean isRate1() { return rating == 1; }
-    public boolean isRate2() { return rating == 2; }
-    public boolean isRate3() { return rating == 3; }
-    public boolean isRate4() { return rating == 4; }
-    public boolean isRate5() { return rating == 5; }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
+    public boolean isRate1() { return rating >= 1; }
+    public boolean isRate2() { return rating >= 2; }
+    public boolean isRate3() { return rating >= 3; }
+    public boolean isRate4() { return rating >= 4; }
+    public boolean isRate5() { return rating >= 5; }
 
     public int getRating() {
         return rating;
@@ -101,6 +98,26 @@ public class Plant {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     @Override
