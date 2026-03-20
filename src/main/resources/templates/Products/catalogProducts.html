@@ -38,51 +38,61 @@
 
         {{#products}}
         <div class="col">
-          <div class="card shadow-sm h-100 producto">
+          <div class="card shadow-sm h-100">
+
+            <!-- Carrusel de imágenes -->
             <div class="card-img-container">
               <div id="productCarousel{{id}}" class="carousel slide" data-bs-ride="false">
-
                 <div class="carousel-inner">
                   {{#images}}
                   <div class="carousel-item {{#-first}}active{{/-first}}">
-                    <img src="/images/{{id}}" class="d-block w-100">
+                    <img src="/images/{{id}}" class="d-block w-100" alt="Imagen producto">
                   </div>
                   {{/images}}
-
                   {{^images}}
-                  <!-- Imagen por defecto si no hay imágenes -->
                   <div class="carousel-item active">
-                    <img src="/assets/images/temporalIcon.png" class="d-block w-100">
+                    <img src="/assets/images/temporalIcon.png" class="d-block w-100" alt="Sin imagen">
                   </div>
                   {{/images}}
                 </div>
-
-                <!-- Flechas del carrusel -->
                 <button class="carousel-control-prev" type="button"
                         data-bs-target="#productCarousel{{id}}" data-bs-slide="prev">
-                  <span class="bi bi-arrow-left custom-arrow"></span>
+                  <span class="carousel-control-prev-icon"></span>
                 </button>
-
                 <button class="carousel-control-next" type="button"
                         data-bs-target="#productCarousel{{id}}" data-bs-slide="next">
-                  <span class="bi bi-arrow-right custom-arrow"></span>
+                  <span class="carousel-control-next-icon"></span>
                 </button>
-
               </div>
             </div>
 
+            <!-- Datos del producto -->
             <div class="card-body d-flex flex-column">
               <h5 class="h5 change-color">{{name}}</h5>
               <p class="card-text fw-bold">{{description}}</p>
               <p class="card-text">Precio: €{{price}}</p>
 
+              <!-- Añadir al carrito: solo para usuarios logueados, no para admin -->
               {{^adminOnly}}
-              <div class="buttons-container">
-                <button class="btn btn-success rounded-pill px-4 py-2 main-button">Añadir al carrito</button>
-              </div>
+              <form action="/Cart/add/{{id}}" method="post" class="mt-auto">
+                <div class="input-group mb-2">
+                  <span class="input-group-text">Cantidad</span>
+                  <input type="number"
+                         name="quantity"
+                         class="form-control"
+                         value="1"
+                         min="1"
+                         max="99"
+                         style="max-width: 80px;">
+                </div>
+                <button type="submit"
+                        class="btn btn-success rounded-pill px-4 py-2 main-button w-100">
+                  Añadir al carrito
+                </button>
+              </form>
               {{/adminOnly}}
-
             </div>
+
           </div>
         </div>
         {{/products}}
@@ -92,54 +102,19 @@
   </div>
 
   <!-- Paginación -->
-  <div style="text-align: center; margin-bottom: 5px !important; margin-top: 5px !important;">
+  <div style="text-align: center; margin: 10px 0;">
     <nobr>
-      {{#hasPrev}}<a href="/Products/catalogProducts?page={{prev}}" class="btn btn-success rounded-pill px-4 py-2 main-button">&larr; Previous</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
-      {{#hasNext}}<a href="/Products/catalogProducts?page={{next}}" class="btn btn-success rounded-pill px-4 py-2 main-button">Next &rarr;</a>{{/hasNext}}
+      {{#hasPrev}}
+      <a href="/Products/catalogProducts?page={{prev}}"
+         class="btn btn-success rounded-pill px-4 py-2 main-button">&larr; Anterior</a>&nbsp;&nbsp;&nbsp;
+      {{/hasPrev}}
+      {{#hasNext}}
+      <a href="/Products/catalogProducts?page={{next}}"
+         class="btn btn-success rounded-pill px-4 py-2 main-button">Siguiente &rarr;</a>
+      {{/hasNext}}
     </nobr>
   </div>
-
-  <script>
-    // Ocultar flechas si solo hay una imagen
-    document.querySelectorAll('.carousel').forEach(carousel => {
-      const items = carousel.querySelectorAll('.carousel-item');
-      const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
-      if (items.length <= 1) controls.forEach(control => control.style.display = 'none');
-    });
-  </script>
 </main>
-
-<script>
-  // Array representing the cart
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-  // Function to update the cart in localStorage
-  function saveCart() {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }
-
-  // Add functionality to buttons
-  const bottons = document.querySelectorAll('.main-button');
-  bottons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const card = e.target.closest('.card');
-      const name = card.querySelector('h5').innerText;
-      const price = parseFloat(card.getAttribute('data-price'));
-
-      // Check if the product already exists in the cart
-      const existentItem = cart.find(item => item.name === name);
-      if(existentItem){
-        existentItem.amount += 1;
-      } else {
-        cart.push({ name, price, amount: 1 });
-      }
-
-      saveCart();
-      alert(`${name} agregado al carrito`);
-      console.log(cart);
-    });
-  });
-</script>
 {{>footer}}
 </body>
 </html>

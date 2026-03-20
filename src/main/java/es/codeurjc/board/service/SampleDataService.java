@@ -1,14 +1,16 @@
 package es.codeurjc.board.service;
 
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.model.Product;
-import es.codeurjc.board.model.User;
+import es.codeurjc.board.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -25,6 +27,9 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private OrderService orderService;
 
     private void addExampleProducts() throws Exception {
         Product product_ex1 = new Product("Fertilizante", "Nutre tus plantas de manera rápida y efectiva.", 10.99, true );
@@ -90,6 +95,33 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
         userService.saveUser(admin);
     }
 
+    private void addExampleOrders() throws Exception {
+        User userEx1 = userService.getUser("hola@gmail.com");
+        User userEx2 = userService.getUser("pepe@gmail.com");
+
+        Product fertilizante = productService.getProductByName("Fertilizante");
+        Product maceta = productService.getProductByName("Maceta");
+        Product regadera = productService.getProductByName("Regadera");
+        Product semillas = productService.getProductByName("Semillas");
+
+        List<OrderItems> items1 = new ArrayList<>();
+        items1.add(new OrderItems(fertilizante, 2));
+        items1.add(new OrderItems(maceta, 1));
+        Order order1 = new Order(userEx1, items1);
+        order1.setOrderDate(LocalDateTime.now().minusDays(2));
+        order1.setStatus(OrderStatus.PENDING);
+        orderService.save(order1);
+
+        List<OrderItems> items2 = new ArrayList<>();
+        items2.add(new OrderItems(regadera, 1));
+        items2.add(new OrderItems(semillas, 5));
+        Order order2 = new Order(userEx2, items2);
+        order2.setOrderDate(LocalDateTime.now().minusDays(1));
+        order2.setStatus(OrderStatus.SHIPPED);
+        orderService.save(order2);
+
+    }
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -97,6 +129,7 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
             addExampleUsers();
             addExamplePlants();
             addExampleProducts();
+            addExampleOrders();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

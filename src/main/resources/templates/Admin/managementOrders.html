@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
 
@@ -22,58 +22,77 @@
 {{>header}}
 <nav id="header-global"></nav>
 <main class="header-main d-flex align-items-center flex-column">
-  <h1>Gestión de pedidos</h1> <p class="lead"> Observa los pedidos que tienes solicitados, cuales se estan repartiendo y cuales se han repartido y editalos </p>
+    <h1>Gestión de pedidos</h1>
+    <p class="lead">Observa, edita y elimina los pedidos de la tienda.</p>
 
-    <table class="table table-bordered text-center">
-      <thead class="table-success">
-      <tr>
-        <th>Usuario</th>
-        <th>Productos</th>
-        <th>Estado del pedido</th>
-      </tr>
-      </thead>
+    {{^orders}}
+    <p class="text-muted mt-4">No hay pedidos registrados aún.</p>
+    {{/orders}}
 
-      <tbody>
-      <tr>
-        <td>pepito_92</td>
+    <div class="w-100 px-3">
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-success">
+            <tr>
+                <th>Nº Pedido</th>
+                <th>Usuario</th>
+                <th>Productos</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Total (€)</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#orders}}
+            <tr>
+                <!-- Número de pedido -->
+                <td>{{id}}</td>
 
-        <td class="text-start">
-          <ul class="mb-0">
-            <li>Fertilizante (x2)</li>
-            <li>Maceta (x1)</li>
-          </ul>
-        </td>
+                <!-- Usuario -->
+                <td>{{user.username}}</td>
 
-        <td>
-          <select class="form-select form-select-sm">
-            <option selected>En proceso</option>
-            <option>Enviado</option>
-            <option>Entregado</option>
-          </select>
-        </td>
-      </tr>
+                <!-- Productos -->
+                <td class="text-start">
+                    <ul class="mb-0 ps-3">
+                        {{#items}}
+                        <li>{{product.name}} (x{{quantity}})</li>
+                        {{/items}}
+                        {{^items}}
+                        <li class="text-muted">Sin productos</li>
+                        {{/items}}
+                    </ul>
+                </td>
 
-      <tr>
-        <td>ana_garden</td>
+                <!-- Estado (selector) -->
+                <td>
+                    <form action="/Orders/{{id}}/status" method="post">
+                        <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="PENDING"    {{#processing}}selected{{/processing}}>En proceso</option>
+                            <option value="SHIPPED"    {{#shipped}}selected{{/shipped}}>Enviado</option>
+                            <option value="DELIVERED"  {{#delivered}}selected{{/delivered}}>Entregado</option>
+                            <option value="CANCELLED"  {{#cancelled}}selected{{/cancelled}}>Cancelado</option>
+                        </select>
+                    </form>
+                </td>
 
-        <td class="text-start">
-          <ul class="mb-0">
-            <li>Sustrato Universal (x1)</li>
-            <li>Regadera (x1)</li>
-          </ul>
-        </td>
+                <!-- Fecha -->
+                <td>{{formattedDate}}</td>
 
-        <td>
-          <select class="form-select form-select-sm">
-            <option>En proceso</option>
-            <option selected>Enviado</option>
-            <option>Entregado</option>
-          </select>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+                <!-- Precio -->
+                <td>€{{formattedPrice}}</td>
 
+                <!-- Eliminar -->
+                <td>
+                    <form action="/Orders/{{id}}/delete" method="post"
+                          onsubmit="return confirm('¿Seguro que quieres eliminar este pedido?')">
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {{/orders}}
+            </tbody>
+        </table>
+    </div>
 </main>
 {{>footer}}
 </body>
