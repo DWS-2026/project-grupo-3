@@ -26,8 +26,11 @@ public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
-        public Page<Plant> findByUsername(User user, Pageable page) {
+        public Page<Plant> findByUsername(User user,Pageable page) {
             return plantRepository.findPlantsByUserUsername(user.getUsername(), page);
+        }
+        public Page<Plant> findAll(Pageable page) {
+            return plantRepository.findAll(page);
         }
         public long count() {
             return plantRepository.count();
@@ -42,6 +45,9 @@ public class PlantService {
             username.addPlant(plant);
             plantRepository.save(plant);
         }
+    public void save(Plant plant) {
+        plantRepository.save(plant);
+    }
 
         public void deleteById(long id) {
             plantRepository.deleteById(id);
@@ -93,15 +99,7 @@ public class PlantService {
             plantRepository.save(plant);
     }
 
-    public void favoritePlant(long id){
-            Plant plant = plantRepository.findById(id).orElseThrow();
-            if(plant.isFavorite()){
-                plant.setFavorite(false);
-            }else{
-                plant.setFavorite(true);
-            }
-            plantRepository.save(plant);
-    }
+
 
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
             return user.equals(plant.getUser());

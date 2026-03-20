@@ -48,6 +48,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/quizzPlants").permitAll()
 
                         // PRIVATE PAGES
+                        .requestMatchers("/Plants/ratingPlant").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/Plants/*/delete").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/Plants/viewPlant/*").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Admin/**").hasAnyRole("ADMIN")
                         .requestMatchers("/User/**").hasAnyRole("USER")
                         .requestMatchers("/Plants/**").hasAnyRole("USER")
