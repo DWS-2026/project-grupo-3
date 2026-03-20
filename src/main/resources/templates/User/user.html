@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/user.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 </head>
 <body>
@@ -43,15 +43,18 @@
                 <a href="/User/editProfile" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Editar perfil</a>
                 <a href="/User/configuration" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Configuración</a>
 
-                <!-- DELETE BUTTON -->
-                <form action="/User/delete/{{id}}" method="post" style="display:inline;">
-                    <button type="submit" class="btn delete-btn">
-                        🗑
-                    </button>
-                </form>
+
             </div>
         </div>
     </div>
+
+    <div class="profile">
+
+        <!-- DELETE BUTTON -->
+
+        <form class="delete-form" action="/Plants/delete/user" method="post">
+            <button type="submit" class="trash-icon bi bi-trash3"></button>
+        </form>
 
     <div class="row g-4">
 

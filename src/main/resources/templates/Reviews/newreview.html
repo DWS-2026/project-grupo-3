@@ -22,59 +22,32 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto">
-  <form class="text-center" action="/" enctype="multipart/form-data">
-    <img
-            class="mb-4"
-            src="/temporalIcon.png"
-            alt=""
-            width="72"
-            height="57"
-    />
+    <form class="text-center" action="/Reviews/newreview" method="post">
 
-    <h3 class="h3 mb-4 fw-normal change-color">Escribe tu comentario aquí</h3>
+        <h3 class="h3 mb-4 fw-normal change-color">Escribe tu comentario aquí</h3>
 
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="title" placeholder="Nombre de la review" required>
+            <label>Nombre de la review</label>
+        </div>
 
-      <!-- Name of the review -->
-      <div class="form-floating mb-3">
-          <input
-                  type="text"
-                  class="form-control"
-                  id="reviewName{{id}}"
-                  placeholder="Tipo"
-                  value ="{{name}}"
-                  required
-          />
-          <label for="reviewName{{id}}">Nombre de la review</label>
-      </div>
+        <div class="form-floating mb-3">
+            <select class="form-select form-select-sm" name="type">
+                <option value="PLANT">Planta</option>
+                <option value="PRODUCT">Producto</option>
+            </select>
+        </div>
 
-      <!-- Review tipe -->
-      <div class="form-floating mb-3">
-          <select class="form-select form-select-sm">
-              <option value = "PLANT" selected>Planta</option>
-              <option value = "PRODUCT">Producto</option>
-          </select>
-      </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control" name="description" style="height:120px" required></textarea>
+            <label>Descripción</label>
+        </div>
 
-      <!-- Description -->
-      <div class="form-floating mb-3">
-        <textarea
-                class="form-control"
-                placeholder="Descripción"
-                id="reviewDescription"
-                style="height: 120px"
-                required>{{description}}
-        </textarea>
-      <label for="reviewDescription">Descripción</label>
-    </div>
+        <button type="submit" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button w-100">
+            Guardar review
+        </button>
 
-    <!-- Bottons -->
-    <div class="buttons-container">
-      <button type="submit" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button w-100">
-        Guardar review
-      </button>
-      <a href="/Reviews/forum" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
-    </div>
-  </form>
+    </form>
 
 </main>
 {{>footer}}

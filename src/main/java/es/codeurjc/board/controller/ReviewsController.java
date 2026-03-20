@@ -5,8 +5,10 @@ import es.codeurjc.board.model.Reviews;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.repositories.ReviewsRepository;
 import es.codeurjc.board.service.ReviewsService;
+import es.codeurjc.board.service.UserService;
 import es.codeurjc.board.service.UserSession;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -39,6 +42,8 @@ public class ReviewsController {
     private ButtonsHeader btnsHeader;
     @Autowired
     private ReviewsRepository reviewsRepository;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/Reviews/forum")
     public String forum(Model model,
@@ -72,7 +77,10 @@ public class ReviewsController {
     }
 
     @PostMapping("/Reviews/newreview")
-    public String saveReview(Reviews review) {
+    public String saveReview(Reviews review, Principal principal) {
+        if (principal != null) {
+            review.setUser(principal.getName());
+        }
 
         reviewsRepository.save(review);
 
@@ -94,8 +102,21 @@ public class ReviewsController {
     }
 
     @PostMapping("/Reviews/{id}/delete")
-    public String deleteReview(@PathVariable long id) {
-        reviewsService.deleteById(id);
+    public String deleteReview(@PathVariable long id,
+                               Principal principal,
+                               HttpServletRequest request) {
+
+        Reviews review = reviewsService.findById(id);
+
+        String currentUser = principal.getName();
+
+        boolean isOwner = review.getUser().equals(currentUser);
+        boolean isAdmin = userService.isUserAdmin(request);
+
+        if (isOwner || isAdmin) {
+            reviewsService.deleteById(id);
+        }
+
         return "redirect:/Reviews/forum";
     }
 
