@@ -70,34 +70,18 @@ public class PlantController {
     }
 
     @GetMapping("/catalogPlants")
-    public String catalogPlants(Model model, @PageableDefault(size = 6) Pageable page, HttpServletRequest session,
-                                @RequestParam(required = false) String type, @RequestParam(required = false) String order) {
+    public String catalogPlants(Model model, @RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
+                                HttpServletRequest session, @RequestParam(required = false) String whatToShow, @RequestParam(required = false) String order) {
         btnsHeader.hideBtnHeader(model,"plantIcon");
-
-        Page<Plant> plantsPage;
-        Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, this.sortPlants(order, model));
-        if(userService.isUserUser(session)){ //only allow users to see their plants, neither admin or anonymus can
-            if("misPlantas".equals(type)){
-                plantsPage = plantService.findByUsername(userService.getUser(session),sortedPage);
-                model.addAttribute("plants", plantsPage.getContent());
-            }else{
-                model.addAttribute("all", true);
-                plantsPage = plantService.findAll(sortedPage);
-                model.addAttribute("onlySeePlants", plantsPage.getContent());
-            }
-
+        Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order,model));
+        if(userService.isUserAdmin(session) || userService.isUserUser(session)) {
+            Page<Plant> plantsPage = plantService.returnPlantsDependingInput(model,userService.getUser(session).getUsername(),
+                    userService.isUserUser(session), whatToShow, search, sortedPage);
+            model.addAttribute("plants", plantsPage.getContent());
             this.addNavButtons(model, plantsPage);
-        } else  if (userService.isUserAdmin(session)){
-            model.addAttribute("all", true);
-            plantsPage = plantService.findAll(sortedPage);
-            model.addAttribute("onlySeePlants", plantsPage.getContent());
-
-            this.addNavButtons(model, plantsPage);
-        }
-            else{
+        } else {
             model.addAttribute("example",true);
         }
-
 
         return "Plants/catalogPlants";
     }

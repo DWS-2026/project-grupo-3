@@ -8,7 +8,9 @@ import es.codeurjc.board.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -20,14 +22,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 @Service
 public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
-        public Page<Plant> findByUsername(User user,Pageable page) {
-            return plantRepository.findPlantsByUserUsername(user.getUsername(), page);
+        public Page<Plant> findByUsername(String username,Pageable page) {
+            return plantRepository.findPlantsByUserUsername(username, page);
         }
         public Page<Plant> findAll(Pageable page) {
             return plantRepository.findAll(page);
@@ -101,6 +104,45 @@ public class PlantService {
 
     public boolean existsByNamePlant(String name){
             return plantRepository.existsByNameIgnoreCase(name);
+    }
+    public Page<Plant> searchByNamePlantAndFilterByUser(String name, String user, Pageable pageable) {
+        return plantRepository.findByNameContainingIgnoreCaseAndUserUsername(name,user,pageable);
+    }
+    public Page<Plant> searchByNamePlant(String name, Pageable pageable) {
+        return plantRepository.findByNameContainingIgnoreCase(name,pageable);
+    }
+
+    public Sort sortPlants(String order, Model model){
+        Sort sort;
+        if ("moreRecent".equals(order)) {
+            model.addAttribute("isCreatedAtSort", true);
+            sort = Sort.by(Sort.Order.desc("createdAt"));
+        } else {
+            sort = Sort.by(Sort.Order.desc("rating"));
+        }
+        return sort;
+    }
+
+    public Page<Plant> returnPlantsDependingInput(Model model, String username, boolean isUserInRoleUser, String whatToShow,
+                                                  String search, Pageable sortedPage){
+        Page<Plant> plantsPage;
+        if(isUserInRoleUser && "misPlantas".equals(whatToShow)){
+            if(search == null){
+                plantsPage = this.findByUsername(username,sortedPage);
+            }else {
+                plantsPage = this.searchByNamePlantAndFilterByUser(search, username, sortedPage);
+                model.addAttribute("search", search);
+            }
+            model.addAttribute("editPlant", true);
+        } else {
+            if(search == null){
+                plantsPage = this.findAll(sortedPage);
+            }else {
+                plantsPage = this.searchByNamePlant(search,sortedPage);
+                model.addAttribute("search", search);
+            }
+        }
+        return plantsPage;
     }
 
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
