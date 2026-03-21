@@ -21,25 +21,7 @@ public class ButtonsHeader {
         }
     }
 
-    @ExceptionHandler(Exception.class) //mínimo: capturar la excepción, cambiar para cada tipo de error, error de servidor: 500
-    public String handleError(Exception e, Model model, HttpServletRequest request) {
-        if(!e.getClass().getSimpleName().isEmpty()){
-            model.addAttribute("errorType", e.getClass().getSimpleName());
-        }
-        if(!e.getMessage().isEmpty()){
-            model.addAttribute("errorMessage", e.getMessage());
-        }
-        Integer statusCode = (Integer) request.getAttribute(
-                RequestDispatcher.ERROR_STATUS_CODE
-        );
 
-        if(statusCode != null){
-            String p3 = statusCode.toString();
-            model.addAttribute("statusCode", statusCode);
-        }
-
-        return "error";
-    }
 
     public void hideBtnHeader(Model model, String name) {
         model.addAttribute(name, false);

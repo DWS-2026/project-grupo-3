@@ -74,18 +74,36 @@ public class UserController {
 
     @PostMapping("/User/register")
     public String register(Model model,@RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword){
-        model.addAttribute("passwords",passwordsDontMatch);
         User user = new User();
-        user.setPassword(passwordEncoder.encode(password));
-        user.setEmail(email);
         user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(password));
+
         List<String> roles = new ArrayList<>();
         roles.add("USER");
         user.setRoles(roles); //Hay que añadirle un lista de string
 
-        if(!password.equals(repeatpassword)){ //mirar si las contraseñas coinciden
-            passwordsDontMatch = true;
-            return "redirect:/User/register";
+        userService.saveUser(user);
+
+        boolean error = false;
+
+        if(userService.usernameExists(username)) {
+            model.addAttribute("usernameError", true);
+            error = true;
+        }
+
+        if(userService.emailExists(email)){
+            model.addAttribute("emailError", true);
+            error = true;
+        }
+
+        if(!password.equals(repeatpassword)){
+            model.addAttribute("passwordError", true);//mirar si las contraseñas coinciden
+            error = true;
+        }
+
+        if(error){
+            return "/User/register";
         }
 
         userService.saveUser(user);

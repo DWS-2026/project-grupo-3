@@ -77,7 +77,7 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
 
         }
         for (int i = 0; i < 5; i++) {
-            Plant plant = new Plant("Rosa de manolito-" + i, "Regar cada 5 días", "Necesita abono x");
+            Plant plant = new Plant("Margarita de manolito-" + i, "Regar cada 5 días", "Necesita abono x");
             plantService.save(plant,userService.getUser("Manolito"));
             plantService.addImageToPlant(plant.getId(), "/static/assets/images/images_example_plants/rosebush.jpg");
 

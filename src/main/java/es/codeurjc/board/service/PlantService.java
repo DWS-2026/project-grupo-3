@@ -4,30 +4,21 @@ import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.PlantRepository;
-import es.codeurjc.board.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import javax.sql.rowset.serial.SerialBlob;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public class PlantService {
     @Autowired
     private PlantRepository plantRepository;
 
-        public Page<Plant> findByUsername(User user,Pageable page) {
-            return plantRepository.findPlantsByUserUsername(user.getUsername(), page);
+        public Page<Plant> findByUsername(String username,Pageable page) {
+            return plantRepository.findPlantsByUserUsername(username, page);
         }
         public Page<Plant> findAll(Pageable page) {
             return plantRepository.findAll(page);
@@ -101,6 +92,41 @@ public class PlantService {
 
     public boolean existsByNamePlant(String name){
             return plantRepository.existsByNameIgnoreCase(name);
+    }
+    public Page<Plant> searchByNamePlantAndFilterByUser(String name, String user, Pageable pageable) {
+        return plantRepository.findByNameContainingIgnoreCaseAndUserUsername(name,user,pageable);
+    }
+    public Page<Plant> searchByNamePlant(String name, Pageable pageable) {
+        return plantRepository.findByNameContainingIgnoreCase(name,pageable);
+    }
+
+    public Sort sortPlants(String order){
+        Sort sort;
+        if ("moreRecent".equals(order)) {
+            sort = Sort.by(Sort.Order.desc("createdAt"));
+        } else {
+            sort = Sort.by(Sort.Order.desc("rating"));
+        }
+        return sort;
+    }
+
+    public Page<Plant> returnPlantsDependingInput(String username, boolean isUserInRoleUser, String whatToShow,
+                                                  String search, Pageable sortedPage){
+        Page<Plant> plantsPage;
+        if(isUserInRoleUser && "misPlantas".equals(whatToShow)){
+            if(search == null){
+                plantsPage = this.findByUsername(username,sortedPage);
+            }else {
+                plantsPage = this.searchByNamePlantAndFilterByUser(search, username, sortedPage);
+            }
+        } else {
+            if(search == null){
+                plantsPage = this.findAll(sortedPage);
+            }else {
+                plantsPage = this.searchByNamePlant(search,sortedPage);
+            }
+        }
+        return plantsPage;
     }
 
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
