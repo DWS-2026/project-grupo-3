@@ -30,6 +30,14 @@
                 height="57"
         />
         <h3 class="h3 mb-3 fw-normal change-color">Por favor, registrese</h3>
+
+        {{#emailError}}
+        <div class="alert alert-warning">
+            El correo ya existe.
+        </div>
+        {{/emailError}}
+
+        <!-- email -->
         <div class="form-floating" id="email">
             <input
                     type="email"
@@ -51,6 +59,13 @@
             />
             <label for="floatingPassword">Introduzca su contraseña</label>
         </div>
+
+        {{#passwordError}}
+        <div class="alert alert-warning">
+            La contraseña no es igual.
+        </div>
+        {{/passwordError}}
+
         <!-- Confirm password -->
         <div class="form-floating" id="RepeatPassword">
             <input
@@ -63,13 +78,16 @@
             <label for="floatinggPassword">Introduzca de nuevo su contraseña</label>
         </div>
 
-        {{#passwords}}
 
-        <p>Las contraseñas no coinciden</p>
-
-        {{/passwords}}
+        {{#usernameError}}
+        <div class="alert alert-warning">
+            El nombre de usuario ya existe.
+        </div>
+        {{/usernameError}}
 
         <!-- User -->
+
+
         <div class="form-floating mb-3">
             <input
                     type="text"
@@ -80,6 +98,8 @@
             />
             <label for="username">Nombre de Usuario</label>
         </div>
+
+
 
         <!-- Description -->
         <div class="form-floating mb-3">
