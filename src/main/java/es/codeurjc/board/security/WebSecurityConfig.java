@@ -87,7 +87,6 @@ public class WebSecurityConfig {
                         .accessDeniedPage("/403")
                 );
 
-        http.csrf(csrf -> csrf.disable());
 
         return http.build();
 

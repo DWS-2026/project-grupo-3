@@ -43,6 +43,7 @@
                 <button type="button" class="btn btn-success rounded-pill px-4 py-3 main-button" id="uploadBtn">
                     Añadir fotito 🪴
                 </button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -55,6 +56,8 @@
                 </div>
                 <div class="offcanvas-body">
                     <form action="/Plants/editPlant/{{id}}" method="post" enctype="multipart/form-data">
+
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
 
                         <!-- plant name -->
                         <div class="form-floating mb-3">
@@ -103,6 +106,7 @@
                         <div class="icon-group d-flex flex-column gap-1 text-start align-items-start">
                             <form style="padding-top: 0px;" action="/Plants/{{plantID}}/delete/image/{{id}}" method="post">
                                 <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                <input type="hidden" name="_csrf" value="{{token}}"/>
                             </form>
                         </div>
                         </div>

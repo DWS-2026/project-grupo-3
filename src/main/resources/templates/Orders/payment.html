@@ -49,6 +49,9 @@
 
     <!-- Formulario de facturación y pago -->
     <div class="col-md-7 col-lg-8">
+      <h4 class="mb-3">Dirección de facturación</h4>
+      <form id="payment-form" class="needs-validation" novalidate>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
       <!--
           El form hace POST a /Orders/checkout directamente.
           El backend lee el carrito de sesión, crea el Order y redirige.

@@ -23,6 +23,7 @@
 <nav id="header-global"></nav>
 <main class="form-signin w-100 m-auto">
     <form class="text-center" action="/Products/new" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
         <img
                 class="mb-4"
                 src="/temporalIcon.png"

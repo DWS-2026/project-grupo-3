@@ -22,6 +22,7 @@
 {{>header}}
 <main class="form-signin w-100 m-auto">
     <form class="text-center" action="/Products/editProduct/{{product.id}}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
 
         <h3 class="mb-4 change-color">Editar producto</h3>
 

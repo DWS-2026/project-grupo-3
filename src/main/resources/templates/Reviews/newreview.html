@@ -23,6 +23,7 @@
 {{>header}}
 <main class="form-signin w-100 m-auto">
     <form class="text-center" action="/Reviews/newreview" method="post">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
 
         <h3 class="h3 mb-4 fw-normal change-color">Escribe tu comentario aquí</h3>
 

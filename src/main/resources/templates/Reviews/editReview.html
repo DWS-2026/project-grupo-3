@@ -41,18 +41,19 @@
             </div>
             <div class="offcanvas-body">
                 <form action="/Reviews/editReviews/{{id}}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="{{token}}"/>
 
                     <!-- Name of the review -->
                     <div class="form-floating mb-3">
                         <input
                                 type="text"
                                 class="form-control"
-                                id="reviewName{{id}}"
-                                placeholder="Tipo"
-                                value ="{{name}}"
+                                id="reviewTitle{{id}}"
+                                placeholder="Titulo"
+                                value ="{{title}}"
                                 required
                         />
-                        <label for="reviewName{{id}}">Nombre de la review</label>
+                        <label for="reviewTitle{{id}}">Titulo de la review</label>
                     </div>
 
                     <!-- Review tipe -->

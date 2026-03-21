@@ -115,6 +115,18 @@
                                                     <span class="star {{#rate4}}filled{{/rate4}}">&#9733;</span>
                                                     <span class="star {{#rate5}}filled{{/rate5}}">&#9733;</span>
                                                 </span>
+                                    <div class="icon-group d-flex flex-column text-start align-items-start">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 10px;">
+                                            <!-- Formulario de favorito -->
+                                            <form action="/Plants/favoritePlant/{{id}}" style="padding-top: 0px;" method="post">
+                                                    <span class="rating" style="display:flex; align-items:center; flex-direction:row-reverse;">
+                                                        <input value="1" name="rate" id="favorite-{{id}}" type="checkbox" onchange="this.form.submit()" {{#favorite}}checked{{/favorite}}>
+                                                        <label title="text" for="favorite-{{id}}"></label>
+                                                        <span>Favorito: </span>
+                                                        <input type="hidden" name="_csrf" value="{{token}}"/>
+
+                                                    </span>
+                                            </form>
 
 
                                                 <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
@@ -129,6 +141,11 @@
 
                                             <a href="/Plants/editPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Editar plantita</a>
                                             <a href="/Plants/viewPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más detalles 💫</a>
+                                            <!-- Formulario de eliminar -->
+                                            <form style="padding-top: 0px;" action="/Plants/{{id}}/delete" method="post">
+                                                <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                                <input type="hidden" name="_csrf" value="{{token}}"/>
+                                            </form>
                                         </div>
 
                                 </div>

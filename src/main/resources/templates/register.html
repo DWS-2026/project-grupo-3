@@ -22,6 +22,7 @@
 {{>header}}
 <main class="form-signin w-100 m-auto" id="login-form">
     <form action="/User/register" method="post">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
         <img
                 class="mb-4"
                 src="/assets/images/temporalIcon.png"
@@ -88,6 +89,7 @@
                 placeholder="Descripción"
                 id="profileDescription"
                 style="height: 120px"
+                name="description"
                 required
         ></textarea>
             <label for="profileDescription">Descripción</label>

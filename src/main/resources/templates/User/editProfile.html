@@ -23,6 +23,7 @@
 {{>header}}
 <main class="form-signin m-auto">
 <form class="text-center" action="/" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
     <h2 class="title-profile">Editar perfil</h2>
 
     <!-- Image of + with a green circle -->
