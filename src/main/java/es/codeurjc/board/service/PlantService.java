@@ -4,25 +4,13 @@ import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.PlantRepository;
-import es.codeurjc.board.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import javax.sql.rowset.serial.SerialBlob;
-import java.io.InputStream;
-import java.sql.Blob;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
+
 
 @Service
 public class PlantService {
@@ -112,10 +100,9 @@ public class PlantService {
         return plantRepository.findByNameContainingIgnoreCase(name,pageable);
     }
 
-    public Sort sortPlants(String order, Model model){
+    public Sort sortPlants(String order){
         Sort sort;
         if ("moreRecent".equals(order)) {
-            model.addAttribute("isCreatedAtSort", true);
             sort = Sort.by(Sort.Order.desc("createdAt"));
         } else {
             sort = Sort.by(Sort.Order.desc("rating"));
@@ -123,7 +110,7 @@ public class PlantService {
         return sort;
     }
 
-    public Page<Plant> returnPlantsDependingInput(Model model, String username, boolean isUserInRoleUser, String whatToShow,
+    public Page<Plant> returnPlantsDependingInput(String username, boolean isUserInRoleUser, String whatToShow,
                                                   String search, Pageable sortedPage){
         Page<Plant> plantsPage;
         if(isUserInRoleUser && "misPlantas".equals(whatToShow)){
@@ -131,15 +118,12 @@ public class PlantService {
                 plantsPage = this.findByUsername(username,sortedPage);
             }else {
                 plantsPage = this.searchByNamePlantAndFilterByUser(search, username, sortedPage);
-                model.addAttribute("search", search);
             }
-            model.addAttribute("editPlant", true);
         } else {
             if(search == null){
                 plantsPage = this.findAll(sortedPage);
             }else {
                 plantsPage = this.searchByNamePlant(search,sortedPage);
-                model.addAttribute("search", search);
             }
         }
         return plantsPage;

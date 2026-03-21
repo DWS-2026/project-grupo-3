@@ -1,6 +1,5 @@
 package es.codeurjc.board.controller;
 import es.codeurjc.board.model.Image;
-import es.codeurjc.board.model.User;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Plant;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,24 +56,14 @@ public class PlantController {
         model.addAttribute("next", plants.getNumber() + 1);
     }
 
-    private Sort sortPlants(String order, Model model){
-        Sort sort;
-        if ("moreRecent".equals(order)) {
-            model.addAttribute("isCreatedAtSort", true);
-            sort = Sort.by(Sort.Order.desc("createdAt"));
-        } else {
-            sort = Sort.by(Sort.Order.desc("rating"));
-        }
-        return sort;
-    }
 
     @GetMapping("/catalogPlants")
     public String catalogPlants(Model model, @RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
                                 HttpServletRequest session, @RequestParam(required = false) String whatToShow, @RequestParam(required = false) String order) {
         btnsHeader.hideBtnHeader(model,"plantIcon");
-        Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order,model));
+        Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order));
         if(userService.isUserAdmin(session) || userService.isUserUser(session)) {
-            Page<Plant> plantsPage = plantService.returnPlantsDependingInput(model,userService.getUser(session).getUsername(),
+            Page<Plant> plantsPage = plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(),
                     userService.isUserUser(session), whatToShow, search, sortedPage);
             model.addAttribute("plants", plantsPage.getContent());
             this.addNavButtons(model, plantsPage);
@@ -83,9 +71,14 @@ public class PlantController {
             model.addAttribute("example",true);
         }
 
+        if("moreRecent".equals(order)){model.addAttribute("isCreatedAtSort", true);}
+
+        if(search != null) { model.addAttribute("search", search);}
+
+        if(userService.isUserUser(session) && "misPlantas".equals(whatToShow)){model.addAttribute("editPlant", true);}
+
         return "Plants/catalogPlants";
     }
-
 
 
     @GetMapping("/editPlant/{id}")
@@ -118,7 +111,7 @@ public class PlantController {
     }
 
     @PostMapping("/new")
-    public String newPost(Plant plant, MultipartFile imageFile, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
+    public String newPlant(Plant plant, MultipartFile imageFile, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
 
         if(plantService.existsByNamePlant(plant.getName())){
             redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
