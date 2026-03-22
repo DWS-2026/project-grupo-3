@@ -41,6 +41,13 @@ public class GeneralController {
 		return "login";
 	}
 
+	@GetMapping("/loginerror")
+	public String signInError(Model model) {
+		btnsHeader.hideBtnHeader(model,"loginButton");
+		model.addAttribute("loginError", true);
+		return "login";
+	}
+
 
 	@GetMapping("/quizzPlants")
 	public String quizPlants() {

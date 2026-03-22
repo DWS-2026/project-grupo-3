@@ -128,7 +128,9 @@ public class PlantService {
         }
         return plantsPage;
     }
-
+    public long numberOfPlants(){
+        return plantRepository.count();
+    }
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
             return user.equals(plant.getUser());
     }

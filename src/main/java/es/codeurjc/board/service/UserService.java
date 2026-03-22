@@ -92,4 +92,8 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
+    public long numberOfUsers(){
+        return userRepository.count();
+    }
+
 }

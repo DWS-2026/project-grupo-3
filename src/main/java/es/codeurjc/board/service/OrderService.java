@@ -42,4 +42,8 @@ public class OrderService {
         }
         return false;
     }
+
+    public long numberOfOrders() {
+        return orderRepository.count();
+    }
 }

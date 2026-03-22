@@ -80,5 +80,7 @@ public class ProductService {
         return productRepository.findByName(name)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + name));
     }
-
+    public long numberOfProducts(){
+        return productRepository.count();
+    }
 }

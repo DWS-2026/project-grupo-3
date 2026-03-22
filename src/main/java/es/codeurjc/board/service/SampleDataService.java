@@ -126,10 +126,18 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
-            addExampleUsers();
-            addExamplePlants();
-            addExampleProducts();
-            addExampleOrders();
+            if(userService.numberOfUsers() == 0){
+                addExampleUsers();
+            }
+            if(plantService.numberOfPlants() == 0){
+                addExamplePlants();
+            }
+            if(productService.numberOfProducts() == 0){
+                addExampleProducts();
+            }
+            if(orderService.numberOfOrders() == 0){
+                addExampleOrders();
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
