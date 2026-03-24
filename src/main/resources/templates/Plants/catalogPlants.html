@@ -123,6 +123,12 @@
                                                     <input type="hidden" name="_csrf" value="{{token}}"/>
                                                 </form>
                                         {{/adminOnly}}
+                                        {{#editPlant}}
+                                                <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
+                                                    <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                                                </form>
+                                        {{/editPlant}}
 
                                         </span>
                             <div class="buttons-container">
@@ -131,7 +137,7 @@
                                 </button>
                             {{#editPlant}}
                                 <a href="/Plants/editPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Editar plantita</a>
-                                {{/editPlant}}
+                            {{/editPlant}}
                                 <a href="/Plants/viewPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más detalles 💫</a>
                             </div>
 
