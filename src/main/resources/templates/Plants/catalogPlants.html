@@ -42,7 +42,6 @@
         <div class="py-lg-5">
             {{#loginOptions}}
             <form method="get" action="/Plants/catalogPlants" class="d-flex gap-3">
-                <input type="hidden" name="_csrf" value="{{token}}"/>
                 {{#userOnly}}
                 <select name="type"
                         onchange="this.form.submit()"
