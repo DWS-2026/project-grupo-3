@@ -144,11 +144,13 @@
                                                 {{#adminOnly}}
                                                     <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
                                                             <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                                        <input type="hidden" name="_csrf" value="{{token}}"/>
                                                     </form>
                                                 {{/adminOnly}}
                                                 {{#editPlant}}
                                                     <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
                                                         <button type="submit" class="trash-icon bi bi-trash3"></button>
+                                                        <input type="hidden" name="_csrf" value="{{token}}"/>
                                                     </form>
                                                 {{/editPlant}}
 
@@ -332,6 +334,7 @@
         </div>
 
         <form id="ratingForm" action="/Plants/ratingPlant" method="post" style="padding-top: 0px">
+            <input type="hidden" name="_csrf" value="{{token}}"/>
             <input type="hidden" name="plantId" id="modalPlantId" value="">
             <input type="hidden" name="rating" id="modalRating" value="">
             <button type="submit" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Enviar</button>
