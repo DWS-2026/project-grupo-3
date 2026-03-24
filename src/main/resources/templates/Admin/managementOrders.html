@@ -66,6 +66,7 @@
                 <!-- Estado (selector) -->
                 <td>
                     <form action="/Orders/{{id}}/status" method="post">
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
                         <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
                             <option value="PENDING"    {{#processing}}selected{{/processing}}>En proceso</option>
                             <option value="SHIPPED"    {{#shipped}}selected{{/shipped}}>Enviado</option>
@@ -86,6 +87,7 @@
                     <form action="/Orders/{{id}}/delete" method="post"
                           onsubmit="return confirm('¿Seguro que quieres eliminar este pedido?')">
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
                     </form>
                 </td>
             </tr>

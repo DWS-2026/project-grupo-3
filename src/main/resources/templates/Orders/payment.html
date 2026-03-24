@@ -58,6 +58,7 @@
           No se necesita JS en ningún momento.
       -->
       <form action="/Orders/checkout" method="post">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
 
         <h4 class="mb-3">Dirección de facturación</h4>
         <div class="row g-3">
