@@ -1,15 +1,18 @@
 package es.codeurjc.board.service;
 
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 
 @Service
@@ -27,8 +30,12 @@ public class PlantService {
             return plantRepository.count();
         }
 
-        public Plant findById(long id) {
-            return plantRepository.findById(id).orElseThrow();
+        public Plant findById(long id, Model model) {
+
+            Plant plant = plantRepository.findById(id).orElseThrow();
+            model.addAttribute("plant", plant);
+            model.addAttribute("plantID", plant.getId());
+            return plant;
         }
 
         public void save(Plant plant, User username) {
@@ -100,37 +107,60 @@ public class PlantService {
         return plantRepository.findByNameContainingIgnoreCase(name,pageable);
     }
 
-    public Sort sortPlants(String order){
+    public Sort sortPlants(String order, Model model){
         Sort sort;
         if ("moreRecent".equals(order)) {
+            model.addAttribute("isCreatedAtSort", true);
             sort = Sort.by(Sort.Order.desc("createdAt"));
         } else {
             sort = Sort.by(Sort.Order.desc("rating"));
         }
         return sort;
     }
-
-    public Page<Plant> returnPlantsDependingInput(String username, boolean isUserInRoleUser, String whatToShow,
-                                                  String search, Pageable sortedPage){
+    private void addNavButtons(Model model, Page<Plant> plants) {
+        model.addAttribute("hasPrev", plants.hasPrevious());
+        model.addAttribute("prev", plants.getNumber() - 1);
+        model.addAttribute("hasNext", plants.hasNext());
+        model.addAttribute("next", plants.getNumber() + 1);
+    }
+    public void returnPlantsDependingInput(String username, boolean isUserUser, boolean isUserAdmin,
+                                                  String whatToShow,
+                                                  String search, Pageable sortedPage, Model model){
         Page<Plant> plantsPage;
-        if(isUserInRoleUser && "misPlantas".equals(whatToShow)){
+        if(isUserUser && "misPlantas".equals(whatToShow)){
             if(search == null){
                 plantsPage = this.findByUsername(username,sortedPage);
             }else {
+                model.addAttribute("search", search);
                 plantsPage = this.searchByNamePlantAndFilterByUser(search, username, sortedPage);
             }
-        } else {
+            model.addAttribute("editPlant",true);
+            model.addAttribute("plants", plantsPage.getContent());
+            this.addNavButtons(model, plantsPage);
+        } else if (isUserAdmin || isUserUser){
             if(search == null){
                 plantsPage = this.findAll(sortedPage);
             }else {
-                plantsPage = this.searchByNamePlant(search,sortedPage);
+                model.addAttribute("search", search);
+                plantsPage = this.searchByNamePlant(search, sortedPage);
             }
+            model.addAttribute("all", true);
+            model.addAttribute("plants", plantsPage.getContent());
+            this.addNavButtons(model, plantsPage);
+        } else{
+            model.addAttribute("example",true);
         }
-        return plantsPage;
+
+    }
+    public void showSavedFormsNewPlant(Model model, Plant plant, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
+        redirectAttributes.addFlashAttribute("cares", plant.getCares());
+        redirectAttributes.addFlashAttribute("description", plant.getDescription());
     }
     public long numberOfPlants(){
         return plantRepository.count();
     }
+
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
             return user.equals(plant.getUser());
     }

@@ -1,7 +1,8 @@
 package es.codeurjc.board.controller;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
@@ -39,43 +40,27 @@ public class PlantController {
 
     @GetMapping("/viewPlant/{id}")
     public String showPost(Model model, @PathVariable long id, HttpServletRequest session) {
-        Plant plant = plantService.findById(id);
+        Plant plant = plantService.findById(id,model);
 
-            model.addAttribute("plant", plant);
             return "Plants/viewPlant";
 
 
 
     }
 
-
-    private void addNavButtons(Model model, Page<Plant> plants) {
-        model.addAttribute("hasPrev", plants.hasPrevious());
-        model.addAttribute("prev", plants.getNumber() - 1);
-        model.addAttribute("hasNext", plants.hasNext());
-        model.addAttribute("next", plants.getNumber() + 1);
-    }
-
-
     @GetMapping("/catalogPlants")
     public String catalogPlants(Model model, @RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
                                 HttpServletRequest session, @RequestParam(required = false) String whatToShow, @RequestParam(required = false) String order) {
         btnsHeader.hideBtnHeader(model,"plantIcon");
-        Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order));
-        if(userService.isUserAdmin(session) || userService.isUserUser(session)) {
-            Page<Plant> plantsPage = plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(),
-                    userService.isUserUser(session), whatToShow, search, sortedPage);
-            model.addAttribute("plants", plantsPage.getContent());
-            this.addNavButtons(model, plantsPage);
-        } else {
-            model.addAttribute("example",true);
+        Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order, model));
+        if(userService.getUser(session) != null){
+            plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(), userService.isUserUser(session),
+                    userService.isUserAdmin(session), whatToShow, search, sortedPage, model);
+        } else{
+            plantService.returnPlantsDependingInput(null, false, false,
+                   whatToShow, search, sortedPage, model);
         }
 
-        if("moreRecent".equals(order)){model.addAttribute("isCreatedAtSort", true);}
-
-        if(search != null) { model.addAttribute("search", search);}
-
-        if(userService.isUserUser(session) && "misPlantas".equals(whatToShow)){model.addAttribute("editPlant", true);}
 
         return "Plants/catalogPlants";
     }
@@ -83,10 +68,8 @@ public class PlantController {
 
     @GetMapping("/editPlant/{id}")
     public String editPlant(Model model, @PathVariable Long id, HttpServletRequest session) {
-        Plant plant = plantService.findById(id);
+        Plant plant = plantService.findById(id, model);
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
-            model.addAttribute("plant", plant);
-            model.addAttribute("plantID", plant.getId());
             return "Plants/editPlant";
         }else{
             return "/accessDenied";
@@ -95,9 +78,9 @@ public class PlantController {
 
     @PostMapping("/editPlant/{id}")
     public String editPlant(@PathVariable Long id, @RequestParam String name, @RequestParam String cares,
-                            @RequestParam String description, HttpServletRequest session) throws Exception {
+                            @RequestParam String description, HttpServletRequest session, Model model) throws Exception {
 
-        Plant plant = plantService.findById(id);
+        Plant plant = plantService.findById(id, model);
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
             plantService.editPlant(name, cares , description, id);
             return "redirect:/Plants/catalogPlants";
@@ -111,12 +94,11 @@ public class PlantController {
     }
 
     @PostMapping("/new")
-    public String newPlant(Plant plant, MultipartFile imageFile, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
+    public String newPlant(Plant plant, MultipartFile imageFile, HttpServletRequest session,
+                           RedirectAttributes redirectAttributes, Model model) throws IOException {
 
         if(plantService.existsByNamePlant(plant.getName())){
-            redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
-            redirectAttributes.addFlashAttribute("cares", plant.getCares());
-            redirectAttributes.addFlashAttribute("description", plant.getDescription());
+            plantService.showSavedFormsNewPlant(model, plant,redirectAttributes);
             return "redirect:/Plants/new";
         }
         plantService.save(plant,userService.getUser(session));
@@ -129,8 +111,8 @@ public class PlantController {
     }
 
     @PostMapping("/{id}/addImageToPlant")
-    public String addImageToPlant(@PathVariable long id, MultipartFile newImage, HttpServletRequest session) throws IOException {
-        Plant plant = plantService.findById(id);
+    public String addImageToPlant(@PathVariable long id, MultipartFile newImage, HttpServletRequest session, Model model) throws IOException {
+        Plant plant = plantService.findById(id,model);
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
             if (!newImage.isEmpty()) {
                 Image imageOne = imageService.createImage(newImage);
@@ -145,9 +127,9 @@ public class PlantController {
     }
 
     @PostMapping("{plantId}/delete/image/{imageId}")
-    public String deleteImage(@PathVariable long plantId, @PathVariable long imageId, HttpServletRequest session){
+    public String deleteImage(@PathVariable long plantId, @PathVariable long imageId, HttpServletRequest session,Model model){
 
-        Plant plant = plantService.findById(plantId);
+        Plant plant = plantService.findById(plantId, model);
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
             plantService.deleteImageFromPlant(plantId, imageId);
             return "redirect:/Plants/catalogPlants";
@@ -157,8 +139,8 @@ public class PlantController {
     }
 
     @PostMapping("/{id}/delete")
-    public String deletePlant(@PathVariable long id, HttpServletRequest session) throws IOException {
-        Plant plant = plantService.findById(id);
+    public String deletePlant(@PathVariable long id, HttpServletRequest session, Model model) throws IOException {
+        Plant plant = plantService.findById(id, model);
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
             plantService.deleteById(id);
             return "redirect:/Plants/catalogPlants?type=misPlantas";
@@ -169,9 +151,9 @@ public class PlantController {
     }
     @PostMapping("/ratingPlant")
     public String ratePlant(@RequestParam("plantId") Long plantId,
-                            @RequestParam("rating") int rating) {
+                            @RequestParam("rating") int rating, Model model) {
 
-        Plant plant = plantService.findById(plantId);
+        Plant plant = plantService.findById(plantId, model);
         if(plant != null) {
             plant.setTotalRating(plant.getTotalRating() + rating);
             plant.setCount(plant.getCount() + 1);
@@ -179,7 +161,6 @@ public class PlantController {
             plantService.save(plant);
         }
 
-        // Rediriges de vuelta al catálogo
         return "redirect:/Plants/catalogPlants";
     }
 }
