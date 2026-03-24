@@ -1,6 +1,7 @@
 package es.codeurjc.board.service;
 
 import es.codeurjc.board.model.*;
+import es.codeurjc.board.repositories.ReviewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -30,6 +31,9 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ReviewsRepository reviewsRepository;
 
     private void addExampleProducts() throws Exception {
         Product product_ex1 = new Product("Fertilizante", "Nutre tus plantas de manera rápida y efectiva.", 10.99, true );
@@ -122,6 +126,42 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
 
     }
 
+    private void addExampleReviews() throws Exception {
+
+        Reviews r1 = new Reviews(
+                "Pepe",
+                "Muy buena planta",
+                "Me ha encantado, crece súper rápido 🌱",
+                Reviews.ReviewType.PLANT
+        );
+
+        Reviews r2 = new Reviews(
+                "Manolito",
+                "Producto útil",
+                "El fertilizante funciona genial",
+                Reviews.ReviewType.PRODUCT
+        );
+
+        Reviews r3 = new Reviews(
+                "Holi",
+                "No me gustó",
+                "Esperaba mejores resultados",
+                Reviews.ReviewType.PRODUCT
+        );
+
+        Reviews r4 = new Reviews(
+                "Pepe",
+                "Recomendadísima",
+                "Muy fácil de cuidar",
+                Reviews.ReviewType.PLANT
+        );
+
+        reviewsRepository.save(r1);
+        reviewsRepository.save(r2);
+        reviewsRepository.save(r3);
+        reviewsRepository.save(r4);
+    }
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -143,4 +183,3 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
         }
     }
 }
-
