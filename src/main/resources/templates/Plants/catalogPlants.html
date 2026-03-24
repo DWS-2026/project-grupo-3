@@ -44,7 +44,7 @@
             <form method="get" action="/Plants/catalogPlants" class="d-flex gap-3">
                 <input type="hidden" name="_csrf" value="{{token}}"/>
                 {{#userOnly}}
-                <select name="type"
+                <select name="whatToShow"
                         onchange="this.form.submit()"
                         class="form-select form-select-sm rounded-pill px-4 py-3"
                         style="height: 50px; width: 200px;">
@@ -117,19 +117,21 @@
                                                     <span class="star {{#rate5}}filled{{/rate5}}">&#9733;</span>
                                                 </span>
 
-
+                                        {{#adminOnly}}
                                                 <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
                                                     <button type="submit" class="trash-icon bi bi-trash3"></button>
                                                     <input type="hidden" name="_csrf" value="{{token}}"/>
                                                 </form>
+                                        {{/adminOnly}}
 
                                         </span>
                             <div class="buttons-container">
                                 <button type="button" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary" onclick="openRatingModal({{id}})">
                                     Valorar
                                 </button>
-
+                            {{#editPlant}}
                                 <a href="/Plants/editPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Editar plantita</a>
+                                {{/editPlant}}
                                 <a href="/Plants/viewPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más detalles 💫</a>
                             </div>
 
@@ -137,68 +139,7 @@
                     </div>
                 </div>
                 {{/plants}}
-                {{#onlySeePlants}}
-                <div class="col">
-                    <div class="card shadow-sm h-100 planta">
-                        <div class="card-img-container">
-                            <div id="plantCarousel{{id}}" class="carousel slide" data-bs-ride="false">
 
-                                <div class="carousel-inner">
-                                    {{#images}}
-                                    <div class="carousel-item {{#-first}}active{{/-first}}">
-                                        <img src="/images/{{id}}" class="d-block w-100">
-                                    </div>
-                                    {{/images}}
-
-                                </div>
-
-                                <!-- Arrows -->
-                                <button class="carousel-control-prev" type="button"
-                                        data-bs-target="#plantCarousel{{id}}" data-bs-slide="prev">
-                                    <span class="bi bi-arrow-left custom-arrow"></span>
-                                </button>
-
-                                <button class="carousel-control-next" type="button"
-                                        data-bs-target="#plantCarousel{{id}}" data-bs-slide="next">
-                                    <span class="bi bi-arrow-right custom-arrow"></span>
-                                </button>
-
-                            </div>
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="h5 change-color">{{name}}</h5>
-                            <p class="card-text fw-bold">{{cares}}</p>
-                            <p class="card-text">{{description}}</p>
-                            <span class="icon-group d-flex justify-content-between align-items-center">
-
-
-                                                <span style="display:flex; flex-direction:row; gap:2px;">
-                                                    <span class="star {{#rate1}}filled{{/rate1}}">&#9733;</span>
-                                                    <span class="star {{#rate2}}filled{{/rate2}}">&#9733;</span>
-                                                    <span class="star {{#rate3}}filled{{/rate3}}">&#9733;</span>
-                                                    <span class="star {{#rate4}}filled{{/rate4}}">&#9733;</span>
-                                                    <span class="star {{#rate5}}filled{{/rate5}}">&#9733;</span>
-                                                </span>
-                                            {{#adminOnly}}
-                                            <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
-                                                    <button type="submit" class="trash-icon bi bi-trash3"></button>
-                                                <input type="hidden" name="_csrf" value="{{token}}"/>
-                                                </form>
-                                            {{/adminOnly}}
-                                         </span>
-                            <div class="buttons-container">
-                                <button type="button" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary" onclick="openRatingModal({{id}})">
-                                    Valorar
-                                </button>
-                                <a href="/Plants/viewPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más detalles 💫</a>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-                {{/onlySeePlants}}
                 {{#example}}
                 <div class="col">
                     <div class="card shadow-sm h-100 planta">

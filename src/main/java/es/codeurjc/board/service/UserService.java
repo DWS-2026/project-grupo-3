@@ -48,21 +48,33 @@ public class UserService {
     }
 
     public boolean isUserUser(HttpServletRequest request){
+        if(this.seeIfUserIsLoggedIn(request)){
         return request.isUserInRole("USER");
+        }
+        return false;
     }
 
     public boolean isUserAdmin(HttpServletRequest request){
-        return request.isUserInRole("ADMIN");
+        if(this.seeIfUserIsLoggedIn(request)){
+            return request.isUserInRole("ADMIN");
+        }
+        return false;
+
     }
 
     public User getUser(HttpServletRequest request){
-        Principal principal = request.getUserPrincipal();
-        User user = userRepository.findByUsername(principal.getName())
-                .or(() -> userRepository.findByEmail(principal.getName()))
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return user;
+        if(this.seeIfUserIsLoggedIn(request)){
+            Principal principal = request.getUserPrincipal();
+
+            User user = userRepository.findByUsername(principal.getName())
+                    .or(() -> userRepository.findByEmail(principal.getName()))
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            return user;
+        }
+        return null;
 
     }
+
     public User getUser(String  username){
         User user = userRepository.findByUsername(username)
                 .or(() -> userRepository.findByEmail(username))
