@@ -37,34 +37,46 @@
             </div>
         </div>
         {{#userOnly}}
-        <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Plants/new">Añadir plantita</a>
+            <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Plants/new">Añadir plantita</a>
         {{/userOnly}}
-        <div class="py-lg-5">
+        <div class="flex-wrap d-flex gap-3 w-100">
             {{#loginOptions}}
-            <form method="get" action="/Plants/catalogPlants" class="d-flex gap-3">
-                <input type="hidden" name="_csrf" value="{{token}}"/>
-                {{#userOnly}}
-                <select name="whatToShow"
-                        onchange="this.form.submit()"
-                        class="form-select form-select-sm rounded-pill px-4 py-3"
-                        style="height: 50px; width: 200px;">
+                <form method="get" action="/Plants/catalogPlants" class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center w-100 gap-3">
+                    <div class="d-flex gap-3">
+                        {{#userOnly}}
+                            <select name="whatToShow"
+                                    onchange="this.form.submit()"
+                                    class="form-select form-select-sm rounded-pill px-4 py-3"
+                                    style="height: 50px; width: 200px;">
 
-                    <option value="" {{#all}}selected{{/all}}>Todo</option>
-                    <option value="misPlantas" {{^all}}selected{{/all}}>Mis Plantas - editar</option>
+                                <option value="" {{^editPlant}}selected{{/editPlant}}>Todo</option>
+                                <option value="misPlantas" {{#editPlant}}selected{{/editPlant}}>Mis Plantas - editar</option>
 
-                </select>
-                {{/userOnly}}
-                <select name="order"
-                        onchange="this.form.submit()"
-                        class="form-select form-select-sm rounded-pill px-4 py-3"
-                        style="height: 50px; width: 175px;">
+                            </select>
+                        {{/userOnly}}
+                        <select name="order"
+                                onchange="this.form.submit()"
+                                class="form-select form-select-sm rounded-pill px-4 py-3"
+                                style="height: 50px; width: 175px;">
 
-                    <option value="" value="" {{^isCreatedAtSort}}selected{{/isCreatedAtSort}}>Rating</option>
-                    <option value="moreRecent" {{#isCreatedAtSort}}selected{{/isCreatedAtSort}}>Más Recientes</option>
+                            <option value="" value="" {{^isCreatedAtSort}}selected{{/isCreatedAtSort}}>Rating</option>
+                            <option value="moreRecent" {{#isCreatedAtSort}}selected{{/isCreatedAtSort}}>Más Recientes</option>
 
-                </select>
+                        </select>
+                    </div>
+                    <div class="d-flex gap-2" style="flex-wrap: wrap; min-width: 200px;">
+                        <div class="form-floating flex-grow-1">
+                    <input
+                            class="form-control"
+                            name="search"
+                            placeholder="Buscar plantas"
+                            {{#search}}value="{{search}}"{{/search}}
+                    /><label>Buscar plantitas</label>
+                    </div>
+                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Buscar</button>
+                    </div>
 
-            </form>
+                </form>
             {{/loginOptions}}
         </div>
     </section>

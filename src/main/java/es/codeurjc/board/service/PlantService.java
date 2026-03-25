@@ -30,12 +30,8 @@ public class PlantService {
             return plantRepository.count();
         }
 
-        public Plant findById(long id, Model model) {
-
-            Plant plant = plantRepository.findById(id).orElseThrow();
-            model.addAttribute("plant", plant);
-            model.addAttribute("plantID", plant.getId());
-            return plant;
+        public Plant findById(long id) {
+            return plantRepository.findById(id).orElseThrow();
         }
 
         public void save(Plant plant, User username) {
@@ -107,60 +103,37 @@ public class PlantService {
         return plantRepository.findByNameContainingIgnoreCase(name,pageable);
     }
 
-    public Sort sortPlants(String order, Model model){
+    public Sort sortPlants(String order){
         Sort sort;
         if ("moreRecent".equals(order)) {
-            model.addAttribute("isCreatedAtSort", true);
             sort = Sort.by(Sort.Order.desc("createdAt"));
         } else {
             sort = Sort.by(Sort.Order.desc("rating"));
         }
         return sort;
     }
-    private void addNavButtons(Model model, Page<Plant> plants) {
-        model.addAttribute("hasPrev", plants.hasPrevious());
-        model.addAttribute("prev", plants.getNumber() - 1);
-        model.addAttribute("hasNext", plants.hasNext());
-        model.addAttribute("next", plants.getNumber() + 1);
-    }
-    public void returnPlantsDependingInput(String username, boolean isUserUser, boolean isUserAdmin,
-                                                  String whatToShow,
-                                                  String search, Pageable sortedPage, Model model){
+
+    public Page<Plant> returnPlantsDependingInput(String username, boolean isUserInRoleUser, String whatToShow,
+                                                  String search, Pageable sortedPage){
         Page<Plant> plantsPage;
-        if(isUserUser && "misPlantas".equals(whatToShow)){
+        if(isUserInRoleUser && "misPlantas".equals(whatToShow)){
             if(search == null){
                 plantsPage = this.findByUsername(username,sortedPage);
             }else {
-                model.addAttribute("search", search);
                 plantsPage = this.searchByNamePlantAndFilterByUser(search, username, sortedPage);
             }
-            model.addAttribute("editPlant",true);
-            model.addAttribute("plants", plantsPage.getContent());
-            this.addNavButtons(model, plantsPage);
-        } else if (isUserAdmin || isUserUser){
+        } else {
             if(search == null){
                 plantsPage = this.findAll(sortedPage);
             }else {
-                model.addAttribute("search", search);
-                plantsPage = this.searchByNamePlant(search, sortedPage);
+                plantsPage = this.searchByNamePlant(search,sortedPage);
             }
-            model.addAttribute("all", true);
-            model.addAttribute("plants", plantsPage.getContent());
-            this.addNavButtons(model, plantsPage);
-        } else{
-            model.addAttribute("example",true);
         }
-
-    }
-    public void showSavedFormsNewPlant(Model model, Plant plant, RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
-        redirectAttributes.addFlashAttribute("cares", plant.getCares());
-        redirectAttributes.addFlashAttribute("description", plant.getDescription());
+        return plantsPage;
     }
     public long numberOfPlants(){
         return plantRepository.count();
     }
-
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
             return user.equals(plant.getUser());
     }
