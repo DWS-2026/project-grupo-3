@@ -34,6 +34,8 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
 
     @Autowired
     private ReviewsRepository reviewsRepository;
+    @Autowired
+    private ReviewsService reviewsService;
 
     private void addExampleProducts() throws Exception {
         Product product_ex1 = new Product("Fertilizante", "Nutre tus plantas de manera rápida y efectiva.", 10.99, true );
@@ -177,6 +179,9 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
             }
             if(orderService.numberOfOrders() == 0){
                 addExampleOrders();
+            }
+            if(reviewsService.numberOfOrders() == 0){
+                addExampleReviews();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
