@@ -267,7 +267,96 @@ Solo si ha cambiado.
 
 #### **Capturas de Pantalla Actualizadas**
 
-Solo si han cambiado.
+#### **1. Página Principal / Home**
+![Página Principal](imagesGithub/screens/common/homePageNew.png)
+
+> Página de inicio que muestra el nombre de la aplicación Green Care y ofrece accesos directos al catálogo de plantas, al catálogo de productos y a las opciones de inicio de sesión y registro. Incluye una barra de navegación adaptada y un pie de página, permitiendo al usuario navegar entre las principales secciones de la aplicación.
+
+#### **2. Página de registro**
+![Página de registro](imagesGithub/screens/noRegisteredUser/register.png)
+
+> Página que permite a los nuevos usuarios crear una cuenta en la aplicación proporcionando su nombre, correo electrónico y contraseña. Una vez registrado, el usuario puede acceder a funcionalidades personalizadas como la gestión de sus propias plantas.
+
+#### **3. Catálogo de plantas (No registrado)**
+![Catálogo de plantas](imagesGithub/screens/noRegisteredUser/catalogPlantsNew.png)
+
+> Muestra las plantas disponibles en el sistema para cualquier visitante. Los usuarios no registrados pueden ver la información básica y las valoraciones de las plantas, pero no pueden editarlas ni añadir nuevas.
+
+#### **4. Catálogo de productos (No registrado)**
+![Catálogo de productos](imagesGithub/screens/noRegisteredUser/catalogProducts.png)
+
+> Muestra los productos disponibles en el sistema para cualquier visitante. Los usuarios no registrados pueden ver la información básica y el precio de los productos, pero no pueden comprarlos. Además, se agregó paginación.
+
+#### **5. Tablón de reviews (No registrado)**
+![Tablón de Reviews](imagesGithub/screens/noRegisteredUser/reviews.png)
+
+> Muestra las reviews de los usuarios sobre las plantas y los productos, con su valoración y comentarios. Los usuarios no registrados pueden leer las opiniones de otros, pero no pueden escribir sus propias reviews ni valoraciones.
+
+#### **6. Página de inicio para usuario registrado**
+![Página de inicio registrado](imagesGithub/screens/registeredUser/homePageNew.png)
+
+> Vista principal para usuarios autenticados, con acceso directo al catálogo de plantas, "Mis pedidos" y el catálogo de productos. La interfaz se adapta para mostrar las opciones relevantes al perfil del usuario.
+
+#### **7. Catálogo de plantas para usuario registrado**
+![Catálogo de plantas registrado](imagesGithub/screens/registeredUser/CatalogPlantsNew.png)
+
+> Espacio personal donde el usuario puede ver las plantas de los demás usuarios, valorarlas y gestionar su propia colección de plantas. Permite añadir nuevas plantas, editar las existentes y ver fotos actualizadas. Además, se agregó paginación.
+
+#### **8. Catálogo de productos para usuario registrado**
+![Catálogo de productos](imagesGithub/screens/registeredUser/CatalogProductsNew.png)
+
+> Tienda online de Green Care donde se listan productos para el cuidado de las plantas. Los usuarios pueden explorar el catálogo y añadir artículos a su carrito de compra. Además, se agregó paginación.
+
+#### **9. Tablón de reviews para usuario registrado**
+![Tablón de Reviews](imagesGithub/screens/registeredUser/reviews.png)
+
+> Muestra las reviews de los usuarios sobre las plantas y los productos, con su valoración y comentarios. Los usuarios registrados pueden escribir sus propias reviews y valoraciones.
+
+#### **10. Carrito de la compra**
+![Carrito de la compra](imagesGithub/screens/registeredUser/shoppingCartNew.png)
+
+> Resumen de los productos seleccionados para la compra. Permite gestionar cantidades, ver el subtotal y proceder a la pantalla de pago para finalizar el pedido.
+
+#### **11. Pedidos del usuario**
+![Pedidos del usuario](imagesGithub/screens/registeredUser/myOrdersNew.png)
+
+> Historial de compras realizadas por el usuario, mostrando detalles como la fecha, los productos adquiridos, el precio total y el estado actual de cada pedido.
+
+#### **12. Página de inicio para administrador**
+![Página de inicio administrador](imagesGithub/screens/admin/homePageNew.png)
+
+> Página de inicio para usuarios con rol de administrador, con acceso a la gestión de usuarios, productos y pedidos. La interfaz se adapta para mostrar las opciones relevantes al perfil del administrador.
+
+#### **13. Gestión de productos (Administrador)**
+![Gestión de productos](imagesGithub/screens/admin/productsManagementNew.png)
+
+> Interfaz que permite al administrador listar, buscar, añadir, editar y eliminar productos del catálogo de la tienda de forma centralizada.
+
+#### **14. Gestión de pedidos (Administrador)**
+![Gestión de pedidos](imagesGithub/screens/admin/managementsOrdersNew.png)
+
+> Panel para supervisar todos los pedidos del sistema, permitiendo al administrador cambiar estados (procesando, enviado, entregado) y ver detalles del comprador.
+
+#### **15. Quizz de plantas**
+![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
+
+> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
+
+#### **16. Quizz de plantas**
+![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
+
+> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
+
+#### **17. Quizz de plantas**
+![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
+
+> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
+
+
+#### **18. Quizz de plantas**
+![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
+
+> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
 
 ### **Instrucciones de Ejecución**
 

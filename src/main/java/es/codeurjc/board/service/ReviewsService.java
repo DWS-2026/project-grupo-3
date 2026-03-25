@@ -55,4 +55,8 @@ public class ReviewsService {
     public List<Reviews> findByType(Reviews.ReviewType type) {
         return reviewsRepository.findByType(type);
     }
+
+    public long numberOfOrders() {
+        return reviewsRepository.count();
+    }
 }
