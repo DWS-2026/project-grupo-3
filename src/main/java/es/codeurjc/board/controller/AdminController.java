@@ -6,17 +6,21 @@ import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.modelAttributes.SessionAttributes;
 import es.codeurjc.board.repositories.OrderRepository;
 import es.codeurjc.board.repositories.ProductRepository;
+import es.codeurjc.board.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/Admin")   // 👈 Prefijo común
+@RequestMapping("/Admin")
 public class AdminController {
 
     @Autowired
@@ -27,6 +31,9 @@ public class AdminController {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/adminPanel")
@@ -56,7 +63,17 @@ public class AdminController {
     }
 
     @GetMapping("/userManagement")
-    public String userManagement() {
+    public String userManagement(Model model) {
+        model.addAttribute("users", userService);
         return "Admin/userManagement";
+    }
+
+    @PostMapping("/admin/deleteUser/{id}")
+    public String deleteUserByAdmin(@PathVariable Long id, HttpServletRequest request){
+        if(!userService.isUserAdmin(request)){
+            return "/accessDenied";
+        }
+        userService.deleteUser(id);
+        return "redirect:/Admin/userManagement";
     }
 }

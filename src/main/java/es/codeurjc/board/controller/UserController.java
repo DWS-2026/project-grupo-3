@@ -73,11 +73,12 @@ public class UserController {
     }
 
     @PostMapping("/User/register")
-    public String register(Model model,@RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword){
+    public String register(Model model,@RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword, @RequestParam String description){
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
+        user.setDescription(description);
 
         List<String> roles = new ArrayList<>();
         roles.add("USER");
@@ -117,6 +118,11 @@ public class UserController {
     }
 
     //@PostMapping --> aquí tengo que el postmapping para eliminar un usuario desde el panel del admin
+    @GetMapping("/userManagement")
+    public String showusers(Model model){
+        model.addAttribute("users", userService.findAll());
+        return "/Admin/userManagement";
+    }
 
 
 

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,6 +26,10 @@ public class UserService {
     private PlantRepository plantService;
 
 
+    public List<User> findAll(){
+        Sort sort = Sort.by(Sort.Direction.ASC, "username");
+        return userRepository.findAll(sort);
+    }
     public void deleteById(long id) { userRepository.findById(id); }
 
     public void saveUser (User user){
