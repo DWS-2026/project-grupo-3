@@ -68,7 +68,7 @@ public class AdminController {
         return "Admin/userManagement";
     }
 
-    @PostMapping("/admin/deleteUser/{id}")
+    @PostMapping("/deleteUser/{id}")
     public String deleteUserByAdmin(@PathVariable Long id, HttpServletRequest request){
         if(!userService.isUserAdmin(request)){
             return "/accessDenied";
