@@ -1,18 +1,16 @@
 package es.codeurjc.board.service;
 
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
+
 
 
 @Service
