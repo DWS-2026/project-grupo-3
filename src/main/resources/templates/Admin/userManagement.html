@@ -32,14 +32,18 @@
             </tr>
         </thead>
         <tbody>
+            {{#users}}
             <tr>
             <td><input type="checkbox"></td>
-            <td>Pepito</td>
-            <td>examp</td>
+            <td>{{username}}</td>
+            <td>{{description}}</td>
             <td>examp</td>
             </tr>
+            {{/users}}
     </tbody>
     </table>
+
+
 
     <div class="mb-3">
         <button class="btn btn-danger" id="delete-selected">Eliminar usuario/s</button>
