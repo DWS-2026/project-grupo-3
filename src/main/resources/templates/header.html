@@ -3,9 +3,9 @@
                 <div class="icon-group">
                     {{#userOnly}}
                         {{#profile}}
-                    <a href="/User/user" class="icons" aria-label="Ir a perfil de usuario">
-                        👤
-                    </a>
+                            <a href="/User/user" class="icons" aria-label="Ir a perfil de usuario">
+                                👤
+                            </a>
                         {{/profile}}
                     {{/userOnly}}
 
@@ -38,7 +38,7 @@
                         <button type="submit" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">
                             Log Out
                         </button>
-                        <!--<input type="hidden" name="_csrf" value="{{token}}"/>-->
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
                     </form>
                 {{/loginOptions}}
 

@@ -1,7 +1,8 @@
 package es.codeurjc.board.controller;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
@@ -49,12 +50,7 @@ public class PlantController {
     }
 
 
-    private void addNavButtons(Model model, Page<Plant> plants) {
-        model.addAttribute("hasPrev", plants.hasPrevious());
-        model.addAttribute("prev", plants.getNumber() - 1);
-        model.addAttribute("hasNext", plants.hasNext());
-        model.addAttribute("next", plants.getNumber() + 1);
-    }
+
 
 
     @GetMapping("/catalogPlants")
@@ -66,7 +62,10 @@ public class PlantController {
             Page<Plant> plantsPage = plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(),
                     userService.isUserUser(session), whatToShow, search, sortedPage);
             model.addAttribute("plants", plantsPage.getContent());
-            this.addNavButtons(model, plantsPage);
+            model.addAttribute("hasPrev", plantsPage.hasPrevious());
+            model.addAttribute("prev", plantsPage.getNumber() - 1);
+            model.addAttribute("hasNext", plantsPage.hasNext());
+            model.addAttribute("next", plantsPage.getNumber() + 1);
         } else {
             model.addAttribute("example",true);
         }
@@ -179,7 +178,6 @@ public class PlantController {
             plantService.save(plant);
         }
 
-        // Rediriges de vuelta al catálogo
         return "redirect:/Plants/catalogPlants";
     }
 }

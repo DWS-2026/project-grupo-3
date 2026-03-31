@@ -73,8 +73,9 @@
               <p class="card-text">Precio: €{{price}}</p>
 
               <!-- Añadir al carrito: solo para usuarios logueados, no para admin -->
-              {{^adminOnly}}
+              {{#userOnly}}
               <form action="/Cart/add/{{id}}" method="post" class="mt-auto">
+                <input type="hidden" name="_csrf" value="{{token}}"/>
                 <div class="input-group mb-2">
                   <span class="input-group-text">Cantidad</span>
                   <input type="number"
@@ -90,7 +91,7 @@
                   Añadir al carrito
                 </button>
               </form>
-              {{/adminOnly}}
+              {{/userOnly}}
             </div>
 
           </div>
