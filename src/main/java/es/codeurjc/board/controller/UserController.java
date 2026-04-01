@@ -78,10 +78,7 @@ public class UserController {
         return "User/configuration";
     }
 
-    @GetMapping("/User/editProfile")
-    public String editProfile() {
-        return "User/editProfile";
-    }
+
 
     @GetMapping("/User/register")
     public String register() {

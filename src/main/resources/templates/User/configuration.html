@@ -18,7 +18,35 @@
 <form class="text-center" action="/" enctype="multipart/form-data">
     <input type="hidden" name="_csrf" value="{{token}}"/>
     <h2 class="title-profile">Configuración</h2>
-    <h2 class="title-profile">Configuración</h2>
+
+    <label class="circle-edition">
+        <input type="file" hidden>
+        <span>+</span>
+    </label>
+    <p>Cambiar foto de perfil</p>
+
+    <!-- User -->
+    <div class="form-floating mb-3">
+      <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Escribe tu nombre de usuario"
+      />
+      <label for="username">Cambiar nombre de Usuario</label>
+    </div>
+
+    <!-- Description -->
+    <div class="form-floating mb-3">
+        <textarea
+                class="form-control"
+                placeholder="Descripción"
+                id="profileDescription"
+                style="height: 120px"
+                required
+        ></textarea>
+      <label for="profileDescription">Cambiar descripción</label>
+    </div>
 
     <!-- Name of the user -->
     <div class="form-floating mb-3">
