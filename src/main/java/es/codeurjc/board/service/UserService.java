@@ -1,6 +1,7 @@
 package es.codeurjc.board.service;
 
 
+import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Order;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.User;
@@ -14,10 +15,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class UserService {
@@ -46,6 +50,12 @@ public class UserService {
 
     public User findByUser(String user){
         return userRepository.findByUsername(user).orElse(null);
+    }
+
+    @Transactional
+    public void addImageToUser(User user, Image image) {
+        user.setProfilePhoto(image);
+        userRepository.save(user);
     }
 
     public void deleteUser(Long id) {

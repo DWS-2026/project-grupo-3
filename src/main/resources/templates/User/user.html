@@ -68,6 +68,10 @@
                         <span>Nueva foto de perfil</span>
                     </label>
 
+                    {{#profilePhoto}}
+                        <img src="/images/{{id}}" class="d-block w-100">
+                    {{/profilePhoto}}
+
                     <!-- Description -->
                     <textarea class="publication-text"
                               placeholder="Escribe una descripción..."></textarea>

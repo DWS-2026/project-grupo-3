@@ -1,8 +1,10 @@
 package es.codeurjc.board.controller;
+import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Order;
 import es.codeurjc.board.model.OrderStatus;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
+import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.OrderService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +33,9 @@ public class UserController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ImageService imageService;
 
 
     @PostMapping("/User/delete/{id}")
@@ -83,7 +89,7 @@ public class UserController {
     }
 
     @PostMapping("/User/register")
-    public String register(Model model,@RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword, @RequestParam String description){
+    public String register(Model model, MultipartFile imageFile, @RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword, @RequestParam String description) throws IOException {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
@@ -117,7 +123,12 @@ public class UserController {
             return "/User/register";
         }
 
+
         userService.saveUser(user);
+        if (!imageFile.isEmpty()) {
+            Image imageOne = imageService.createImage(imageFile);
+            userService.addImageToUser(user, imageOne);
+        }
         return "redirect:/";
     }
 

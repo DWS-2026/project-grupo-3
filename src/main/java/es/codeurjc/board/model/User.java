@@ -23,7 +23,10 @@ public class User {
     private String password;
     private String username;
     private String description;
-    private String profileImage;
+
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
+    private Image profilePhoto;
+
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reviews> reviews = new ArrayList<>();
@@ -82,14 +85,6 @@ public class User {
         this.description = description;
     }
 
-    public String getProfileImage() {
-        return profileImage;
-    }
-
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
-    }
-
     public List<String> getRoles() {
         return roles;
     }
@@ -124,15 +119,21 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(username, user.username) && Objects.equals(description, user.description) && Objects.equals(profileImage, user.profileImage) && Objects.equals(reviews, user.reviews) && Objects.equals(plants, user.plants);
+        return Objects.equals(id, user.id) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(username, user.username) && Objects.equals(description, user.description) && Objects.equals(reviews, user.reviews) && Objects.equals(plants, user.plants);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, roles, email, password, username, description, profileImage, reviews, plants);
+        return Objects.hash(id, roles, email, password, username, description, reviews, plants);
     }
 
+    public Image getProfilePhoto() {
+        return profilePhoto;
+    }
 
+    public void setProfilePhoto(Image profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
 }
 
 

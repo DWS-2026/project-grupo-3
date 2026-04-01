@@ -87,8 +87,6 @@
         {{/usernameError}}
 
         <!-- User -->
-
-
         <div class="form-floating mb-3">
             <input
                     type="text"
@@ -98,6 +96,20 @@
                     placeholder="Escribe tu nombre de usuario"
             />
             <label for="username">Nombre de Usuario</label>
+        </div>
+
+
+        <!-- Image -->
+        <div class="mb-4 text-start">
+            <label class="form-label change-color fw-medium">Imagen de la planta</label>
+            <input
+                    class="form-control"
+                    name="imageFile"
+                    type="file"
+                    id="plantImage"
+                    accept="image/*"
+                    required
+            />
         </div>
 
 
@@ -134,6 +146,7 @@
             ¿Ya tienes cuenta?
             <a href="/login" target="_green">Iniciar sesión</a>
         </p>
+
 
     </form>
 </main>
