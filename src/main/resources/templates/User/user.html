@@ -28,8 +28,13 @@
 
     <!-- PROFILE HEADER -->
     <div class="profile-header mb-4">
-        <div class="profile-photo">
-        </div>
+        <img class="profile-photo"
+            src="{{#profilePhoto}}
+                       /images/{{id}}
+                    {{/profilePhoto}}"
+            alt=""
+
+        />
 
         <div class="main-info">
             <h1 class="user-name">{{username}}</h1>
@@ -40,8 +45,8 @@
 
 
             <div class="buttons">
-                <a href="/User/editProfile" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Editar perfil</a>
-                <a href="/User/configuration" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Configuración</a>
+                <a href="/User/editProfile" class="btn btn-success rounded-pill px-4 py-2 fw-medium main-button">Editar perfil</a>
+                <a href="/User/configuration" class="btn btn-success rounded-pill px-4 py-2 fw-medium main-button">Configuración</a>
             </div>
         </div>
     </div>
@@ -54,32 +59,7 @@
             <input type="hidden" name="_csrf" value="{{token}}"/>
         </form>
 
-    <div class="row g-4">
-
-        <!-- MY PUBLICATION -->
-        <div class="col-md-6 col-lg-4">
-            <button class="card card-publicacion w-100 text-start p-3">
-
-                <div class="publication-content">
-
-                    <!-- Upload image -->
-                    <label class="publication-image">
-                        <input type="file" hidden>
-                        <span>Nueva foto de perfil</span>
-                    </label>
-
-                    {{#profilePhoto}}
-                        <img src="/images/{{id}}" class="d-block w-100">
-                    {{/profilePhoto}}
-
-                    <!-- Description -->
-                    <textarea class="publication-text"
-                              placeholder="Escribe una descripción..."></textarea>
-
-                </div>
-
-            </button>
-        </div>
+    <div class="row g-4 justify-content-center align-items-center">
 
         <!-- NEW PUBLICATION -->
         <div class="col-md-6 col-lg-4">
@@ -130,9 +110,12 @@
         </div>
 
     </div>
-</div>
     {{/user}}
+</div>
+</div>
+    
 
 {{>footer}}
 </body>
+
 </html>

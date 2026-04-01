@@ -98,9 +98,7 @@ public class UserController {
 
         List<String> roles = new ArrayList<>();
         roles.add("USER");
-        user.setRoles(roles); //Hay que añadirle un lista de string
-
-        userService.saveUser(user);
+        user.setRoles(roles);
 
         boolean error = false;
 
@@ -120,12 +118,12 @@ public class UserController {
         }
 
         if(error){
-            return "/User/register";
+            return "register";
         }
 
 
         userService.saveUser(user);
-        if (!imageFile.isEmpty()) {
+        if (imageFile!= null && !imageFile.isEmpty()) {
             Image imageOne = imageService.createImage(imageFile);
             userService.addImageToUser(user, imageOne);
         }

@@ -21,7 +21,7 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto" id="login-form">
-    <form action="/User/register" method="post">
+    <form action="/User/register" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="{{token}}"/>
         <img
                 class="mb-4"
@@ -101,12 +101,12 @@
 
         <!-- Image -->
         <div class="mb-4 text-start">
-            <label class="form-label change-color fw-medium">Imagen de la planta</label>
+            <label class="form-label change-color fw-medium">Elige imágen de perfil</label>
             <input
                     class="form-control"
                     name="imageFile"
                     type="file"
-                    id="plantImage"
+                    id="userImage"
                     accept="image/*"
                     required
             />
