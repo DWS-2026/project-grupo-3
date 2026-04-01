@@ -31,12 +31,22 @@ public class UserController {
     @Autowired
     private OrderService orderService;
 
-    private boolean passwordsDontMatch= false;
-    private boolean existsUser = false;
+
+    @PostMapping("/User/delete/{id}")
+    public String delete(HttpServletRequest session, @PathVariable Long id){
+        if(userService.getUserID(session)==id){
+            userService.deleteUser(id);
+            return "redirect:/logout";
+        }else{
+            return "/accessDenied";
+        }
+    }
+
 
     @GetMapping("/User/user")
-    public String user(Model model) {
+    public String user(Model model, HttpServletRequest session) {
         btnsHeader.hideBtnHeader(model,"profile");
+        model.addAttribute("user", userService.getUser(session));
         return "User/user";
     }
 
@@ -111,18 +121,13 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("User/delete/{id}")
-    public String deleteUser(@PathVariable long id) throws IOException {
-        userService.deleteById(id);
-        return "redirect:/Reviews/forum";
-    }
 
-    //@PostMapping --> aquí tengo que el postmapping para eliminar un usuario desde el panel del admin
     @GetMapping("/userManagement")
     public String showusers(Model model){
         model.addAttribute("users", userService.findAll());
         return "/Admin/userManagement";
     }
+
 
 
 

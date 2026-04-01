@@ -1,8 +1,10 @@
 package es.codeurjc.board.service;
 
 
+import es.codeurjc.board.model.Order;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.User;
+import es.codeurjc.board.repositories.OrderRepository;
 import es.codeurjc.board.repositories.PlantRepository;
 import es.codeurjc.board.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,13 +26,15 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PlantRepository plantService;
+    @Autowired
+    private OrderRepository orderRepository;
 
 
     public List<User> findAll(){
         Sort sort = Sort.by(Sort.Direction.ASC, "username");
         return userRepository.findAll(sort);
     }
-    public void deleteById(long id) { userRepository.findById(id); }
+
 
     public void saveUser (User user){
         userRepository.save(user);
@@ -44,8 +48,20 @@ public class UserService {
         return userRepository.findByUsername(user).orElse(null);
     }
 
-    public void deleteUser(Long id){
-        userRepository.deleteById(id);
+    public void deleteUser(Long id) {
+        // Primero obtenemos el usuario
+        User user = userRepository.findById(id).orElse(null);
+
+        if (user != null) {
+            // Recorremos todos los pedidos del usuario y los eliminamos
+            List<Order> orders = orderRepository.findByUserUsername(user.getUsername());
+            for (Order order : orders) {
+                orderRepository.delete(order);
+            }
+
+            // Ahora eliminamos el usuario
+            userRepository.deleteById(id);
+        }
     }
 
     public boolean seeIfUserIsLoggedIn(HttpServletRequest request){

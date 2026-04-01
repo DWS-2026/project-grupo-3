@@ -22,6 +22,7 @@
 <body>
 {{>header}}
 <div class="profile">
+    {{#user}}
     <h2 class="title-profile">Mi Perfil</h2>
 
 
@@ -31,10 +32,9 @@
         </div>
 
         <div class="main-info">
-            <h1 class="user-name">Nombre Usuario</h1>
-
+            <h1 class="user-name">{{username}}</h1>
             <div class="data-box">
-                <textarea id="user-description" placeholder="Añade una descripción sobre ti." disabled></textarea>
+                <textarea id="user-description" placeholder="{{description}}" disabled></textarea>
             </div>
 
 
@@ -42,15 +42,6 @@
             <div class="buttons">
                 <a href="/User/editProfile" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Editar perfil</a>
                 <a href="/User/configuration" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button">Configuración</a>
-
-                <!-- DELETE BUTTON -->
-                <form action="/User/delete/{{id}}" method="post" style="display:inline;">
-                    <button type="submit" class="btn delete-btn">
-                        🗑
-                    </button>
-                    <input type="hidden" name="_csrf" value="{{token}}"/>
-                </form>
-
             </div>
         </div>
     </div>
@@ -58,8 +49,7 @@
     <div class="profile">
 
         <!-- DELETE BUTTON -->
-
-        <form class="delete-form" action="/Plants/delete/user" method="post">
+        <form class="delete-form" action="/User/delete/{{id}}" method="post">
             <button type="submit" class="trash-icon bi bi-trash3"></button>
             <input type="hidden" name="_csrf" value="{{token}}"/>
         </form>
@@ -137,6 +127,8 @@
 
     </div>
 </div>
+    {{/user}}
+
 {{>footer}}
 </body>
 </html>
