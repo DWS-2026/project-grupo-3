@@ -46,6 +46,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/Products/catalogProducts").permitAll()
                         .requestMatchers("/Reviews/forum").permitAll()
                         .requestMatchers("/quizzPlants").permitAll()
+                        .requestMatchers("/quizzPlants/result").permitAll()
                         .requestMatchers("/User/delete/*").permitAll()
 
                         // PRIVATE PAGES

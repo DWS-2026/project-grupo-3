@@ -25,85 +25,163 @@
         <h1 class="h2">¿Qué plantita eres? 🌱</h1>
         <p class="lead">Contesta a las preguntas y averígualo.</p>
     </div>
+    <form method="post" action="/quizzPlants" id="quizForm">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
 
-    <form method="post" action="/quiz/result">
+    <div class="container d-flex justify-content-center">
+        <div class="card p-4 shadow" style="max-width: 500px; width: 100%;">
+            <div id="quiz-container">
 
-        <input type="hidden" name="_csrf" value="{{token}}"/>
+                <!-- PREGUNTAS 1 a 12 -->
+                <div class="question">
+                    <h5>1. ¿Cómo eres en tu día a día?</h5>
+                    <div class="form-check"><input type="radio" name="p1" value="a"> Tranquila</div>
+                    <div class="form-check"><input type="radio" name="p1" value="b"> Sociable</div>
+                    <div class="form-check"><input type="radio" name="p1" value="c"> Independiente</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-        <div class="col-md-7 col-lg-8 mx-auto">
+                <div class="question d-none">
+                    <h5>2. ¿Qué plan prefieres?</h5>
+                    <div class="form-check"><input type="radio" name="p2" value="a"> Relax</div>
+                    <div class="form-check"><input type="radio" name="p2" value="b"> Amigos</div>
+                    <div class="form-check"><input type="radio" name="p2" value="c"> Aventura</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <!-- P1 -->
-            <hr class="my-4">
-            <h4>1. ¿Cómo eres en tu día a día?</h4>
-            <div class="form-check"><input type="radio" name="p1" value="a" checked> Tranquila y constante</div>
-            <div class="form-check"><input type="radio" name="p1" value="b"> Alegre y sociable</div>
-            <div class="form-check"><input type="radio" name="p1" value="c"> Independiente y fuerte</div>
+                <div class="question d-none">
+                    <h5>3. ¿Cómo reaccionas al estrés?</h5>
+                    <div class="form-check"><input type="radio" name="p3" value="a"> Calma</div>
+                    <div class="form-check"><input type="radio" name="p3" value="b"> Busco ayuda</div>
+                    <div class="form-check"><input type="radio" name="p3" value="c"> Me adapto</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <!-- P2 -->
-            <hr class="my-4">
-            <h4>2. ¿Qué plan te gusta más?</h4>
-            <div class="form-check"><input type="radio" name="p2" value="a" checked> Leer o descansar</div>
-            <div class="form-check"><input type="radio" name="p2" value="b"> Salir con amigos</div>
-            <div class="form-check"><input type="radio" name="p2" value="c"> Aventuras nuevas</div>
+                <div class="question d-none">
+                    <h5>4. ¿Clima favorito?</h5>
+                    <div class="form-check"><input type="radio" name="p4" value="a"> Templado</div>
+                    <div class="form-check"><input type="radio" name="p4" value="b"> Soleado</div>
+                    <div class="form-check"><input type="radio" name="p4" value="c"> Seco</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>3. ¿Cómo reaccionas al estrés?</h4>
-            <div class="form-check"><input type="radio" name="p3" value="a" checked> Me tomo mi tiempo</div>
-            <div class="form-check"><input type="radio" name="p3" value="b"> Busco apoyo</div>
-            <div class="form-check"><input type="radio" name="p3" value="c"> Me adapto rápido</div>
+                <div class="question d-none">
+                    <h5>5. ¿Cómo trabajas?</h5>
+                    <div class="form-check"><input type="radio" name="p5" value="a"> A mi ritmo</div>
+                    <div class="form-check"><input type="radio" name="p5" value="b"> En equipo</div>
+                    <div class="form-check"><input type="radio" name="p5" value="c"> Solo</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>4. ¿Qué clima prefieres?</h4>
-            <div class="form-check"><input type="radio" name="p4" value="a" checked> Templado</div>
-            <div class="form-check"><input type="radio" name="p4" value="b"> Soleado</div>
-            <div class="form-check"><input type="radio" name="p4" value="c"> Seco/caluroso</div>
+                <div class="question d-none">
+                    <h5>6. ¿Qué te define?</h5>
+                    <div class="form-check"><input type="radio" name="p6" value="a"> Paciencia</div>
+                    <div class="form-check"><input type="radio" name="p6" value="b"> Energía</div>
+                    <div class="form-check"><input type="radio" name="p6" value="c"> Resistencia</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>5. ¿Cómo trabajas mejor?</h4>
-            <div class="form-check"><input type="radio" name="p5" value="a" checked> A mi ritmo</div>
-            <div class="form-check"><input type="radio" name="p5" value="b"> En equipo</div>
-            <div class="form-check"><input type="radio" name="p5" value="c"> Independiente</div>
+                <div class="question d-none">
+                    <h5>7. ¿Cómo te ven?</h5>
+                    <div class="form-check"><input type="radio" name="p7" value="a"> Relajada</div>
+                    <div class="form-check"><input type="radio" name="p7" value="b"> Divertida</div>
+                    <div class="form-check"><input type="radio" name="p7" value="c"> Fuerte</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>6. ¿Qué te define más?</h4>
-            <div class="form-check"><input type="radio" name="p6" value="a" checked> Paciencia</div>
-            <div class="form-check"><input type="radio" name="p6" value="b"> Energía</div>
-            <div class="form-check"><input type="radio" name="p6" value="c"> Resistencia</div>
+                <div class="question d-none">
+                    <h5>8. ¿Qué valoras?</h5>
+                    <div class="form-check"><input type="radio" name="p8" value="a"> Paz</div>
+                    <div class="form-check"><input type="radio" name="p8" value="b"> Conexión</div>
+                    <div class="form-check"><input type="radio" name="p8" value="c"> Libertad</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>7. ¿Cómo te ven los demás?</h4>
-            <div class="form-check"><input type="radio" name="p7" value="a" checked> Relajada</div>
-            <div class="form-check"><input type="radio" name="p7" value="b"> Divertida</div>
-            <div class="form-check"><input type="radio" name="p7" value="c"> Fuerte</div>
+                <div class="question d-none">
+                    <h5>9. ¿Dónde estás mejor?</h5>
+                    <div class="form-check"><input type="radio" name="p9" value="a"> Casa</div>
+                    <div class="form-check"><input type="radio" name="p9" value="b"> Fiesta</div>
+                    <div class="form-check"><input type="radio" name="p9" value="c"> Naturaleza</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>8. ¿Qué valoras más?</h4>
-            <div class="form-check"><input type="radio" name="p8" value="a" checked> Paz</div>
-            <div class="form-check"><input type="radio" name="p8" value="b"> Conexión</div>
-            <div class="form-check"><input type="radio" name="p8" value="c"> Libertad</div>
+                <div class="question d-none">
+                    <h5>10. ¿Cómo afrontas cambios?</h5>
+                    <div class="form-check"><input type="radio" name="p10" value="a"> Poco a poco</div>
+                    <div class="form-check"><input type="radio" name="p10" value="b"> Emoción</div>
+                    <div class="form-check"><input type="radio" name="p10" value="c"> Sin miedo</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>9. ¿Dónde te sentirías mejor?</h4>
-            <div class="form-check"><input type="radio" name="p9" value="a" checked> En casa</div>
-            <div class="form-check"><input type="radio" name="p9" value="b"> En una fiesta</div>
-            <div class="form-check"><input type="radio" name="p9" value="c"> En la naturaleza</div>
+                <div class="question d-none">
+                    <h5>11. ¿Qué te gusta más?</h5>
+                    <div class="form-check"><input type="radio" name="p11" value="a"> Rutina</div>
+                    <div class="form-check"><input type="radio" name="p11" value="b"> Diversión</div>
+                    <div class="form-check"><input type="radio" name="p11" value="c"> Cambio</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <h4>10. ¿Cómo afrontas cambios?</h4>
-            <div class="form-check"><input type="radio" name="p10" value="a" checked> Poco a poco</div>
-            <div class="form-check"><input type="radio" name="p10" value="b"> Con emoción</div>
-            <div class="form-check"><input type="radio" name="p10" value="c"> Sin miedo</div>
+                <div class="question d-none">
+                    <h5>12. ¿Cómo decides?</h5>
+                    <div class="form-check"><input type="radio" name="p12" value="a"> Con calma</div>
+                    <div class="form-check"><input type="radio" name="p12" value="b"> Intuición</div>
+                    <div class="form-check"><input type="radio" name="p12" value="c"> Rápido</div>
+                    <div class="alert alert-danger mt-2 d-none error-msg">Selecciona una opción por favor</div>
+                </div>
 
-            <hr class="my-4">
-            <button class="btn btn-success w-100 main-button" type="submit">
-                Averígualo 🌱
-            </button>
+            </div>
 
+            <div class="mt-4 d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary rounded-pill px-4 py-2 main-button secondary" id="prevBtn">Anterior</button>
+                <button type="button" class="btn btn-success rounded-pill px-4 py-2 main-button secondary" id="nextBtn">Siguiente</button>
+                <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 main-button secondary d-none" id="submitBtn">Ver resultado 🌱</button>
+            </div>
         </div>
-    </form>
+    </div>
+</form>
+
 </main>
 
 {{>footer}}
 
 </body>
+<script>
+let current = 0;
+const questions = document.querySelectorAll(".question");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+function showQuestion(index) {
+    questions.forEach(q => q.classList.add("d-none"));
+    questions[index].classList.remove("d-none");
+
+    prevBtn.style.display = index === 0 ? "none" : "inline-block";
+    nextBtn.style.display = index === questions.length - 1 ? "none" : "inline-block";
+    submitBtn.classList.toggle("d-none", index !== questions.length - 1);
+}
+
+nextBtn.addEventListener("click", () => {
+    const currentQuestion = questions[current];
+    const checked = currentQuestion.querySelector("input:checked");
+    const error = currentQuestion.querySelector(".error-msg");
+
+    if (!checked) {
+        if (error) error.classList.remove("d-none");
+        return;
+    } else {
+        if (error) error.classList.add("d-none");
+    }
+
+    current++;
+    showQuestion(current);
+});
+
+prevBtn.addEventListener("click", () => {
+    current--;
+    showQuestion(current);
+});
+
+showQuestion(current);
+</script>
 </html>
