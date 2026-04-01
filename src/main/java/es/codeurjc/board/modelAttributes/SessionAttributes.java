@@ -11,9 +11,8 @@ import java.util.List;
 
 @ControllerAdvice
 public class SessionAttributes {
-    private List<String> attributes = List.of("loginOptions", "userOnly","adminOnly", "adminPanel");
     @ModelAttribute
-    public void addAttributes(Model model, HttpServletRequest request) {
+    public void addAttributes(Model model, HttpServletRequest request, HttpSession session) {
         model.addAttribute("adminPanel", true );
         Principal principal = request.getUserPrincipal();
         System.out.println("URI: " + request.getRequestURI());
@@ -28,6 +27,19 @@ public class SessionAttributes {
             model.addAttribute("userOnly", false);
             model.addAttribute("adminOnly", false);
         }
+        //this attribute is for the quizzPlants
+        String winner = (String) session.getAttribute("winnerPlant");
+        if(winner != null){
+            model.addAttribute("a", "a".equals(winner));
+		    model.addAttribute("b", "b".equals(winner));
+		    model.addAttribute("c", "c".equals(winner));
+            model.addAttribute("nothing", false);
+
+        } else{
+             model.addAttribute("nothing", true);
+
+        }
+
     }
 
 

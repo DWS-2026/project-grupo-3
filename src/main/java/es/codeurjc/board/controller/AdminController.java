@@ -2,7 +2,6 @@ package es.codeurjc.board.controller;
 import es.codeurjc.board.model.Order;
 import es.codeurjc.board.model.OrderStatus;
 import es.codeurjc.board.model.Product;
-import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.modelAttributes.SessionAttributes;
 import es.codeurjc.board.repositories.OrderRepository;
 import es.codeurjc.board.repositories.ProductRepository;
@@ -23,8 +22,6 @@ import java.util.List;
 @RequestMapping("/Admin")
 public class AdminController {
 
-    @Autowired
-    private ButtonsHeader btnsHeader;
 
     @Autowired
     private ProductRepository productRepository;

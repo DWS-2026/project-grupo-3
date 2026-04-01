@@ -1,12 +1,8 @@
 package es.codeurjc.board.model;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import jakarta.persistence.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.sql.rowset.serial.SerialBlob;
 import java.util.ArrayList;
 @Entity
 public class Plant {
