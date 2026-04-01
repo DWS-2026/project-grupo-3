@@ -35,10 +35,12 @@
             {{#users}}
             <tr>
             <td>
-                <form action="/Admin/deleteUser/{{id}}" method="post" style="padding-top: 0px">
-                <button type="submit">🗑</button>
-                <input type="hidden" name="_csrf" value="{{token}}"/>
-            </form></td>
+                <form action="/Admin/deleteUser/{{id}}" method="post">
+                    <button type="submit" class="btn delete-btn">
+                        🗑
+                    </button>
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+</form></td>
             <td>{{username}}</td>
             <td>{{description}}</td>
             <td>examp</td>
