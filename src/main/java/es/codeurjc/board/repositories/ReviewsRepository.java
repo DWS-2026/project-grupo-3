@@ -18,4 +18,5 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Long> {
     Optional<Reviews> findById (long id);
 
     public void deleteById(long id);
-}
+
+    List<Reviews> findByUser(String user);}

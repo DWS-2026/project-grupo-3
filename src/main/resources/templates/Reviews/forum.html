@@ -37,18 +37,23 @@
         <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Reviews/newreview">Añadir Review</a>
         {{/userOnly}}
 
-        <form method="get" action="/Reviews/forum">
-            <select name="type"
-                    onchange="this.form.submit()"
-                    class="form-select form-select-sm rounded-pill px-4 py-3"
-                    style="height: 50px; width: 125px;">
+        {{#loginOptions}}
+        <form method="get" action="/Reviews/forum" class="d-flex gap-3">
+            {{#userOnly}}
+            <select name="whatToShow" onchange="this.form.submit()" class="form-select form-select-sm rounded-pill px-4 py-3" style="height: 50px; width: 200px;">
+                <option value="">Todo</option>
+                <option value="misReviews" {{#misReviews}}selected{{/misReviews}}>Mis reviews - editar</option>
+            </select>
+            {{/userOnly}}
 
+            <select name="type" onchange="this.form.submit()" class="form-select form-select-sm rounded-pill px-4 py-3" style="height: 50px; width: 125px;">
                 <option value="" {{^type}}selected{{/type}}>Todo</option>
                 <option value="PLANT" {{#isPlant}}selected{{/isPlant}}>Planta</option>
                 <option value="PRODUCT" {{#isProduct}}selected{{/isProduct}}>Producto</option>
-
             </select>
         </form>
+        {{/loginOptions}}
+
     </section>
 
 
@@ -80,9 +85,11 @@
 
                             </div>
                             <div class="buttons-container">
-                                {{#userOnly}}
-                                <a href="/Reviews/editReview/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Editar review</a>
-                                {{/userOnly}}
+                                {{#showEditButton}}
+                                <a href="/Reviews/editReview/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">
+                                    Editar review
+                                </a>
+                                {{/showEditButton}}
                             </div>
                         </div>
                     </div>

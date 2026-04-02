@@ -45,28 +45,35 @@ public class ReviewsController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/Reviews/forum")
-    public String forum(Model model,
-                        @RequestParam(required=false) Reviews.ReviewType type) {
+    public String forum(Model model, @RequestParam(required = false) String type,
+                        @RequestParam(required = false) String whatToShow,
+                        Principal principal, HttpServletRequest request) {
 
         List<Reviews> reviews;
 
-        if (type != null) {
-            reviews = reviewsRepository.findByType(type);
+        // filter by type
+        if (type != null && !type.isEmpty()) {
+            reviews = reviewsService.findByType(Reviews.ReviewType.valueOf(type));
         } else {
-            reviews = reviewsRepository.findAll();
+            reviews = reviewsService.findAll(PageRequest.of(0, 100)).getContent();
         }
 
         model.addAttribute("reviews", reviews);
-
         model.addAttribute("type", type);
-        model.addAttribute("isPlant", type == Reviews.ReviewType.PLANT);
-        model.addAttribute("isProduct", type == Reviews.ReviewType.PRODUCT);
+        model.addAttribute("isPlant", "PLANT".equals(type));
+        model.addAttribute("isProduct", "PRODUCT".equals(type));
 
-        if (reviews.isEmpty()) {
-            model.addAttribute("example", true);
+        // filter by myReviews
+        if (principal != null && "misReviews".equals(whatToShow)) {
+            reviews = reviewsService.findByUser(principal.getName());
+            model.addAttribute("reviews", reviews);
+            model.addAttribute("showEditButton", true);  // ← BOTÓN EDITAR
         }
 
+        model.addAttribute("loginOptions", principal != null);
+        model.addAttribute("misReviews", "misReviews".equals(whatToShow));
         return "Reviews/forum";
     }
 
@@ -77,24 +84,34 @@ public class ReviewsController {
     }
 
     @PostMapping("/Reviews/newreview")
-    public String saveReview(Reviews review, Principal principal) {
-        if (principal != null) {
-            review.setUser(principal.getName());
+    public String saveReview(@RequestParam String title,
+                             @RequestParam String description,
+                             @RequestParam Reviews.ReviewType type,
+                             Principal principal,
+                             HttpServletRequest request) {
+
+        if (principal == null) {
+            return "redirect:/login";
         }
 
+        Reviews review = new Reviews(principal.getName(), title, description, type);
         reviewsRepository.save(review);
-
         return "redirect:/Reviews/forum";
     }
 
-    @GetMapping("/editReview/{id}")
-    public String editPlant(Model model, @PathVariable Long id) {
+    @GetMapping("/Reviews/editReview/{id}")
+    public String editReview(Model model, @PathVariable Long id, Principal principal, HttpServletRequest request) {
         Reviews review = reviewsService.findById(id);
-        model.addAttribute("review",review);
-        model.addAttribute("reviewId", review.getId());
 
+        // Verify that belong to the user
+        if (!review.getUser().equals(principal.getName()) && !userService.isUserAdmin(request)) {
+            return "redirect:/accessDenied";
+        }
+
+        model.addAttribute("review", review);
         return "Reviews/editReview";
     }
+
     @PostMapping("/Reviews/editReview/{id}")
     public String editReview(@PathVariable Long id,@RequestParam String title, @RequestParam String description, @RequestParam Reviews.ReviewType type)throws Exception{
         reviewsService.editReview(title,description,id);
