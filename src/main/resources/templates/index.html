@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!--FAVICON -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Green Care</title>
 
+    <!--FAVICON -->
     <!-- MODERN SVG FAVICON -->
     <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg">
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon/favicon.ico">
@@ -23,16 +23,28 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body >
 {{>header}}
 
-<main class="header-main d-flex justify-content-center align-items-center flex-column">
-    <h1>Green Care</h1>
+<main class="home-hero">
+    <!-- SVG/PNG FONDO -->
+    <div class="hero-bg"></div>
 
-    <div class="buttons-container">
-            <a href="/Plants/catalogPlants" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de plantas</a>
-            <a href="/Products/catalogProducts" class="btn btn-success rounded-pill px-4 py-3 main-button">Catálogo de productos</a>
-        <a href="/quizzPlants" id="Quizz" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Averigua que plantita eres</a>
+    <!-- Contenido centrado -->
+    <div class="hero-content">
+
+        <!-- ✅ BOTONES HORIZONTALES ORIGINALES -->
+        <div class="buttons-container">
+            <a href="/Plants/catalogPlants" class="btn btn-success rounded-pill px-5 py-3 main-button">
+                Catálogo de plantas 🪴
+            </a>
+            <a href="/Products/catalogProducts" class="btn btn-success rounded-pill px-5 py-3 main-button">
+                Catálogo de productos 🛒
+            </a>
+            <a href="/quizzPlants" class="btn btn-success rounded-pill px-5 py-3 main-button secondary">
+                Averigua que plantita eres 🌟
+            </a>
+        </div>
     </div>
 </main>
 
