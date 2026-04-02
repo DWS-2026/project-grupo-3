@@ -9,6 +9,7 @@ import es.codeurjc.board.service.OrderService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,7 +79,17 @@ public class UserController {
         return "User/configuration";
     }
 
+    @PostMapping("/User/configuration/{id}")
+    public String configuration(MultipartFile imageFile, @PathVariable long id, HttpServletRequest session, @RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String description)throws IOException {
+    if(userService.getUserID(session) != id){
+        return "/accessDenied";
+    }else{
+        userService.editUser(String email, String username, String description, MultipartFile imageFile, String passwordEncoder.encode(password), long id);
+        return "redirect: /User/user";
+    }
 
+
+    }
 
     @GetMapping("/User/register")
     public String register() {

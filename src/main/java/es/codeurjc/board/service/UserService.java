@@ -5,6 +5,7 @@ import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Order;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.User;
+import es.codeurjc.board.repositories.ImageRepository;
 import es.codeurjc.board.repositories.OrderRepository;
 import es.codeurjc.board.repositories.PlantRepository;
 import es.codeurjc.board.repositories.UserRepository;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -32,6 +34,8 @@ public class UserService {
     private PlantRepository plantService;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ImageService imageService;
 
 
     public List<User> findAll(){
@@ -56,6 +60,28 @@ public class UserService {
     public void addImageToUser(User user, Image image) {
         user.setProfilePhoto(image);
         userRepository.save(user);
+    }
+
+    public void editUser(String email, String username, String description, MultipartFile imageFile, String password, long id) throws Exception{
+        User user = userRepository.findById(id).orElseThrow();
+        if(email != null && !email.isBlank()){
+            user.setUsername(email);
+        }
+        if(username != null && !username.isBlank()){
+            user.setUsername(username);
+        }
+        if(description != null && !description.isBlank()){
+            user.setDescription(description);
+        }
+        if(imageFile != null && !imageFile.isEmpty()){
+            Image imageOne = imageService.createImage(imageFile);
+            this.addImageToUser(user, imageOne);
+        }
+        if(password != null && !password.isBlank()){
+            user.setPassword(password);
+        }
+        userRepository.save(user);
+
     }
 
     public void deleteUser(Long id) {
