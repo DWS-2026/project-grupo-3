@@ -58,10 +58,10 @@
       <tbody>
       {{#orders}}
       <tr>
-        <!-- Número de pedido -->
+        <!-- Number of the order -->
         <td>{{id}}</td>
 
-        <!-- Productos -->
+        <!-- Products -->
         <td class="text-start">
           <ul class="mb-0 ps-3">
             {{#items}}
@@ -70,7 +70,7 @@
           </ul>
         </td>
 
-        <!-- Estado con badge de color -->
+        <!-- State with colored badge -->
         <td>
           {{#processing}}
           <span class="badge bg-warning text-dark fs-6">⏳ En proceso</span>
@@ -86,10 +86,10 @@
           {{/cancelled}}
         </td>
 
-        <!-- Fecha -->
+        <!-- Date -->
         <td>{{formattedDate}}</td>
 
-        <!-- Precio -->
+        <!-- Price -->
         <td>€{{formattedPrice}}</td>
 
       </tr>

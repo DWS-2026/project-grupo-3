@@ -138,7 +138,4 @@ public class ReviewsController {
     }
 
 
-    //editar review, crear una nueva review (post mapping) eliminar review tanto por parte de admin,
-    //como usuario
-
 }

@@ -1,11 +1,11 @@
-/* Reset básico */
+/* Basic reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Fondo y centrado general */
+/* General background and centering */
 body {
     min-height: 100vh;
     display: flex;
@@ -16,13 +16,13 @@ body {
     text-align: center;
 }
 
-/* Contenedor principal */
+/* Main container */
 body > * {
     max-width: 600px;
     padding: 40px 20px;
 }
 
-/* 404 grande */
+/* Big 404 */
 h1 {
     font-size: 6rem;
     font-weight: 600;
@@ -31,7 +31,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-/* Subtítulo */
+/* Subtitle */
 h2 {
     font-size: 1.8rem;
     font-weight: 400;
@@ -39,7 +39,7 @@ h2 {
     margin-bottom: 25px;
 }
 
-/* Línea divisoria */
+/* dividing line */
 hr {
     border: none;
     height: 2px;
@@ -48,14 +48,14 @@ hr {
     width: 60%;
 }
 
-/* Texto */
+/* Text */
 p {
     font-size: 1rem;
     color: #2F4F2F;
     margin-bottom: 15px;
 }
 
-/* Botón volver al inicio */
+/* Back to home button */
 a {
     display: inline-block;
     margin-top: 10px;
@@ -73,7 +73,7 @@ a:hover {
     transform: translateY(-3px);
 }
 
-/* Texto pequeño */
+/* small text */
 small {
     display: block;
     margin-top: 20px;

@@ -46,7 +46,7 @@
         <div class="col">
           <div class="card shadow-sm h-100">
 
-            <!-- Carrusel de imágenes -->
+            <!-- Image carousel -->
             <div class="card-img-container">
               <div id="productCarousel{{id}}" class="carousel slide" data-bs-ride="false">
                 <div class="carousel-inner">
@@ -72,13 +72,13 @@
               </div>
             </div>
 
-            <!-- Datos del producto -->
+            <!-- Product data -->
             <div class="card-body d-flex flex-column">
               <h5 class="h5 change-color">{{name}}</h5>
               <p class="card-text fw-bold">{{description}}</p>
               <p class="card-text">Precio: €{{price}}</p>
 
-              <!-- Añadir al carrito: solo para usuarios logueados, no para admin -->
+              <!-- Add to cart: only for logged in users, not for admin -->
               {{#userOnly}}
               <form action="/Cart/add/{{id}}" method="post" class="mt-auto">
                 <input type="hidden" name="_csrf" value="{{token}}"/>
@@ -108,7 +108,7 @@
     </div>
   </div>
 
-  <!-- Paginación -->
+  <!-- Pagination -->
   <div style="text-align: center; margin: 10px 0;">
     <nobr>
       {{#hasPrev}}

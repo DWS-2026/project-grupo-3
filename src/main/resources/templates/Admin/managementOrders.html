@@ -51,13 +51,13 @@
             <tbody>
             {{#orders}}
             <tr>
-                <!-- Número de pedido -->
+                <!-- Number of the order -->
                 <td>{{id}}</td>
 
-                <!-- Usuario -->
+                <!-- User -->
                 <td>{{user.username}}</td>
 
-                <!-- Productos -->
+                <!-- Products -->
                 <td class="text-start">
                     <ul class="mb-0 ps-3">
                         {{#items}}
@@ -69,7 +69,7 @@
                     </ul>
                 </td>
 
-                <!-- Estado (selector) -->
+                <!-- Status (selector) -->
                 <td>
                     <form action="/Orders/{{id}}/status" method="post">
                         <input type="hidden" name="_csrf" value="{{token}}"/>
@@ -82,13 +82,13 @@
                     </form>
                 </td>
 
-                <!-- Fecha -->
+                <!-- Arrow -->
                 <td>{{formattedDate}}</td>
 
-                <!-- Precio -->
+                <!-- Price -->
                 <td>€{{formattedPrice}}</td>
 
-                <!-- Eliminar -->
+                <!-- Delete -->
                 <td>
                     <form action="/Orders/{{id}}/delete" method="post"
                           onsubmit="return confirm('¿Seguro que quieres eliminar este pedido?')">
