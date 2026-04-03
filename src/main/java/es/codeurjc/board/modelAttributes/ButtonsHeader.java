@@ -8,12 +8,12 @@ import org.springframework.ui.Model;import java.util.List;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-@ControllerAdvice //añade acciones antes de ejecutar cualquier controlador y es necesario para poder hacer ModelAttribute
-//NO funciona con @Component
+@ControllerAdvice //adds actions before running any controller and is required to be able to make ModelAttribute
+//Does NOT work with @Component
 public class ButtonsHeader {
 
-    @ModelAttribute //esto se añade para que se haga por cada request,
-    // por cada model que pidamos y solo afecta al metodo de debajo
+    @ModelAttribute //this is added so that it is done for each request,
+    // for each model we order and only affects the method below
     public void buttonsHeader(Model model) {
         List<String> buttons = List.of("goBackBtn", "productsOption", "orders", "plantIcon","profile","shoppingCart","review", "loginButton");
         for(String btn : buttons){

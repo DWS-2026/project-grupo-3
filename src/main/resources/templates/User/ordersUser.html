@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!--FAVICON -->
+  <!-- MODERN SVG FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon/favicon.ico">
+
+  <!-- APPLE/MOVILEPHONE -->
+  <link rel="apple-touch-icon" href="/assets/images/favicon/apple-touch-icon.png">
+
+
   <meta charset="UTF-8">
   <title>Mis pedidos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,10 +58,10 @@
       <tbody>
       {{#orders}}
       <tr>
-        <!-- Número de pedido -->
+        <!-- Number of the order -->
         <td>{{id}}</td>
 
-        <!-- Productos -->
+        <!-- Products -->
         <td class="text-start">
           <ul class="mb-0 ps-3">
             {{#items}}
@@ -61,7 +70,7 @@
           </ul>
         </td>
 
-        <!-- Estado con badge de color -->
+        <!-- State with colored badge -->
         <td>
           {{#processing}}
           <span class="badge bg-warning text-dark fs-6">⏳ En proceso</span>
@@ -77,10 +86,10 @@
           {{/cancelled}}
         </td>
 
-        <!-- Fecha -->
+        <!-- Date -->
         <td>{{formattedDate}}</td>
 
-        <!-- Precio -->
+        <!-- Price -->
         <td>€{{formattedPrice}}</td>
 
       </tr>

@@ -59,4 +59,7 @@ public class ReviewsService {
     public long numberOfOrders() {
         return reviewsRepository.count();
     }
-}
+
+    public List<Reviews> findByUser(String username) {
+        return reviewsRepository.findByUser(username);
+    }}
