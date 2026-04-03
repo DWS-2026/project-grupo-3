@@ -118,12 +118,14 @@ public class PlantController {
             redirectAttributes.addFlashAttribute("description", plant.getDescription());
             return "redirect:/Plants/new";
         }
-        plantService.save(plant,userService.getUser(session));
 
-        if (!imageFile.isEmpty()) {
+        if (imageFile!=null && !imageFile.isEmpty()) {
             Image imageOne = imageService.createImage(imageFile);
             plantService.addImageToPlant(plant.getId(), imageOne);
         }
+        
+        plantService.save(plant,userService.getUser(session));
+
         return "redirect:/Plants/catalogPlants";
     }
 

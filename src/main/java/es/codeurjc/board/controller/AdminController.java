@@ -70,7 +70,15 @@ public class AdminController {
         if(!userService.isUserAdmin(request)){
             return "/accessDenied";
         }
-        userService.deleteUser(id);
+
+        //include case when admin deletes himself
+        if(userService.isUserAdmin(id)){
+            request.getSession().invalidate();
+            userService.deleteUser(id);
+        } else{
+            userService.deleteUser(id);
+        }
+
         return "redirect:/Admin/userManagement";
     }
 }

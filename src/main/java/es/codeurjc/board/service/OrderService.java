@@ -46,4 +46,10 @@ public class OrderService {
     public long numberOfOrders() {
         return orderRepository.count();
     }
+    public List<Order> getOrdersFromUser(String username){
+        return orderRepository.findByUserUsername(username);
+    }
+    public void delete (Order order){
+        orderRepository.delete(order);
+    }
 }

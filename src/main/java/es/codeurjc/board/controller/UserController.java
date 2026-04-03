@@ -9,7 +9,6 @@ import es.codeurjc.board.service.OrderService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +42,7 @@ public class UserController {
     public String delete(HttpServletRequest session, @PathVariable Long id){
         if(userService.getUserID(session)==id){
             userService.deleteUser(id);
+            session.getSession().invalidate();
             return "redirect:/logout";
         }else{
             return "/accessDenied";
@@ -79,16 +79,36 @@ public class UserController {
         return "User/configuration";
     }
 
-    @PostMapping("/User/configuration/{id}")
-    public String configuration(MultipartFile imageFile, @PathVariable long id, HttpServletRequest session, @RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String description)throws IOException {
-    if(userService.getUserID(session) != id){
-        return "/accessDenied";
-    }else{
-        userService.editUser(String email, String username, String description, MultipartFile imageFile, String passwordEncoder.encode(password), long id);
-        return "redirect: /User/user";
-    }
+    @PostMapping("/User/configuration")
+    public String configuration(Model model, MultipartFile imageFile, HttpServletRequest session,@RequestParam String repeatpassword, @RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String description)throws IOException, Exception {
+        boolean error = false;
+        if(username !=null && !username.isBlank() && userService.usernameExists(username)) {
+            model.addAttribute("usernameError", true);
+            error = true;
+        }
 
+        if(email !=null && !email.isBlank() && userService.emailExists(email)){
+            model.addAttribute("emailError", true);
+            error = true;
+        }
+        String encodedPassword = null;
+        if(password !=null && !password.isBlank() && !password.equals(repeatpassword)){
+            model.addAttribute("passwordError", true);
+            encodedPassword = passwordEncoder.encode(password);
+            error = true;
+        }
 
+        if(error){
+            return "user";
+        }
+
+        userService.editUser( email,username, description, encodedPassword, imageFile, userService.getUserID(session));
+        if(password !=null && !password.isBlank() || email !=null && !email.isBlank() || username !=null && !username.isBlank()){
+            session.getSession().invalidate();
+        }
+        
+        return "redirect:/User/user";
+    
     }
 
     @GetMapping("/User/register")

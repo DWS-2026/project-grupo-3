@@ -116,16 +116,6 @@ public class User {
         this.reviews.add(review);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof User user)) return false;
-        return Objects.equals(id, user.id) && Objects.equals(roles, user.roles) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(username, user.username) && Objects.equals(description, user.description) && Objects.equals(reviews, user.reviews) && Objects.equals(plants, user.plants);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, roles, email, password, username, description, reviews, plants);
-    }
 
     public Image getProfilePhoto() {
         return profilePhoto;
@@ -134,6 +124,8 @@ public class User {
     public void setProfilePhoto(Image profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
+
+
 }
 
 

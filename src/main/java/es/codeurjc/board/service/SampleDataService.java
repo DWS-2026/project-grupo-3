@@ -33,8 +33,6 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
     private OrderService orderService;
 
     @Autowired
-    private ReviewsRepository reviewsRepository;
-    @Autowired
     private ReviewsService reviewsService;
 
     private void addExampleProducts() throws Exception {
@@ -158,10 +156,10 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
                 Reviews.ReviewType.PLANT
         );
 
-        reviewsRepository.save(r1);
-        reviewsRepository.save(r2);
-        reviewsRepository.save(r3);
-        reviewsRepository.save(r4);
+        reviewsService.save(r1);
+        reviewsService.save(r2);
+        reviewsService.save(r3);
+        reviewsService.save(r4);
     }
 
     @Override

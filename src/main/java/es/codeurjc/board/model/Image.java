@@ -1,6 +1,5 @@
 package es.codeurjc.board.model;
 
-import jakarta.persistence.*;
 
 import java.io.InputStream;
 import java.sql.Blob;

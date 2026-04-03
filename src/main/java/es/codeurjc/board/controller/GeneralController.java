@@ -22,10 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class GeneralController {
 	@Autowired
 	private ButtonsHeader btnsHeader;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	@Autowired
-	private UserService userService;
+
 
 	@GetMapping("/")
 	public String showMainPage(Model model) {
