@@ -35,7 +35,7 @@
 
         <div class="buttons-container">
             <a href="/Plants/catalogPlants" class="btn btn-success rounded-pill px-5 py-3 main-button">
-                Catálogo de plantas 🪴
+                Catálogo de plantas {{#nothing}}🪴{{/nothing}}{{#a}}🌿{{/a}}{{#b}}🌼{{/b}}{{#c}}🌵{{/c}}
             </a>
             <a href="/Products/catalogProducts" class="btn btn-success rounded-pill px-5 py-3 main-button">
                 Catálogo de productos 🛒
@@ -45,9 +45,13 @@
             </a>
         </div>
     </div>
+
 </main>
 
-{{>footer}}
+    {{>footer}}
+
+    
+
 
 </body>
 </html>

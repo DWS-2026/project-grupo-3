@@ -50,11 +50,22 @@ public class UserController {
     }
 
 
-    @GetMapping("/User/user")
-    public String user(Model model, HttpServletRequest session) {
+    @GetMapping("/User/profile/{id}")
+    public String user(@PathVariable long id, Model model, HttpServletRequest session) {
         btnsHeader.hideBtnHeader(model,"profile");
-        model.addAttribute("user", userService.getUser(session));
-        return "User/user";
+        if(userService.getUserID(session) == id || userService.isUserAdmin(session)){
+            User user = userService.findById(id);
+            if(user != null){
+                model.addAttribute("user", userService.findById(id));
+                return "User/user";
+            } else{
+                return "/error";
+            }
+             
+        }
+        return "/accessDenied";
+
+
     }
 
     @GetMapping("/User/ordersUser")
@@ -159,11 +170,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/userManagement")
-    public String showusers(Model model){
-        model.addAttribute("users", userService.findAll());
-        return "/Admin/userManagement";
-    }
+
 
 
 

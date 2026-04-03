@@ -47,9 +47,11 @@ public class WebSecurityConfig {
                         .requestMatchers("/Reviews/forum").permitAll()
                         .requestMatchers("/quizzPlants").permitAll()
                         .requestMatchers("/quizzPlants/result").permitAll()
-                        .requestMatchers("/User/delete/*").permitAll()
+                        
 
                         // PRIVATE PAGES
+                        .requestMatchers("/User/delete/*").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/User/profile/*").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Plants/ratingPlant").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Plants/*/delete").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Plants/viewPlant/*").hasAnyRole("USER", "ADMIN")

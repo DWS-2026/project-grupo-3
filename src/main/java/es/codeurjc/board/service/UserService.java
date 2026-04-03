@@ -91,6 +91,13 @@ public class UserService {
             userRepository.deleteById(id);
         }
     }
+    public void deleteAllUsers(){
+        List<User> users =  this.findAll();
+        users.removeIf(user -> user.getRoles().contains("ADMIN"));
+        for(User u : users){
+            this.deleteUser(u.getId());
+        }
+    }
 
     public boolean seeIfUserIsLoggedIn(HttpServletRequest request){
         return request.getUserPrincipal() != null;

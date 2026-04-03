@@ -3,9 +3,11 @@
                 <div class="icon-group">
                     {{#userOnly}}
                         {{#profile}}
-                            <a href="/User/user" class="icons" aria-label="Ir a perfil de usuario">
-                                👤
-                            </a>
+                            {{#userId}}
+                                <a href="/User/profile/{{userId}}" class="icons" aria-label="Ir a perfil de usuario">
+                                    👤
+                                </a>
+                            {{/userId}}
                         {{/profile}}
                     {{/userOnly}}
 

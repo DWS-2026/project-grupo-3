@@ -2,10 +2,10 @@ package es.codeurjc.board.model;
 
 import jakarta.persistence.*;
 
-import javax.lang.model.element.Name;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 
 @Entity

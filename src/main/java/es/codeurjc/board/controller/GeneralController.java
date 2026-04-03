@@ -2,13 +2,11 @@ package es.codeurjc.board.controller;
 
 
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

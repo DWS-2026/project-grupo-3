@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import es.codeurjc.board.model.User;
 
 import java.util.List;
 
@@ -61,8 +62,10 @@ public class AdminController {
 
     @GetMapping("/userManagement")
     public String userManagement(Model model) {
-        model.addAttribute("users", userService.findAll());
-        return "Admin/userManagement";
+        List<User> users =  userService.findAll();
+        users.removeIf(user -> user.getRoles().contains("ADMIN"));
+        model.addAttribute("users", users);
+        return "/Admin/userManagement";
     }
 
     @PostMapping("/deleteUser/{id}")
@@ -71,14 +74,28 @@ public class AdminController {
             return "/accessDenied";
         }
 
-        //include case when admin deletes himself
-        if(userService.isUserAdmin(id)){
-            request.getSession().invalidate();
+
+
             userService.deleteUser(id);
-        } else{
-            userService.deleteUser(id);
-        }
+        
 
         return "redirect:/Admin/userManagement";
+    }
+
+    @PostMapping("/deleteAdmin")
+    public String deleteAdmin(HttpServletRequest request){
+        if(userService.isUserAdmin(request)){
+            request.getSession().invalidate();
+            userService.deleteUser(userService.getUserID(request));
+        }
+        return "redirect:/";
+    }
+        @PostMapping("/deleteAllUsers")
+        public String deleteAllUsers(HttpServletRequest request){
+            if(userService.isUserAdmin(request)){
+                userService.deleteAllUsers();
+                
+            }
+        return "redirect:/";
     }
 }
