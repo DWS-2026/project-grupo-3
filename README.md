@@ -422,7 +422,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 |2| [Función para encontrar a los usuarios](https://github.com/DWS-2026/project-grupo-3/commit/a22cdf9698199d902cc03d19310642f9e880911e)  | [User Service](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/service/UserService.java)   |
 |3| [Añadí la función para que no se puedan repetir los correos, usuarios o contraseñas de los distintosn usuarios](https://github.com/DWS-2026/project-grupo-3/commit/e398a613169fb185a9a02ad2232b34a49bc4839a)  | [User Controller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java)   |
 |4| [Puse los permisos que van a tener tanto el usuario como el admin](https://github.com/DWS-2026/project-grupo-3/commit/e0cfc22773d86479c18d3d4d2ea62bf114c14266)  | [User COntroller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java)   |
-|5| [Modificar el espacio de la foto de perfil para que el usuario pueda poner su propia foto]([URL_commit_5](https://github.com/DWS-2026/project-grupo-3/commit/801f20bfe35b5eb64f3fd06dc1d580ca64a74c36))  | [User Controller]([URL_archivo_5](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java))   |
+|5| [Modificar el espacio de la foto de perfil para que el usuario pueda poner su propia foto](https://github.com/DWS-2026/project-grupo-3/commit/801f20bfe35b5eb64f3fd06dc1d580ca64a74c36)  | [User Controller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java)   |
 
 ---
 
