@@ -412,17 +412,17 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 2 - Sara García Lopo*
+#### **Alumno 2 - Sara García Lopo**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Añadí la función para poder eliminar al usuario](https://github.com/DWS-2026/project-grupo-3/commit/cfd4565764a19595aeeab58434b0b6338e3ceebe)  | [User Controller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java)   |
+|2| [Función para encontrar a los usuarios](https://github.com/DWS-2026/project-grupo-3/commit/a22cdf9698199d902cc03d19310642f9e880911e)  | [User Service](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/service/UserService.java)   |
+|3| [Añadí la función para que no se puedan repetir los correos, usuarios o contraseñas de los distintosn usuarios](https://github.com/DWS-2026/project-grupo-3/commit/e398a613169fb185a9a02ad2232b34a49bc4839a)  | [User Controller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java)   |
+|4| [Puse los permisos que van a tener tanto el usuario como el admin](https://github.com/DWS-2026/project-grupo-3/commit/e0cfc22773d86479c18d3d4d2ea62bf114c14266)  | [User COntroller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java)   |
+|5| [Modificar el espacio de la foto de perfil para que el usuario pueda poner su propia foto]([URL_commit_5](https://github.com/DWS-2026/project-grupo-3/commit/801f20bfe35b5eb64f3fd06dc1d580ca64a74c36))  | [User Controller]([URL_archivo_5](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/controller/UserController.java))   |
 
 ---
 
