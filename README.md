@@ -412,7 +412,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Sara García Lopo*
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
