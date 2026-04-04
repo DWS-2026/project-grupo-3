@@ -1,8 +1,9 @@
 package es.codeurjc.board.service;
 
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.model.Reviews;
+import es.codeurjc.board.model.Review;
+import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.ReviewsRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ public class ReviewsService {
     @Autowired
     private ReviewsRepository reviewsRepository;
 
+
+
     public ReviewsService(ReviewsRepository reviewsRepository) {
         this.reviewsRepository = reviewsRepository;
     }
 
-    public Page<Reviews> findAll(Pageable page) {
+    public Page<Review> findAll(Pageable page) {
         return reviewsRepository.findAll(page);
     }
 
@@ -28,12 +31,8 @@ public class ReviewsService {
         return reviewsRepository.count();
     }
 
-    public Reviews findById(long id) {
+    public Review findById(long id) {
         return reviewsRepository.findById(id).orElseThrow();
-    }
-
-    public Reviews save(Reviews review) {
-        return reviewsRepository.save(review);
     }
 
     public void deleteById(long id) {
@@ -42,7 +41,7 @@ public class ReviewsService {
 
 
     public void editReview(String title, String description, Long id) throws Exception{
-        Reviews review = reviewsRepository.findById(id).orElseThrow();
+        Review review = reviewsRepository.findById(id).orElseThrow();
         if (title != null && !title.isBlank()){
             review.setTitle(title);
         }
@@ -52,7 +51,7 @@ public class ReviewsService {
         reviewsRepository.save(review);
     }
 
-    public List<Reviews> findByType(Reviews.ReviewType type) {
+    public List<Review> findByType(Review.ReviewType type) {
         return reviewsRepository.findByType(type);
     }
 
@@ -60,6 +59,15 @@ public class ReviewsService {
         return reviewsRepository.count();
     }
 
-    public List<Reviews> findByUser(String username) {
-        return reviewsRepository.findByUser(username);
-    }}
+    public List<Review> findByUserAndType(User user, Review.ReviewType type) {
+        return reviewsRepository.findByUserAndType(user, type);
+    }
+        public List<Review> findByUser(User user) {
+        return reviewsRepository.findByUser(user);
+    }
+    public void save(Review review, User user) {
+            review.setUser(user);
+            user.addReview(review);
+            reviewsRepository.save(review);
+    }
+}

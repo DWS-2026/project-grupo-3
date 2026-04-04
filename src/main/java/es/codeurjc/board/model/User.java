@@ -28,8 +28,9 @@ public class User {
     private Image profilePhoto;
 
 
-    @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reviews> reviews = new ArrayList<>();
+
+    @OneToMany (mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     @OneToMany (mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Plant> plants = new ArrayList<>();
@@ -104,15 +105,15 @@ public class User {
         this.plants.add(plant);
     }
 
-    public List<Reviews> getReviews() {
+    public List<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Reviews> reviews) {
+    public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
 
-    public void addReview(Reviews review) {
+    public void addReview(Review review) {
         this.reviews.add(review);
     }
 
@@ -124,6 +125,7 @@ public class User {
     public void setProfilePhoto(Image profilePhoto) {
         this.profilePhoto = profilePhoto;
     }
+
 
 
 }

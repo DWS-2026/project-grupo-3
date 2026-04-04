@@ -44,6 +44,16 @@
                 <option value="PRODUCT">Producto</option>
             </select>
         </div>
+        {{#nameNotValid}}
+          <div class="alert alert-danger">
+            No existe ese producto o esa planta
+          </div>
+      {{/nameNotValid}}
+        
+        <div class="form-floating mb-3">
+            <textarea class="form-control" name="whatToSearch" style="height:120px" required></textarea>
+            <label>Nombre del producto o de la planta que vas a dejar reseña</label>
+        </div>
 
         <div class="form-floating mb-3">
             <textarea class="form-control" name="description" style="height:120px" required></textarea>

@@ -12,6 +12,7 @@ public class Plant {
 
     @ManyToOne
     private User user;
+
     private LocalDateTime createdAt;
     private String name;
     private String cares;
@@ -19,7 +20,7 @@ public class Plant {
     private int rating = 0;
     private int totalRating = 0;
     private int count = 0;
-
+    private String type;
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
     private List<Image> images = new ArrayList<>();
@@ -35,6 +36,7 @@ public class Plant {
         this.cares = cares;
         this.description = description;
     }
+    
     public void addImage(Image image){
         images.add(image);
     }

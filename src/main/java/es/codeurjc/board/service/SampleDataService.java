@@ -1,7 +1,6 @@
 package es.codeurjc.board.service;
 
 import es.codeurjc.board.model.*;
-import es.codeurjc.board.repositories.ReviewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -128,38 +127,34 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
 
     private void addExampleReviews() throws Exception {
 
-        Reviews r1 = new Reviews(
-                "Pepe",
+        Review r1 = new Review(
                 "Muy buena planta",
                 "Me ha encantado, crece súper rápido 🌱",
-                Reviews.ReviewType.PLANT
+                Review.ReviewType.PLANT
         );
 
-        Reviews r2 = new Reviews(
-                "Manolito",
+        Review r2 = new Review(
                 "Producto útil",
                 "El fertilizante funciona genial",
-                Reviews.ReviewType.PRODUCT
+                Review.ReviewType.PRODUCT
         );
 
-        Reviews r3 = new Reviews(
-                "Holi",
+        Review r3 = new Review(
                 "No me gustó",
                 "Esperaba mejores resultados",
-                Reviews.ReviewType.PRODUCT
+                Review.ReviewType.PRODUCT
         );
 
-        Reviews r4 = new Reviews(
-                "Pepe",
+        Review r4 = new Review(
                 "Recomendadísima",
                 "Muy fácil de cuidar",
-                Reviews.ReviewType.PLANT
+                Review.ReviewType.PLANT
         );
 
-        reviewsService.save(r1);
-        reviewsService.save(r2);
-        reviewsService.save(r3);
-        reviewsService.save(r4);
+        reviewsService.save(r1, userService.getUser("Pepe"));
+        reviewsService.save(r2, userService.getUser("Manolito"));
+        reviewsService.save(r3, userService.getUser("Holi"));
+        reviewsService.save(r4,userService.getUser("Pepe"));
     }
 
     @Override

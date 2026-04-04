@@ -1,22 +1,24 @@
 package es.codeurjc.board.repositories;
 
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.model.Reviews;
+import es.codeurjc.board.model.Review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import es.codeurjc.board.model.User;
 import java.util.List;
 import java.util.Optional;
 
 
-public interface ReviewsRepository extends JpaRepository<Reviews, Long> {
+public interface ReviewsRepository extends JpaRepository<Review, Long> {
 
-    List<Reviews> findByType(Reviews.ReviewType type);
-    Page<Reviews> findAll(Pageable page);
+    List<Review> findByType(Review.ReviewType type);
 
-    Optional<Reviews> findById (long id);
+        List<Review> findByUserAndType(User user, Review.ReviewType type);
+    Page<Review> findAll(Pageable page);
+
+    Optional<Review> findById (long id);
 
     public void deleteById(long id);
 
-    List<Reviews> findByUser(String user);}
+    List<Review> findByUser(User user);
+}
