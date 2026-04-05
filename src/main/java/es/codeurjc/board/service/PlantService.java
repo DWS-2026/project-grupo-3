@@ -65,12 +65,16 @@ public class PlantService {
 
         return plantRepository.save(plant);
     }
-    public void editPlant(String name, String cares, String description, long id) throws Exception{
+    public void editPlant(String name, String cares, String description, long id, String species) throws Exception{
             Plant plant = plantRepository.findById(id).orElse(null);
             if(plant != null){
+                if(species != null && !species.isBlank()){             
+                    PlantType type = plantTypeService.getOrCreateType(species);
+                    plant.setType(type);    
+                }  
                 if(name != null && !name.isBlank()){
                     plant.setName(name);
-                }   
+                } 
                 if(cares != null && !cares.isBlank()){
                     plant.setCares(cares);
                 }

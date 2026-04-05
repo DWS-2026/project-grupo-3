@@ -94,11 +94,11 @@ public class PlantController {
 
     @PostMapping("/editPlant/{id}")
     public String editPlant(@PathVariable Long id, @RequestParam String name, @RequestParam String cares,
-                            @RequestParam String description, HttpServletRequest session) throws Exception {
+                            @RequestParam String description, @RequestParam String species,HttpServletRequest session) throws Exception {
 
         Plant plant = plantService.findById(id);
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
-            plantService.editPlant(name, cares , description, id);
+            plantService.editPlant(name, cares , description, id, species);
             return "redirect:/Plants/catalogPlants";
         }else{
             return "/accessDenied";
@@ -112,7 +112,7 @@ public class PlantController {
     @PostMapping("/new")
     public String newPlant(Plant plant, MultipartFile imageFile, @RequestParam String type, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
 
-        if(plantService.existsByNamePlant(plant.getName())){
+        if(plantService.existsByNamePlant(plant.getName())){ //if it already exist that plant
             redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
             redirectAttributes.addFlashAttribute("cares", plant.getCares());
             redirectAttributes.addFlashAttribute("description", plant.getDescription());
