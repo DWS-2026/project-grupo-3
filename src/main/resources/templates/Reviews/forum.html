@@ -92,6 +92,7 @@
 
                             </div>
                             <div class="buttons-container">
+                                {{#userOnly}}
                                 {{#plantReview}}
                                     <form method="get" action="/Plants/catalogPlants" style="padding-top: 0px">
 
@@ -111,10 +112,11 @@
                                     </form>
                                 {{/productReview}}
                                 {{#showEditButton}}
-                                    <a href="/Reviews/editReview/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">
+                                    <a href="/Reviews/editReview/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary" syle="padding-top: 0px;">
                                         Editar review
                                     </a>
                                 {{/showEditButton}}
+                                {{/userOnly}}
                             </div>
                         </div>
                     </div>

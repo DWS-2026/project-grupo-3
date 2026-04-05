@@ -88,13 +88,18 @@ public class ReviewsService {
         return reviewsRepository.findByUser(user);
     }
     public void save(Review review, User user) {
+            if (review.getProduct() != null) {
+                review.getProduct().addReview(review);
+            }
             review.setUser(user);
             user.addReview(review);
             reviewsRepository.save(review);
     }
 
     public void intialSave(Review review, User user, String productOrplant) {
-
+            if (review.getProduct() != null) {
+                review.getProduct().addReview(review);
+            }
             if ("PLANT".equals(review.getType().name())) {
                 plantTypeService.getOrCreateType(productOrplant);
                 this.handlePlant(review, productOrplant);

@@ -16,6 +16,13 @@ public class Product {
     private double price;
     private boolean example = false;
 
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
+    List <Review> reviews = new ArrayList<>();
+
+    
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
+    List <OrderItems> orderItems = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
 
@@ -83,5 +90,17 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void addReview(Review review){
+        this.reviews.add(review);
     }
 }
