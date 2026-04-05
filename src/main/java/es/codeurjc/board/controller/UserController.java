@@ -108,15 +108,18 @@ public class UserController {
             encodedPassword = passwordEncoder.encode(password);
             error = true;
         }
-
         if(error){
-            return "user";
+            return  "/User/configuration";
         }
 
-        userService.editUser( email,username, description, encodedPassword, imageFile, userService.getUserID(session));
-        if(password !=null && !password.isBlank() || email !=null && !email.isBlank() || username !=null && !username.isBlank()){
-            session.getSession().invalidate();
+        if(!error){
+            userService.editUser( email,username, description, encodedPassword, imageFile, userService.getUserID(session));
+            if(password !=null && !password.isBlank() || email !=null && !email.isBlank() || username !=null && !username.isBlank()){
+                session.getSession().invalidate();
+            };
         }
+
+
         
         return "redirect:/User/profile/"+userService.getUserID(session);
     
