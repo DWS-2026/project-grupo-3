@@ -75,13 +75,13 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
     private void addExamplePlants() throws Exception {
         for (int i = 0; i < 5; i++) {
             Plant plant = new Plant( "Rosa de Pepe-" + i, "Regar cada 5 días", "Necesita abono x y la tengo mucho cariño mimimimimimimj");
-            plantService.save(plant,userService.getUser("Pepe"));
+            plantService.save(plant,userService.getUser("Pepe"), "rosa");
             plantService.addImageToPlant(plant.getId(), "/static/assets/images/images_example_plants/rosebush.jpg");
 
         }
         for (int i = 0; i < 5; i++) {
             Plant plant = new Plant("Margarita de manolito-" + i, "Regar cada 5 días", "Necesita abono x");
-            plantService.save(plant,userService.getUser("Manolito"));
+            plantService.save(plant,userService.getUser("Manolito"), "margarita");
             plantService.addImageToPlant(plant.getId(), "/static/assets/images/images_example_plants/rosebush.jpg");
 
         }
@@ -151,10 +151,10 @@ public class SampleDataService  implements ApplicationListener<ContextRefreshedE
                 Review.ReviewType.PLANT
         );
 
-        reviewsService.save(r1, userService.getUser("Pepe"));
-        reviewsService.save(r2, userService.getUser("Manolito"));
-        reviewsService.save(r3, userService.getUser("Holi"));
-        reviewsService.save(r4,userService.getUser("Pepe"));
+        reviewsService.intialSave(r1, userService.getUser("Pepe"),"rosa");
+        reviewsService.intialSave(r2, userService.getUser("Manolito"), "fertilizante");
+        reviewsService.intialSave(r3, userService.getUser("Holi"), "fertilizante");
+        reviewsService.intialSave(r4,userService.getUser("Pepe"), "margarita");
     }
 
     @Override

@@ -59,6 +59,13 @@ public class ProductController {
         return "/Products/catalogProducts";
     }
 
+    @GetMapping("/Products/showOneProduct")
+    public String oneProduct(Model model,  @RequestParam String search) {
+        Product product = productService.findByNameProduct(search);
+        model.addAttribute("products",product);
+        return "/Products/catalogProducts";
+    }
+
     @GetMapping("/Products/newProduct")
     public String newProduct() {
         return "Products/newProduct";

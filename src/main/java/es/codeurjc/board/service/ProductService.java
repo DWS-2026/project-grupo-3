@@ -83,4 +83,8 @@ public class ProductService {
     public long numberOfProducts(){
         return productRepository.count();
     }
+
+    public Product findByNameProduct(String name){
+        return productRepository.findByName(name).orElse(null);
+    }
 }

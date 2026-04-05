@@ -110,7 +110,7 @@ public class PlantController {
     }
 
     @PostMapping("/new")
-    public String newPlant(Plant plant, MultipartFile imageFile, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
+    public String newPlant(Plant plant, MultipartFile imageFile, @RequestParam String type, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
 
         if(plantService.existsByNamePlant(plant.getName())){
             redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
@@ -124,7 +124,7 @@ public class PlantController {
             plantService.addImageToPlant(plant.getId(), imageOne);
         }
         
-        plantService.save(plant,userService.getUser(session));
+        plantService.save(plant,userService.getUser(session), type);
 
         return "redirect:/Plants/catalogPlants";
     }

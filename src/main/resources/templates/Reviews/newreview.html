@@ -48,12 +48,13 @@
           <div class="alert alert-danger">
             No existe ese producto o esa planta
           </div>
-      {{/nameNotValid}}
+        {{/nameNotValid}}
         
         <div class="form-floating mb-3">
-            <textarea class="form-control" name="whatToSearch" style="height:120px" required></textarea>
-            <label>Nombre del producto o de la planta que vas a dejar reseña</label>
+            <input type="text" class="form-control" name="productOrplant" placeholder="Nombre de la planta (especie) / producto" required>
+            <label>Nombre de la planta (su especie) o del producto</label>
         </div>
+
 
         <div class="form-floating mb-3">
             <textarea class="form-control" name="description" style="height:120px" required></textarea>

@@ -89,10 +89,29 @@
                                 </form>
                                 {{/adminOnly}}
 
+
                             </div>
                             <div class="buttons-container">
+                                {{#plantReview}}
+                                    <form method="get" action="/Plants/catalogPlants" style="padding-top: 0px">
+
+                                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Link a la plantita</button>
+
+                                        <input type="hidden" name="search" value="{{#plantType}}{{species}}{{/plantType}}"/>
+
+                                    </form>
+                                {{/plantReview}}
+                                {{#productReview}}
+                                    <form method="get" action="/Products/showOneProduct" syle="padding-top: 0px;">
+
+                                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Link al producto</button>
+
+                                        <input type="hidden" name="search" value="{{#product}}{{name}}{{/product}}"/>
+
+                                    </form>
+                                {{/productReview}}
                                 {{#showEditButton}}
-                                    <a href="/Reviews/editReview/{{id}}" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">
+                                    <a href="/Reviews/editReview/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">
                                         Editar review
                                     </a>
                                 {{/showEditButton}}

@@ -20,12 +20,12 @@ public class Plant {
     private int rating = 0;
     private int totalRating = 0;
     private int count = 0;
-    private String type;
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
     private List<Image> images = new ArrayList<>();
 
-
+    @ManyToOne
+    private PlantType plantType;
 
     public Plant(){
         this.createdAt = LocalDateTime.now();
@@ -122,7 +122,13 @@ public class Plant {
     public String toString() {
         return "Plant [id="+id+", user=" + user.getUsername() + ", name=" + name + ", cares=" + cares + "]";
     }
+    public PlantType getType() {
+        return plantType;
+    }
+    public void setType(PlantType type) {
+        this.plantType = type;
+    }
 
-
+    
 
 }

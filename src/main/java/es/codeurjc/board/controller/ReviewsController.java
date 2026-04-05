@@ -3,6 +3,7 @@ package es.codeurjc.board.controller;
 import es.codeurjc.board.model.Review;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.service.PlantService;
+import es.codeurjc.board.service.ProductService;
 import es.codeurjc.board.service.ReviewsService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,11 +15,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.security.Principal;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import es.codeurjc.board.model.Plant;
+import es.codeurjc.board.model.PlantType;
+import es.codeurjc.board.model.Product;
+import es.codeurjc.board.service.PlantTypeService;
 
 @Controller
 
@@ -28,13 +34,21 @@ public class ReviewsController {
     private ReviewsService reviewsService;
 
     @Autowired
-    private PlantService plantService;
+    private PlantTypeService plantTypeService;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private ButtonsHeader btnsHeader;
 
     @Autowired
     private UserService userService;
+
+
+    ReviewsController(ProductService productService) {
+        this.productService = productService;
+    }
 
 
     @GetMapping("/Reviews/forum")
@@ -62,7 +76,7 @@ public class ReviewsController {
                 reviews = reviewsService.findAll(PageRequest.of(0, 100)).getContent();
             }
         }
-
+        
         model.addAttribute("reviews", reviews);
         model.addAttribute("type", type);
         model.addAttribute("isPlant", "PLANT".equals(type));
@@ -80,16 +94,39 @@ public class ReviewsController {
     }
 
     @PostMapping("/Reviews/newreview")
-    public String saveReview(@RequestParam String title,
+    public String saveReview(Model model,  RedirectAttributes redirectAttributes,@RequestParam String title,
                              @RequestParam String description,
-                             @RequestParam Review.ReviewType type, @RequestParam String whatToShow,    HttpServletRequest request) {
-                                
-        if(userService.isUserUser(request)){
-            Review review = new Review(title, description, type);         
-            reviewsService.save(review,userService.getUser(request));
-            return "redirect:/Reviews/forum";
+                             @RequestParam Review.ReviewType type,   @RequestParam String productOrplant, HttpServletRequest request) {
+                                        
+        boolean isValidRequest = false;
+
+        if (userService.isUserUser(request) && productOrplant != null && !productOrplant.isBlank() && type != null) {
+            isValidRequest = true;
         }
-        return "/login";
+
+        if (isValidRequest) {
+            Review review = new Review(title, description, type);
+            boolean associationOk = false;
+
+            if ("PLANT".equals(type.name())) {
+                associationOk = reviewsService.handlePlant(review, productOrplant);
+            } else if ("PRODUCT".equals(type.name())) {
+                associationOk = reviewsService.handleProduct(review, productOrplant);
+            }
+
+            if (!associationOk) {
+                redirectAttributes.addFlashAttribute("nameNotValid", true);
+                return "redirect:/Reviews/newreview";
+            }else{
+                reviewsService.save(review, userService.getUser(request));
+                return "redirect:/Reviews/forum";
+            }
+
+        } else {
+            return "redirect:/Reviews/newreview";
+        }
+                
+
     }
 
     @GetMapping("/Reviews/editReview/{id}")
@@ -97,7 +134,7 @@ public class ReviewsController {
         Review review = reviewsService.findById(id);
 
         // Verify that belong to the user
-        if (review.getUser().getId() != userService.getUserID(request) && !userService.isUserAdmin(request)) {
+        if (review.getUser().getId() != userService.getUserID(request) || userService.isUserAdmin(request)) {
             return "redirect:/accessDenied";
         }
 
@@ -106,9 +143,20 @@ public class ReviewsController {
     }
 
     @PostMapping("/Reviews/editReview/{id}")
-    public String editReview(@PathVariable Long id,@RequestParam String title, @RequestParam String description, @RequestParam Review.ReviewType type)throws Exception{
-        reviewsService.editReview(title,description,id);
-        return "redirect:/Reviews/forum";
+    public String editReview(@PathVariable Long id,@RequestParam String title, @RequestParam String description,@RequestParam String productOrplant, @RequestParam Review.ReviewType type, HttpServletRequest session)throws Exception{
+        Review review = reviewsService.findById(id);
+
+        if (review.getUser().getId() != userService.getUserID(session) || userService.isUserAdmin(session)) {
+            return "redirect:/accessDenied";
+        }
+
+        if(reviewsService.editReview(title,description,productOrplant, id)){
+            reviewsService.save(review, userService.getUser(session));
+            return "redirect:/Reviews/forum";
+        }else{
+            return "redirect:/Reviews/editReview/" + review.getId();
+        }
+
     }
 
     @PostMapping("/Reviews/{id}/delete")

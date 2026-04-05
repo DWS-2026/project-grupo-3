@@ -14,6 +14,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    
 
     private String title;
     private String description;
@@ -21,11 +22,11 @@ public class Review {
     @Enumerated(EnumType.STRING)
     private ReviewType type;
 
-    @OneToOne
+    @ManyToOne
     private Product product;
 
-    @OneToOne
-    private Plant plant;
+    @ManyToOne
+    private PlantType plantType;
 
     @ManyToOne
     private User user;
@@ -33,7 +34,6 @@ public class Review {
 
     public Review(){}
     public Review( String title, String description, ReviewType type){
-        super();
         this.title = title;
         this.description = description;
         this.type = type;
@@ -78,18 +78,27 @@ public class Review {
     public void setProduct(Product product) {
         this.product = product;
     }
-    public Plant getPlant() {
-        return plant;
-    }
-    public void setPlant(Plant plant) {
-        this.plant = plant;
-    }
+
     public User getUser() {
         return user;
     }
     public void setUser(User user) {
         this.user = user;
     }
+    public PlantType getPlantType() {
+        return plantType;
+    }
+    public void setPlantType(PlantType plantType) {
+        this.plantType = plantType;
+    }
 
+    
+        public boolean isPlantReview() {
+        return this.type == ReviewType.PLANT;
+    }
+
+    public boolean isProductReview() {
+        return this.type == ReviewType.PRODUCT;
+    }
     
 }
