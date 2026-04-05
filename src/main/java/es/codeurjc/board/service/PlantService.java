@@ -35,8 +35,10 @@ public class PlantService {
             return plantRepository.findById(id).orElseThrow();
         }
 
-        public void save(Plant plant, User username, String type) {
+        public void save(Plant plant,User username, String type) {
+
             PlantType typePlant = plantTypeService.getOrCreateType(type);
+
             plant.setType(typePlant);
             plant.setUser(username);
             username.addPlant(plant);

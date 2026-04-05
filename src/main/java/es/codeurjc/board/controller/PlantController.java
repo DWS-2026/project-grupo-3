@@ -114,21 +114,22 @@ public class PlantController {
     }
 
     @PostMapping("/new")
-    public String newPlant(Plant plant, MultipartFile imageFile, @RequestParam String type, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
+    public String newPlant(@RequestParam String name, @RequestParam String description, @RequestParam String cares, MultipartFile imageFile, @RequestParam String type, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
 
-        if(plantService.existsByNamePlant(plant.getName())){ //if it already exist that plant
+        if(plantService.existsByNamePlant(name)){ //if it already exist that plant
             redirectAttributes.addFlashAttribute("plantNameExists", true);
-            redirectAttributes.addFlashAttribute("cares", plant.getCares());
-            redirectAttributes.addFlashAttribute("description", plant.getDescription());
+            redirectAttributes.addFlashAttribute("cares",cares);
+            redirectAttributes.addFlashAttribute("description", description);
             return "redirect:/Plants/new";
         }
+        Plant plant = new Plant(name, cares,description);
+        plantService.save(plant,userService.getUser(session), type);
 
         if (imageFile!=null && !imageFile.isEmpty()) {
             Image imageOne = imageService.createImage(imageFile);
             plantService.addImageToPlant(plant.getId(), imageOne);
         }
         
-        plantService.save(plant,userService.getUser(session), type);
 
         return "redirect:/Plants/catalogPlants";
     }
