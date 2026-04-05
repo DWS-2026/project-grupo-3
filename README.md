@@ -385,9 +385,9 @@ Solo si ha cambiado.
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
+![Diagrama Entidad-Relación](imagesGithub/databaseDiagram.png)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
+> ["El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido, Plantas y Comentarios, con sus respectivos atributos y relaciones 1:N y N:M, además se pueden observar otras entidades como por ejemplo PlantType que realmente son tablas intermedias para poder comunicar plantas y comentarios o para hacer más fácil su implementación como en el ejmplo de orderItems que posibilita añadir un producto con una cantidad dentro de un pedido."]
 
 ### **Diagrama de Clases y Templates**
 
