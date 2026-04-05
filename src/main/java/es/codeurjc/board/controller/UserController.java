@@ -118,7 +118,7 @@ public class UserController {
             session.getSession().invalidate();
         }
         
-        return "redirect:/User/user";
+        return "redirect:/User/profile/"+userService.getUserID(session);
     
     }
 
