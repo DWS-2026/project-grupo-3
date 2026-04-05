@@ -93,15 +93,19 @@ public class PlantController {
     }
 
     @PostMapping("/editPlant/{id}")
-    public String editPlant(@PathVariable Long id, @RequestParam String name, @RequestParam String cares,
+    public String editPlant(RedirectAttributes redirectAttributes,@PathVariable Long id, @RequestParam String name, @RequestParam String cares,
                             @RequestParam String description, @RequestParam String species,HttpServletRequest session) throws Exception {
 
         Plant plant = plantService.findById(id);
-        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+        if(!plantService.existsByNamePlant(name) && plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
             plantService.editPlant(name, cares , description, id, species);
-            return "redirect:/Plants/catalogPlants";
-        }else{
+            return "redirect:/Plants/editPlant/" + id;
+        }else if (plantService.existsByNamePlant(name)){
+            redirectAttributes.addFlashAttribute("plantNameExists", true);
+            return "redirect:/Plants/editPlant/" + id;
+        } else{
             return "/accessDenied";
+
         }
     }
     @GetMapping("/new")
@@ -113,7 +117,7 @@ public class PlantController {
     public String newPlant(Plant plant, MultipartFile imageFile, @RequestParam String type, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
 
         if(plantService.existsByNamePlant(plant.getName())){ //if it already exist that plant
-            redirectAttributes.addFlashAttribute("plantNameExists", "Guardado correctamente");
+            redirectAttributes.addFlashAttribute("plantNameExists", true);
             redirectAttributes.addFlashAttribute("cares", plant.getCares());
             redirectAttributes.addFlashAttribute("description", plant.getDescription());
             return "redirect:/Plants/new";
