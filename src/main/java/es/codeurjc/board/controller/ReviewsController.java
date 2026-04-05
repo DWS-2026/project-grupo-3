@@ -150,7 +150,7 @@ public class ReviewsController {
             return "redirect:/accessDenied";
         }
 
-        if(reviewsService.editReview(title,description,productOrplant, id)){
+        if(reviewsService.editReview(title,description,productOrplant, type, id)){
             reviewsService.save(review, userService.getUser(session));
             return "redirect:/Reviews/forum";
         }else{

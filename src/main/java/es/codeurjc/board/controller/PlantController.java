@@ -168,6 +168,9 @@ public class PlantController {
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
             plantService.deleteById(id);
             return "redirect:/Plants/catalogPlants?type=misPlantas";
+        }else if(userService.isUserAdmin(session)){
+            plantService.deleteById(id);
+            return "redirect:/Plants/catalogPlants";
         }else{
             return "/accessDenied";
         }

@@ -46,9 +46,11 @@ public class ReviewsService {
     }
 
 
-    public boolean editReview(String title, String description, String productOrplant, Long id) throws Exception{
+    public boolean editReview(String title, String description, String productOrplant, Review.ReviewType type,Long id) throws Exception{
         Review review = reviewsRepository.findById(id).orElseThrow();
-
+        if(type != null){
+            review.setType(type);
+        }
         boolean associationOk = false;
         if(productOrplant != null && !productOrplant.isBlank()){
             if ("PLANT".equals(review.getType().name())) {
