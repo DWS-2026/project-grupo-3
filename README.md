@@ -480,17 +480,17 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Nerea Blázquez Zayas**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Para esta parte de la prácica me he encargado de realizar todo lo relacionado con las reseñas en la base de datos además de sus respectivos cambios en los html. A parte de estos cambios también me he encargado de realizar los cambios en la seguridad implimentando el CSRF y el HTTPS para la pagina web. Por otro lado he realizado el html de la pagina de registro, la cual nos faltaba en la practica anterior y me he encargado de pasar todos los comentarios a inglés.
 
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+| Nº    |                                                                                   Commits                                                                                   |                                                                          Files                                                                           |
+|:------------: |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|1|                     [Construui la entidad de las reseñas](https://github.com/DWS-2026/project-grupo-3/commit/af61f7ade87ef824acdccaadfb2548ddba1538b6)                      |                    [Reviews](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/model/Review.java)                    |
+|2|                           [Implemente el CSRF](https://github.com/DWS-2026/dws-2026-project-base/commit/3dd5003fd547f194ec66786ea85c2cd56fc4a717)                           | [CSRFHandlerConfiguration](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/security/CSRFHandlerConfiguration.java) |
+|3|                          [Implemente el HTTPS](https://github.com/DWS-2026/dws-2026-project-base/commit/7807f070b92ff7f8f4bd022e5e855473ab09a10f)                           |                          [keystore.jks](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/keystore.jks)                           |
+|4| [Edite el foro con las reseñas para que se adaptasen a la base de datos](https://github.com/DWS-2026/dws-2026-project-base/commit/f9d1acb8e2fb563a57f629002dd587115799e379) |                      [forum](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/templates/Reviews/forum.html)                      |
+|5|                                                                 [Implemente la pagina de registro](https://github.com/DWS-2026/dws-2026-project-base/commit/a2176cd616cd61a4ca337c4d5d4166df41f1632f)                                                                  |                                                                [register ](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/resources/templates/register.html)                                                                |
 
 ---
 

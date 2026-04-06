@@ -61,7 +61,7 @@ public class UserController {
             } else{
                 return "/error";
             }
-             
+
         }
         return "/accessDenied";
 
@@ -120,9 +120,9 @@ public class UserController {
         }
 
 
-        
+
         return "redirect:/User/profile/"+userService.getUserID(session);
-    
+
     }
 
     @GetMapping("/User/register")
@@ -155,7 +155,7 @@ public class UserController {
         }
 
         if(!password.equals(repeatpassword)){
-            model.addAttribute("passwordError", true);//mirar si las contraseñas coinciden
+            model.addAttribute("passwordError", true);// look if the passwords match
             error = true;
         }
 
