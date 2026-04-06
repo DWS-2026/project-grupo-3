@@ -266,6 +266,8 @@ He desarrollado la página principal de la aplicación, encargándome de su maqu
 ![Diagrama de Navegación-1](imagesGithub/ScreenDiagram-1.png)
 ![Diagrama de Navegación-2](imagesGithub/ScreenDiagram-2.png)
 
+> En este nuevo diagrama de navegación se han cambiado de dos pantallas de configuración y edición del usuario a una sola, hemos añadido un quizz de plantas y hemos remodelado toda la parte de las pantallas de las plantas. 
+
 ##### **Vistas Comunes**
 
 #### **1. Página Principal / Home**
