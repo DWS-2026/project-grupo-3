@@ -256,7 +256,7 @@ He desarrollado la página principal de la aplicación, encargándome de su maqu
 ## 🛠 **Práctica 2: Web con HTML generado en servidor**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://youtu.be/WIG1wJmfDCg)**
+📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=vq54yXXmeug)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Navegación y Capturas de Pantalla**
