@@ -91,12 +91,11 @@
 
 
                             </div>
-                            <div class="buttons-container">
-                                {{#userOnly}}
+                            <div class="buttons-container mt-auto">
                                 {{#plantReview}}
                                     <form method="get" action="/Plants/catalogPlants" style="padding-top: 0px">
 
-                                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Link a la plantita</button>
+                                        <button type="submit" class="btn btn-sm btn-success rounded-pill   main-button secondary px-3 py-2 w-100">Link a la plantita</button>
 
                                         <input type="hidden" name="search" value="{{#plantType}}{{species}}{{/plantType}}"/>
 
@@ -105,14 +104,15 @@
                                 {{#productReview}}
                                     <form method="get" action="/Products/showOneProduct" syle="padding-top: 0px;">
 
-                                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Link al producto</button>
+                                        <button type="submit" class="btn btn-sm btn-success rounded-pill main-button secondary px-3 py-2 w-100">Link al producto</button>
 
                                         <input type="hidden" name="search" value="{{#product}}{{name}}{{/product}}"/>
 
                                     </form>
                                 {{/productReview}}
+                                {{#userOnly}}
                                 {{#showEditButton}}
-                                    <a href="/Reviews/editReview/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary" syle="padding-top: 0px;">
+                                    <a href="/Reviews/editReview/{{id}}" class="btn btn-sm btn-success rounded-pill main-button secondary px- py-1 w-100" syle="padding-top: 0px;">
                                         Editar review
                                     </a>
                                 {{/showEditButton}}
