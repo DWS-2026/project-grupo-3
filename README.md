@@ -256,7 +256,7 @@ He desarrollado la página principal de la aplicación, encargándome de su maqu
 ## 🛠 **Práctica 2: Web con HTML generado en servidor**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/WIG1wJmfDCg)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Navegación y Capturas de Pantalla**
@@ -410,15 +410,23 @@ He desarrollado la página principal de la aplicación, encargándome de su maqu
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/DWS-2026/project-grupo-3
+   cd project-grupo-3
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
+2. **Compilar el proyecto**
+   ```
+   mvn clean install
+   ```
+3. **Ejecutar la aplicación**
+   ```
+   mvn spring-boot:run
+   ```
+4. **Accedeer a la aplicación**
 
 #### **Credenciales de prueba**
-- **Usuario Admin**: usuario: `admin`, contraseña: `admin`
-- **Usuario Registrado**: usuario: `user`, contraseña: `user`
+- **Usuario Admin**: usuario: `Admin`, contraseña: `admin`
+- **Usuario Registrado**: usuario: `Pepe`, contraseña: `pepe`
 
 ### **Diagrama de Entidades de Base de Datos**
 
