@@ -16,12 +16,10 @@ public class Product {
     private double price;
     private boolean example = false;
 
+    private boolean active = true;
+
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
     List <Review> reviews = new ArrayList<>();
-
-    
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
-    List <OrderItems> orderItems = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
@@ -40,6 +38,7 @@ public class Product {
         this.description = description;
         this.price = price;
         this.example = example;
+        this.active = true;
     }
 
     public void addImage(Image image){
@@ -81,6 +80,12 @@ public class Product {
     public List<Image> getImages() {
         return images;
     }
+
+    public boolean isActive() {return active;}
+
+    public void setActive(boolean active) {this.active = active;}
+
+    public boolean isInactive() { return !active; }
 
     @Override
     public String toString() {

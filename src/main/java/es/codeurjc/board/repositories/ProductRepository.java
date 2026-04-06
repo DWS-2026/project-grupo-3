@@ -10,6 +10,10 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findAll(Pageable page);
     Page<Product> findByExampleEquals(boolean example, Pageable page);
+
+    Page<Product> findByActiveTrue(Pageable page);
+    Page<Product> findByActiveTrueAndExampleEquals(boolean example, Pageable page);
+
     Optional<Product> findById(long id);
     Optional<Product> findByName(String name);
 }

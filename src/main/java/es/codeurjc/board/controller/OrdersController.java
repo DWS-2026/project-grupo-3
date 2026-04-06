@@ -50,6 +50,11 @@ public class OrdersController {
         return "Orders/payment";
     }
 
+    @GetMapping("/Orders/success")
+    public String orderSuccess() {
+        return "Orders/orderSuccess";
+    }
+
 
     @PostMapping("/Orders/checkout")
     public String checkout(HttpServletRequest request) {
@@ -70,10 +75,8 @@ public class OrdersController {
 
         cartService.clear();
 
-        return "redirect:/User/ordersUser";
+        return "redirect:/Orders/success";
     }
-
-
 
     @PostMapping("/Orders/{id}/cancel")
     public String cancelOrder(@PathVariable long id, HttpServletRequest request) {

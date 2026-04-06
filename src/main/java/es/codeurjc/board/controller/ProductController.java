@@ -125,11 +125,15 @@ public class ProductController {
     }
 
     @PostMapping("/products/{id}/delete")
-    public String deleteProduct(Model model, @PathVariable long id) throws IOException {
-
+    public String deleteProduct(@PathVariable long id) {
         productService.deleteById(id);
+        return "redirect:/Admin/productManagement";
+    }
 
-        return "redirect:/Products/catalogProducts";
+    @PostMapping("/products/{id}/reactivate")
+    public String reactivateProduct(@PathVariable long id) {
+        productService.reactivateById(id);
+        return "redirect:/Admin/productManagement";
     }
 
 

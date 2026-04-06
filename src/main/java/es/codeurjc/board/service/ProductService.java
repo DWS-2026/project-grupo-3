@@ -23,11 +23,25 @@ public class ProductService {
 
     public Page<Product> findAll(Pageable page) {return productRepository.findAll(page);}
 
+    public Page<Product> findAllActive(Pageable page) {return productRepository.findByActiveTrue(page);}
+
     public Product findById(long id) {return productRepository.findById(id).orElseThrow();}
 
     public void save(Product product) {productRepository.save(product);}
 
-    public void deleteById(Long id) {productRepository.deleteById(id);}
+    @Transactional
+    public void deleteById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow();
+        product.setActive(false);
+        productRepository.save(product);
+    }
+
+    @Transactional
+    public void reactivateById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow();
+        product.setActive(true);
+        productRepository.save(product);
+    }
 
     @Transactional
     public Product addImageToProduct(long id, Image image) {
