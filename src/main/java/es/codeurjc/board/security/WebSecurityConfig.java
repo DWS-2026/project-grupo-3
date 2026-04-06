@@ -52,6 +52,7 @@ public class WebSecurityConfig {
                         // PRIVATE PAGES
                         .requestMatchers("/User/delete/*").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/User/profile/*").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/User/configuration").hasAnyRole("USER")
                         .requestMatchers("/Plants/ratingPlant").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Plants/*/delete").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/Plants/viewPlant/*").hasAnyRole("USER", "ADMIN")

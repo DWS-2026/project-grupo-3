@@ -266,98 +266,135 @@ He desarrollado la página principal de la aplicación, encargándome de su maqu
 
 Solo si ha cambiado.
 
-#### **Capturas de Pantalla Actualizadas**
+##### **Vistas Comunes**
 
 #### **1. Página Principal / Home**
 ![Página Principal](imagesGithub/screens/common/homePageNew.png)
 
-> Página de inicio que muestra el nombre de la aplicación Green Care y ofrece accesos directos al catálogo de plantas, al catálogo de productos y a las opciones de inicio de sesión y registro. Incluye una barra de navegación adaptada y un pie de página, permitiendo al usuario navegar entre las principales secciones de la aplicación.
+> Página de inicio actualizada con un diseño más limpio y moderno. Ofrece accesos directos al catálogo de plantas, productos y opciones de sesión, con una barra de navegación adaptada.
 
-#### **2. Página de registro**
+#### **2. Quizz de Plantas**
+![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
+
+> Funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades.
+
+#### **3. Resultado del Quizz**
+![Resultado del Quizz](imagesGithub/screens/common/resultQuizz.png)
+
+> Pantalla que muestra el resultado personalizado del cuestionario, indicando qué planta es la ideal para el usuario basándose en sus respuestas.
+
+#### **4. Catálogo de Productos (Soft Delete)**
+![Catálogo de productos no disponible](imagesGithub/screens/common/catalogProductsNoAvailable.png)
+
+> Vista del catálogo donde se puede observar la implementación del "borrado lógico" (soft delete). Los productos marcados como no disponibles muestran una etiqueta de "No disponible".
+
+#### **5. Error de Acceso Denegado (403)**
+![Acceso Denegado](imagesGithub/screens/common/accessDenied.png)
+
+> Página de error personalizada que se muestra cuando un usuario intenta acceder a una sección para la que no tiene permisos (ej. un usuario registrado intentando entrar al panel de admin).
+
+#### **6. Error de Servidor (500)**
+![Error del Servidor](imagesGithub/screens/common/error.png)
+
+> Página de error genérica para manejar excepciones inesperadas del servidor, manteniendo la estética de la aplicación y proporcionando un camino de vuelta a la página principal.
+
+##### **Vistas de Usuario No Registrado**
+
+#### **7. Página de Registro de Usuario**
 ![Página de registro](imagesGithub/screens/noRegisteredUser/register.png)
 
-> Página que permite a los nuevos usuarios crear una cuenta en la aplicación proporcionando su nombre, correo electrónico y contraseña. Una vez registrado, el usuario puede acceder a funcionalidades personalizadas como la gestión de sus propias plantas.
+> Formulario para que nuevos usuarios creen una cuenta, solicitando nombre, correo electrónico y contraseña.
 
-#### **3. Catálogo de plantas (No registrado)**
+#### **8. Catálogo de Plantas (Anónimo)**
 ![Catálogo de plantas](imagesGithub/screens/noRegisteredUser/catalogPlantsNew.png)
 
-> Muestra las plantas disponibles en el sistema para cualquier visitante. Los usuarios no registrados pueden ver la información básica y las valoraciones de las plantas, pero no pueden editarlas ni añadir nuevas.
+> Permite a los visitantes ver las plantas disponibles en el sistema y sus valoraciones sin necesidad de estar autenticados.
 
-#### **4. Catálogo de productos (No registrado)**
-![Catálogo de productos](imagesGithub/screens/noRegisteredUser/catalogProducts.png)
-
-> Muestra los productos disponibles en el sistema para cualquier visitante. Los usuarios no registrados pueden ver la información básica y el precio de los productos, pero no pueden comprarlos. Además, se agregó paginación.
-
-#### **5. Tablón de reviews (No registrado)**
+#### **9. Tablón de Reviews (Anónimo)**
 ![Tablón de Reviews](imagesGithub/screens/noRegisteredUser/reviews.png)
 
-> Muestra las reviews de los usuarios sobre las plantas y los productos, con su valoración y comentarios. Los usuarios no registrados pueden leer las opiniones de otros, pero no pueden escribir sus propias reviews ni valoraciones.
+> Muestra las opiniones y valoraciones de otros usuarios. Los visitantes pueden leerlas pero no participar hasta que inicien sesión.
 
-#### **6. Página de inicio para usuario registrado**
+##### **Vistas de Usuario Registrado**
+
+#### **10. Página de Inicio (Registrado)**
 ![Página de inicio registrado](imagesGithub/screens/registeredUser/homePageNew.png)
 
-> Vista principal para usuarios autenticados, con acceso directo al catálogo de plantas, "Mis pedidos" y el catálogo de productos. La interfaz se adapta para mostrar las opciones relevantes al perfil del usuario.
+> Vista personalizada para el usuario autenticado, con acceso rápido a su colección de plantas, sus pedidos y el catálogo de productos.
 
-#### **7. Catálogo de plantas para usuario registrado**
+#### **11. Catálogo de Plantas (Registrado)**
 ![Catálogo de plantas registrado](imagesGithub/screens/registeredUser/CatalogPlantsNew.png)
 
-> Espacio personal donde el usuario puede ver las plantas de los demás usuarios, valorarlas y gestionar su propia colección de plantas. Permite añadir nuevas plantas, editar las existentes y ver fotos actualizadas. Además, se agregó paginación.
+> Espacio donde el usuario puede gestionar su colección, valorar plantas de otros usuarios y añadir nuevas plantas a su perfil. Incluye paginación para facilitar la navegación.
 
-#### **8. Catálogo de productos para usuario registrado**
-![Catálogo de productos](imagesGithub/screens/registeredUser/CatalogProductsNew.png)
+#### **12. Catálogo de Productos (Registrado)**
+![Catálogo de productos registrado](imagesGithub/screens/registeredUser/CatalogProductsNew.png)
 
-> Tienda online de Green Care donde se listan productos para el cuidado de las plantas. Los usuarios pueden explorar el catálogo y añadir artículos a su carrito de compra. Además, se agregó paginación.
+> Tienda online donde los usuarios pueden explorar productos y añadirlos al carrito. También incluye sistema de paginación.
 
-#### **9. Tablón de reviews para usuario registrado**
+#### **13. Catálogo de Productos (Soft Delete parra usuario registrado)**
+![Catálogo de productos no disponible](imagesGithub/screens/registeredUser/catalogProductsNoAvailable.png)
+
+> Vista del catálogo donde se puede observar la implementación del "borrado lógico" (soft delete). Los productos marcados como no disponibles muestran una etiqueta de "No disponible" y se elimina el botón de "Añadir al carrito".
+
+
+#### **14. Tablón de Reviews (Registrado)**
 ![Tablón de Reviews](imagesGithub/screens/registeredUser/reviews.png)
 
-> Muestra las reviews de los usuarios sobre las plantas y los productos, con su valoración y comentarios. Los usuarios registrados pueden escribir sus propias reviews y valoraciones.
+> Muestra las opiniones y valoraciones de otros usuarios, permitiendo a los usuarios registrados no solo leerlas, también participar dejando sus propias valoraciones y comentarios y se pueden ver las valoraciones de cada producto o planta en su detalle.
 
-#### **10. Carrito de la compra**
+
+#### **15. Detalle de Reviews de Producto**
+![Detalle de reviews](imagesGithub/screens/registeredUser/showProductReview.png)
+
+> Vista detallada de un producto específico, permitiendo a los usuarios registrados ver el producto del que se hizo una valoración.
+
+#### **16. Carrito de la Compra Actualizado**
 ![Carrito de la compra](imagesGithub/screens/registeredUser/shoppingCartNew.png)
 
-> Resumen de los productos seleccionados para la compra. Permite gestionar cantidades, ver el subtotal y proceder a la pantalla de pago para finalizar el pedido.
+> Resumen de productos seleccionados, permitiendo modificar cantidades o eliminar artículos antes de proceder al pago.
 
-#### **11. Pedidos del usuario**
+#### **17. Pedido Realizado con Éxito**
+![Pedido Éxito](imagesGithub/screens/registeredUser/orderSuccess.png)
+
+> Pantalla de confirmación tras realizar una compra satisfactoriamente, con enlaces para seguir comprando o ver el historial de pedidos.
+
+#### **18. Mis Pedidos**
 ![Pedidos del usuario](imagesGithub/screens/registeredUser/myOrdersNew.png)
 
-> Historial de compras realizadas por el usuario, mostrando detalles como la fecha, los productos adquiridos, el precio total y el estado actual de cada pedido.
+> Historial detallado de todas las compras realizadas por el usuario, con el estado actual de cada pedido.
 
-#### **12. Página de inicio para administrador**
+#### **19. Perfil de Usuario Actualizado**
+![Perfil de usuario](imagesGithub/screens/registeredUser/profileNew.png)
+
+> Vista mejorada del perfil que muestra la información del usuario y su actividad reciente en la plataforma.
+
+#### **20. Configuración de Cuenta**
+![Configuración de cuenta](imagesGithub/screens/registeredUser/configurationNew.png)
+
+> Interfaz para actualizar datos sensibles como el correo electrónico o la contraseña de forma segura.
+
+##### **Vistas de Administrador**
+
+#### **21. Panel de Control / Inicio Admin**
 ![Página de inicio administrador](imagesGithub/screens/admin/homePageNew.png)
 
-> Página de inicio para usuarios con rol de administrador, con acceso a la gestión de usuarios, productos y pedidos. La interfaz se adapta para mostrar las opciones relevantes al perfil del administrador.
+> Menú principal para el administrador con acceso a las herramientas de gestión global del sistema.
 
-#### **13. Gestión de productos (Administrador)**
+#### **22. Gestión de Usuarios**
+![Gestión de usuarios](imagesGithub/screens/admin/userManagementNew.png)
+
+> Herramienta para que el administrador pueda supervisar, editar o eliminar cuentas de usuario.
+
+#### **23. Gestión de Productos**
 ![Gestión de productos](imagesGithub/screens/admin/productsManagementNew.png)
 
-> Interfaz que permite al administrador listar, buscar, añadir, editar y eliminar productos del catálogo de la tienda de forma centralizada.
+> Interfaz administrativa para el mantenimiento del catálogo de productos, incluyendo creación, edición y borrado lógico.
 
-#### **14. Gestión de pedidos (Administrador)**
+#### **24. Gestión de Pedidos Global**
 ![Gestión de pedidos](imagesGithub/screens/admin/managementsOrdersNew.png)
 
-> Panel para supervisar todos los pedidos del sistema, permitiendo al administrador cambiar estados (procesando, enviado, entregado) y ver detalles del comprador.
-
-#### **15. Quizz de plantas**
-![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
-
-> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
-
-#### **16. Quizz de plantas**
-![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
-
-> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
-
-#### **17. Quizz de plantas**
-![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
-
-> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
-
-
-#### **18. Quizz de plantas**
-![Quizz de plantas](imagesGithub/screens/common/quizzPlants.png)
-
-> Nueva funcionalidad interactiva que permite a los usuarios realizar un cuestionario para recibir recomendaciones personalizadas sobre qué plantas se adaptan mejor a sus necesidades y cuidados.
+> Panel que permite al administrador ver y actualizar el estado de todos los pedidos realizados en la plataforma.
 
 ### **Instrucciones de Ejecución**
 
@@ -393,9 +430,11 @@ Diagrama mostrando las entidades, sus campos y relaciones:
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+![Diagrama de Clases](imagesGithub/classesDiagram.png)
 
-> [Descripción opcional del diagrama y relaciones principales]
+> El diagrama representa la arquitectura MVC de la aplicación mediante un código de colores: **Púrpura** para las Vistas (Templates), **Verde** para los Controladores, **Rojo** para los Servicios, **Azul** para los Repositorios y **Blanco** para las Entidades de Dominio. 
+> 
+> Cabe destacar que **CartItem** no es una entidad persistente, sino un objeto de sesión para el manejo temporal del carrito. Por otro lado, **Order** y **OrderItems** son entidades fundamentales: mientras que **Order** guarda la información general del pedido, **OrderItems** actúa como el nexo que detalla los productos y cantidades asociadas a cada compra.
 
 ### **Participación de Miembros en la Práctica 2**
 
