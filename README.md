@@ -466,17 +466,18 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Camila Montero Huerto**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+En esta parte de la práctica he implementado la gestión completa de productos (creación, edición y control por parte del administrador), así como el sistema de pedidos mediante las entidades Order y OrderItem, que permiten representar pedidos compuestos por varios productos con sus cantidade. También me encargué del carrito de la compra usando la entidad Cartitem para gestionar los productos seleccionados por el usuario. Además, realicé la transición de páginas estáticas a controladores para dotar de funcionalidad a la aplicación y desarrollé una página de éxito tras completar un pedido correctamente. 
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Cambio de las rutas a los HTMLs por la ruta de los controladores](https://github.com/DWS-2026/project-grupo-3/commit/72a0bc1f2b523813e687d8fefa59b8f141718d35)  | [Editar Producto](https://github.com/DWS-2026/project-grupo-3/blob/72a0bc1f2b523813e687d8fefa59b8f141718d35/src/main/resources/templates/Productos/editProduct.html)   |
+|2| [Entidad Producto con controlador, servicio y repositorio y funcionando la parte del administrador](https://github.com/DWS-2026/project-grupo-3/commit/ebedb6898d1a212df8585e5ccca3c6ab6bbb0985)  | [Producto](https://github.com/DWS-2026/project-grupo-3/blob/ebedb6898d1a212df8585e5ccca3c6ab6bbb0985/src/main/java/es/codeurjc/board/model/Product.java)   |
+|3| [Entidad Order y OrderItems junto a la lógica del carrito de compra usando la clase CartItem con funcionalidad completa](https://github.com/DWS-2026/project-grupo-3/commit/49281423149bfde54685f3122f8184c9f511da75)  | [Pedido](https://github.com/DWS-2026/project-grupo-3/blob/49281423149bfde54685f3122f8184c9f511da75/src/main/java/es/codeurjc/board/model/Order.java)   |
+|4| [Se cambia la eliminación de un producto por parte del Admin por poner a un producto en estado no disponible hasta que el admin lo cambie  ](https://github.com/DWS-2026/project-grupo-3/commit/1f00642a69b1147d6e224198be89ec5fef43577b)  | [Funciones deleteById y reactivateById](https://github.com/DWS-2026/project-grupo-3/blob/1f00642a69b1147d6e224198be89ec5fef43577b/src/main/java/es/codeurjc/board/service/ProductService.java)   |
+|5| [Página de éxito después de realizar un pedido correctamente](https://github.com/DWS-2026/project-grupo-3/commit/1f00642a69b1147d6e224198be89ec5fef43577b)  | [exito](https://github.com/DWS-2026/project-grupo-3/blob/1f00642a69b1147d6e224198be89ec5fef43577b/src/main/resources/templates/Orders/orderSuccess.html)   |
+
 
 ---
 
