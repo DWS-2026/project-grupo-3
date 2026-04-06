@@ -454,7 +454,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 #### **Alumno 2 - Sara García Lopo**
 
-[En esta parte de la práctica, me he encargado del desarrollo del módulo de usuario, centrado en la gestión de la interacción entre el usuario y el sistema. Esta parte incluye la lógica necesaria para el registro de usuarios, el inicio de sesión y la gestión de sus credenciales.]
+En esta parte de la práctica, me he encargado del desarrollo del módulo de usuario, centrado en la gestión de la interacción entre el usuario y el sistema. Esta parte incluye la lógica necesaria para el registro de usuarios, el inicio de sesión y la gestión de sus credenciales.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
