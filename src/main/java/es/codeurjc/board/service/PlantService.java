@@ -11,7 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import es.codeurjc.board.model.PlantType;
-
+import java.util.List;
 
 @Service
 public class PlantService {
@@ -26,6 +26,10 @@ public class PlantService {
         }
         public Page<Plant> findAll(Pageable page) {
             return plantRepository.findAll(page);
+        }
+
+        public List<Plant> findAll() {
+            return plantRepository.findAll();
         }
         public long count() {
             return plantRepository.count();
