@@ -57,8 +57,9 @@
 
 
         <div class="form-floating mb-3">
-            <textarea class="form-control" name="description" style="height:120px" required></textarea>
+            <textarea class="form-control" name="description" style="height:120px; display:none;" id="description-textarea" required></textarea>
             <label>Descripción</label>
+            <div id="editor"></div>
         </div>
 
         <button type="submit" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button w-100">
@@ -68,6 +69,18 @@
     </form>
 
 </main>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.2/dist/quill.js"></script>
+<!-- Initialize Quill editor -->
+<script>
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+    quill.on('text-change', function () {
+        document.getElementById('description-textarea').value = quill.root.innerHTML;
+    });
+</script>
 {{>footer}}
 
 </body>
