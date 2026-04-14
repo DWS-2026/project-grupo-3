@@ -1,4 +1,4 @@
-package es.codeurjc.board.controller;
+package es.codeurjc.board.webController;
 
 import es.codeurjc.board.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package es.codeurjc.board.controller;
+package es.codeurjc.board.webController;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.codeurjc.board.model.Image;

@@ -1,4 +1,4 @@
-package es.codeurjc.board.controller;
+package es.codeurjc.board.webController;
 import es.codeurjc.board.model.*;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
 import es.codeurjc.board.service.CartService;

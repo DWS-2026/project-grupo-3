@@ -1,4 +1,4 @@
-package es.codeurjc.board.controller;
+package es.codeurjc.board.webController;
 
 import es.codeurjc.board.model.Review;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
