@@ -36,7 +36,7 @@ public class PlantService {
         }
 
         public Plant findById(long id) {
-            return plantRepository.findById(id).orElseThrow();
+            return plantRepository.findById(id).orElseThrow(() -> new RuntimeException("Plant not found"));
         }
 
         public void save(Plant plant,User username, String type) {

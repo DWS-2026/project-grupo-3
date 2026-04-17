@@ -1,4 +1,4 @@
-package es.codeurjc.board.restController;
+package es.codeurjc.board.rest.restController;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import es.codeurjc.board.rest.dto.PlantBasicDTO;
+import es.codeurjc.board.rest.dto.PlantExtendedDTO;
+import es.codeurjc.board.rest.mapper.PlantMapper;
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
@@ -28,9 +30,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @RestController
-@RequestMapping("/api/Plants")
+@RequestMapping("/api/v1/Plants")
 public class PlantRestController {
-        
+    @Autowired
+    private PlantMapper mapper;
+
     @Autowired
     private ButtonsHeader btnsHeader;
 
@@ -45,11 +49,22 @@ public class PlantRestController {
 
 
     @GetMapping("/")
-    public Page<Plant> getItemRepository(Pageable page) {
+    public List<Plant> getItemRepository(Pageable page) {
         Page<Plant> plantsPage = plantService.findAll(page);
-        return plantsPage;
+        return plantsPage.getContent();
     }
 
+    @DeleteMapping("/{id}")
+    public void deletePlant(@PathVariable long id){
+        plantService.deleteById(id);
+    }
+
+	@GetMapping("/{id}")
+	public PlantExtendedDTO getPost(@PathVariable long id) {
+            Plant plant = plantService.findById(id);
+            return mapper.extendedToDTO(plant);
+	}
+    
 
    
 }
