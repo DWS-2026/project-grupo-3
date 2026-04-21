@@ -81,9 +81,12 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseURL}}",
+              "raw": "{{baseURL}}/",
               "host": [
                 "{{baseURL}}"
+              ],
+              "path": [
+                ""
               ]
             }
           },
@@ -124,12 +127,24 @@
       "request": {
         "method": "POST",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\":\"Pepe\",\r\n    \"password\":\"pepe\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
-          "raw": "{{baseURL}}/login",
+          "raw": "{{baseURL}}/api/v1/auth/login",
           "host": [
             "{{baseURL}}"
           ],
           "path": [
+            "api",
+            "v1",
+            "auth",
             "login"
           ]
         }
