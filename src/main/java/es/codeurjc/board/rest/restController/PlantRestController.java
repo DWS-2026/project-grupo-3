@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @RestController
-@RequestMapping("/api/v1/Plants")
+@RequestMapping("/api/v1/plants")
 public class PlantRestController {
     @Autowired
     private PlantMapper mapper;
@@ -44,26 +45,47 @@ public class PlantRestController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ImageService imageService;
-
+    
 
     @GetMapping("/")
-    public List<Plant> getItemRepository(Pageable page) {
-        Page<Plant> plantsPage = plantService.findAll(page);
-        return plantsPage.getContent();
+    public List<Plant> getItemRepository(@RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
+                                HttpServletRequest session, @RequestParam(required = false) String whatToShow, @RequestParam(required = false) String order) {
+        Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order));
+        if(userService.isUserAdmin(session) || userService.isUserUser(session)) {
+            Page<Plant> plantsPage = plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(),
+                    userService.isUserUser(session), whatToShow, search, sortedPage);
+            return plantsPage.getContent();
+        } else{
+            return null;
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deletePlant(@PathVariable long id){
-        plantService.deleteById(id);
+    public Plant deletePlant(@PathVariable long id,HttpServletRequest session){
+        Plant plant = plantService.findById(id);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session)) || userService.isUserAdmin(session)){
+            plantService.deleteById(id);
+            return plant;
+        }else{
+            return null;
+        }
+    }
+    @GetMapping("/edit/{id}")
+    public Plant editPlant(@PathVariable Long id, HttpServletRequest session) {
+        Plant plant = plantService.findById(id);
+        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+            return plant;
+        }else{
+            return null;
+        }
     }
 
 	@GetMapping("/{id}")
-	public PlantExtendedDTO getPost(@PathVariable long id) {
+	public PlantExtendedDTO getPlant(@PathVariable long id) {
             Plant plant = plantService.findById(id);
             return mapper.extendedToDTO(plant);
 	}
+
     
 
    
