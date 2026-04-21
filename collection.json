@@ -157,11 +157,14 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "{{baseURL}}/logout",
+          "raw": "{{baseURL}}/api/v1/auth/logout",
           "host": [
             "{{baseURL}}"
           ],
           "path": [
+            "api",
+            "v1",
+            "auth",
             "logout"
           ]
         }

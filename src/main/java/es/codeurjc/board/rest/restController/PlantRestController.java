@@ -70,7 +70,7 @@ public class PlantRestController {
             return null;
         }
     }
-    @GetMapping("/edit/{id}")
+    @PostMapping("/{id}")
     public Plant editPlant(@PathVariable Long id, HttpServletRequest session) {
         Plant plant = plantService.findById(id);
         if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
@@ -81,9 +81,11 @@ public class PlantRestController {
     }
 
 	@GetMapping("/{id}")
-	public PlantExtendedDTO getPlant(@PathVariable long id) {
+	public PlantExtendedDTO getPlant(@PathVariable long id,  HttpServletRequest session) {
             Plant plant = plantService.findById(id);
-            return mapper.extendedToDTO(plant);
+        return mapper.extendedToDTO(plant);
+            
+
 	}
 
     

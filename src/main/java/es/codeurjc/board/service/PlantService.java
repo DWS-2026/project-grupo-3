@@ -152,7 +152,11 @@ public class PlantService {
         return plantRepository.count();
     }
     public boolean seeIfPlantBelongsToUser(Plant plant, User user) {
+        if(user != null){
             return user.equals(plant.getUser());
+        }else{
+            return false;
+        }
     }
 
 }
