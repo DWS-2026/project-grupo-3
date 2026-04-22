@@ -1,11 +1,8 @@
 package es.codeurjc.board.modelAttributes;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.ui.Model;import java.util.List;
-
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.ui.Model;
+import java.util.List;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @ControllerAdvice //adds actions before running any controller and is required to be able to make ModelAttribute

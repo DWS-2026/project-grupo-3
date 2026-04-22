@@ -17,7 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.Optional;
 import java.io.IOException;
 
 @Controller
@@ -40,10 +40,14 @@ public class PlantController {
 
     @GetMapping("/viewPlant/{id}")
     public String showPost(Model model, @PathVariable long id, HttpServletRequest session) {
-        Plant plant = plantService.findById(id);
-
-            model.addAttribute("plant", plant);
+        Optional<Plant> plant = plantService.findById(id);
+        if(plant.isPresent()){
+            model.addAttribute("plant", plant.get());
             return "Plants/viewPlant";
+        }else{
+            return "/error";
+        }
+            
 
 
 
@@ -82,8 +86,9 @@ public class PlantController {
 
     @GetMapping("/editPlant/{id}")
     public String editPlant(Model model, @PathVariable Long id, HttpServletRequest session) {
-        Plant plant = plantService.findById(id);
-        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+        Optional <Plant> plantOp = plantService.findById(id);
+        if(plantOp.isPresent() && plantService.seeIfPlantBelongsToUser(plantOp.get(),userService.getUser(session))){
+            Plant plant = plantOp.get();
             model.addAttribute("plant", plant);
             model.addAttribute("plantID", plant.getId());
             return "Plants/editPlant";
@@ -96,8 +101,8 @@ public class PlantController {
     public String editPlant(RedirectAttributes redirectAttributes,@PathVariable Long id, @RequestParam String name, @RequestParam String cares,
                             @RequestParam String description, @RequestParam String species,HttpServletRequest session) throws Exception {
 
-        Plant plant = plantService.findById(id);
-        if(!plantService.existsByNamePlant(name) && plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+        Optional<Plant> plant = plantService.findById(id);
+        if(!plantService.existsByNamePlant(name) && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
             plantService.editPlant(name, cares , description, id, species);
             return "redirect:/Plants/editPlant/" + id;
         }else if (plantService.existsByNamePlant(name)){
@@ -136,8 +141,8 @@ public class PlantController {
 
     @PostMapping("/{id}/addImageToPlant")
     public String addImageToPlant(@PathVariable long id, MultipartFile newImage, HttpServletRequest session) throws IOException {
-        Plant plant = plantService.findById(id);
-        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+        Optional<Plant> plant = plantService.findById(id);
+        if(plant.isPresent() && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
             if (!newImage.isEmpty()) {
                 Image imageOne = imageService.createImage(newImage);
                 plantService.addImageToPlant(id, imageOne);
@@ -153,8 +158,8 @@ public class PlantController {
     @PostMapping("{plantId}/delete/image/{imageId}")
     public String deleteImage(@PathVariable long plantId, @PathVariable long imageId, HttpServletRequest session){
 
-        Plant plant = plantService.findById(plantId);
-        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+        Optional<Plant> plant = plantService.findById(plantId);
+        if(plant.isPresent() && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
             plantService.deleteImageFromPlant(plantId, imageId);
             return "redirect:/Plants/catalogPlants";
         }else{
@@ -164,10 +169,10 @@ public class PlantController {
 
     @PostMapping("/{id}/delete")
     public String deletePlant(@PathVariable long id, HttpServletRequest session) throws IOException {
-        Plant plant = plantService.findById(id);
-        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
+        Optional<Plant> plant = plantService.findById(id);
+        if(plant.isPresent() && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
             plantService.deleteById(id);
-            return "redirect:/Plants/catalogPlants?type=misPlantas";
+            return "redirect:/Plants/catalogPlants";
         }else if(userService.isUserAdmin(session)){
             plantService.deleteById(id);
             return "redirect:/Plants/catalogPlants";
@@ -180,8 +185,9 @@ public class PlantController {
     public String ratePlant(@RequestParam("plantId") Long plantId,
                             @RequestParam("rating") int rating) {
 
-        Plant plant = plantService.findById(plantId);
-        if(plant != null) {
+        Optional<Plant> plantOp = plantService.findById(plantId);
+        if(plantOp.isPresent()) {
+            Plant plant = plantOp.get();
             plant.setTotalRating(plant.getTotalRating() + rating);
             plant.setCount(plant.getCount() + 1);
             plant.setRating(plant.getTotalRating() / plant.getCount());

@@ -1,12 +1,13 @@
 package es.codeurjc.board.rest.restController;
-
-import java.io.IOException;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+import java.net.URI;
 import java.util.List;
-
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
+import org.springframework.http.HttpStatus; 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,15 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.PutMapping;
 import es.codeurjc.board.rest.dto.PlantBasicDTO;
-import es.codeurjc.board.rest.dto.PlantExtendedDTO;
 import es.codeurjc.board.rest.mapper.PlantMapper;
-import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,9 +33,6 @@ public class PlantRestController {
     private PlantMapper mapper;
 
     @Autowired
-    private ButtonsHeader btnsHeader;
-
-    @Autowired
     private PlantService plantService;
 
     @Autowired
@@ -48,46 +41,72 @@ public class PlantRestController {
     
 
     @GetMapping("/")
-    public List<Plant> getItemRepository(@RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
+    public Page<PlantBasicDTO> getItemRepository(@RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
                                 HttpServletRequest session, @RequestParam(required = false) String whatToShow, @RequestParam(required = false) String order) {
         Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order));
         if(userService.isUserAdmin(session) || userService.isUserUser(session)) {
             Page<Plant> plantsPage = plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(),
                     userService.isUserUser(session), whatToShow, search, sortedPage);
-            return plantsPage.getContent();
+            return plantsPage.map(mapper::ToDTO);
         } else{
-            return null;
+            return Page.empty();
         }
     }
 
     @DeleteMapping("/{id}")
-    public Plant deletePlant(@PathVariable long id,HttpServletRequest session){
-        Plant plant = plantService.findById(id);
-        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session)) || userService.isUserAdmin(session)){
+    public ResponseEntity<PlantBasicDTO> deletePlant(@PathVariable long id,HttpServletRequest session){
+        Optional<Plant> plant = plantService.findById(id);
+        if(plant.isPresent() || plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session)) || userService.isUserAdmin(session)){
             plantService.deleteById(id);
-            return plant;
+            return ResponseEntity.ok(mapper.ToDTO(plant.get()));
         }else{
-            return null;
+            if(plant.isPresent()){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
+            }
+            return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping("/{id}")
-    public Plant editPlant(@PathVariable Long id, HttpServletRequest session) {
-        Plant plant = plantService.findById(id);
-        if(plantService.seeIfPlantBelongsToUser(plant,userService.getUser(session))){
-            return plant;
+    @PutMapping("/{id}")
+    public ResponseEntity<PlantBasicDTO> editPlant(@PathVariable Long id, HttpServletRequest session, @RequestBody PlantBasicDTO updatedPlant) throws Exception {
+        Optional<Plant> plantOp = plantService.findById(id);
+        if(plantOp.isPresent() && plantService.seeIfPlantBelongsToUser(plantOp.get(),userService.getUser(session))){
+            plantService.editPlant(updatedPlant.name(),updatedPlant.cares(),updatedPlant.description(),id,updatedPlant.species());
+            return ResponseEntity.ok(mapper.ToDTO(plantOp.get()));
         }else{
-            return null;
+            if(plantOp.isPresent()){
+               return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
+            }
+            return ResponseEntity.notFound().build();
         }
     }
 
+    @PostMapping("/")
+    public ResponseEntity<PlantBasicDTO> newPlant(@RequestBody PlantBasicDTO plantDTO,  HttpServletRequest session){
+        if(userService.seeIfUserIsLoggedIn(session) && userService.isUserUser(session)){
+            Plant plant = mapper.ToDomain(plantDTO);
+            plant.setUser(userService.getUser(session));
+            plantService.save(plant, userService.getUser(session), plantDTO.species());
+            URI location = fromCurrentRequest().path("/{id}").buildAndExpand(plant.getId()).toUri();
+            return ResponseEntity.created(location).body(mapper.ToDTO(plant));
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+    }
+
 	@GetMapping("/{id}")
-	public PlantExtendedDTO getPlant(@PathVariable long id,  HttpServletRequest session) {
-            Plant plant = plantService.findById(id);
-        return mapper.extendedToDTO(plant);
+	public ResponseEntity<PlantBasicDTO> getPlant(@PathVariable long id,  HttpServletRequest session) {
+        Optional<Plant> plant = plantService.findById(id);
+        if(plant.isPresent()){
+            return ResponseEntity.ok(mapper.ToDTO(plant.get()));
+        }else{
+            return ResponseEntity.notFound().build();
+        }
             
 
 	}
 
+ 
     
 
    

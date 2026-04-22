@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import es.codeurjc.board.model.PlantType;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlantService {
@@ -35,8 +36,8 @@ public class PlantService {
             return plantRepository.count();
         }
 
-        public Plant findById(long id) {
-            return plantRepository.findById(id).orElseThrow(() -> new RuntimeException("Plant not found"));
+        public Optional<Plant> findById(long id) {
+            return plantRepository.findById(id);
         }
 
         public void save(Plant plant,User username, String type) {
