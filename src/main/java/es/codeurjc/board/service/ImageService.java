@@ -1,6 +1,8 @@
 package es.codeurjc.board.service;
 
 import java.io.IOException;
+import java.io.InputStream;
+
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.core.io.InputStreamResource;
 
+import java.util.Optional;
 
 
 @Service
@@ -43,5 +46,22 @@ public class ImageService {
 
     public void deleteById(long id) {
 			imageRepository.deleteById(id);
+    }
+
+	public Optional<Image> findById(long id){
+		return imageRepository.findById(id);
+	}
+
+	public void replaceImageFile(long id, InputStream inputStream) throws IOException {
+
+        Image image = imageRepository.findById(id).orElseThrow();
+
+        try {
+            image.setImageFile(new SerialBlob(inputStream.readAllBytes()));
+        } catch (Exception e) {
+            throw new IOException("Failed to create image", e);
+        }
+
+        imageRepository.save(image);
     }
 }

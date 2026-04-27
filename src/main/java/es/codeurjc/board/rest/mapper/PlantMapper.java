@@ -19,11 +19,12 @@ public interface PlantMapper {
     PlantBasicDTO ToDTO(Plant plant);
 
     List<PlantBasicDTO> ToDTOs(Collection<Plant> plants);
-
+    
+    @Mapping(target = "images", ignore = true)
     Plant ToDomain(PlantBasicDTO plantDTO);
 
-    PlantExtendedDTO extendedToDTO(Plant plant);
+    //PlantExtendedDTO extendedToDTO(Plant plant);
 
-    Plant extendedToDomin(PlantExtendedDTO plantDTO);
+    //Plant extendedToDomin(PlantExtendedDTO plantDTO);
     
 }

@@ -1,7 +1,7 @@
 package es.codeurjc.board.rest.restController;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 import java.net.URI;
-import java.util.List;
+import java.io.IOException;
 import org.springframework.http.HttpStatus; 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PutMapping;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
+import es.codeurjc.board.rest.dto.ImageDTO;
 import es.codeurjc.board.rest.dto.PlantBasicDTO;
+import es.codeurjc.board.rest.mapper.ImageMapper;
 import es.codeurjc.board.rest.mapper.PlantMapper;
+import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Plant;
+import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +38,10 @@ public class PlantRestController {
     @Autowired
     private PlantMapper mapper;
 
+    @Autowired 
+    private ImageMapper imageMapper;
+    @Autowired
+    private ImageService imageService;
     @Autowired
     private PlantService plantService;
 
@@ -81,7 +91,8 @@ public class PlantRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<PlantBasicDTO> newPlant(@RequestBody PlantBasicDTO plantDTO,  HttpServletRequest session){
+    public ResponseEntity<PlantBasicDTO> newPlant(@RequestBody PlantBasicDTO plantDTO,  HttpServletRequest session){ //we
+        //should check that in the plantDTO fields there is no one with an empty etrance
         if(userService.seeIfUserIsLoggedIn(session) && userService.isUserUser(session)){
             Plant plant = mapper.ToDomain(plantDTO);
             plant.setUser(userService.getUser(session));
@@ -106,6 +117,43 @@ public class PlantRestController {
 
 	}
 
+    @PostMapping("/{id}/image")
+    public ResponseEntity<ImageDTO> addImageToPlant(@PathVariable long id,@RequestParam MultipartFile newImage, HttpServletRequest session) 
+        throws IOException {
+        Optional<Plant> plant = plantService.findById(id);
+        if(plant.isPresent() && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
+            if (newImage.isEmpty()) {
+                throw new IllegalArgumentException("Image file cannot be empty");
+            }
+
+            Image image = imageService.createImage(newImage);
+            plantService.addImageToPlant(id, image);
+
+            URI location = fromCurrentContextPath()
+                    .path("/images/{imageId}/media")
+                    .buildAndExpand(image.getId())
+                    .toUri();
+
+            return ResponseEntity.created(location).body(imageMapper.toDTO(image));
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
+        }
+
+    }
+
+    @DeleteMapping("{plantId}/image/{imageId}")
+    public ResponseEntity<ImageDTO> deletePlantImage(@PathVariable long plantId, @PathVariable long imageId, HttpServletRequest session)
+        throws IOException {
+
+        Optional<Plant> plant = plantService.findById(plantId);
+        Optional<Image> image = imageService.findById(imageId);
+        if(plant.isPresent() && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
+            plantService.deleteImageFromPlant(plantId, imageId);
+            return ResponseEntity.ok(imageMapper.toDTO(image.get()));
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
+        }
+    }
  
     
 

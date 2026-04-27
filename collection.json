@@ -10,7 +10,7 @@
       "name": "plants",
       "item": [
         {
-          "name": "get plants",
+          "name": "get Plants",
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -27,7 +27,7 @@
               }
             },
             "url": {
-              "raw": "{{baseURL}}/api/v1/plants/?search&whatToShow&order",
+              "raw": "{{baseURL}}/api/v1/plants/?search&whatToShow&order&page=1&sort=",
               "host": [
                 "{{baseURL}}"
               ],
@@ -40,15 +40,30 @@
               "query": [
                 {
                   "key": "search",
-                  "value": null
+                  "value": null,
+                  "id": 0
                 },
                 {
                   "key": "whatToShow",
-                  "value": null
+                  "value": null,
+                  "id": 1
                 },
                 {
                   "key": "order",
-                  "value": null
+                  "value": null,
+                  "id": 2
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "type": "text",
+                  "id": 3
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "type": "text",
+                  "id": 4
                 }
               ]
             }
@@ -56,7 +71,7 @@
           "response": []
         },
         {
-          "name": "get plant",
+          "name": "get Plant",
           "request": {
             "method": "GET",
             "header": [],
@@ -87,6 +102,121 @@
               ],
               "path": [
                 ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete Image from Plant",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/plants/1/image/202",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "plants",
+                "1",
+                "image",
+                "202"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new Plant",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"cares\": \"Riego moderado, luz indirecta\",\r\n    \"name\": \"Monstera Deliciosa\",\r\n    \"description\": \"Planta tropical con hojas grandes y características\",\r\n    \"species\": \"Monstera\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/plants/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "plants",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edit Plant",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"cares\": \"Regar 2 veces por semana\",\r\n  \"name\": \"Rawr\",\r\n  \"description\": \"Planta tropical de interior\",\r\n  \"species\": \"monstera\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/plants/1",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "plants",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add Image To Plant",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "newImage",
+                  "type": "file",
+                  "id": 0,
+                  "fileUploadError": "",
+                  "src": [
+                    "c:\\Users\\iness\\Downloads\\fa.webp"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/plants/1/image",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "plants",
+                "1",
+                "image"
               ]
             }
           },
@@ -123,8 +253,69 @@
       "item": []
     },
     {
+      "name": "images",
+      "item": [
+        {
+          "name": "get Image",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/images/202/media",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "images",
+                "202",
+                "media"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get Image File",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/images/1",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "images",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "login",
       "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "Pepe",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "pepe",
+              "type": "string"
+            }
+          ]
+        },
         "method": "POST",
         "header": [],
         "body": {

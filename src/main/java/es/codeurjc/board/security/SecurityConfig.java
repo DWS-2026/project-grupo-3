@@ -28,7 +28,7 @@ public class SecurityConfig {
 	private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public RepositoryUserDetailsService userDetailService;
+    private RepositoryUserDetailsService userDetailService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
