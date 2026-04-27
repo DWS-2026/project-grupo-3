@@ -1,9 +1,6 @@
 package es.codeurjc.board.service;
 
-import es.codeurjc.board.model.PlantType;
-import es.codeurjc.board.model.Product;
-import es.codeurjc.board.model.Review;
-import es.codeurjc.board.model.User;
+import es.codeurjc.board.model.*;
 import es.codeurjc.board.repositories.ReviewsRepository;
 
 import org.springframework.data.domain.Page;
@@ -11,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -21,6 +21,9 @@ public class ReviewsService {
 
     @Autowired
     private PlantTypeService plantTypeService;
+
+    @Autowired
+    private VideoService videoService;
 
     @Autowired
     private ProductService productService;
@@ -135,4 +138,13 @@ public class ReviewsService {
 
 
         }
+
+    public void addVideoToReview(Long reviewId, MultipartFile file) throws IOException {
+        Review review = reviewsRepository.findById(reviewId).orElseThrow();
+
+        Video video = videoService.saveVideo(file);
+        review.setVideo(video);
+
+        reviewsRepository.save(review);
+    }
 }

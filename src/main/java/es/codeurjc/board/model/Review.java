@@ -2,6 +2,9 @@ package es.codeurjc.board.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Review {
 
@@ -18,6 +21,9 @@ public class Review {
 
     private String title;
     private String description;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Video video;
 
     @Enumerated(EnumType.STRING)
     private ReviewType type;
@@ -37,6 +43,14 @@ public class Review {
         this.title = title;
         this.description = description;
         this.type = type;
+    }
+
+    public Video getVideo() {
+        return video;
+    }
+
+    public void setVideo(Video video) {
+        this.video = video;
     }
 
     public Long getId() {

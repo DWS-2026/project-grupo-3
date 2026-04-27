@@ -97,6 +97,7 @@ public class SecurityConfig {
                         .requestMatchers("/Reviews/forum").permitAll()
                         .requestMatchers("/quizzPlants").permitAll()
                         .requestMatchers("/quizzPlants/result").permitAll()
+                        .requestMatchers("/api/videos/**").permitAll()
 
 
                         // PRIVATE PAGES
