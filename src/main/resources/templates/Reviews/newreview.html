@@ -28,7 +28,7 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto">
-    <form class="text-center" action="/Reviews/newreview" method="post">
+    <form class="text-center" action="/Reviews/newreview" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="{{token}}"/>
 
         <h3 class="h3 mb-4 fw-normal change-color">Escribe tu comentario aquí</h3>
@@ -60,6 +60,24 @@
             <textarea class="form-control" name="description" style="height:120px; display:none;" id="description-textarea" required></textarea>
             <label>Descripción</label>
             <div id="editor"></div>
+        </div>
+
+        <!-- Upload video -->
+        {{#videoError}}
+        <div class="alert alert-warning">
+            Tienes que volver a seleccionar el vídeo.
+        </div>
+        {{/videoError}}
+
+        <div class="mb-4 text-start">
+            <label class="form-label change-color fw-medium">Vídeo de la review</label>
+            <input
+                    class="form-control"
+                    name="videoFile"
+                    type="file"
+                    id="reviewVideo"
+                    accept="video/*"
+            />
         </div>
 
         <button type="submit" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button w-100">

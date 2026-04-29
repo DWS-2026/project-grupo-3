@@ -1,11 +1,8 @@
 package es.codeurjc.board.webController;
 
-import es.codeurjc.board.model.Review;
+import es.codeurjc.board.model.*;
 import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import es.codeurjc.board.service.PlantService;
-import es.codeurjc.board.service.ProductService;
-import es.codeurjc.board.service.ReviewsService;
-import es.codeurjc.board.service.UserService;
+import es.codeurjc.board.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -15,16 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.model.PlantType;
-import es.codeurjc.board.model.Product;
-import es.codeurjc.board.service.PlantTypeService;
 
 @Controller
 
@@ -44,6 +39,9 @@ public class ReviewsController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+            private VideoService videoService;
 
 
     ReviewsController(ProductService productService) {
@@ -94,39 +92,47 @@ public class ReviewsController {
     }
 
     @PostMapping("/Reviews/newreview")
-    public String saveReview(Model model,  RedirectAttributes redirectAttributes,@RequestParam String title,
+    public String saveReview(Model model,
+                             RedirectAttributes redirectAttributes,
+                             @RequestParam String title,
                              @RequestParam String description,
-                             @RequestParam Review.ReviewType type,   @RequestParam String productOrplant, HttpServletRequest request) {
-                                        
-        boolean isValidRequest = false;
+                             @RequestParam Review.ReviewType type,
+                             @RequestParam String productOrplant,
+                             HttpServletRequest request,
+                             @RequestParam(required = false) MultipartFile videoFile) throws IOException {
 
-        if (userService.isUserUser(request) && productOrplant != null && !productOrplant.isBlank() && type != null) {
-            isValidRequest = true;
-        }
+        boolean isValidRequest = userService.isUserUser(request)
+                && productOrplant != null && !productOrplant.isBlank()
+                && type != null;
 
-        if (isValidRequest) {
-            Review review = new Review(title, description, type);
-            boolean associationOk = false;
-
-            if ("PLANT".equals(type.name())) {
-                associationOk = reviewsService.handlePlant(review, productOrplant);
-            } else if ("PRODUCT".equals(type.name())) {
-                associationOk = reviewsService.handleProduct(review, productOrplant);
-            }
-
-            if (!associationOk) {
-                redirectAttributes.addFlashAttribute("nameNotValid", true);
-                return "redirect:/Reviews/newreview";
-            }else{
-                reviewsService.save(review, userService.getUser(request));
-                return "redirect:/Reviews/forum";
-            }
-
-        } else {
+        if (!isValidRequest) {
             return "redirect:/Reviews/newreview";
         }
-                
 
+        Review review = new Review(title, description, type);
+
+        boolean associationOk = false;
+
+        if (type == Review.ReviewType.PLANT) {
+            associationOk = reviewsService.handlePlant(review, productOrplant);
+        } else if (type == Review.ReviewType.PRODUCT) {
+            associationOk = reviewsService.handleProduct(review, productOrplant);
+        }
+
+        if (!associationOk) {
+            redirectAttributes.addFlashAttribute("nameNotValid", true);
+            return "redirect:/Reviews/newreview";
+        }
+
+        // First save the review (user and ID)
+        reviewsService.save(review, userService.getUser(request));
+
+        // Now we use user and ID for saving the video
+        if (videoFile != null && !videoFile.isEmpty()) {
+            videoService.addVideoToReview(review.getId(), videoFile);
+        }
+
+        return "redirect:/Reviews/forum";
     }
 
     @GetMapping("/Reviews/editReview/{id}")
@@ -134,7 +140,7 @@ public class ReviewsController {
         Review review = reviewsService.findById(id);
 
         // Verify that belong to the user
-        if (review.getUser().getId() != userService.getUserID(request) || userService.isUserAdmin(request)) {
+        if (review.getUser().getId() != userService.getUserID(request) && userService.isUserAdmin(request)) {
             return "redirect:/accessDenied";
         }
 
@@ -176,6 +182,7 @@ public class ReviewsController {
 
         return "redirect:/Reviews/forum";
     }
+
 
 
 }
