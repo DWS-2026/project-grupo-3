@@ -110,9 +110,9 @@ public class ReviewsController {
         }
 
         Review review = new Review(title, description, type);
+
         boolean associationOk = false;
 
-        // 🔹 Asociation
         if (type == Review.ReviewType.PLANT) {
             associationOk = reviewsService.handlePlant(review, productOrplant);
         } else if (type == Review.ReviewType.PRODUCT) {
@@ -124,14 +124,13 @@ public class ReviewsController {
             return "redirect:/Reviews/newreview";
         }
 
-        // Set the video before saving the review
-        if (videoFile != null && !videoFile.isEmpty()) {
-            Video video = videoService.saveVideo(videoFile);
-            review.setVideo(video);
-        }
-
-        // Final saving
+        // First save the review (user and ID)
         reviewsService.save(review, userService.getUser(request));
+
+        // Now we use user and ID for saving the video
+        if (videoFile != null && !videoFile.isEmpty()) {
+            videoService.addVideoToReview(review.getId(), videoFile);
+        }
 
         return "redirect:/Reviews/forum";
     }

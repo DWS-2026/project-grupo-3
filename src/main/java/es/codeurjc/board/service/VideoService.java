@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,37 +25,64 @@ public class VideoService {
 
 
 
-    public Video saveVideo(MultipartFile file) throws IOException {
+    public Video saveVideo(MultipartFile file, Long reviewId, String username) throws IOException {
         String originalName = file.getOriginalFilename();
+        if (originalName == null || originalName.isBlank()) {
+            throw new IOException("Invalid file name");
+        }
+        // Eliminate possible paths in the originalName
+        originalName = Paths.get(originalName).getFileName().toString();
 
-        String safeName = System.currentTimeMillis() + "_" + UUID.randomUUID();
-        String extension = "";
-        int i = originalName.lastIndexOf(".");
-        if (i > 0) {
-            extension = originalName.substring(i);
-        }        String fileName = safeName + extension;
-
-        Path uploadPath = Paths.get(UPLOAD_DIR);
-
-        if (!file.getContentType().startsWith("video/")) {
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.startsWith("video/")) {
             throw new IOException("Invalid file type");
         }
-
         if (file.getSize() > 50_000_000) {
             throw new IOException("File too large");
         }
 
+        int i = originalName.lastIndexOf('.');
+        if (i < 0) throw new IOException("File must have an extension");
+        String baseName = originalName.substring(0, i);
+        String extension = originalName.substring(i).toLowerCase();
+
+        // whitelist of permited extensions
+        List<String> allowedExt = List.of(".mp4", ".webm", ".ogg");
+        if (!allowedExt.contains(extension)) {
+            throw new IOException("Unsupported file extension");
+        }
+
+        //sanitize to show (no used for the path)
+        String displayName = baseName.replaceAll("[^A-Za-z0-9._-]", "_");
+        if (displayName.length() > 100) displayName = displayName.substring(0, 100);
+        displayName = displayName + extension;
+
+        //sanitize username shorter for metadata (max 30)
+        if (username == null) username = "unknown";
+        username = username.replaceAll("[^A-Za-z0-9_-]", "_");
+        if (username.length() > 30) username = username.substring(0, 30);
+
+        // generate unique storage name
+        String safeBaseName = baseName.replaceAll("[^A-Za-z0-9._-]", "_");
+        String storageFileName = safeBaseName + "_review_" + reviewId + extension;
+
+        Path uploadPath = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        Path filePath = uploadPath.resolve(fileName);
+        Path target = uploadPath.resolve(storageFileName).normalize();
+        if (!target.startsWith(uploadPath)) {
+            throw new IOException("Invalid path");
+        }
 
-        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+        try (InputStream in = file.getInputStream()) {
+            Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+        }
 
-        Video video = new Video(originalName, filePath.toString(), file.getContentType());
-
+        Video video = new Video(displayName, target.toString(), contentType);
         return videoRepository.save(video);
+
     }
 
     public Resource getVideo(Long id) throws IOException {
@@ -80,7 +108,13 @@ public class VideoService {
     public void addVideoToReview(Long reviewId, MultipartFile file) throws IOException {
         Review review = reviewsRepository.findById(reviewId).orElseThrow();
 
-        Video video = saveVideo(file);
+        if (review.getUser() == null) {
+            throw new IllegalStateException("Review without user");
+        }
+
+        String username = review.getUser().getUsername();
+
+        Video video = saveVideo(file, reviewId, username);
 
         review.setVideo(video);
         reviewsRepository.save(review);
