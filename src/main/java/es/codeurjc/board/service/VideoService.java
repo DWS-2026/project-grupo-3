@@ -17,7 +17,7 @@ import java.util.UUID;
 @Service
 public class VideoService {
 
-    private static final String UPLOAD_DIR = "src/main/resources/static/assets/videos/";
+    private static final String UPLOAD_DIR = "videos";
     @Autowired
     private VideoRepository videoRepository;
     @Autowired
