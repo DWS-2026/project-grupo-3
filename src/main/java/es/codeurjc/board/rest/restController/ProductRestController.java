@@ -34,9 +34,6 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RequestMapping("/api/v1/products")
 public class ProductRestController {
     @Autowired
-    private ProductMapper mapper;
-
-    @Autowired
     private ImageMapper imageMapper;
 
     @Autowired

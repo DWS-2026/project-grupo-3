@@ -466,6 +466,138 @@
       ]
     },
     {
+      "name": "orders",
+      "item": [
+        {
+          "name": "get Orders",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "get Order",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "get User's Orders",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "new Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n            {\r\n                \"productId\": 1,\r\n                \"quantity\": 3\r\n            },\r\n            {\r\n                \"productId\": 2,\r\n                \"quantity\": 4\r\n            }\r\n        ]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/orders/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edit Status",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n            {\r\n                \"productId\": 1,\r\n                \"quantity\": 3\r\n            },\r\n            {\r\n                \"productId\": 2,\r\n                \"quantity\": 4\r\n            }\r\n        ]"
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/orders/1/status",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "1",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "cancel order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n            {\r\n                \"productId\": 1,\r\n                \"quantity\": 3\r\n            },\r\n            {\r\n                \"productId\": 2,\r\n                \"quantity\": 4\r\n            }\r\n        ]"
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/orders/2/cancel",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "2",
+                "cancel"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete Order",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n            {\r\n                \"productId\": 1,\r\n                \"quantity\": 3\r\n            },\r\n            {\r\n                \"productId\": 2,\r\n                \"quantity\": 4\r\n            }\r\n        ]"
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/orders/1",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "login",
       "request": {
         "auth": {
