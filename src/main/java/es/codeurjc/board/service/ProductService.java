@@ -101,4 +101,16 @@ public class ProductService {
     public Product findByNameProduct(String name){
         return productRepository.findByName(name).orElse(null);
     }
+
+    public Product replaceProduct(long id, Product updatedProduct) {
+        Product existing = productRepository.findById(id).orElseThrow();
+
+        existing.setName(updatedProduct.getName());
+        existing.setDescription(updatedProduct.getDescription());
+        existing.setPrice(updatedProduct.getPrice());
+        existing.setActive(updatedProduct.isActive());
+
+        productRepository.save(existing);
+        return existing;
+    }
 }

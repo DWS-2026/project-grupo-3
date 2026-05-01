@@ -1,9 +1,10 @@
 {
   "info": {
-    "_postman_id": "8cb9f254-1d01-414c-b4a3-1d9d73513d92",
+    "_postman_id": "482296d1-dd82-434d-b365-08535b7e5e8f",
     "name": "group3-api_endpoints",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "53916207"
+    "_exporter_id": "54001222",
+    "_collection_link": "https://go.postman.co/collection/54001222-482296d1-dd82-434d-b365-08535b7e5e8f?source=collection_link"
   },
   "item": [
     {
@@ -40,30 +41,25 @@
               "query": [
                 {
                   "key": "search",
-                  "value": null,
-                  "id": 0
+                  "value": null
                 },
                 {
                   "key": "whatToShow",
-                  "value": null,
-                  "id": 1
+                  "value": null
                 },
                 {
                   "key": "order",
-                  "value": null,
-                  "id": 2
+                  "value": null
                 },
                 {
                   "key": "page",
                   "value": "1",
-                  "type": "text",
-                  "id": 3
+                  "type": "text"
                 },
                 {
                   "key": "sort",
                   "value": "",
-                  "type": "text",
-                  "id": 4
+                  "type": "text"
                 }
               ]
             }
@@ -200,9 +196,7 @@
                   "type": "file",
                   "id": 0,
                   "fileUploadError": "",
-                  "src": [
-                    "c:\\Users\\iness\\Downloads\\fa.webp"
-                  ]
+                  "src": "c:\\Users\\iness\\Downloads\\fa.webp"
                 }
               ]
             },
@@ -250,7 +244,180 @@
     },
     {
       "name": "products",
-      "item": []
+      "item": [
+        {
+          "name": "get Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/products/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/products/1",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new Product",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Semillas de Girasol\",\r\n    \"description\": \"Semillas de girasol para plantar en tu huerto\",\r\n    \"price\": 4.50,\r\n    \"active\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/products/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edit Product",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Fertilizante ultra\",\r\n    \"description\": \"Nutre tus plantas de manera mucho más rápida y efectiva.\",\r\n    \"price\": 25.99,\r\n    \"active\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/products/1",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add Image To Product",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "newImage",
+                  "type": "file",
+                  "uuid": "4037d7aa-739c-41b2-af07-d527d42a2ccd",
+                  "src": "/D:/fertilizante_ejemplo.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}} /api/v1/products/1/image",
+              "host": [
+                "{{baseURL}} "
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "1",
+                "image"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete Image from Product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/products/1/image/152",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "1",
+                "image",
+                "152"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete Product (soft delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}} /api/v1/products/1",
+              "host": [
+                "{{baseURL}} "
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
     {
       "name": "images",
