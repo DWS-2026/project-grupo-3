@@ -1,4 +1,4 @@
-package es.codeurjc.board.webController;
+package es.codeurjc.board.errorHandler;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;

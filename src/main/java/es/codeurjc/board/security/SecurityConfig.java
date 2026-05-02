@@ -88,7 +88,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                         // PUBLIC PAGES
                         .requestMatchers("/", "/assets/css/**", "/assets/images/**", "/error", "/403", "/login", "/check", "/images/*").permitAll()
-                        .requestMatchers("/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html").permitAll()
+                        .requestMatchers("/v3/api-docs/**","/swagger-ui/**","/swagger-ui.html", "/v3/api-docs.yaml").permitAll()
                         .requestMatchers("/User/register").permitAll()
                         .requestMatchers("/images/*").permitAll()
                         .requestMatchers("/Plants/catalogPlants").permitAll()
