@@ -138,19 +138,4 @@ public class ReviewsService {
 
 
         }
-
-    public void addVideoToReview(Long reviewId, MultipartFile file) throws IOException {
-        Review review = reviewsRepository.findById(reviewId).orElseThrow();
-
-        if (review.getUser() == null) {
-            throw new IllegalStateException("Review without user");
-        }
-
-        String username = review.getUser().getUsername();
-
-        Video video = videoService.saveVideo(file, reviewId, username);
-
-        review.setVideo(video);
-        reviewsRepository.save(review);
-    }
 }

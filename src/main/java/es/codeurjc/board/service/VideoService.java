@@ -64,7 +64,7 @@ public class VideoService {
 
         // generate unique storage name
         String safeBaseName = baseName.replaceAll("[^A-Za-z0-9._-]", "_");
-        String storageFileName = safeBaseName + "_review_" + reviewId + extension;
+        String storageFileName = UUID.randomUUID().toString() + extension;
 
         Path uploadPath = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
         if (!Files.exists(uploadPath)) {
@@ -80,16 +80,9 @@ public class VideoService {
             Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        Video video = new Video(displayName, target.toString(), contentType);
+        Video video = new Video(displayName, storageFileName, contentType);
         return videoRepository.save(video);
 
-    }
-
-    public Resource getVideo(Long id) throws IOException {
-        Video video = videoRepository.findById(id).orElseThrow();
-
-        Path path = Paths.get(video.getFilePath());
-        return new UrlResource(path.toUri());
     }
 
     public Video findById(Long id) {
@@ -99,7 +92,10 @@ public class VideoService {
     public void delete(Long id) {
         Video video = findById(id);
         try {
-            Files.deleteIfExists(Paths.get(video.getFilePath()));
+            Path basePath = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
+            Path filePath = basePath.resolve(video.getStoredFileName()).normalize();
+
+            Files.deleteIfExists(filePath);
         } catch (IOException ignored) {}
 
         videoRepository.deleteById(id);
@@ -118,5 +114,26 @@ public class VideoService {
 
         review.setVideo(video);
         reviewsRepository.save(review);
+    }
+
+    public Resource getVideo(Long id) throws IOException {
+
+        Video video = videoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Video not found"));
+
+        Path basePath = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
+        Path filePath = basePath.resolve(video.getStoredFileName()).normalize();
+
+        if (!filePath.startsWith(basePath)) {
+            throw new SecurityException("Path Traversal attempt detected");
+        }
+
+        Resource resource = new UrlResource(filePath.toUri());
+
+        if (!resource.exists() || !resource.isReadable()) {
+            throw new RuntimeException("Cannot read file");
+        }
+
+        return resource;
     }
 }

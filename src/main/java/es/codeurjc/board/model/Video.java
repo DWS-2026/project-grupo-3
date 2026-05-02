@@ -10,14 +10,14 @@ public class Video {
     private Long id;
 
     private String fileName;
-    private String filePath;
+    private String storedFileName;
     private String contentType;
 
     public Video() {}
 
-    public Video(String fileName, String filePath, String contentType) {
+    public Video(String fileName, String storedFileName, String contentType) {
         this.fileName = fileName;
-        this.filePath = filePath;
+        this.storedFileName = storedFileName;
         this.contentType = contentType;
     }
 
@@ -26,8 +26,8 @@ public class Video {
     public String getFileName() { return fileName; }
     public void setFileName(String fileName) { this.fileName = fileName; }
 
-    public String getFilePath() { return filePath; }
-    public void setFilePath(String filePath) { this.filePath = filePath; }
+    public String getStoredFileName() { return storedFileName; }
+    public void setStoredFileName(String storedFileName) { this.storedFileName = storedFileName; }
 
     public String getContentType() { return contentType; }
     public void setContentType(String contentType) { this.contentType = contentType; }
