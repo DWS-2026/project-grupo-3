@@ -13,4 +13,7 @@ public interface UserMapper {
 
 
     UserBasicDTO basicToDTO(User user);
+    User basicToDomain (UserBasicDTO user);
+    User extendedToDomain(UserExtendedDTO user);
+    UserExtendedDTO extendedToDTO(User user);
 }
