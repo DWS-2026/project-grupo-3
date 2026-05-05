@@ -114,6 +114,7 @@ public class UserController {
 
         if(!error){
             userService.editUser( email,username, description, encodedPassword, imageFile, userService.getUserID(session));
+            String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$"; 
             if(password !=null && !password.isBlank() || email !=null && !email.isBlank() || username !=null && !username.isBlank()){
                 session.getSession().invalidate();
             };
@@ -132,6 +133,7 @@ public class UserController {
 
     @PostMapping("/User/register")
     public String register(Model model, MultipartFile imageFile, @RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword, @RequestParam String description) throws IOException {
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$"; 
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
