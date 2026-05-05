@@ -64,7 +64,7 @@
               <p class="card-text">Precio: €{{price}}</p>
               {{#userOnly}}
               {{#active}}
-              <form action="/Cart/add/{{id}}" method="post" class="mt-auto">
+              <form action="/carts/add/{{id}}" method="post" class="mt-auto">
                 <input type="hidden" name="_csrf" value="{{token}}"/>
                 <div class="input-group mb-2">
                   <span class="input-group-text">Cantidad</span>
@@ -84,8 +84,10 @@
 
   <div style="text-align: center; margin: 10px 0;">
     <nobr>
-      {{#hasPrev}}<a href="/Products/catalogProducts?page={{prev}}" class="btn btn-success rounded-pill px-4 py-2 main-button">&larr; Anterior</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
-      {{#hasNext}}<a href="/Products/catalogProducts?page={{next}}" class="btn btn-success rounded-pill px-4 py-2 main-button">Siguiente &rarr;</a>{{/hasNext}}
+      {{#hasPrev}}<a href="/products/catalogProducts?page={{prev}}"
+                     class="btn btn-success rounded-pill px-4 py-2 main-button">&larr; Anterior</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
+      {{#hasNext}}<a href="/products/catalogProducts?page={{next}}"
+                     class="btn btn-success rounded-pill px-4 py-2 main-button">Siguiente &rarr;</a>{{/hasNext}}
     </nobr>
   </div>
 </main>

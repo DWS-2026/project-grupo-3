@@ -43,11 +43,12 @@
             </div>
         </div>
         {{#userOnly}}
-            <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/Plants/new">Añadir plantita</a>
+        <a class="btn btn-success rounded-pill px-4 py-3 main-button secondary" href="/plants/new">Añadir plantita</a>
         {{/userOnly}}
         <div class="flex-wrap d-flex gap-3 w-100">
             {{#loginOptions}}
-                <form method="get" action="/Plants/catalogPlants" class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center w-100 gap-3">
+            <form method="get" action="/plants/catalogPlants"
+                  class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center w-100 gap-3">
                     <div class="d-flex gap-3">
                         {{#userOnly}}
                             <select name="whatToShow"
@@ -137,13 +138,15 @@
                                                 </span>
 
                                         {{#adminOnly}}
-                                                <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
+                                                <form action="/plants/{{id}}/delete" method="post"
+                                                      style="padding-top: 0px">
                                                     <button type="submit" class="trash-icon bi bi-trash3"></button>
                                                     <input type="hidden" name="_csrf" value="{{token}}"/>
                                                 </form>
                                         {{/adminOnly}}
                                         {{#editPlant}}
-                                                <form action="/Plants/{{id}}/delete" method="post" style="padding-top: 0px">
+                                                <form action="/plants/{{id}}/delete" method="post"
+                                                      style="padding-top: 0px">
                                                     <button type="submit" class="trash-icon bi bi-trash3"></button>
                                                     <input type="hidden" name="_csrf" value="{{token}}"/>
                                                 </form>
@@ -155,9 +158,13 @@
                                     Valorar
                                 </button>
                             {{#editPlant}}
-                                <a href="/Plants/editPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Editar plantita</a>
+                                <a href="/plants/editPlant/{{id}}"
+                                   class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Editar
+                                    plantita</a>
                             {{/editPlant}}
-                                <a href="/Plants/viewPlant/{{id}}" class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más detalles 💫</a>
+                                <a href="/plants/viewPlant/{{id}}"
+                                   class="btn btn-sm btn-success rounded-pill px-2 py-2 main-button secondary">Más
+                                    detalles 💫</a>
                             </div>
 
                         </div>
@@ -255,8 +262,10 @@
     </div>
     <div style="text-align: center; margin-bottom: 5px !important; margin-top: 5px !important;">
         <nobr>
-            {{#hasPrev}}<a href="/Plants/catalogPlants?page={{prev}}" class="btn btn-success rounded-pill px-4 py-2 main-button"><- Previous</a>{{/hasPrev}}
-            {{#hasNext}}<a href="/Plants/catalogPlants?page={{next}}" class="btn btn-success rounded-pill px-4 py-2 main-button">-> Next</a>{{/hasNext}}
+            {{#hasPrev}}<a href="/plants/catalogPlants?page={{prev}}"
+                           class="btn btn-success rounded-pill px-4 py-2 main-button"><- Previous</a>{{/hasPrev}}
+            {{#hasNext}}<a href="/plants/catalogPlants?page={{next}}"
+                           class="btn btn-success rounded-pill px-4 py-2 main-button">-> Next</a>{{/hasNext}}
         </nobr>
     </div>
 
@@ -324,7 +333,7 @@
             <span class="rating-star" data-value="1">&#9733;</span>
         </div>
 
-        <form id="ratingForm" action="/Plants/ratingPlant" method="post" style="padding-top: 0px">
+        <form id="ratingForm" action="/plants/ratingPlant" method="post" style="padding-top: 0px">
             <input type="hidden" name="_csrf" value="{{token}}"/>
             <input type="hidden" name="plantId" id="modalPlantId" value="">
             <input type="hidden" name="rating" id="modalRating" value="">

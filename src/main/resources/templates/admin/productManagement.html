@@ -49,7 +49,7 @@
             </td>
             <td>
                 {{#active}}
-                <a href="/Products/editProduct/{{id}}" class="btn main-button btn-sm mb-1">Editar</a>
+                <a href="/products/editProduct/{{id}}" class="btn main-button btn-sm mb-1">Editar</a>
                 <form action="/products/{{id}}/delete" method="post" style="display:inline;">
                     <input type="hidden" name="_csrf" value="{{token}}"/>
                     <button type="submit" class="btn btn-danger btn-sm mb-1">Desactivar</button>
@@ -68,7 +68,7 @@
     </table>
 
     <div class="mb-3">
-        <a href="/Products/newProduct" class="text-decoration-none">
+        <a href="/products/newProduct" class="text-decoration-none">
             <button class="btn main-button">Añadir producto</button>
         </a>
     </div>

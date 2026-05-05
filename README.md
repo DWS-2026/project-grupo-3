@@ -525,7 +525,7 @@ Para esta parte de la prácica me he encargado de realizar todo lo relacionado c
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado](imagesGithub/classesDiagram-2.png)
 
 #### **Credenciales de Usuarios de Ejemplo**
 

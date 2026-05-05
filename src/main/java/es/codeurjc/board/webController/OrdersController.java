@@ -31,36 +31,36 @@ public class OrdersController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping("/Orders/shoppingCart")
+    @GetMapping("/orders/shoppingCart")
     public String shoppingCart(Model model) {
         btnsHeader.hideBtnHeader(model,"shoppingCart");
         model.addAttribute("cartItems", cartService.getItems());
         model.addAttribute("cartTotal", cartService.getFormattedTotal());
         model.addAttribute("cartEmpty", cartService.isEmpty());
-        return "Orders/shoppingCart";
+        return "orders/shoppingCart";
     }
 
-    @GetMapping("/Orders/payment")
+    @GetMapping("/orders/payment")
     public String payment(Model model) {
         if (cartService.isEmpty()) {
-            return "redirect:/Orders/shoppingCart";
+            return "redirect:/orders/shoppingCart";
         }
         model.addAttribute("cartItems", cartService.getItems());
         model.addAttribute("cartTotal", cartService.getTotal());
-        return "Orders/payment";
+        return "orders/payment";
     }
 
-    @GetMapping("/Orders/success")
+    @GetMapping("/orders/success")
     public String orderSuccess() {
-        return "Orders/orderSuccess";
+        return "orders/orderSuccess";
     }
 
 
-    @PostMapping("/Orders/checkout")
+    @PostMapping("/orders/checkout")
     public String checkout(HttpServletRequest request) {
 
         if (cartService.isEmpty()) {
-            return "redirect:/Orders/shoppingCart";
+            return "redirect:/orders/shoppingCart";
         }
 
         User user = userService.getUser(request);
@@ -75,28 +75,27 @@ public class OrdersController {
 
         cartService.clear();
 
-        return "redirect:/Orders/success";
+        return "redirect:/orders/success";
     }
 
-    @PostMapping("/Orders/{id}/cancel")
+    @PostMapping("/orders/{id}/cancel")
     public String cancelOrder(@PathVariable long id, HttpServletRequest request) {
         User user = userService.getUser(request);
         orderService.cancelOrder(id, user.getUsername());
-        return "redirect:/User/ordersUser";
+        return "redirect:/user/ordersUser";
     }
 
-    @PostMapping("/Orders/{id}/status")
+    @PostMapping("/orders/{id}/status")
     public String updateOrderStatus(@PathVariable long id,
                                     @RequestParam OrderStatus status) {
         orderService.updateStatus(id, status);
-        return "redirect:/Admin/managementOrders";
+        return "redirect:/admins/managementOrders";
     }
 
-    @PostMapping("/Orders/{id}/delete")
+    @PostMapping("/orders/{id}/delete")
     public String deleteOrder(@PathVariable long id) {
         orderService.deleteById(id);
-        return "redirect:/Admin/managementOrders";
+        return "redirect:/admins/managementOrders";
     }
-
 
 }

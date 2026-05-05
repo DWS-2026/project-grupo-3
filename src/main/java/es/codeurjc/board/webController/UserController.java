@@ -38,7 +38,7 @@ public class UserController {
     private ImageService imageService;
 
 
-    @PostMapping("/User/delete/{id}")
+    @PostMapping("/users/delete/{id}")
     public String delete(HttpServletRequest session, @PathVariable Long id){
         if(userService.getUserID(session)==id){
             userService.deleteUser(id);
@@ -50,14 +50,14 @@ public class UserController {
     }
 
 
-    @GetMapping("/User/profile/{id}")
+    @GetMapping("/users/profile/{id}")
     public String user(@PathVariable long id, Model model, HttpServletRequest session) {
         btnsHeader.hideBtnHeader(model,"profile");
         if(userService.getUserID(session) == id || userService.isUserAdmin(session)){
             User user = userService.findById(id);
             if(user != null){
                 model.addAttribute("user", userService.findById(id));
-                return "User/user";
+                return "users/user";
             } else{
                 return "/error";
             }
@@ -65,10 +65,9 @@ public class UserController {
         }
         return "/accessDenied";
 
-
     }
 
-    @GetMapping("/User/ordersUser")
+    @GetMapping("/users/ordersUser")
     public String ordersUser(Model model, HttpServletRequest request) {
         User user = userService.getUser(request);
         List<Order> orders = orderService.findByUser(user.getUsername());
@@ -82,15 +81,15 @@ public class UserController {
 
         model.addAttribute("orders", orders);
         model.addAttribute("hasOrders", !orders.isEmpty());
-        return "User/ordersUser";
+        return "users/ordersUser";
     }
 
-    @GetMapping("/User/configuration")
+    @GetMapping("/users/configuration")
     public String configuration() {
-        return "User/configuration";
+        return "users/configuration";
     }
 
-    @PostMapping("/User/configuration")
+    @PostMapping("/users/configuration")
     public String configuration(Model model, MultipartFile imageFile, HttpServletRequest session,@RequestParam String repeatpassword, @RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String description)throws IOException, Exception {
         boolean error = false;
         if(username !=null && !username.isBlank() && userService.usernameExists(username)) {
@@ -109,7 +108,7 @@ public class UserController {
             error = true;
         }
         if(error){
-            return  "/User/configuration";
+            return "/users/configuration";
         }
 
         if(!error){
@@ -120,18 +119,16 @@ public class UserController {
             };
         }
 
-
-
-        return "redirect:/User/profile/"+userService.getUserID(session);
+        return "redirect:/users/profile/" + userService.getUserID(session);
 
     }
 
-    @GetMapping("/User/register")
+    @GetMapping("/users/register")
     public String register() {
         return "register";
     }
 
-    @PostMapping("/User/register")
+    @PostMapping("/users/register")
     public String register(Model model, MultipartFile imageFile, @RequestParam String password, @RequestParam String email, @RequestParam String username, @RequestParam String repeatpassword, @RequestParam String description) throws IOException {
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$"; 
         User user = new User();
@@ -165,7 +162,6 @@ public class UserController {
             return "register";
         }
 
-
         userService.saveUser(user);
         if (imageFile!= null && !imageFile.isEmpty()) {
             Image imageOne = imageService.createImage(imageFile);
@@ -173,11 +169,5 @@ public class UserController {
         }
         return "redirect:/";
     }
-
-
-
-
-
-
 
 }

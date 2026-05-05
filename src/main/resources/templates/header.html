@@ -6,7 +6,7 @@
                     {{#userOnly}}
                         {{#profile}}
                             {{#userId}}
-                                <a href="/User/profile/{{userId}}" class="icons" aria-label="Ir a perfil de usuario">
+                    <a href="/users/profile/{{userId}}" class="icons" aria-label="Ir a perfil de usuario">
                                     👤
                                 </a>
                             {{/userId}}
@@ -14,7 +14,7 @@
                     {{/userOnly}}
 
                     {{#shoppingCart}}
-                        <a href="/Orders/shoppingCart" id="cart-options" class="icons" aria-label="Ir al carrito">
+                    <a href="/orders/shoppingCart" id="cart-options" class="icons" aria-label="Ir al carrito">
                             🛒
                         </a>
                     {{/shoppingCart}}
@@ -24,11 +24,11 @@
                     {{/goBackBtn}}
 
                     {{#plantIcon}}
-                        <a href="/Plants/catalogPlants" class="icons">{{#nothing}}🪴{{/nothing}}{{#a}}🌿{{/a}}{{#b}}🌼{{/b}}{{#c}}🌵{{/c}}</a>
+                    <a href="/plants/catalogPlants" class="icons">{{#nothing}}🪴{{/nothing}}{{#a}}🌿{{/a}}{{#b}}🌼{{/b}}{{#c}}🌵{{/c}}</a>
                     {{/plantIcon}}
 
                     {{#review}}
-                        <a href="/Reviews/forum" class="icons">💬</a>
+                    <a href="/reviews/forum" class="icons">💬</a>
                     {{/review}}
                 </div>
                 {{#loginButton}}
@@ -48,18 +48,21 @@
 
 
                 {{#productsOption}}
-                    <a href="/Products/catalogProducts" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
+                <a href="/products/catalogProducts"
+                   class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Productos</a>
                 {{/productsOption}}
 
                 {{#userOnly}}
-                    <a href="/User/ordersUser" id="orders" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Mis pedidos</a>
+                <a href="/users/ordersUser" id="orders"
+                   class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn">Mis pedidos</a>
                 {{/userOnly}}
 
 
 
                 {{#adminOnly}}
                     {{#adminPanel}}
-                        <a href="/Admin/adminPanel" id="admin-btn" class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
+                <a href="/admins/adminPanel" id="admin-btn"
+                   class="btn btn-sm rounded-pill px-4 py-3 ms-2 main-button topbar-btn login-options">Admin panel</a>
                     {{/adminPanel}}
                 {{/adminOnly}}
 

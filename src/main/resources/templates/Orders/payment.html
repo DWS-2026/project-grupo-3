@@ -40,7 +40,7 @@
           <strong>€{{cartTotal}}</strong>
         </li>
       </ul>
-      <a href="/Orders/shoppingCart" class="btn btn-outline-secondary w-100">
+      <a href="/orders/shoppingCart" class="btn btn-outline-secondary w-100">
         ← Volver al carrito
       </a>
     </div>
@@ -48,7 +48,7 @@
     <!-- Billing and payment form - ONLY ONE FORM -->
     <div class="col-md-7 col-lg-8">
 
-      <form action="/Orders/checkout" method="post">
+      <form action="/orders/checkout" method="post">
         <input type="hidden" name="_csrf" value="{{token}}"/>
 
         <h4 class="mb-3">Dirección de facturación</h4>

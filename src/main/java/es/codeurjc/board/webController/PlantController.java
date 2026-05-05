@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/Plants")
+@RequestMapping("/plants")
 public class PlantController {
 
 
@@ -43,19 +43,12 @@ public class PlantController {
         Optional<Plant> plant = plantService.findById(id);
         if(plant.isPresent()){
             model.addAttribute("plant", plant.get());
-            return "Plants/viewPlant";
+            return "plants/viewPlant";
         }else{
             return "/error";
         }
-            
-
-
 
     }
-
-
-
-
 
     @GetMapping("/catalogPlants")
     public String catalogPlants(Model model, @RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
@@ -80,7 +73,7 @@ public class PlantController {
 
         if(userService.isUserUser(session) && "misPlantas".equals(whatToShow)){model.addAttribute("editPlant", true);}
 
-        return "Plants/catalogPlants";
+        return "plants/catalogPlants";
     }
 
 
@@ -91,7 +84,7 @@ public class PlantController {
             Plant plant = plantOp.get();
             model.addAttribute("plant", plant);
             model.addAttribute("plantID", plant.getId());
-            return "Plants/editPlant";
+            return "plants/editPlant";
         }else{
             return "/accessDenied";
         }
@@ -104,10 +97,10 @@ public class PlantController {
         Optional<Plant> plant = plantService.findById(id);
         if(!plantService.existsByNamePlant(name) && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
             plantService.editPlant(name, cares , description, id, species);
-            return "redirect:/Plants/editPlant/" + id;
+            return "redirect:/plants/editPlant/" + id;
         }else if (plantService.existsByNamePlant(name)){
             redirectAttributes.addFlashAttribute("plantNameExists", true);
-            return "redirect:/Plants/editPlant/" + id;
+            return "redirect:/plants/editPlant/" + id;
         } else{
             return "/accessDenied";
 
@@ -115,7 +108,7 @@ public class PlantController {
     }
     @GetMapping("/new")
     public String newPlant() {
-        return "Plants/newPlant";
+        return "plants/newPlant";
     }
 
     @PostMapping("/new")
@@ -125,7 +118,7 @@ public class PlantController {
             redirectAttributes.addFlashAttribute("plantNameExists", true);
             redirectAttributes.addFlashAttribute("cares",cares);
             redirectAttributes.addFlashAttribute("description", description);
-            return "redirect:/Plants/new";
+            return "redirect:/plants/new";
         }
         Plant plant = new Plant(name, cares,description);
         plantService.save(plant,userService.getUser(session), type);
@@ -134,9 +127,9 @@ public class PlantController {
             Image imageOne = imageService.createImage(imageFile);
             plantService.addImageToPlant(plant.getId(), imageOne);
         }
-        
 
-        return "redirect:/Plants/catalogPlants";
+
+        return "redirect:/plants/catalogPlants";
     }
 
     @PostMapping("/{id}/addImageToPlant")
@@ -148,7 +141,7 @@ public class PlantController {
                 plantService.addImageToPlant(id, imageOne);
             }
 
-            return "redirect:/Plants/editPlant/" + id;
+            return "redirect:/plants/editPlant/" + id;
         }else{
             return "/accessDenied";
         }
@@ -161,7 +154,7 @@ public class PlantController {
         Optional<Plant> plant = plantService.findById(plantId);
         if(plant.isPresent() && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
             plantService.deleteImageFromPlant(plantId, imageId);
-            return "redirect:/Plants/catalogPlants";
+            return "redirect:/plants/catalogPlants";
         }else{
             return "/accessDenied";
         }
@@ -172,15 +165,16 @@ public class PlantController {
         Optional<Plant> plant = plantService.findById(id);
         if(plant.isPresent() && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session))){
             plantService.deleteById(id);
-            return "redirect:/Plants/catalogPlants";
+            return "redirect:/plants/catalogPlants";
         }else if(userService.isUserAdmin(session)){
             plantService.deleteById(id);
-            return "redirect:/Plants/catalogPlants";
+            return "redirect:/plants/catalogPlants";
         }else{
             return "/accessDenied";
         }
 
     }
+
     @PostMapping("/ratingPlant")
     public String ratePlant(@RequestParam("plantId") Long plantId,
                             @RequestParam("rating") int rating) {
@@ -194,6 +188,6 @@ public class PlantController {
             plantService.save(plant);
         }
 
-        return "redirect:/Plants/catalogPlants";
+        return "redirect:/plants/catalogPlants";
     }
 }
