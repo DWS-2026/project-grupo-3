@@ -1,11 +1,12 @@
 package es.codeurjc.board.errorHandler;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.webmvc.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ExceptionController implements ErrorController {
@@ -21,7 +22,9 @@ public class ExceptionController implements ErrorController {
                 RequestDispatcher.ERROR_EXCEPTION
         );
 
-        if (statusCode == null) statusCode = 500;
+        if (statusCode == null) {
+            statusCode = 500;
+        }
 
         model.addAttribute("statusCode", statusCode);
 

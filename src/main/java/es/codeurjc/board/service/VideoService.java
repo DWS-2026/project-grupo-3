@@ -1,18 +1,24 @@
 package es.codeurjc.board.service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import es.codeurjc.board.model.Review;
 import es.codeurjc.board.model.Video;
 import es.codeurjc.board.repositories.ReviewsRepository;
 import es.codeurjc.board.repositories.VideoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.*;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.*;
-import java.nio.file.*;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class VideoService {
@@ -24,8 +30,7 @@ public class VideoService {
     private ReviewsRepository reviewsRepository;
 
 
-
-    public Video saveVideo(MultipartFile file, Long reviewId, String username) throws IOException {
+    public Video saveVideo(MultipartFile file, String username) throws IOException {
         String originalName = file.getOriginalFilename();
         if (originalName == null || originalName.isBlank()) {
             throw new IOException("Invalid file name");
@@ -42,7 +47,9 @@ public class VideoService {
         }
 
         int i = originalName.lastIndexOf('.');
-        if (i < 0) throw new IOException("File must have an extension");
+        if (i < 0) {
+            throw new IOException("File must have an extension");
+        }
         String baseName = originalName.substring(0, i);
         String extension = originalName.substring(i).toLowerCase();
 
@@ -54,13 +61,19 @@ public class VideoService {
 
         //sanitize to show (no used for the path)
         String displayName = baseName.replaceAll("[^A-Za-z0-9._-]", "_");
-        if (displayName.length() > 100) displayName = displayName.substring(0, 100);
+        if (displayName.length() > 100) {
+            displayName = displayName.substring(0, 100);
+        }
         displayName = displayName + extension;
 
         //sanitize username shorter for metadata (max 30)
-        if (username == null) username = "unknown";
+        if (username == null) {
+            username = "unknown";
+        }
         username = username.replaceAll("[^A-Za-z0-9_-]", "_");
-        if (username.length() > 30) username = username.substring(0, 30);
+        if (username.length() > 30) {
+            username = username.substring(0, 30);
+        }
 
         // generate unique storage name
         String safeBaseName = baseName.replaceAll("[^A-Za-z0-9._-]", "_");
@@ -96,7 +109,8 @@ public class VideoService {
             Path filePath = basePath.resolve(video.getStoredFileName()).normalize();
 
             Files.deleteIfExists(filePath);
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
 
         videoRepository.deleteById(id);
     }
@@ -110,7 +124,7 @@ public class VideoService {
 
         String username = review.getUser().getUsername();
 
-        Video video = saveVideo(file, reviewId, username);
+        Video video = saveVideo(file, username);
 
         review.setVideo(video);
         reviewsRepository.save(review);

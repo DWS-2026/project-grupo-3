@@ -1,9 +1,14 @@
 package es.codeurjc.board.model;
 
-import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Review {
@@ -16,8 +21,6 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    
 
     private String title;
     private String description;
@@ -37,9 +40,10 @@ public class Review {
     @ManyToOne
     private User user;
 
+    public Review() {
+    }
 
-    public Review(){}
-    public Review( String title, String description, ReviewType type){
+    public Review(String title, String description, ReviewType type) {
         this.title = title;
         this.description = description;
         this.type = type;
@@ -61,7 +65,6 @@ public class Review {
         this.id = id;
     }
 
-
     public String getTitle() {
         return title;
     }
@@ -78,17 +81,23 @@ public class Review {
         this.description = description;
     }
 
-    public ReviewType getType() { return type; }
+    public ReviewType getType() {
+        return type;
+    }
 
-    public void setType(ReviewType type) { this.type = type; }
+    public void setType(ReviewType type) {
+        this.type = type;
+    }
 
     @Override
-    public String toString(){
-        return "Review [id ="+id+ "title = " + title + "description = " + description + "]";
+    public String toString() {
+        return "Review [id =" + id + "title = " + title + "description = " + description + "]";
     }
+
     public Product getProduct() {
         return product;
     }
+
     public void setProduct(Product product) {
         this.product = product;
     }
@@ -96,23 +105,25 @@ public class Review {
     public User getUser() {
         return user;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
+
     public PlantType getPlantType() {
         return plantType;
     }
+
     public void setPlantType(PlantType plantType) {
         this.plantType = plantType;
     }
 
-    
-        public boolean isPlantReview() {
+    public boolean isPlantReview() {
         return this.type == ReviewType.PLANT;
     }
 
     public boolean isProductReview() {
         return this.type == ReviewType.PRODUCT;
     }
-    
+
 }

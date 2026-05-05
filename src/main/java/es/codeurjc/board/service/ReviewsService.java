@@ -1,21 +1,23 @@
 package es.codeurjc.board.service;
 
-import es.codeurjc.board.model.*;
-import es.codeurjc.board.repositories.ReviewsRepository;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.List;
+import es.codeurjc.board.model.PlantType;
+import es.codeurjc.board.model.Product;
+import es.codeurjc.board.model.Review;
+import es.codeurjc.board.model.User;
+import es.codeurjc.board.repositories.ReviewsRepository;
 
 @Service
 @Transactional
 public class ReviewsService {
+
     @Autowired
     private ReviewsRepository reviewsRepository;
 
@@ -48,31 +50,29 @@ public class ReviewsService {
         reviewsRepository.deleteById(id);
     }
 
-
-    public boolean editReview(String title, String description, String productOrplant, Review.ReviewType type,Long id) throws Exception{
+    public boolean editReview(String title, String description, String productOrplant, Review.ReviewType type, Long id) throws Exception {
         Review review = reviewsRepository.findById(id).orElseThrow();
-        if(type != null){
+        if (type != null) {
             review.setType(type);
         }
         boolean associationOk = false;
-        if(productOrplant != null && !productOrplant.isBlank()){
+        if (productOrplant != null && !productOrplant.isBlank()) {
             if ("PLANT".equals(review.getType().name())) {
                 associationOk = this.handlePlant(review, productOrplant);
             } else if ("PRODUCT".equals(review.getType().name())) {
                 associationOk = this.handleProduct(review, productOrplant);
             }
-            
-        }  
-        if(associationOk){
-            if (title != null && !title.isBlank()){
-            review.setTitle(title);
-            }
-            if (description !=null && !description.isBlank()){
-                review.setDescription(description);
-            } 
+
         }
-         
-            
+        if (associationOk) {
+            if (title != null && !title.isBlank()) {
+                review.setTitle(title);
+            }
+            if (description != null && !description.isBlank()) {
+                review.setDescription(description);
+            }
+        }
+
         return associationOk;
     }
 
@@ -87,55 +87,57 @@ public class ReviewsService {
     public List<Review> findByUserAndType(User user, Review.ReviewType type) {
         return reviewsRepository.findByUserAndType(user, type);
     }
-        public List<Review> findByUser(User user) {
+
+    public List<Review> findByUser(User user) {
         return reviewsRepository.findByUser(user);
     }
+
     public void save(Review review, User user) {
-            if (review.getProduct() != null) {
-                review.getProduct().addReview(review);
-            }
-            review.setUser(user);
-            user.addReview(review);
-            reviewsRepository.save(review);
+        if (review.getProduct() != null) {
+            review.getProduct().addReview(review);
+        }
+        review.setUser(user);
+        user.addReview(review);
+        reviewsRepository.save(review);
     }
 
     public void intialSave(Review review, User user, String productOrplant) {
-            if (review.getProduct() != null) {
-                review.getProduct().addReview(review);
-            }
-            if ("PLANT".equals(review.getType().name())) {
-                plantTypeService.getOrCreateType(productOrplant);
-                this.handlePlant(review, productOrplant);
-            } else if ("PRODUCT".equals(review.getType().name())) {
-                this.handleProduct(review, productOrplant);
-            }
-            review.setUser(user);
-            user.addReview(review);
-            reviewsRepository.save(review);
+        if (review.getProduct() != null) {
+            review.getProduct().addReview(review);
+        }
+        if ("PLANT".equals(review.getType().name())) {
+            plantTypeService.getOrCreateType(productOrplant);
+            this.handlePlant(review, productOrplant);
+        } else if ("PRODUCT".equals(review.getType().name())) {
+            this.handleProduct(review, productOrplant);
+        }
+        review.setUser(user);
+        user.addReview(review);
+        reviewsRepository.save(review);
     }
 
     public boolean handlePlant(Review review, String productOrplant) {
         PlantType species = plantTypeService.findBySpecies(productOrplant);
         if (species == null) {
             return false;
-        }else{
+        } else {
             review.setPlantType(species);
             review.setProduct(null);
             return true;
         }
 
     }
-        public boolean handleProduct(Review review, String productOrplant) {
-            Product product = productService.findByNameProduct(productOrplant);
 
-            if (product == null) {
-                return false;
-            }else{
-                review.setProduct(product);
-                review.setPlantType(null);
-                return true;
-            }
+    public boolean handleProduct(Review review, String productOrplant) {
+        Product product = productService.findByNameProduct(productOrplant);
 
-
+        if (product == null) {
+            return false;
+        } else {
+            review.setProduct(product);
+            review.setPlantType(null);
+            return true;
         }
+
+    }
 }
