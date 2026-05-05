@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.ArrayList;
+
+import es.codeurjc.board.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -66,7 +68,7 @@ public class UserRestController {
         || newUser.username() == null || newUser.email() == null || newUser.email() == null || newUser.email().isBlank()){
             throw new IllegalArgumentException("Some fields are empty");
         }else{
-            User user = userMapper.extendedToDomain(newUser);; 
+            User user = userMapper.extendedToDomain(newUser);;
             user.setPassword(passwordEncoder.encode(newUser.password()));
             List<String> roles = new ArrayList<>();
             roles.add("USER");
@@ -126,6 +128,8 @@ public class UserRestController {
             HttpServletRequest request) {
 
         User user = userService.findById(id);
+
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$"; 
 
         if (user == null) {
             return ResponseEntity.notFound().build();
