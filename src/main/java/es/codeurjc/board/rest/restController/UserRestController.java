@@ -47,47 +47,47 @@ import es.codeurjc.board.rest.dto.UserValidationDTO;
 public class UserRestController {
 
     @Autowired
-    private ButtonsHeader btnsHeader;
-    @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserService userService;
 
     @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private ImageService imageService;
-
-    @Autowired
     private UserMapper userMapper;
 
+    private final String REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$";
+
     @PostMapping("")
-    public ResponseEntity<UserBasicDTO> newUser(@RequestBody UserValidationDTO newUser) throws Exception {
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$";
-        if (newUser.description() == null || newUser.description().isBlank() || newUser.password() == null || newUser.password().isBlank()
-                || newUser.password().length() < 6 || newUser.password().matches(regex)
-                || newUser.username() == null || newUser.email() == null || newUser.email() == null || newUser.email().isBlank()) {
-            throw new IllegalArgumentException("Some fields are empty");
-        } else {
-            User user = userMapper.extendedToDomain(newUser);;
-            user.setPassword(passwordEncoder.encode(newUser.password()));
-            List<String> roles = new ArrayList<>();
-            roles.add("USER");
-            user.setRoles(roles);
-            userService.saveUser(user);
-            Image image;
-            try {
-                image = imageService.createImage(newImage);
-                userService.addImageToUser(user, image);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            userService.saveUser(user);
-            URI location = fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
-            return ResponseEntity.created(location).body(userMapper.basicToDTO(user));
+    public ResponseEntity<?> newUser(@RequestBody UserValidationDTO newUser) {
+
+        if (newUser.username() == null || newUser.username().isBlank() ||
+            newUser.email() == null || newUser.email().isBlank() ||
+            newUser.password() == null || newUser.password().isBlank() ||
+            newUser.description() == null || newUser.description().isBlank()) {
+
+            return ResponseEntity.badRequest().body("Missing fields");
         }
 
+        if (!newUser.password().matches(REGEX)) {
+            return ResponseEntity.badRequest().body("Invalid password format");
+        }
+
+        User user = userMapper.ToDomain(newUser);
+        user.setPassword(passwordEncoder.encode(newUser.password()));
+
+        List<String> roles = new ArrayList<>();
+        roles.add("USER");
+        user.setRoles(roles);
+
+        userService.saveUser(user);
+
+        URI location = fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(user.getId())
+                .toUri();
+
+        return ResponseEntity.created(location)
+                .body(userMapper.basicToDTO(user));
     }
 
     @GetMapping("")
@@ -97,12 +97,11 @@ public class UserRestController {
             return ResponseEntity.status(403).body("Forbidden");
         }
 
-        List<User> users = userService.findAll();
-        List<UserBasicDTO> dtoList = users.stream()
-                .map(userMapper::basicToDTO)
-                .toList();
-
-        return ResponseEntity.ok(dtoList);
+        return ResponseEntity.ok(
+                userService.findAll().stream()
+                        .map(userMapper::basicToDTO)
+                        .toList()
+        );
     }
 
     @GetMapping("/{id}")
@@ -110,11 +109,8 @@ public class UserRestController {
 
         User user = userService.findById(id);
 
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
+        if (user == null) return ResponseEntity.notFound().build();
 
-        // OWNER OR ADMIN
         if (userService.getUserID(request) != id && !userService.isUserAdmin(request)) {
             return ResponseEntity.status(403).body("Forbidden");
         }
@@ -125,16 +121,12 @@ public class UserRestController {
     @PutMapping("/{id}")
     public ResponseEntity<?> editUser(
             @PathVariable long id,
-            @RequestBody UserExtendedDTO userDTO,
+            @RequestBody UserValidationDTO userDTO,
             HttpServletRequest request) {
 
         User user = userService.findById(id);
 
-        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$";
-
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
+        if (user == null) return ResponseEntity.notFound().build();
 
         if (userService.getUserID(request) != id && !userService.isUserAdmin(request)) {
             return ResponseEntity.status(403).body("Forbidden");
@@ -153,15 +145,15 @@ public class UserRestController {
         }
 
         if (userDTO.password() != null && !userDTO.password().isBlank()) {
-            if (!userDTO.password().matches(regex)) {
-                return ResponseEntity.badRequest().body("Invalid password format");
+            if (!userDTO.password().matches(REGEX)) {
+                return ResponseEntity.badRequest().body("Invalid password");
             }
             user.setPassword(passwordEncoder.encode(userDTO.password()));
         }
 
         userService.saveUser(user);
 
-        return ResponseEntity.ok(userMapper.extendedToDTO(user));
+        return ResponseEntity.ok(userMapper.basicToDTO(user));
     }
 
     @DeleteMapping("/{id}")
@@ -169,11 +161,8 @@ public class UserRestController {
 
         User user = userService.findById(id);
 
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
+        if (user == null) return ResponseEntity.notFound().build();
 
-        // OWNER OR ADMIN
         if (userService.getUserID(request) != id && !userService.isUserAdmin(request)) {
             return ResponseEntity.status(403).body("Forbidden");
         }
