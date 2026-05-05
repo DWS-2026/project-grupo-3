@@ -1,11 +1,20 @@
 package es.codeurjc.board.model;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
 @Entity
 public class Plant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,34 +30,50 @@ public class Plant {
     private int totalRating = 0;
     private int count = 0;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) //we don´t need it to be bidirectional, we only need it in one direction
     private List<Image> images = new ArrayList<>();
 
     @ManyToOne
     private PlantType plantType;
 
-    public Plant(){
+    public Plant() {
         this.createdAt = LocalDateTime.now();
     }
+
     public Plant(String name, String cares, String description) {
         this.createdAt = LocalDateTime.now();
-        this.name= name;
+        this.name = name;
         this.cares = cares;
         this.description = description;
     }
-    
-    public void addImage(Image image){
+
+    public void addImage(Image image) {
         images.add(image);
     }
+
     public List<Image> getImages() {
         return images;
     }
 
-    public boolean isRate1() { return rating >= 1; }
-    public boolean isRate2() { return rating >= 2; }
-    public boolean isRate3() { return rating >= 3; }
-    public boolean isRate4() { return rating >= 4; }
-    public boolean isRate5() { return rating >= 5; }
+    public boolean isRate1() {
+        return rating >= 1;
+    }
+
+    public boolean isRate2() {
+        return rating >= 2;
+    }
+
+    public boolean isRate3() {
+        return rating >= 3;
+    }
+
+    public boolean isRate4() {
+        return rating >= 4;
+    }
+
+    public boolean isRate5() {
+        return rating >= 5;
+    }
 
     public int getRating() {
         return rating;
@@ -120,15 +145,15 @@ public class Plant {
 
     @Override
     public String toString() {
-        return "Plant [id="+id+", user=" + user.getUsername() + ", name=" + name + ", cares=" + cares + "]";
+        return "Plant [id=" + id + ", user=" + user.getUsername() + ", name=" + name + ", cares=" + cares + "]";
     }
+
     public PlantType getType() {
         return plantType;
     }
+
     public void setType(PlantType type) {
         this.plantType = type;
     }
-
-    
 
 }

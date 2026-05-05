@@ -1,24 +1,24 @@
 package es.codeurjc.board.webController;
 
-import es.codeurjc.board.service.ImageService;
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import java.io.IOException;
-import java.sql.SQLException;
+import es.codeurjc.board.service.ImageService;
 
 @Controller
 public class ImageController {
+
     @Autowired
     private ImageService imageService;
+
     @GetMapping("/images/{id}")
     public ResponseEntity<Object> getImageFile(@PathVariable long id) throws SQLException {
         Resource imageFile = imageService.getImageFile(id);
@@ -30,6 +30,5 @@ public class ImageController {
                 .contentType(mediaType)
                 .body(imageFile);
     }
-
 
 }

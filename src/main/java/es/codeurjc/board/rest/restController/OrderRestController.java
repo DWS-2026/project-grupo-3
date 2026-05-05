@@ -1,5 +1,21 @@
 package es.codeurjc.board.rest.restController;
 
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import es.codeurjc.board.model.Order;
 import es.codeurjc.board.model.OrderItems;
@@ -8,25 +24,15 @@ import es.codeurjc.board.model.Product;
 import es.codeurjc.board.rest.dto.CreateOrderItemDTO;
 import es.codeurjc.board.rest.dto.OrderDTO;
 import es.codeurjc.board.rest.mapper.OrderMapper;
-import es.codeurjc.board.service.OrderItemService;
 import es.codeurjc.board.service.OrderService;
 import es.codeurjc.board.service.ProductService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
-import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.util.List;
-
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
 @RequestMapping("/api/v1/orders")
 public class OrderRestController {
+
     @Autowired
     private OrderMapper orderMapper;
 
@@ -40,16 +46,16 @@ public class OrderRestController {
     private UserService userService;
 
     @GetMapping("/")
-    public ResponseEntity<List<OrderDTO>> getAllOrders(HttpServletRequest request){
-        if(!userService.isUserAdmin(request)){
+    public ResponseEntity<List<OrderDTO>> getAllOrders(HttpServletRequest request) {
+        if (!userService.isUserAdmin(request)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         return ResponseEntity.ok(orderMapper.toDTOs(orderService.findAll()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDTO> getOrder(@PathVariable long id, HttpServletRequest request){
-        if(!userService.isUserAdmin(request)){
+    public ResponseEntity<OrderDTO> getOrder(@PathVariable long id, HttpServletRequest request) {
+        if (!userService.isUserAdmin(request)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         Order order = orderService.findById(id);
@@ -57,8 +63,8 @@ public class OrderRestController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity<List<OrderDTO>> getUserOrders(HttpServletRequest request){
-        if(!userService.seeIfUserIsLoggedIn(request)){
+    public ResponseEntity<List<OrderDTO>> getUserOrders(HttpServletRequest request) {
+        if (!userService.seeIfUserIsLoggedIn(request)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         String username = userService.getUser(request).getUsername();
@@ -66,8 +72,8 @@ public class OrderRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<OrderDTO> createOrder(@RequestBody List<CreateOrderItemDTO> itemsDTOs, HttpServletRequest request){
-        if(userService.isUserAdmin(request) && !userService.seeIfUserIsLoggedIn(request)){
+    public ResponseEntity<OrderDTO> createOrder(@RequestBody List<CreateOrderItemDTO> itemsDTOs, HttpServletRequest request) {
+        if (userService.isUserAdmin(request) && !userService.seeIfUserIsLoggedIn(request)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         List<OrderItems> items = itemsDTOs.stream().map(dto -> {
@@ -85,8 +91,8 @@ public class OrderRestController {
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<OrderDTO> updateStatus(@PathVariable long id, @RequestParam OrderStatus status, HttpServletRequest request){
-        if(!userService.isUserAdmin(request)){
+    public ResponseEntity<OrderDTO> updateStatus(@PathVariable long id, @RequestParam OrderStatus status, HttpServletRequest request) {
+        if (!userService.isUserAdmin(request)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         orderService.updateStatus(id, status);
@@ -94,22 +100,22 @@ public class OrderRestController {
     }
 
     @PostMapping("/{id}/cancel")
-    public ResponseEntity<OrderDTO> cancelOrder(@PathVariable long id, HttpServletRequest request){
-        if(!userService.seeIfUserIsLoggedIn(request)){
+    public ResponseEntity<OrderDTO> cancelOrder(@PathVariable long id, HttpServletRequest request) {
+        if (!userService.seeIfUserIsLoggedIn(request)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         String username = userService.getUser(request).getUsername();
         boolean cancelled = orderService.cancelOrder(id, username);
-        if(cancelled){
+        if (cancelled) {
             return ResponseEntity.ok(orderMapper.toDTO(orderService.findById(id)));
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<OrderDTO> deleteOrder(@PathVariable long id, HttpServletRequest request){
-        if(!userService.isUserAdmin(request)){
+    public ResponseEntity<OrderDTO> deleteOrder(@PathVariable long id, HttpServletRequest request) {
+        if (!userService.isUserAdmin(request)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
         Order order = orderService.findById(id);

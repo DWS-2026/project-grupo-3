@@ -1,33 +1,41 @@
 package es.codeurjc.board.service;
 
-import es.codeurjc.board.model.Image;
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.model.Product;
-import es.codeurjc.board.repositories.ProductRepository;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.util.List;
+import es.codeurjc.board.model.Image;
+import es.codeurjc.board.model.Product;
+import es.codeurjc.board.repositories.ProductRepository;
 
 @Service
 public class ProductService {
+
     @Autowired
     private ProductRepository productRepository;
 
     @Autowired
     private ImageService imageService;
 
-    public Page<Product> findAll(Pageable page) {return productRepository.findAll(page);}
+    public Page<Product> findAll(Pageable page) {
+        return productRepository.findAll(page);
+    }
 
-    public Page<Product> findAllActive(Pageable page) {return productRepository.findByActiveTrue(page);}
+    public Page<Product> findAllActive(Pageable page) {
+        return productRepository.findByActiveTrue(page);
+    }
 
-    public Product findById(long id) {return productRepository.findById(id).orElseThrow();}
+    public Product findById(long id) {
+        return productRepository.findById(id).orElseThrow();
+    }
 
-    public void save(Product product) {productRepository.save(product);}
+    public void save(Product product) {
+        productRepository.save(product);
+    }
 
     @Transactional
     public void deleteById(Long id) {
@@ -63,13 +71,13 @@ public class ProductService {
 
     public void editProduct(String name, String description, double price, Long id) throws IOException {
         Product product = productRepository.findById(id).orElseThrow();
-        if(name != null && !name.isBlank()){
+        if (name != null && !name.isBlank()) {
             product.setName(name);
         }
-        if(description != null && !description.isBlank()){
+        if (description != null && !description.isBlank()) {
             product.setDescription(description);
         }
-        if(price > 0){
+        if (price > 0) {
             product.setPrice(price);
         }
 
@@ -94,11 +102,12 @@ public class ProductService {
         return productRepository.findByName(name)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + name));
     }
-    public long numberOfProducts(){
+
+    public long numberOfProducts() {
         return productRepository.count();
     }
 
-    public Product findByNameProduct(String name){
+    public Product findByNameProduct(String name) {
         return productRepository.findByName(name).orElse(null);
     }
 
