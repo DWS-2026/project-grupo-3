@@ -24,8 +24,7 @@ public class VideoService {
     private ReviewsRepository reviewsRepository;
 
 
-
-    public Video saveVideo(MultipartFile file, Long reviewId, String username) throws IOException {
+    public Video saveVideo(MultipartFile file, String username) throws IOException {
         String originalName = file.getOriginalFilename();
         if (originalName == null || originalName.isBlank()) {
             throw new IOException("Invalid file name");
@@ -110,7 +109,7 @@ public class VideoService {
 
         String username = review.getUser().getUsername();
 
-        Video video = saveVideo(file, reviewId, username);
+        Video video = saveVideo(file, username);
 
         review.setVideo(video);
         reviewsRepository.save(review);
