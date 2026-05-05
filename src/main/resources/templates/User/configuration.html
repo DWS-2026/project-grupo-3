@@ -30,8 +30,8 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto" id="login-form">
-    
-    <form action="/User/configuration" method="post" enctype="multipart/form-data">
+
+    <form action="/users/configuration" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="{{token}}"/>
         <img
                 class="mb-4"
@@ -139,7 +139,7 @@
 
         <div class="buttons-container">
             <button type="submit" id="login-btn" class="btn btn-success rounded-pill px-4 py-3 main-button secondary">Sube tus cambios</button>
-             <a href="/User/user" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
+            <a href="/users/user" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
 
         </div>
 

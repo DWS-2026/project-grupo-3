@@ -50,7 +50,7 @@ public class ReviewsController {
         this.productService = productService;
     }
 
-    @GetMapping("/Reviews/forum")
+    @GetMapping("/reviews/forum")
     public String forum(Model model, @RequestParam(required = false) String type, @RequestParam(required = false) String whatToShow,
             HttpServletRequest request) {
 
@@ -82,16 +82,16 @@ public class ReviewsController {
 
         model.addAttribute("loginOptions", userService.seeIfUserIsLoggedIn(request));
 
-        return "Reviews/forum";
+        return "reviews/forum";
     }
 
-    @GetMapping("/Reviews/newreview")
+    @GetMapping("/reviews/newreview")
     public String newReviewForm(Model model) {
         model.addAttribute("review", new Review());
-        return "Reviews/newreview";
+        return "reviews/newreview";
     }
 
-    @PostMapping("/Reviews/newreview")
+    @PostMapping("/reviews/newreview")
     public String saveReview(Model model,
             RedirectAttributes redirectAttributes,
             @RequestParam String title,
@@ -106,7 +106,7 @@ public class ReviewsController {
                 && type != null;
 
         if (!isValidRequest) {
-            return "redirect:/Reviews/newreview";
+            return "redirect:/reviews/newreview";
         }
 
         Review review = new Review(title, description, type);
@@ -121,7 +121,7 @@ public class ReviewsController {
 
         if (!associationOk) {
             redirectAttributes.addFlashAttribute("nameNotValid", true);
-            return "redirect:/Reviews/newreview";
+            return "redirect:/reviews/newreview";
         }
 
         // First save the review (user and ID)
@@ -132,10 +132,10 @@ public class ReviewsController {
             videoService.addVideoToReview(review.getId(), videoFile);
         }
 
-        return "redirect:/Reviews/forum";
+        return "redirect:/reviews/forum";
     }
 
-    @GetMapping("/Reviews/editReview/{id}")
+    @GetMapping("/reviews/editReview/{id}")
     public String editReview(Model model, @PathVariable Long id, Principal principal, HttpServletRequest request) {
         Review review = reviewsService.findById(id);
 
@@ -145,10 +145,10 @@ public class ReviewsController {
         }
 
         model.addAttribute("review", review);
-        return "Reviews/editReview";
+        return "reviews/editReview";
     }
 
-    @PostMapping("/Reviews/editReview/{id}")
+    @PostMapping("/reviews/editReview/{id}")
     public String editReview(@PathVariable Long id, @RequestParam String title, @RequestParam String description, @RequestParam String productOrplant, @RequestParam Review.ReviewType type, HttpServletRequest session) throws Exception {
         Review review = reviewsService.findById(id);
 
@@ -158,14 +158,14 @@ public class ReviewsController {
 
         if (reviewsService.editReview(title, description, productOrplant, type, id)) {
             reviewsService.save(review, userService.getUser(session));
-            return "redirect:/Reviews/forum";
+            return "redirect:/reviews/forum";
         } else {
-            return "redirect:/Reviews/editReview/" + review.getId();
+            return "redirect:/reviews/editReview/" + review.getId();
         }
 
     }
 
-    @PostMapping("/Reviews/{id}/delete")
+    @PostMapping("/reviews/{id}/delete")
     public String deleteReview(@PathVariable long id,
             HttpServletRequest request) {
 
@@ -179,7 +179,7 @@ public class ReviewsController {
             }
         }
 
-        return "redirect:/Reviews/forum";
+        return "redirect:/reviews/forum";
     }
 
 }

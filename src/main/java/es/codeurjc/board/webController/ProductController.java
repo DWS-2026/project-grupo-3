@@ -37,7 +37,7 @@ public class ProductController {
     private UserService userService;
 
 
-    @GetMapping("/Products/catalogProducts")
+    @GetMapping("/products/catalogProducts")
     public String catalogProducts(Model model, @PageableDefault(size = 6) Pageable page, HttpServletRequest request) {
         btnsHeader.hideBtnHeader(model, "productsOption");
         Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6);
@@ -56,22 +56,22 @@ public class ProductController {
         model.addAttribute("hasNext", productsPage.hasNext());
         model.addAttribute("next", productsPage.getNumber() + 1);
 
-        return "/Products/catalogProducts";
+        return "/products/catalogProducts";
     }
 
-    @GetMapping("/Products/showOneProduct")
+    @GetMapping("/products/showOneProduct")
     public String oneProduct(Model model,  @RequestParam String search) {
         Product product = productService.findByNameProduct(search);
         model.addAttribute("products",product);
-        return "/Products/catalogProducts";
+        return "/products/catalogProducts";
     }
 
-    @GetMapping("/Products/newProduct")
+    @GetMapping("/products/newProduct")
     public String newProduct() {
-        return "Products/newProduct";
+        return "products/newProduct";
     }
 
-    @PostMapping("/Products/new")
+    @PostMapping("/products/new")
     public String newProduct(Model model, Product product, MultipartFile imageFile) throws IOException {
         product.setExample(true);
         productService.save(product);
@@ -79,18 +79,18 @@ public class ProductController {
             Image image = imageService.createImage(imageFile);
             productService.addImageToProduct(product.getId(), image);
         }
-        return "redirect:/Products/catalogProducts";
+        return "redirect:/products/catalogProducts";
     }
 
-    @GetMapping("/Products/editProduct/{id}")
+    @GetMapping("/products/editProduct/{id}")
     public String editProduct(Model model, @PathVariable long id) {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
         model.addAttribute("productId", product.getId() );
-        return "Products/editProduct";
+        return "products/editProduct";
     }
 
-    @PostMapping("/Products/editProduct/{id}")
+    @PostMapping("/products/editProduct/{id}")
     public String editProduct(@PathVariable long id, @RequestParam String name, @RequestParam String description, @RequestParam double price, @RequestParam(required = false) MultipartFile imageFile) throws IOException {
         productService.editProduct(name, description, price, id);
         if (imageFile != null && !imageFile.isEmpty()) {
@@ -103,7 +103,7 @@ public class ProductController {
             productService.addImageToProduct(id, image);
         }
 
-        return "redirect:/Products/catalogProducts";
+        return "redirect:/products/catalogProducts";
     }
 
     @PostMapping("/addImageToProduct/{id}")
@@ -113,7 +113,7 @@ public class ProductController {
             Image imageOne = imageService.createImage(newImage);
             productService.addImageToProduct(id, imageOne);
         }
-        return "redirect:/Products/editProduct/" + id;
+        return "redirect:/products/editProduct/" + id;
     }
 
     @PostMapping("/delete/image/{productId}/{imageId}")
@@ -121,20 +121,19 @@ public class ProductController {
 
         productService.deleteImageFromProduct(productId, imageId);
 
-        return "redirect:/Products/catalogProducts";
+        return "redirect:/products/catalogProducts";
     }
 
     @PostMapping("/products/{id}/delete")
     public String deleteProduct(@PathVariable long id) {
         productService.deleteById(id);
-        return "redirect:/Admin/productManagement";
+        return "redirect:/admins/productManagement";
     }
 
     @PostMapping("/products/{id}/reactivate")
     public String reactivateProduct(@PathVariable long id) {
         productService.reactivateById(id);
-        return "redirect:/Admin/productManagement";
+        return "redirect:/admins/productManagement";
     }
-
 
 }
