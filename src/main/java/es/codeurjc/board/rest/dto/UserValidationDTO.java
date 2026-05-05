@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 public record UserValidationDTO ( @NotBlank(message = "El username es obligatorio")String username,
 
     String description,
-
+    @NotNull;
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El email no es válido")
     String email,
