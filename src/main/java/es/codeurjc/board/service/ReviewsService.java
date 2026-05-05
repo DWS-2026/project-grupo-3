@@ -14,6 +14,10 @@ import es.codeurjc.board.model.Review;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.ReviewsRepository;
 
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
+import org.owasp.html.HtmlPolicyBuilder;
+
 @Service
 @Transactional
 public class ReviewsService {
@@ -29,6 +33,17 @@ public class ReviewsService {
 
     @Autowired
     private ProductService productService;
+
+    private final PolicyFactory reviewPolicy =
+            new HtmlPolicyBuilder()
+                    .allowElements("p", "b", "strong", "i", "em", "u", "br", "a", "h1", "h2", "h3", "ul", "ol", "li")
+                    .allowAttributes("href").onElements("a")
+                    .allowStandardUrlProtocols()
+                    .requireRelNofollowOnLinks()
+                    .toFactory();
+
+    private final PolicyFactory titlePolicy =
+            Sanitizers.FORMATTING.and(Sanitizers.BLOCKS);
 
     public ReviewsService(ReviewsRepository reviewsRepository) {
         this.reviewsRepository = reviewsRepository;
@@ -69,7 +84,9 @@ public class ReviewsService {
                 review.setTitle(title);
             }
             if (description != null && !description.isBlank()) {
-                review.setDescription(description);
+                review.setDescription(
+                        reviewPolicy.sanitize(description)
+                );
             }
         }
 
@@ -96,6 +113,12 @@ public class ReviewsService {
         if (review.getProduct() != null) {
             review.getProduct().addReview(review);
         }
+        review.setTitle(
+                review.getTitle().replaceAll("<[^>]*>", "")
+        );
+        review.setDescription(
+                reviewPolicy.sanitize(review.getDescription())
+        );
         review.setUser(user);
         user.addReview(review);
         reviewsRepository.save(review);

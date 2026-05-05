@@ -54,9 +54,6 @@ public class PlantController {
     }
 
 
-
-
-
     @GetMapping("/catalogPlants")
     public String catalogPlants(Model model, @RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
                                 HttpServletRequest session, @RequestParam(required = false) String whatToShow, @RequestParam(required = false) String order) {

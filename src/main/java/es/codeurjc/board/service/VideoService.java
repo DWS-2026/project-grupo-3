@@ -42,9 +42,6 @@ public class VideoService {
         if (contentType == null || !contentType.startsWith("video/")) {
             throw new IOException("Invalid file type");
         }
-        if (file.getSize() > 50_000_000) {
-            throw new IOException("File too large");
-        }
 
         int i = originalName.lastIndexOf('.');
         if (i < 0) {
