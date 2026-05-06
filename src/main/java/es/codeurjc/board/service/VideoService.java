@@ -29,7 +29,7 @@ public class VideoService {
     private ReviewsRepository reviewsRepository;
 
 
-    public Video saveVideo(MultipartFile file, String username) throws IOException {
+    public Video saveVideo(MultipartFile file, String username, Long reviewId) throws IOException {
         String originalName = file.getOriginalFilename();
         if (originalName == null || originalName.isBlank()) {
             throw new IOException("Invalid file name");
@@ -72,15 +72,18 @@ public class VideoService {
         }
 
         // generate unique storage name
-        String safeBaseName = baseName.replaceAll("[^A-Za-z0-9._-]", "_");
-        String storageFileName = UUID.randomUUID().toString() + extension;
+        String safeOriginal = baseName.replaceAll("[^A-Za-z0-9._-]", "_");
+
+        String uploadFileName = safeOriginal + "_" + reviewId + extension;
 
         Path uploadPath = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        Path target = uploadPath.resolve(storageFileName).normalize();
+        Path target = uploadPath.resolve(uploadFileName).normalize();
+
+        // 🔒 Path traversal protection
         if (!target.startsWith(uploadPath)) {
             throw new IOException("Invalid path");
         }
@@ -89,9 +92,8 @@ public class VideoService {
             Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        Video video = new Video(displayName, storageFileName, contentType);
+        Video video = new Video(displayName, uploadFileName, contentType);
         return videoRepository.save(video);
-
     }
 
     public Video findById(Long id) {
@@ -120,7 +122,7 @@ public class VideoService {
 
         String username = review.getUser().getUsername();
 
-        Video video = saveVideo(file, username);
+        Video video = saveVideo(file, username, reviewId);
 
         if (review.getVideo() != null) {
             delete(review.getVideo().getId());
