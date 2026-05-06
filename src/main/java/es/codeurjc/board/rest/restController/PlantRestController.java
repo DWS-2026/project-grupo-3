@@ -29,6 +29,8 @@ import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -36,7 +38,7 @@ import org.springframework.data.domain.Pageable;
 @RequestMapping("/api/v1/plants")
 public class PlantRestController {
     @Autowired
-    private PlantMapper mapper;
+    private PlantMapper plantMapper;
 
     @Autowired 
     private ImageMapper imageMapper;
@@ -57,7 +59,7 @@ public class PlantRestController {
         if(userService.isUserAdmin(session) || userService.isUserUser(session)) {
             Page<Plant> plantsPage = plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(),
                     userService.isUserUser(session), whatToShow, search, sortedPage);
-            return plantsPage.map(mapper::ToDTO);
+            return plantsPage.map(plantMapper::ToDTO);
         } else{
             return Page.empty();
         }
@@ -68,7 +70,7 @@ public class PlantRestController {
         Optional<Plant> plant = plantService.findById(id);
         if(plant.isPresent() || plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session)) || userService.isUserAdmin(session)){
             plantService.deleteById(id);
-            return ResponseEntity.ok(mapper.ToDTO(plant.get()));
+            return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
         }else{
             if(plant.isPresent()){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
@@ -81,7 +83,7 @@ public class PlantRestController {
         Optional<Plant> plantOp = plantService.findById(id);
         if(plantOp.isPresent() && plantService.seeIfPlantBelongsToUser(plantOp.get(),userService.getUser(session))){
             plantService.editPlant(updatedPlant.name(),updatedPlant.cares(),updatedPlant.description(),id,updatedPlant.species());
-            return ResponseEntity.ok(mapper.ToDTO(plantOp.get()));
+            return ResponseEntity.ok(plantMapper.ToDTO(plantOp.get()));
         }else{
             if(plantOp.isPresent()){
                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
@@ -91,14 +93,15 @@ public class PlantRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<PlantBasicDTO> newPlant(@RequestBody PlantBasicDTO plantDTO,  HttpServletRequest session){ //we
-        //should check that in the plantDTO fields there is no one with an empty etrance
-        if(userService.seeIfUserIsLoggedIn(session) && userService.isUserUser(session)){
-            Plant plant = mapper.ToDomain(plantDTO);
+    public ResponseEntity<PlantBasicDTO> newPlant(@Valid @RequestBody PlantBasicDTO plantDTO,  HttpServletRequest session){ //we
+       if(!plantService.validRequest(plantDTO.name(), plantDTO.species())){
+        return ResponseEntity.badRequest().build();
+       } else if(userService.seeIfUserIsLoggedIn(session) && userService.isUserUser(session)){
+            Plant plant = plantMapper.ToDomain(plantDTO);
             plant.setUser(userService.getUser(session));
             plantService.save(plant, userService.getUser(session), plantDTO.species());
             URI location = fromCurrentRequest().path("/{id}").buildAndExpand(plant.getId()).toUri();
-            return ResponseEntity.created(location).body(mapper.ToDTO(plant));
+            return ResponseEntity.created(location).body(plantMapper.ToDTO(plant));
         }else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -109,7 +112,7 @@ public class PlantRestController {
 	public ResponseEntity<PlantBasicDTO> getPlant(@PathVariable long id,  HttpServletRequest session) {
         Optional<Plant> plant = plantService.findById(id);
         if(plant.isPresent()){
-            return ResponseEntity.ok(mapper.ToDTO(plant.get()));
+            return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
         }else{
             return ResponseEntity.notFound().build();
         }

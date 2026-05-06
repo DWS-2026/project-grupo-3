@@ -537,9 +537,9 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ### **Participación de Miembros en la Práctica 3**
 
-#### **Alumno 1 - Inés Sebastián**
+#### **Alumno 1 - Inés Sebastián Santamaría**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Mi tarea principal consistía en hacer que la parte de API de las imágenes funcionase, luego como la anterior vez, me encargué del controlador de las plantas y además del que permitía el inicio sesión a un usuario legítimo. Por último me hice responsable de la documentación de la API.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|

@@ -1,16 +1,10 @@
 package es.codeurjc.board.rest.restController;
 
-import java.io.IOException;
 import java.net.URI;
-import java.util.List;
 import java.util.ArrayList;
-
-import es.codeurjc.board.model.User;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,15 +26,20 @@ import es.codeurjc.board.service.UserService;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import es.codeurjc.board.model.User;
 import es.codeurjc.board.rest.dto.UserValidationDTO;
+import es.codeurjc.board.rest.mapper.UserMapper;
+import es.codeurjc.board.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -55,25 +54,11 @@ public class UserRestController {
     @Autowired
     private UserMapper userMapper;
 
-    private final String REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$";
-
     @PostMapping("")
-    public ResponseEntity<?> newUser(@RequestBody UserValidationDTO newUser) {
+    public ResponseEntity<?> newUser(@Valid @RequestBody UserValidationDTO new_User) {
 
-        if (newUser.username() == null || newUser.username().isBlank() ||
-            newUser.email() == null || newUser.email().isBlank() ||
-            newUser.password() == null || newUser.password().isBlank() ||
-            newUser.description() == null || newUser.description().isBlank()) {
-
-            return ResponseEntity.badRequest().body("Missing fields");
-        }
-
-        if (!newUser.password().matches(REGEX)) {
-            return ResponseEntity.badRequest().body("Invalid password format");
-        }
-
-        User user = userMapper.extendedToDomain(newUser);
-        user.setPassword(passwordEncoder.encode(newUser.password()));
+        User user = userMapper.validationToDomain(new_User);
+        user.setPassword(passwordEncoder.encode(new_User.password()));
 
         List<String> roles = new ArrayList<>();
         roles.add("USER");
@@ -144,12 +129,6 @@ public class UserRestController {
             user.setDescription(userDTO.description());
         }
 
-        if (userDTO.password() != null && !userDTO.password().isBlank()) {
-            if (!userDTO.password().matches(REGEX)) {
-                return ResponseEntity.badRequest().body("Invalid password");
-            }
-            user.setPassword(passwordEncoder.encode(userDTO.password()));
-        }
 
         userService.saveUser(user);
 
