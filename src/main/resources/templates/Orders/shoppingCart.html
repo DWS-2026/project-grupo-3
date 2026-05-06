@@ -29,7 +29,7 @@
     {{#cartEmpty}}
     <div class="text-center text-muted mt-5">
         <p class="fs-5">Tu carrito está vacío.</p>
-        <a href="/Products/catalogProducts"
+        <a href="/products/catalogProducts"
            class="btn btn-success rounded-pill px-4 py-2 main-button mt-2">
             Ver productos
         </a>
@@ -57,7 +57,7 @@
                 <td>{{quantity}}</td>
                 <td>€{{formattedSubtotal}}</td>
                 <td>
-                    <form action="/Cart/remove/{{productId}}" method="post">
+                    <form action="/carts/remove/{{productId}}" method="post">
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                         <input type="hidden" name="_csrf" value="{{token}}"/>
                     </form>
@@ -76,13 +76,13 @@
 
         <!-- Actions -->
         <div class="d-flex justify-content-between mt-3">
-            <form action="/Cart/clear" method="post">
+            <form action="/carts/clear" method="post">
                 <button type="submit" class="btn btn-outline-danger rounded-pill px-4">
                     Vaciar carrito
                 </button>
                 <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
-            <a href="/Orders/payment"
+            <a href="/orders/payment"
                class="btn btn-success rounded-pill px-4 py-2 main-button">
                 Proceder al pago →
             </a>

@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/Admin")
+@RequestMapping("/admins")
 public class AdminController {
 
 
@@ -37,14 +37,14 @@ public class AdminController {
     @GetMapping("/adminPanel")
     public String adminPanel(Model model) {
         SessionAttributes.hideAdminPanel(model);
-        return "Admin/adminPanel";
+        return "admins/adminPanel";
     }
 
     @GetMapping("/productManagement")
     public String productManagement(Model model) {
         List<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
-        return "Admin/productManagement";
+        return "admins/productManagement";
     }
 
     @GetMapping("/managementOrders")
@@ -57,7 +57,7 @@ public class AdminController {
             order.setCancelled(order.getStatus() == OrderStatus.CANCELLED);
         }
         model.addAttribute("orders", orders);
-        return "Admin/managementOrders";
+        return "admins/managementOrders";
     }
 
     @GetMapping("/userManagement")
@@ -65,7 +65,7 @@ public class AdminController {
         List<User> users =  userService.findAll();
         users.removeIf(user -> user.getRoles().contains("ADMIN"));
         model.addAttribute("users", users);
-        return "/Admin/userManagement";
+        return "/admins/userManagement";
     }
 
     @PostMapping("/deleteUser/{id}")
@@ -74,12 +74,9 @@ public class AdminController {
             return "/accessDenied";
         }
 
-
-
             userService.deleteUser(id);
-        
 
-        return "redirect:/Admin/userManagement";
+        return "redirect:/admins/userManagement";
     }
 
     @PostMapping("/deleteAdmin")

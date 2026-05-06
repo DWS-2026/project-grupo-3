@@ -43,10 +43,9 @@ public class GeneralController {
 		return "login";
 	}
 
-
 	@GetMapping("/quizzPlants")
 	public String quizPlants() {
-		return "/QuizzPlants/quizzPlants";
+		return "/quizzesPlants/quizzPlants";
 	}
 	@PostMapping("/quizzPlants")
 	public String resultTest(@RequestParam Map<String, String> answers, RedirectAttributes redirectAttributes, HttpSession session) {
@@ -71,10 +70,8 @@ public class GeneralController {
 	public String showResult(HttpSession session, Model model) {
 
 
-			return "/QuizzPlants/result";
+		return "/quizzesPlants/result";
 	}
-	
-	
 
 	@GetMapping("/403")
 	public String accessDeniedPage() {

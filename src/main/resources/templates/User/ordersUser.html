@@ -22,7 +22,7 @@
   {{^hasOrders}}
   <div class="mt-5 text-center">
     <p class="text-muted fs-5">Todavía no has realizado ningún pedido.</p>
-    <a href="/Products/catalogProducts" class="btn btn-success rounded-pill px-4 py-2 main-button mt-2">
+    <a href="/products/catalogProducts" class="btn btn-success rounded-pill px-4 py-2 main-button mt-2">
       Ver productos
     </a>
   </div>
@@ -69,7 +69,7 @@
         <!-- Cancel button (only if PENDING) -->
         <td>
           {{#processing}}
-          <form action="/Orders/{{id}}/cancel" method="post"
+          <form action="/orders/{{id}}/cancel" method="post"
                 onsubmit="return confirm('¿Seguro que quieres cancelar este pedido?')">
             <input type="hidden" name="_csrf" value="{{token}}"/>
             <button type="submit" class="btn btn-danger btn-sm">Cancelar</button>

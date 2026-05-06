@@ -34,7 +34,7 @@ public class VideoController {
             videoService.addVideoToReview(reviewId, file);
         }
 
-        return "redirect:/Reviews/editReview/" + reviewId;
+        return "redirect:/reviews/editReview/" + reviewId;
     }
 
     @GetMapping("/videos/{id}")

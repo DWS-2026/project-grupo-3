@@ -27,7 +27,7 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto">
-    <form class="text-center" action="/Products/editProduct/{{product.id}}" method="post" enctype="multipart/form-data">
+    <form class="text-center" action="/products/editProduct/{{product.id}}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="{{token}}"/>
 
         <h3 class="mb-4 change-color">Editar producto</h3>
@@ -61,7 +61,7 @@
             <button type="submit" class="btn btn-success rounded-pill px-4 py-3 w-100 main-button">
                 Guardar cambios
             </button>
-            <a href="/Products/catalogProducts" class="btn btn-success rounded-pill px-4 py-3 main-button mt-2">
+            <a href="/products/catalogProducts" class="btn btn-success rounded-pill px-4 py-3 main-button mt-2">
                 Cancelar
             </a>
         </div>

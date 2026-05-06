@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/Cart")
+@RequestMapping("/carts")
 public class CartController {
 
     @Autowired
@@ -26,19 +26,19 @@ public class CartController {
 
         Product product = productService.findById(productId);
         cartService.addItem(product.getId(), product.getName(), product.getPrice(), quantity);
-        return "redirect:/Products/catalogProducts";
+        return "redirect:/products/catalogProducts";
     }
 
 
     @PostMapping("/remove/{productId}")
     public String removeFromCart(@PathVariable long productId) {
         cartService.removeItem(productId);
-        return "redirect:/Orders/shoppingCart";
+        return "redirect:/orders/shoppingCart";
     }
 
     @PostMapping("/clear")
     public String clearCart() {
         cartService.clear();
-        return "redirect:/Orders/shoppingCart";
+        return "redirect:/orders/shoppingCart";
     }
 }

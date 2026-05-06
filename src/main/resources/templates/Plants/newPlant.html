@@ -27,7 +27,7 @@
 <body>
 {{>header}}
 <main class="form-signin w-100 m-auto">
-  <form class="text-center" action="/Plants/new" method="post" enctype="multipart/form-data">
+    <form class="text-center" action="/plants/new" method="post" enctype="multipart/form-data">
       <input type="hidden" name="_csrf" value="{{token}}"/>
       <img
             class="mb-4"
@@ -119,7 +119,7 @@
       <button type="submit" class="btn btn-success rounded-pill px-4 py-3 fw-medium main-button w-100">
         Guardar planta
       </button>
-      <a href="/Plants/catalogPlants" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
+        <a href="/plants/catalogPlants" class="btn btn-success rounded-pill px-4 py-3 main-button">Cancelar</a>
     </div>
 
   </form>

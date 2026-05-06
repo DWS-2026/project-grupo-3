@@ -41,7 +41,7 @@
             {{#users}}
             <tr>
             <td>
-                <form action="/Admin/deleteUser/{{id}}" method="post">
+                <form action="/admins/deleteUser/{{id}}" method="post">
                     <button type="submit" class="btn delete-btn">
                         🗑
                     </button>
@@ -51,7 +51,7 @@
             <td>{{username}}</td>
             <td>{{description}}</td>
             <td>    <p class="license" style="font-size: 20px;">
-            <a href="/User/profile/{{id}}" target="_green">👤 {{username}}</a>
+                <a href="/users/profile/{{id}}" target="_green">👤 {{username}}</a>
             </p></td>
             </tr>
             {{/users}}
@@ -61,11 +61,11 @@
 
 
     <div class="mb-3 buttons-container">
-        <form action="/Admin/deleteAllUsers" method="post">
+        <form action="/admins/deleteAllUsers" method="post">
             <button class="btn btn-danger" id="delete-selected">Eliminar todos los usuario/s</button>
             <input type="hidden" name="_csrf" value="{{token}}"/>
         </form>
-        <form action="/Admin/deleteAdmin" method="post">
+        <form action="/admins/deleteAdmin" method="post">
             <button class="btn btn-danger" id="delete-selected">Eliminar al admin</button>
             <input type="hidden" name="_csrf" value="{{token}}"/>
         </form>
