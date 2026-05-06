@@ -14,5 +14,5 @@ public interface UserMapper {
 
     UserBasicDTO basicToDTO(User user);
     User basicToDomain (UserBasicDTO user);
-    User extendedToDomain(UserValidationDTO user);
+    //User extendedToDomain(UserValidationDTO user);
 }
