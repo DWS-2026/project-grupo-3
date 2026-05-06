@@ -41,7 +41,7 @@ public class ReviewRestController {
     @GetMapping
     public List<ReviewDTO> getAllReviews() {
         return reviewMapper.toDTOs(
-                reviewsService.findAll(PageRequest.of(0, 100)).getContent()
+                reviewsService.findAll()
         );
     }
 

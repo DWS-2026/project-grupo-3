@@ -1,5 +1,15 @@
 package es.codeurjc.board.service;
 
+import es.codeurjc.board.model.Review;
+import es.codeurjc.board.model.Video;
+import es.codeurjc.board.repositories.ReviewsRepository;
+import es.codeurjc.board.repositories.VideoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -8,17 +18,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import es.codeurjc.board.model.Review;
-import es.codeurjc.board.model.Video;
-import es.codeurjc.board.repositories.ReviewsRepository;
-import es.codeurjc.board.repositories.VideoRepository;
 
 @Service
 public class VideoService {
@@ -122,6 +121,10 @@ public class VideoService {
         String username = review.getUser().getUsername();
 
         Video video = saveVideo(file, username);
+
+        if (review.getVideo() != null) {
+            delete(review.getVideo().getId());
+        }
 
         review.setVideo(video);
         reviewsRepository.save(review);
