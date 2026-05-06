@@ -1,7 +1,9 @@
 package es.codeurjc.board.rest.dto;
 
-public record VideoDTO(Long id,
-                       String fileName,
-                       String storedFileName,
-                       String contentType) {
+public record VideoDTO(
+        Long id,
+        String fileName,
+        String contentType,
+        String url
+) {
 }
