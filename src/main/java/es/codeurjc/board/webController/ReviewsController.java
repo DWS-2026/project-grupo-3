@@ -71,7 +71,7 @@ public class ReviewsController {
             if (type != null && !type.isEmpty()) {
                 reviews = reviewsService.findByType(Review.ReviewType.valueOf(type));
             } else {
-                reviews = reviewsService.findAll(PageRequest.of(0, 100)).getContent();
+                reviews = reviewsService.findAll();
             }
         }
 

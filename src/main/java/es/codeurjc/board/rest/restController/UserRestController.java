@@ -72,7 +72,7 @@ public class UserRestController {
             return ResponseEntity.badRequest().body("Invalid password format");
         }
 
-        User user = userMapper.ToDomain(newUser);
+        User user = userMapper.extendedToDomain(newUser);
         user.setPassword(passwordEncoder.encode(newUser.password()));
 
         List<String> roles = new ArrayList<>();

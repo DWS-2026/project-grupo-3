@@ -14,7 +14,8 @@ public interface ReviewsRepository extends JpaRepository<Review, Long> {
     List<Review> findByType(Review.ReviewType type);
 
     List<Review> findByUserAndType(User user, Review.ReviewType type);
-    Page<Review> findAll(Pageable page);
+
+    List<Review> findAll();
 
     
     Optional<Review> findById (long id);

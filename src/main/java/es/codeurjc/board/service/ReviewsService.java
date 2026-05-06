@@ -49,8 +49,8 @@ public class ReviewsService {
         this.reviewsRepository = reviewsRepository;
     }
 
-    public Page<Review> findAll(Pageable page) {
-        return reviewsRepository.findAll(page);
+    public List<Review> findAll() {
+        return reviewsRepository.findAll();
     }
 
     public long count() {
