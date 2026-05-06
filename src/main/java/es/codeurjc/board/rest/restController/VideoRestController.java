@@ -43,34 +43,33 @@ public class VideoRestController {
 
         Review review = reviewsService.findById(reviewId);
         if (review == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found");
+            return ResponseEntity.notFound().build();
         }
 
-        validateOwnerOrAdmin(review, request);
+        if (!userService.seeIfUserIsLoggedIn(request)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        if (!validateOwnerOrAdmin(review, request)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
         videoService.addVideoToReview(reviewId, file);
 
         return ResponseEntity.ok("Video uploaded");
     }
 
-    private void validateOwnerOrAdmin(
+    private boolean validateOwnerOrAdmin(
             Review review,
             HttpServletRequest request) {
 
         Long loggedUserId = userService.getUserID(request);
 
-        boolean isOwner =
-                review.getUser().getId().equals(loggedUserId);
+        boolean isOwner = review.getUser().getId().equals(loggedUserId);
 
-        boolean isAdmin =
-                userService.isUserAdmin(request);
+        boolean isAdmin = userService.isUserAdmin(request);
 
-        if (!isOwner && !isAdmin) {
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN,
-                    "Forbidden"
-            );
-        }
+        return isOwner || isAdmin;
     }
 
     @GetMapping("/{reviewId}/video/info")
@@ -79,7 +78,7 @@ public class VideoRestController {
 
         Review review = reviewsService.findById(reviewId);
 
-        if (review.getVideo() == null) {
+        if (review == null || review.getVideo() == null) {
             return ResponseEntity.notFound().build();
         }
 
@@ -94,7 +93,7 @@ public class VideoRestController {
 
         Review review = reviewsService.findById(reviewId);
 
-        if (review.getVideo() == null) {
+        if (review == null || review.getVideo() == null) {
             return ResponseEntity.notFound().build();
         }
 
@@ -117,7 +116,17 @@ public class VideoRestController {
 
         Review review = reviewsService.findById(reviewId);
 
-        validateOwnerOrAdmin(review, request);
+        if (review == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (!userService.seeIfUserIsLoggedIn(request)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        if (!validateOwnerOrAdmin(review, request)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
 
         if (review.getVideo() != null) {
             videoService.delete(review.getVideo().getId());
