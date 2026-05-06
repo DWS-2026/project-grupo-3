@@ -1,46 +1,27 @@
 package es.codeurjc.board.rest.restController;
 
-import java.io.IOException;
 import java.net.URI;
-import java.util.List;
 import java.util.ArrayList;
-
-import es.codeurjc.board.model.User;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-
-import es.codeurjc.board.model.Image;
-import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import es.codeurjc.board.rest.dto.UserBasicDTO;
-import es.codeurjc.board.rest.mapper.UserMapper;
-import es.codeurjc.board.service.ImageService;
-import es.codeurjc.board.service.OrderService;
-import es.codeurjc.board.service.UserService;
-
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-
-import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import es.codeurjc.board.model.User;
 import es.codeurjc.board.rest.dto.UserValidationDTO;
+import es.codeurjc.board.rest.mapper.UserMapper;
+import es.codeurjc.board.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/v1/user")

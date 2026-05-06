@@ -1,7 +1,11 @@
 package es.codeurjc.board.rest.dto;
 import java.util.List;
 
-public record PlantBasicDTO (String cares,String name,String description, String species,
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record PlantBasicDTO (String cares,@NotBlank(message = "El nombre no puede estar en blanco") @NotNull(message = "La especie no puede ser nula") String name,String description, 
+@NotBlank(message = "La especie no puede estar en blanco") @NotNull(message = "La especie no puede ser nula")  String species,
     List<ImageDTO> images
 ){
     

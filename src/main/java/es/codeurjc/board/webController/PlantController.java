@@ -1,24 +1,30 @@
 package es.codeurjc.board.webController;
 
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import es.codeurjc.board.model.Image;
-import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.service.ImageService;
-import es.codeurjc.board.service.PlantService;
-import es.codeurjc.board.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import java.util.Optional;
-import java.io.IOException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import es.codeurjc.board.model.Image;
+import es.codeurjc.board.model.Plant;
+import es.codeurjc.board.modelAttributes.ButtonsHeader;
+import es.codeurjc.board.service.ImageService;
+import es.codeurjc.board.service.PlantService;
+import es.codeurjc.board.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/plants")
@@ -112,9 +118,9 @@ public class PlantController {
     }
 
     @PostMapping("/new")
-    public String newPlant(@RequestParam String name, @RequestParam String description, @RequestParam String cares, MultipartFile imageFile, @RequestParam String type, HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
-
-        if(plantService.existsByNamePlant(name)){ //if it already exist that plant
+    public String newPlant(@RequestParam (required=true) String name, @RequestParam String description, @RequestParam String cares, MultipartFile imageFile, @RequestParam (required = true) String type , HttpServletRequest session, RedirectAttributes redirectAttributes) throws IOException {
+        
+        if(plantService.validRequest(name, type)){ //if it already exist that plant
             redirectAttributes.addFlashAttribute("plantNameExists", true);
             redirectAttributes.addFlashAttribute("cares",cares);
             redirectAttributes.addFlashAttribute("description", description);

@@ -1,18 +1,20 @@
 package es.codeurjc.board.service;
 
-import es.codeurjc.board.model.Image;
-import es.codeurjc.board.model.Plant;
-import es.codeurjc.board.model.User;
-import es.codeurjc.board.repositories.PlantRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import es.codeurjc.board.model.Image;
+import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.model.PlantType;
-import java.util.List;
-import java.util.Optional;
+import es.codeurjc.board.model.User;
+import es.codeurjc.board.repositories.PlantRepository;
 
 @Service
 public class PlantService {
@@ -159,5 +161,12 @@ public class PlantService {
             return false;
         }
     }
-
+    public boolean validRequest(String name, String species){
+        boolean ok = true;
+        if(name == null || name.isBlank() || name.isEmpty() || species == null || species.isBlank() || species.isEmpty()
+            || this.existsByNamePlant(name)){
+            ok = false;
+        } 
+        return ok;
+    }
 }
