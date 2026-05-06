@@ -32,6 +32,7 @@ import es.codeurjc.board.service.UserService;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,7 +57,7 @@ public class UserRestController {
     private UserMapper userMapper;
 
     @PostMapping("")
-    public ResponseEntity<?> naewUser(@RequestBody UserValidationDTO new_User) {
+    public ResponseEntity<?> newUser(@Valid @RequestBody UserValidationDTO new_User) {
 
         User user = userMapper.validationToDomain(new_User);
         user.setPassword(passwordEncoder.encode(new_User.password()));
@@ -130,12 +131,6 @@ public class UserRestController {
             user.setDescription(userDTO.description());
         }
 
-        if (userDTO.password() != null && !userDTO.password().isBlank()) {
-            if (!userDTO.password().matches(REGEX)) {
-                return ResponseEntity.badRequest().body("Invalid password");
-            }
-            user.setPassword(passwordEncoder.encode(userDTO.password()));
-        }
 
         userService.saveUser(user);
 
