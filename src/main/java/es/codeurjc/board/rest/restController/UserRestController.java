@@ -55,25 +55,11 @@ public class UserRestController {
     @Autowired
     private UserMapper userMapper;
 
-    private final String REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$";
-
     @PostMapping("")
-    public ResponseEntity<?> newUser(@RequestBody UserValidationDTO newUser) {
+    public ResponseEntity<?> naewUser(@RequestBody UserValidationDTO new_User) {
 
-        if (newUser.username() == null || newUser.username().isBlank() ||
-            newUser.email() == null || newUser.email().isBlank() ||
-            newUser.password() == null || newUser.password().isBlank() ||
-            newUser.description() == null || newUser.description().isBlank()) {
-
-            return ResponseEntity.badRequest().body("Missing fields");
-        }
-
-        if (!newUser.password().matches(REGEX)) {
-            return ResponseEntity.badRequest().body("Invalid password format");
-        }
-
-        User user = userMapper.ToDomain(newUser);
-        user.setPassword(passwordEncoder.encode(newUser.password()));
+        User user = userMapper.validationToDomain(new_User);
+        user.setPassword(passwordEncoder.encode(new_User.password()));
 
         List<String> roles = new ArrayList<>();
         roles.add("USER");
