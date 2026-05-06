@@ -7,5 +7,12 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface VideoMapper {
 
-    VideoDTO toDTO(Video video);
+    default VideoDTO toDTO(Video video, Long reviewId) {
+        return new VideoDTO(
+                video.getId(),
+                video.getFileName(),
+                video.getContentType(),
+                "/api/v1/reviews/" + reviewId + "/video"
+        );
+    }
 }

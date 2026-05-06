@@ -577,14 +577,20 @@ Mi tarea principal consistía en hacer que la parte de API de las imágenes func
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Nerea Blázquez Zayas**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+En esta tercera práctica he implementado las dos funcionalidades adicionales requeridas: el soporte de texto enriquecido
+y el almacenamiento de ficheros en el sistema local. En nuestro caso, el fichero asociado a las reviews es un vídeo
+corto.
+Ambas funcionalidades se han integrado en la entidad Review. Además, he aplicado mecanismos de sanitización de entradas
+para prevenir problemas de seguridad derivados del uso de texto enriquecido y la subida de ficheros.
+Por otro lado, también he desarrollado la API REST completa para la gestión de reviews, así como para la nueva entidad
+Video, la cual he diseñado e implementado desde cero.
 
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+| Nº |                                                                      Commits                                                                       |                                                                            Files                                                                             |
+|:--:|:--------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| 1  |  [Implementacion y sanitización de la entidad Video](https://github.com/DWS-2026/project-grupo-3/commit/913469d083a0913b797d8457bc179f65daf82038)  |         [VideoController](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/webController/VideoController.java)          |
+| 2  |       [rest Controller y DTO para las reviews](https://github.com/DWS-2026/project-grupo-3/commit/c03bc3641720712a1819771a117a55c9016e1512)        | [ReviewsRestController](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/ReviewRestController.java) |
+| 3  |        [Rest Controller y DTO para los videos](https://github.com/DWS-2026/project-grupo-3/commit/d31331fb8619c2ddc56dab1c97f701df416d8581)        |  [VideoRestController](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/VideoRestController.java)   |
+| 4  | [Implementación y sanitización del texto enriquecido](https://github.com/DWS-2026/project-grupo-3/commit/d4283f1f5f8ca3c577d90bdff4d6a0e866bd4504) |             [ReviewsService](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/service/ReviewsService.java)              |
+| 5  |                                                        [Descripción commit 5](URL_commit_5)                                                        |                                                                  [Archivo5](URL_archivo_5)                                                                   |

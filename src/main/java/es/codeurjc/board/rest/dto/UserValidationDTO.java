@@ -12,7 +12,7 @@ public record UserValidationDTO ( @NotBlank(message = "El username es obligatori
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El email no es válido")
     String email,
-
+    @NotNull
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 8, message = "Mínimo 8 caracteres")
     @Pattern(

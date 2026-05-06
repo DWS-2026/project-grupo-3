@@ -9,6 +9,7 @@ import es.codeurjc.board.service.OrderService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -154,6 +155,12 @@ public class UserController {
         if(!password.equals(repeatpassword)){
             model.addAttribute("passwordError", true);// look if the passwords match
             error = true;
+        }
+        
+        String REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&._-])[A-Za-z\\d@$!%*?&._-]{8,}$";
+
+        if (!password.matches(REGEX)) {
+            error=true;
         }
 
         if(error){
