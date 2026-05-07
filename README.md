@@ -549,17 +549,17 @@ Mi tarea principal consistía en hacer que la parte de API de las imágenes func
 |4| [Documentación de la api (Open API documentation)](URL_commit_5)   | [Archivo4](URL_archivo_4)   |
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Sara García Lopo**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+En esta parte de la práctica me encargué de desarrollar y securizar la API correspopndiente a la gestión de usuarios de la aplicación web. Para ello, implementé los distintos endpoints necesarios para manejar las operaciones relacionadas con los usuarios.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Añadí el regex para el usuario](https://github.com/DWS-2026/dws-2026-project-base/commit/d2ad264133fe2806b655067aa3545b608da1280b)  | [UserBasicDTO](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/dto/UserBasicDTO.java)   |
+|2| [Añadí los endpoints a la API](https://github.com/DWS-2026/dws-2026-project-base/commit/da3e37bc3c0ce84670c48f0dd4fd29bcf660421d)  | [UserRestController](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/UserRestController.java)   |
+|3| [Añadí el regex en el UserController](https://github.com/DWS-2026/dws-2026-project-base/commit/299f9de5183a15ff5bd78ddc100b0b5adf6029d1)  | [UserController](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/webController/UserController.java)   |
+|4| [Añadí el UserValidation al DTO para la validación de los datos](https://github.com/DWS-2026/dws-2026-project-base/commit/790b9e14164b7245db2a52bdb1d0f176d4acc641)  | [UserValidationDTO](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/dto/UserValidationDTO.java)   |
+|5| [Añadí variables al UserBasicDTO](https://github.com/DWS-2026/dws-2026-project-base/commit/d2ad264133fe2806b655067aa3545b608da1280b)  | [UserBasicDTO](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/dto/UserBasicDTO.java)   |
 
 ---
 
