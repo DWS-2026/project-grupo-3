@@ -23,6 +23,8 @@ public class Plant {
     private User user;
 
     private LocalDateTime createdAt;
+
+    
     private String name;
     private String cares;
     private String description;

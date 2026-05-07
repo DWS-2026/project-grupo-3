@@ -11,6 +11,8 @@ import java.util.List;
 public interface ReviewMapper {
 
     @Mapping(source = "user.username", target = "username")
+    @Mapping(source = "plantType.species", target = "plantSpecies")
+    @Mapping(source = "product.name", target = "product")
     ReviewDTO toDTO(Review review);
 
     List<ReviewDTO> toDTOs(List<Review> reviews);

@@ -163,4 +163,13 @@ public class ReviewsService {
         }
 
     }
+
+    public boolean reviewBelongsToUser(User user, Review review){
+        if(user != null && review != null){
+            if(review.getUser().getId()== user.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

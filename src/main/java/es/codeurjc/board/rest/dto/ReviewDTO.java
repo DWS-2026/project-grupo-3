@@ -8,6 +8,8 @@ public record ReviewDTO(
         String description,
         Review.ReviewType type,
         String username,
-        VideoDTO video
+        VideoDTO video,
+        String plantSpecies,
+        String product
 ) {
 }

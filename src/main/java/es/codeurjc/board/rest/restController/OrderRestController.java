@@ -73,7 +73,7 @@ public class OrderRestController {
 
     @PostMapping("/")
     public ResponseEntity<OrderDTO> createOrder(@RequestBody List<CreateOrderItemDTO> itemsDTOs, HttpServletRequest request) {
-        if (userService.isUserAdmin(request) && !userService.seeIfUserIsLoggedIn(request)) {
+        if (userService.isUserAdmin(request) || !userService.seeIfUserIsLoggedIn(request)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         List<OrderItems> items = itemsDTOs.stream().map(dto -> {

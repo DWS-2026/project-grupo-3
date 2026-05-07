@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record UserValidationDTO ( @NotBlank(message = "El username es obligatorio")String username,
+public record UserValidationDTO (@NotNull @NotBlank(message = "El username es obligatorio")String username,
 
     String description,
     @NotNull

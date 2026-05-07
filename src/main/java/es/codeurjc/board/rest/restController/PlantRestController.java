@@ -1,38 +1,39 @@
 package es.codeurjc.board.rest.restController;
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-import java.net.URI;
 import java.io.IOException;
-import org.springframework.http.HttpStatus; 
+import java.net.URI; 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.PutMapping;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
+import es.codeurjc.board.model.Image;
+import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.rest.dto.ImageDTO;
 import es.codeurjc.board.rest.dto.PlantBasicDTO;
 import es.codeurjc.board.rest.mapper.ImageMapper;
 import es.codeurjc.board.rest.mapper.PlantMapper;
-import es.codeurjc.board.model.Image;
-import es.codeurjc.board.model.Plant;
 import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.PlantService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/api/v1/plants")
@@ -56,7 +57,7 @@ public class PlantRestController {
     public Page<PlantBasicDTO> getItemRepository(@RequestParam(required = false) String search, @PageableDefault(size = 6) Pageable page,
                                 HttpServletRequest session, @RequestParam(required = false) String whatToShow, @RequestParam(required = false) String order) {
         Pageable sortedPage = PageRequest.of(page.getPageNumber(), 6, plantService.sortPlants(order));
-        if(userService.isUserAdmin(session) || userService.isUserUser(session)) {
+        if(userService.seeIfUserIsLoggedIn(session)) {
             Page<Plant> plantsPage = plantService.returnPlantsDependingInput(userService.getUser(session).getUsername(),
                     userService.isUserUser(session), whatToShow, search, sortedPage);
             return plantsPage.map(plantMapper::ToDTO);
@@ -66,17 +67,21 @@ public class PlantRestController {
     }
 
     @DeleteMapping("/{id}")
+    
     public ResponseEntity<PlantBasicDTO> deletePlant(@PathVariable long id,HttpServletRequest session){
-        Optional<Plant> plant = plantService.findById(id);
-        if(plant.isPresent() || plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session)) || userService.isUserAdmin(session)){
-            plantService.deleteById(id);
-            return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
-        }else{
-            if(plant.isPresent()){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
+            Optional<Plant> plant = plantService.findById(id);
+            if(plant.isPresent() && (userService.seeIfUserIsLoggedIn(session) || 
+                plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session)) || userService.isUserAdmin(session))){
+                plantService.deleteById(id);
+                return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
+            }else{
+                if(!userService.seeIfUserIsLoggedIn(session)){
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
+                }
+                return ResponseEntity.notFound().build();
             }
-            return ResponseEntity.notFound().build();
-        }
+        
+        
     }
     @PutMapping("/{id}")
     public ResponseEntity<PlantBasicDTO> editPlant(@PathVariable Long id, HttpServletRequest session, @RequestBody PlantBasicDTO updatedPlant) throws Exception {
@@ -110,11 +115,15 @@ public class PlantRestController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<PlantBasicDTO> getPlant(@PathVariable long id,  HttpServletRequest session) {
+        if(userService.seeIfUserIsLoggedIn(session)){
         Optional<Plant> plant = plantService.findById(id);
         if(plant.isPresent()){
             return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
         }else{
             return ResponseEntity.notFound().build();
+        }}else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
         }
             
 

@@ -86,9 +86,14 @@ public class ReviewsController {
     }
 
     @GetMapping("/reviews/newreview")
-    public String newReviewForm(Model model) {
-        model.addAttribute("review", new Review());
-        return "reviews/newreview";
+    public String newReviewForm(Model model,HttpServletRequest request) {
+        if(userService.seeIfUserIsLoggedIn(request)){
+            model.addAttribute("review", new Review());
+            return "reviews/newreview";
+        }else{
+            return "redirect:/accessDenied";
+        }
+
     }
 
     @PostMapping("/reviews/newreview")
@@ -140,7 +145,7 @@ public class ReviewsController {
         Review review = reviewsService.findById(id);
 
         // Verify that belong to the user
-        if (review.getUser().getId() != userService.getUserID(request) && userService.isUserAdmin(request)) {
+        if (!reviewsService.reviewBelongsToUser(userService.getUser(request), review) || userService.isUserAdmin(request)) {
             return "redirect:/accessDenied";
         }
 
@@ -152,7 +157,7 @@ public class ReviewsController {
     public String editReview(@PathVariable Long id, @RequestParam String title, @RequestParam String description, @RequestParam String productOrplant, @RequestParam Review.ReviewType type, HttpServletRequest session) throws Exception {
         Review review = reviewsService.findById(id);
 
-        if (review.getUser().getId() != userService.getUserID(session) || userService.isUserAdmin(session)) {
+        if (reviewsService.reviewBelongsToUser(userService.getUser(session), review) || userService.isUserAdmin(session)) {
             return "redirect:/accessDenied";
         }
 
@@ -172,7 +177,7 @@ public class ReviewsController {
         Review review = reviewsService.findById(id);
 
         if (review != null) {
-            boolean isOwner = review.getUser().getId() == userService.getUserID(request);
+            boolean isOwner = reviewsService.reviewBelongsToUser(userService.getUser(request), review);
             boolean isAdmin = userService.isUserAdmin(request);
             if (isOwner || isAdmin) {
                 reviewsService.deleteById(id);

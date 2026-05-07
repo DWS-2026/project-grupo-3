@@ -1,20 +1,21 @@
 package es.codeurjc.board.service;
 
 
+import java.security.Principal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.Order;
 import es.codeurjc.board.model.User;
 import es.codeurjc.board.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Sort;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.security.Principal;
-import java.util.List;
 
 
 @Service
@@ -173,5 +174,12 @@ public class UserService {
     public long numberOfUsers(){
         return userRepository.count();
     }
+    public boolean requiresReLogin(String username, String email, String password) {
+
+        return (username != null && !username.isBlank())
+            || (email != null && !email.isBlank())
+            || (password != null && !password.isBlank());
+    }
+
 
 }

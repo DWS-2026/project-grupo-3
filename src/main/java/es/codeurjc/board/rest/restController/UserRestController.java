@@ -10,24 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-
-import es.codeurjc.board.model.Image;
-import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import es.codeurjc.board.rest.dto.UserBasicDTO;
-import es.codeurjc.board.rest.mapper.UserMapper;
-import es.codeurjc.board.service.ImageService;
-import es.codeurjc.board.service.OrderService;
-import es.codeurjc.board.service.UserService;
-
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import es.codeurjc.board.model.User;
+import es.codeurjc.board.rest.dto.UserEditDTO;
 import es.codeurjc.board.rest.dto.UserValidationDTO;
 import es.codeurjc.board.rest.mapper.UserMapper;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -106,7 +91,7 @@ public class UserRestController {
     @PutMapping("/{id}")
     public ResponseEntity<?> editUser(
             @PathVariable long id,
-            @RequestBody UserValidationDTO userDTO,
+            @Valid @RequestBody  UserEditDTO userDTO,
             HttpServletRequest request) {
 
         User user = userService.findById(id);
@@ -117,21 +102,15 @@ public class UserRestController {
             return ResponseEntity.status(403).body("Forbidden");
         }
 
-        if (userDTO.email() != null && !userDTO.email().isBlank()) {
-            user.setEmail(userDTO.email());
+        try {
+            userService.editUser(userDTO.email(), userDTO.username(), userDTO.description(), passwordEncoder.encode(userDTO.password()), null, id);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error updating user: " + e.getMessage());
         }
-
-        if (userDTO.username() != null && !userDTO.username().isBlank()) {
-            user.setUsername(userDTO.username());
+        
+        if(userService.requiresReLogin(userDTO.username(), userDTO.email(), userDTO.password())){
+                request.getSession().invalidate();
         }
-
-        if (userDTO.description() != null) {
-            user.setDescription(userDTO.description());
-        }
-
-
-        userService.saveUser(user);
-
         return ResponseEntity.ok(userMapper.basicToDTO(user));
     }
 
