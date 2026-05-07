@@ -10,6 +10,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+
+import es.codeurjc.board.model.Image;
+import es.codeurjc.board.modelAttributes.ButtonsHeader;
+import es.codeurjc.board.rest.dto.UserBasicDTO;
+import es.codeurjc.board.rest.mapper.UserMapper;
+import es.codeurjc.board.service.ImageService;
+import es.codeurjc.board.service.OrderService;
+import es.codeurjc.board.service.UserService;
+
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +56,9 @@ public class UserRestController {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ImageService imageService;
 
     @PostMapping("/")
     public ResponseEntity<?> newUser(@Valid @RequestBody UserValidationDTO new_User) {
@@ -107,7 +128,7 @@ public class UserRestController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error updating user: " + e.getMessage());
         }
-        
+
         if(userService.requiresReLogin(userDTO.username(), userDTO.email(), userDTO.password())){
                 request.getSession().invalidate();
         }
@@ -128,5 +149,48 @@ public class UserRestController {
         userService.deleteUser(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/{id}/profile-photo")
+    public ResponseEntity<?> uploadProfilePhoto(
+            @PathVariable long id,
+            @RequestPart("imageFile") MultipartFile imageFile,
+            HttpServletRequest request) {
+
+        User user = userService.findById(id);
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Solo el propio usuario o admin
+        if (userService.getUserID(request) != id &&
+                !userService.isUserAdmin(request)) {
+
+            return ResponseEntity.status(403).body("Forbidden");
+        }
+
+        try {
+
+            if (imageFile == null || imageFile.isEmpty()) {
+                return ResponseEntity.badRequest()
+                        .body("Image file is empty");
+            }
+
+            Image image = imageService.createImage(imageFile);
+
+            userService.addImageToUser(user, image);
+
+            return ResponseEntity.ok(
+                    userMapper.basicToDTO(user)
+            );
+
+        } catch (Exception e) {
+
+            return ResponseEntity.internalServerError()
+                    .body("Error uploading image");
+
+        }
     }
 }
