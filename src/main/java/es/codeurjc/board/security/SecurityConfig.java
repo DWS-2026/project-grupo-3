@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -60,8 +61,52 @@ public class SecurityConfig {
                 .securityMatcher("/api/v1/**")
                 .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
 
-        http.authorizeHttpRequests(authorize -> authorize.
-                anyRequest().permitAll());
+        http.authorizeHttpRequests(authorize -> authorize
+                // public
+                .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/auth/refresh").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/auth/logout").permitAll()
+
+                // products
+                .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/products/**").hasRole("ADMIN")
+
+                // orders
+                .requestMatchers(HttpMethod.GET, "/api/v1/orders/my").hasRole("USER")
+                .requestMatchers(HttpMethod.POST, "/api/v1/orders/**").hasRole("USER")
+
+                .requestMatchers(HttpMethod.GET, "/api/v1/orders/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/orders/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/orders/**").hasRole("ADMIN")
+
+                // plants
+                .requestMatchers(HttpMethod.GET, "/api/v1/plants/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/plants/**").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/plants/**").hasRole("USER")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/plants/**").hasAnyRole("USER", "ADMIN")
+
+                // reviews
+                .requestMatchers(HttpMethod.GET, "/api/v1/reviews/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/reviews/**").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/reviews/**").hasRole("USER")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/reviews/**").hasRole("USER")
+
+                .requestMatchers("/api/v1/reviews/*/video/**").hasAnyRole("USER", "ADMIN")
+
+                // users
+                .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMIN")
+
+                // images
+                .requestMatchers(HttpMethod.GET, "/api/v1/images/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/v1/images/**").hasAnyRole("USER", "ADMIN")
+
+                .anyRequest().authenticated()
+        );
 
         // Disable Form login Authentication
         http.formLogin(formLogin -> formLogin.disable());
