@@ -42,7 +42,7 @@ import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 public class UserRestController {
 
     @Autowired
@@ -54,7 +54,7 @@ public class UserRestController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<?> newUser(@Valid @RequestBody UserValidationDTO new_User) {
 
         User user = userMapper.validationToDomain(new_User);
@@ -75,7 +75,7 @@ public class UserRestController {
                 .body(userMapper.basicToDTO(user));
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<?> getUsers(HttpServletRequest request) {
 
         if (!userService.isUserAdmin(request)) {
