@@ -514,10 +514,10 @@ Para esta parte de la prácica me he encargado de realizar todo lo relacionado c
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
+📄 **[Especificación OpenAPI (YAML)](https://github.com/DWS-2026/project-grupo-3/blob/main/api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[Documentación API REST (HTML)](https://raw.githack.com/DWS-2026/project-grupo-3/main/api-docs/api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -543,10 +543,11 @@ Mi tarea principal consistía en hacer que la parte de API de las imágenes func
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Rest Controller y DTO para plantas](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Rest Controller y DTO para imágenes](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Rest Controller para permitir login](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Documentación de la api (Open API documentation)](URL_commit_5)   | [Archivo4](URL_archivo_4)   |
+|1| [Rest Controller y DTO para plantas](https://github.com/DWS-2026/project-grupo-3/commit/d348d0b2e02fe2c9cff8e6cae4b075d80a43fdd0)  | [PlantDTO](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/dto/PlantBasicDTO.java)[Plant Rest Controller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/PlantRestController.java)   |
+|2| [Rest Controller y DTO para imágenes](https://github.com/DWS-2026/project-grupo-3/commit/43acbbfeae5c78eaa6fe0d87044d6ec74cbc17d9)  | [Image Rest Controller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/ImageRestController.java) [Image DTO](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/dto/ImageDTO.java)   |
+|3| [Rest Controller para permitir login](https://github.com/DWS-2026/project-grupo-3/commit/577b9e77693362f655d79a1378d7c8bee5af1fd9)  |[Login Rest Controller](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/LoginRestcontroller.java)    |
+|4| [Documentación de la api (Open API documentation)](https://github.com/DWS-2026/project-grupo-3/commit/de2ce8eb5ed60e954ae498b32e45ffca8a51f7bd)   |  
+ [Documentación api](https://github.com/DWS-2026/project-grupo-3/blob/main/api-docs/api-docs.html) |
 ---
 
 #### **Alumno 2 - Sara García Lopo**
