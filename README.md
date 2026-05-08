@@ -508,7 +508,7 @@ Para esta parte de la prácica me he encargado de realizar todo lo relacionado c
 ## 🛠 **Práctica 3: Incorporación de una API REST a la aplicación web, análisis de vulnerabilidades y contramedidas**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/VLJ0921523I)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Documentación de la API REST**
@@ -531,9 +531,9 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | Admin | admin |
+| Usuario Registrado | Pepe | pepe |
+| Usuario Registrado | Holi | hola |
 
 ### **Participación de Miembros en la Práctica 3**
 
