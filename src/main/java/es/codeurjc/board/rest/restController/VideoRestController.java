@@ -38,7 +38,7 @@ public class VideoRestController {
     @PostMapping("/{reviewId}/video")
     public ResponseEntity<String> uploadVideo(
             @PathVariable Long reviewId,
-            @RequestParam MultipartFile file,
+            @RequestPart("imageFile") MultipartFile imageFile,
             HttpServletRequest request) throws IOException {
 
         Review review = reviewsService.findById(reviewId);
@@ -54,7 +54,7 @@ public class VideoRestController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        videoService.addVideoToReview(reviewId, file);
+        videoService.addVideoToReview(reviewId, imageFile);
 
         return ResponseEntity.ok("Video uploaded");
     }

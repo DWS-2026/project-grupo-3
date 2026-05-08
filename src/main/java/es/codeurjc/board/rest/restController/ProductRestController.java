@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
@@ -105,7 +106,7 @@ public class ProductRestController {
     }
 
     @PostMapping("/{id}/image")
-    public ResponseEntity<ImageDTO> addImageToProduct(@PathVariable long id, @RequestParam MultipartFile newImage, HttpServletRequest request) throws IOException {
+    public ResponseEntity<ImageDTO> addImageToProduct(@PathVariable long id, @RequestPart("newImage") MultipartFile newImage, HttpServletRequest request) throws IOException {
         if (!userService.isUserAdmin(request)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }

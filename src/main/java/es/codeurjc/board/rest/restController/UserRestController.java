@@ -5,40 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-
-import es.codeurjc.board.model.Image;
-import es.codeurjc.board.modelAttributes.ButtonsHeader;
-import es.codeurjc.board.rest.dto.UserBasicDTO;
-import es.codeurjc.board.rest.mapper.UserMapper;
-import es.codeurjc.board.service.ImageService;
-import es.codeurjc.board.service.OrderService;
-import es.codeurjc.board.service.UserService;
-
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
+import es.codeurjc.board.model.Image;
 import es.codeurjc.board.model.User;
+import es.codeurjc.board.rest.dto.UserBasicDTO;
 import es.codeurjc.board.rest.dto.UserEditDTO;
 import es.codeurjc.board.rest.dto.UserValidationDTO;
 import es.codeurjc.board.rest.mapper.UserMapper;
+import es.codeurjc.board.service.ImageService;
 import es.codeurjc.board.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -191,6 +179,15 @@ public class UserRestController {
             return ResponseEntity.internalServerError()
                     .body("Error uploading image");
 
+        }
+    }
+    @GetMapping("me")
+    public ResponseEntity<UserBasicDTO> getMe(HttpServletRequest request) {
+        if (userService.seeIfUserIsLoggedIn(request)) {
+            User user = userService.getUser(request);
+            return ResponseEntity.ok(userMapper.basicToDTO(user));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }

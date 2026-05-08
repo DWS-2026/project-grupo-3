@@ -1,5 +1,5 @@
 package es.codeurjc.board.rest.dto;
 
-public record UserBasicDTO (String username, String description, String email, ImageDTO images){
+public record UserBasicDTO (long id,String username, String description, String email, ImageDTO profilePhoto){
     
 }

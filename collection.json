@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "4d52214c-4b4b-45bf-aa3f-bd37c6505178",
+    "_postman_id": "a22bb38b-d041-43e7-a530-8d07fe200fc0",
     "name": "group3-api_endpoints",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "53916207"
@@ -27,7 +27,7 @@
               }
             },
             "url": {
-              "raw": "{{baseURL}}/api/v1/plants/?search&whatToShow=misPlantas&order&page=1&sort=",
+              "raw": "{{baseURL}}/api/v1/plants/?search&whatToShow=&order=rating&page=1&sort=",
               "host": [
                 "{{baseURL}}"
               ],
@@ -40,30 +40,23 @@
               "query": [
                 {
                   "key": "search",
-                  "value": null,
-                  "id": 0
+                  "value": null
                 },
                 {
                   "key": "whatToShow",
-                  "value": "misPlantas",
-                  "id": 1
+                  "value": ""
                 },
                 {
                   "key": "order",
-                  "value": null,
-                  "id": 2
+                  "value": "rating"
                 },
                 {
                   "key": "page",
-                  "value": "1",
-                  "type": "text",
-                  "id": 3
+                  "value": "1"
                 },
                 {
                   "key": "sort",
-                  "value": "",
-                  "type": "text",
-                  "id": 4
+                  "value": ""
                 }
               ]
             }
@@ -116,7 +109,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseURL}}/api/v1/plants/1/image/202",
+              "raw": "{{baseURL}}/api/v1/plants/3/image/3",
               "host": [
                 "{{baseURL}}"
               ],
@@ -124,9 +117,9 @@
                 "api",
                 "v1",
                 "plants",
-                "1",
+                "3",
                 "image",
-                "202"
+                "3"
               ]
             }
           },
@@ -251,120 +244,7 @@
           "name": "post new review",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "name": "cache-control",
-                "sortOrder": 2,
-                "infoTitle": "We recommend using this header",
-                "info": "Postman added \"Cache-Control: no-cache\" as a precautionary measure to prevent the server from returning stale response when one makes repeated requests.\n\nYou can remove this header in the app settings or enter a new one with a different value.",
-                "allowedToToggle": false,
-                "disableEdit": true,
-                "previewSettingsLink": "Go to settings",
-                "key": "Cache-Control",
-                "value": "no-cache",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "postman-token",
-                "sortOrder": 3,
-                "infoTitle": "We recommend using this header",
-                "info": "The Postman-Token header appends a random UUID to every outgoing request. Postman adds this header for API developers to better debug requests sent and to ensure separate requests appear distinct to the receiving server.\n\nYou can remove this header in the app settings.",
-                "allowedToToggle": false,
-                "disableEdit": true,
-                "previewSettingsLink": "Go to settings",
-                "key": "Postman-Token",
-                "value": "<calculated when request is sent>",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "content-type",
-                "sortOrder": 4,
-                "infoTitle": "This header was automatically added",
-                "info": "The Content-Type header is added to help the server identify the media type of the request body that is present in this request.\n\nUse the request body tab to control the value or to remove this header.",
-                "allowedToToggle": true,
-                "disableEdit": true,
-                "previewSettingsLink": "Go to body",
-                "key": "Content-Type",
-                "value": "text/plain",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "content-length",
-                "sortOrder": 5,
-                "infoTitle": "This header was automatically added",
-                "info": "The Content-Length header was added to indicate to the server the size of the request body that is added to this request. Server uses this value to parse the request body accurately.\n\nYou can remove the header or enter a new one with a different value.",
-                "allowedToToggle": true,
-                "disableEdit": true,
-                "previewSettingsLink": "Go to body",
-                "key": "Content-Length",
-                "value": "<calculated when request is sent>",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "host",
-                "sortOrder": 6,
-                "infoTitle": "We recommend using this header",
-                "info": "The Host header is added to identify the domain name for which a request is being sent to the server. This header is implicitly sent by every HTTP client.\n\nYou can remove the header or enter a new one with a different value. It is most likely that without this header, your request will return an HTTP 400 error.",
-                "allowedToToggle": true,
-                "disableEdit": true,
-                "key": "Host",
-                "value": "<calculated when request is sent>",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "user-agent",
-                "sortOrder": 7,
-                "infoTitle": "We recommend using this header",
-                "info": "The User-Agent header is added to help the server identify Postman as the HTTP requesting application or client.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
-                "allowedToToggle": true,
-                "disableEdit": true,
-                "key": "User-Agent",
-                "value": "PostmanRuntime/7.39.1",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "accept",
-                "sortOrder": 8,
-                "infoTitle": "We recommend using this header",
-                "info": "The \"Accept: */*\" header is added to tell the server that Postman can understand and process all forms of response content types.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
-                "allowedToToggle": true,
-                "disableEdit": true,
-                "key": "Accept",
-                "value": "*/*",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "accept-encoding",
-                "sortOrder": 9,
-                "infoTitle": "We recommend using this header",
-                "info": "The Accept-Encoding header is added to indicate to the server that Postman HTTP client supports a defined list of content-encoding or compression algorithms as response.\n\nYou can remove the header or enter a new one with a different value. Doing that may not accurately render the response within the app.",
-                "allowedToToggle": true,
-                "disableEdit": true,
-                "key": "Accept-Encoding",
-                "value": "gzip, deflate, br",
-                "system": true,
-                "type": "text"
-              },
-              {
-                "name": "connection",
-                "sortOrder": 10,
-                "infoTitle": "We recommend using this header",
-                "info": "Postman added the Connection header to indicate the server to keep the underlying network connection open once the current response is received. This allows Postman to reuse the same connection for faster response times in subsequent requests to the same server.\n\nYou can remove this header or enter a new one with a different value, such as `Connection: Close` to control this behaviour.",
-                "allowedToToggle": true,
-                "disableEdit": true,
-                "key": "Connection",
-                "value": "keep-alive",
-                "system": true,
-                "type": "text"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
               "raw": "{\r\n  \"title\": \"Mi cactuss\",\r\n  \"description\": \"<p>Muy resistente</p>\",\r\n  \"type\": \"PLANT\",\r\n  \"plantSpecies\":\"rosa\",\r\n  \"product\":null\r\n}\r\n",
@@ -375,14 +255,15 @@
               }
             },
             "url": {
-              "raw": "{{baseURL}}/api/v1/reviews",
+              "raw": "{{baseURL}}/api/v1/reviews/",
               "host": [
                 "{{baseURL}}"
               ],
               "path": [
                 "api",
                 "v1",
-                "reviews"
+                "reviews",
+                ""
               ]
             }
           },
@@ -394,7 +275,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseURL}}/api/v1/reviews/1",
+              "raw": "{{baseURL}}/api/v1/reviews/3",
               "host": [
                 "{{baseURL}}"
               ],
@@ -402,7 +283,7 @@
                 "api",
                 "v1",
                 "reviews",
-                "1"
+                "3"
               ]
             }
           },
@@ -412,69 +293,18 @@
           "name": "edit review",
           "request": {
             "method": "PUT",
-            "header": [
-              {
-                "key": "Cache-Control",
-                "value": "no-cache",
-                "type": "text"
-              },
-              {
-                "key": "Postman-Token",
-                "value": "<calculated when request is sent>",
-                "type": "text"
-              },
-              {
-                "key": "Content-Type",
-                "value": "text/plain",
-                "type": "text"
-              },
-              {
-                "key": "Content-Length",
-                "value": "<calculated when request is sent>",
-                "type": "text"
-              },
-              {
-                "key": "Host",
-                "value": "<calculated when request is sent>",
-                "type": "text"
-              },
-              {
-                "key": "User-Agent",
-                "value": "PostmanRuntime/7.39.1",
-                "type": "text"
-              },
-              {
-                "key": "Accept",
-                "value": "*/*",
-                "type": "text"
-              },
-              {
-                "key": "Accept-Encoding",
-                "value": "gzip, deflate, br",
-                "type": "text"
-              },
-              {
-                "key": "Connection",
-                "value": "keep-alive",
-                "type": "text"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "body": {
               "mode": "raw",
               "raw": "{\r\n  \"title\": \"Mi cactus editado\",\r\n  \"description\": \"<p>Nuevo texto</p>\",\r\n  \"type\": \"PLANT\"\r\n}",
               "options": {
                 "raw": {
-                  "language": "text"
+                  "language": "json"
                 }
               }
             },
             "url": {
-              "raw": "{{baseURL}}/api/v1/reviews/1",
+              "raw": "{{baseURL}}/api/v1/reviews/3",
               "host": [
                 "{{baseURL}}"
               ],
@@ -482,7 +312,7 @@
                 "api",
                 "v1",
                 "reviews",
-                "1"
+                "3"
               ]
             }
           },
@@ -512,154 +342,190 @@
     },
     {
       "name": "users",
-      "item": [{
-  "name": "get Users",
-  "request": {
-    "method": "GET",
-    "header": [],
-    "url": {
-      "raw": "{{baseURL}}/api/v1/user",
-      "host": [
-        "{{baseURL}}"
-      ],
-      "path": [
-        "api",
-        "v1",
-        "user"
-      ]
-    }
-  },
-  "response": []
-},
-{
-  "name": "get User",
-  "request": {
-    "method": "GET",
-    "header": [],
-    "url": {
-      "raw": "{{baseURL}}/api/v1/user/1",
-      "host": [
-        "{{baseURL}}"
-      ],
-      "path": [
-        "api",
-        "v1",
-        "user",
-        "1"
-      ]
-    }
-  },
-  "response": []
-},
-{
-  "name": "get Me",
-  "request": {
-    "method": "GET",
-    "header": [],
-    "url": {
-      "raw": "{{baseURL}}/api/v1/user/me",
-      "host": [
-        "{{baseURL}}"
-      ],
-      "path": [
-        "api",
-        "v1",
-        "user",
-        "me"
-      ]
-    }
-  },
-  "response": []
-},
-{
-  "name": "new User",
-  "request": {
-    "method": "POST",
-    "header": [
-      {
-        "key": "Content-Type",
-        "value": "application/json",
-        "type": "text"
-      }
-    ],
-    "body": {
-      "mode": "raw",
-      "raw": "{\r\n  \"username\": \"ines\",\r\n  \"email\": \"ines@gmail.com\",\r\n  \"password\": \"1234\",\r\n  \"description\": \"Me gustan las plantas\"\r\n}",
-      "options": {
-        "raw": {
-          "language": "json"
+      "item": [
+        {
+          "name": "get Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/1",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get Me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/me",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "new User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"ines\",\r\n  \"email\": \"ines@gmail.com\",\r\n  \"password\": \"1234\",\r\n  \"description\": \"Me gustan las plantas\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "edit User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"ines_editada\",\r\n  \"email\": \"nuevoemail@gmail.com\",\r\n  \"description\": \"Nueva descripción\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/2",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/2",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "profile photo",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imageFile",
+                  "type": "file",
+                  "uuid": "d42d16de-d67a-4ee6-9aef-7ad30488e83c",
+                  "src": "/C:/Users/iness/Downloads/heart.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/2/profile-photo",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "2",
+                "profile-photo"
+              ]
+            }
+          },
+          "response": []
         }
-      }
-    },
-    "url": {
-      "raw": "{{baseURL}}/api/v1/user",
-      "host": [
-        "{{baseURL}}"
-      ],
-      "path": [
-        "api",
-        "v1",
-        "user"
       ]
-    }
-  },
-  "response": []
-},
-{
-  "name": "edit User",
-  "request": {
-    "method": "PUT",
-    "header": [
-      {
-        "key": "Content-Type",
-        "value": "application/json",
-        "type": "text"
-      }
-    ],
-    "body": {
-      "mode": "raw",
-      "raw": "{\r\n  \"username\": \"ines_editada\",\r\n  \"email\": \"nuevoemail@gmail.com\",\r\n  \"description\": \"Nueva descripción\"\r\n}",
-      "options": {
-        "raw": {
-          "language": "json"
-        }
-      }
-    },
-    "url": {
-      "raw": "{{baseURL}}/api/v1/user/1",
-      "host": [
-        "{{baseURL}}"
-      ],
-      "path": [
-        "api",
-        "v1",
-        "user",
-        "1"
-      ]
-    }
-  },
-  "response": []
-},
-{
-  "name": "delete User",
-  "request": {
-    "method": "DELETE",
-    "header": [],
-    "url": {
-      "raw": "{{baseURL}}/api/v1/user/1",
-      "host": [
-        "{{baseURL}}"
-      ],
-      "path": [
-        "api",
-        "v1",
-        "user",
-        "1"
-      ]
-    }
-  },
-  "response": []
-}]
     },
     {
       "name": "products",
@@ -774,12 +640,12 @@
                   "key": "newImage",
                   "type": "file",
                   "uuid": "4037d7aa-739c-41b2-af07-d527d42a2ccd",
-                  "src": "/D:/fertilizante_ejemplo.jpg"
+                  "src": "/C:/Users/iness/Downloads/WhatsApp Image 2026-03-02 at 01.03.25.jpeg"
                 }
               ]
             },
             "url": {
-              "raw": "{{baseURL}} /api/v1/products/1/image",
+              "raw": "{{baseURL}} /api/v1/products/2/image",
               "host": [
                 "{{baseURL}} "
               ],
@@ -787,7 +653,7 @@
                 "api",
                 "v1",
                 "products",
-                "1",
+                "2",
                 "image"
               ]
             }
@@ -800,7 +666,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseURL}}/api/v1/products/1/image/152",
+              "raw": "{{baseURL}}/api/v1/products/1/image/11",
               "host": [
                 "{{baseURL}}"
               ],
@@ -810,7 +676,7 @@
                 "products",
                 "1",
                 "image",
-                "152"
+                "11"
               ]
             }
           },
@@ -842,12 +708,12 @@
       "name": "images",
       "item": [
         {
-          "name": "get Image",
+          "name": "get Image File",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseURL}}/api/v1/images/202/media",
+              "raw": "{{baseURL}}/api/v1/images/1/media",
               "host": [
                 "{{baseURL}}"
               ],
@@ -855,7 +721,7 @@
                 "api",
                 "v1",
                 "images",
-                "202",
+                "1",
                 "media"
               ]
             }
@@ -863,7 +729,7 @@
           "response": []
         },
         {
-          "name": "get Image File",
+          "name": "get Image",
           "request": {
             "method": "GET",
             "header": [],
@@ -1023,7 +889,7 @@
               "raw": "[\r\n            {\r\n                \"productId\": 1,\r\n                \"quantity\": 3\r\n            },\r\n            {\r\n                \"productId\": 2,\r\n                \"quantity\": 4\r\n            }\r\n        ]"
             },
             "url": {
-              "raw": "{{baseURL}}/api/v1/orders/2/cancel",
+              "raw": "{{baseURL}}/api/v1/orders/3/cancel",
               "host": [
                 "{{baseURL}}"
               ],
@@ -1031,7 +897,7 @@
                 "api",
                 "v1",
                 "orders",
-                "2",
+                "3",
                 "cancel"
               ]
             }
@@ -1073,19 +939,13 @@
             "method": "POST",
             "header": [],
             "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "file",
-                  "type": "file",
-                  "id": 2,
-                  "fileUploadError": "",
-                  "src": "c:\\Users\\Nerea\\Documents\\GitHub\\project-grupo-3\\videos\\9b56e5d8-ba6c-437f-8d62-cd376266c451.mp4"
-                }
-              ]
+              "mode": "file",
+              "file": {
+                "src": "/C:/Users/iness/Downloads/videoPlantaPepe.mp4"
+              }
             },
             "url": {
-              "raw": "{{baseURL}}/api/v1/reviews/52/video",
+              "raw": "{{baseURL}}/api/v1/reviews/3/video",
               "host": [
                 "{{baseURL}}"
               ],
@@ -1093,7 +953,7 @@
                 "api",
                 "v1",
                 "reviews",
-                "52",
+                "3",
                 "video"
               ]
             }
@@ -1104,45 +964,9 @@
           "name": "video info",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Cache-Control",
-                "value": "no-cache",
-                "type": "text"
-              },
-              {
-                "key": "Postman-Token",
-                "value": "<calculated when request is sent>",
-                "type": "text"
-              },
-              {
-                "key": "Host",
-                "value": "<calculated when request is sent>",
-                "type": "text"
-              },
-              {
-                "key": "User-Agent",
-                "value": "PostmanRuntime/7.39.1",
-                "type": "text"
-              },
-              {
-                "key": "Accept",
-                "value": "*/*",
-                "type": "text"
-              },
-              {
-                "key": "Accept-Encoding",
-                "value": "gzip, deflate, br",
-                "type": "text"
-              },
-              {
-                "key": "Connection",
-                "value": "keep-alive",
-                "type": "text"
-              }
-            ],
+            "header": [],
             "url": {
-              "raw": "{{baseURL}}/api/v1/reviews/52/video/info",
+              "raw": "{{baseURL}}/api/v1/reviews/5/video/info",
               "host": [
                 "{{baseURL}}"
               ],
@@ -1150,7 +974,7 @@
                 "api",
                 "v1",
                 "reviews",
-                "52",
+                "5",
                 "video",
                 "info"
               ]
@@ -1164,7 +988,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseURL}}/api/v1/reviews/52/video",
+              "raw": "{{baseURL}}/api/v1/reviews/5/video",
               "host": [
                 "{{baseURL}}"
               ],
@@ -1172,7 +996,7 @@
                 "api",
                 "v1",
                 "reviews",
-                "52",
+                "5",
                 "video"
               ]
             }
@@ -1185,7 +1009,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "{{baseURL}}/api/v1/reviews/52/video",
+              "raw": "{{baseURL}}/api/v1/reviews/3/video",
               "host": [
                 "{{baseURL}}"
               ],
@@ -1193,7 +1017,7 @@
                 "api",
                 "v1",
                 "reviews",
-                "52",
+                "3",
                 "video"
               ]
             }
@@ -1233,123 +1057,10 @@
           "type": "noauth"
         },
         "method": "POST",
-        "header": [
-          {
-            "name": "cache-control",
-            "sortOrder": 2,
-            "infoTitle": "We recommend using this header",
-            "info": "Postman added \"Cache-Control: no-cache\" as a precautionary measure to prevent the server from returning stale response when one makes repeated requests.\n\nYou can remove this header in the app settings or enter a new one with a different value.",
-            "allowedToToggle": false,
-            "disableEdit": true,
-            "previewSettingsLink": "Go to settings",
-            "key": "Cache-Control",
-            "value": "no-cache",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "postman-token",
-            "sortOrder": 3,
-            "infoTitle": "We recommend using this header",
-            "info": "The Postman-Token header appends a random UUID to every outgoing request. Postman adds this header for API developers to better debug requests sent and to ensure separate requests appear distinct to the receiving server.\n\nYou can remove this header in the app settings.",
-            "allowedToToggle": false,
-            "disableEdit": true,
-            "previewSettingsLink": "Go to settings",
-            "key": "Postman-Token",
-            "value": "<calculated when request is sent>",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "content-type",
-            "sortOrder": 4,
-            "infoTitle": "This header was automatically added",
-            "info": "The Content-Type header is added to help the server identify the media type of the request body that is present in this request.\n\nUse the request body tab to control the value or to remove this header.",
-            "allowedToToggle": true,
-            "disableEdit": true,
-            "previewSettingsLink": "Go to body",
-            "key": "Content-Type",
-            "value": "application/json",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "content-length",
-            "sortOrder": 5,
-            "infoTitle": "This header was automatically added",
-            "info": "The Content-Length header was added to indicate to the server the size of the request body that is added to this request. Server uses this value to parse the request body accurately.\n\nYou can remove the header or enter a new one with a different value.",
-            "allowedToToggle": true,
-            "disableEdit": true,
-            "previewSettingsLink": "Go to body",
-            "key": "Content-Length",
-            "value": "<calculated when request is sent>",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "host",
-            "sortOrder": 6,
-            "infoTitle": "We recommend using this header",
-            "info": "The Host header is added to identify the domain name for which a request is being sent to the server. This header is implicitly sent by every HTTP client.\n\nYou can remove the header or enter a new one with a different value. It is most likely that without this header, your request will return an HTTP 400 error.",
-            "allowedToToggle": true,
-            "disableEdit": true,
-            "key": "Host",
-            "value": "<calculated when request is sent>",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "user-agent",
-            "sortOrder": 7,
-            "infoTitle": "We recommend using this header",
-            "info": "The User-Agent header is added to help the server identify Postman as the HTTP requesting application or client.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
-            "allowedToToggle": true,
-            "disableEdit": true,
-            "key": "User-Agent",
-            "value": "PostmanRuntime/7.39.1",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "accept",
-            "sortOrder": 8,
-            "infoTitle": "We recommend using this header",
-            "info": "The \"Accept: */*\" header is added to tell the server that Postman can understand and process all forms of response content types.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
-            "allowedToToggle": true,
-            "disableEdit": true,
-            "key": "Accept",
-            "value": "*/*",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "accept-encoding",
-            "sortOrder": 9,
-            "infoTitle": "We recommend using this header",
-            "info": "The Accept-Encoding header is added to indicate to the server that Postman HTTP client supports a defined list of content-encoding or compression algorithms as response.\n\nYou can remove the header or enter a new one with a different value. Doing that may not accurately render the response within the app.",
-            "allowedToToggle": true,
-            "disableEdit": true,
-            "key": "Accept-Encoding",
-            "value": "gzip, deflate, br",
-            "system": true,
-            "type": "text"
-          },
-          {
-            "name": "connection",
-            "sortOrder": 10,
-            "infoTitle": "We recommend using this header",
-            "info": "Postman added the Connection header to indicate the server to keep the underlying network connection open once the current response is received. This allows Postman to reuse the same connection for faster response times in subsequent requests to the same server.\n\nYou can remove this header or enter a new one with a different value, such as `Connection: Close` to control this behaviour.",
-            "allowedToToggle": true,
-            "disableEdit": true,
-            "key": "Connection",
-            "value": "keep-alive",
-            "system": true,
-            "type": "text"
-          }
-        ],
+        "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+          "raw": "{\r\n    \"username\":\"Pepe\",\r\n    \"password\":\"pepe\"\r\n}",
           "options": {
             "raw": {
               "language": "json"

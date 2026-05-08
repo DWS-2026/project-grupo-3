@@ -1066,15 +1066,6 @@ ul.nav-tabs {
     }
   }
 };
-    defs["replaceImageFile_request"] = {
-  "required" : [ "imageFile" ],
-  "properties" : {
-    "imageFile" : {
-      "type" : "string",
-      "format" : "binary"
-    }
-  }
-};
     defs["ReviewDTO"] = {
   "properties" : {
     "id" : {
@@ -1105,12 +1096,32 @@ ul.nav-tabs {
     }
   }
 };
-    defs["uploadVideo_request"] = {
-  "required" : [ "file" ],
+    defs["uploadProfilePhoto_request"] = {
+  "required" : [ "imageFile" ],
   "properties" : {
-    "file" : {
+    "imageFile" : {
       "type" : "string",
       "format" : "binary"
+    }
+  }
+};
+    defs["UserBasicDTO"] = {
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "username" : {
+      "type" : "string"
+    },
+    "description" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "profilePhoto" : {
+      "$ref" : "#/components/schemas/ImageDTO"
     }
   }
 };
@@ -1299,6 +1310,9 @@ ul.nav-tabs {
                     <li data-group="UserRestController" data-name="editUser" class="">
                       <a href="#api-UserRestController-editUser">editUser</a>
                     </li>
+                    <li data-group="UserRestController" data-name="getMe" class="">
+                      <a href="#api-UserRestController-getMe">getMe</a>
+                    </li>
                     <li data-group="UserRestController" data-name="getUser" class="">
                       <a href="#api-UserRestController-getUser">getUser</a>
                     </li>
@@ -1307,6 +1321,9 @@ ul.nav-tabs {
                     </li>
                     <li data-group="UserRestController" data-name="newUser" class="">
                       <a href="#api-UserRestController-newUser">newUser</a>
+                    </li>
+                    <li data-group="UserRestController" data-name="uploadProfilePhoto" class="">
+                      <a href="#api-UserRestController-uploadProfilePhoto">uploadProfilePhoto</a>
                     </li>
                   <li class="nav-header" data-group="VideoRestController"><a href="#api-VideoRestController">API Methods - VideoRestController</a></li>
                     <li data-group="VideoRestController" data-name="deleteVideo" class="">
@@ -2260,10 +2277,10 @@ public class ImageRestControllerApiExample {
         // Create an instance of the API class
         ImageRestControllerApi apiInstance = new ImageRestControllerApi();
         Long id = 789; // Long | 
-        ReplaceImageFileRequest replaceImageFileRequest = ; // ReplaceImageFileRequest | 
+        UploadProfilePhotoRequest uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
 
         try {
-            Object result = apiInstance.replaceImageFile(id, replaceImageFileRequest);
+            Object result = apiInstance.replaceImageFile(id, uploadProfilePhotoRequest);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ImageRestControllerApi#replaceImageFile");
@@ -2280,10 +2297,10 @@ public class ImageRestControllerApiExample {
 final api_instance = DefaultApi();
 
 final Long id = new Long(); // Long | 
-final ReplaceImageFileRequest replaceImageFileRequest = new ReplaceImageFileRequest(); // ReplaceImageFileRequest | 
+final UploadProfilePhotoRequest uploadProfilePhotoRequest = new UploadProfilePhotoRequest(); // UploadProfilePhotoRequest | 
 
 try {
-    final result = await api_instance.replaceImageFile(id, replaceImageFileRequest);
+    final result = await api_instance.replaceImageFile(id, uploadProfilePhotoRequest);
     print(result);
 } catch (e) {
     print('Exception when calling DefaultApi->replaceImageFile: $e\n');
@@ -2299,10 +2316,10 @@ public class ImageRestControllerApiExample {
     public static void main(String[] args) {
         ImageRestControllerApi apiInstance = new ImageRestControllerApi();
         Long id = 789; // Long | 
-        ReplaceImageFileRequest replaceImageFileRequest = ; // ReplaceImageFileRequest | 
+        UploadProfilePhotoRequest uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
 
         try {
-            Object result = apiInstance.replaceImageFile(id, replaceImageFileRequest);
+            Object result = apiInstance.replaceImageFile(id, uploadProfilePhotoRequest);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ImageRestControllerApi#replaceImageFile");
@@ -2321,10 +2338,10 @@ public class ImageRestControllerApiExample {
 // Create an instance of the API class
 ImageRestControllerApi *apiInstance = [[ImageRestControllerApi alloc] init];
 Long *id = 789; //  (default to null)
-ReplaceImageFileRequest *replaceImageFileRequest = ; //  (optional)
+UploadProfilePhotoRequest *uploadProfilePhotoRequest = ; //  (optional)
 
 [apiInstance replaceImageFileWith:id
-    replaceImageFileRequest:replaceImageFileRequest
+    uploadProfilePhotoRequest:uploadProfilePhotoRequest
               completionHandler: ^(Object output, NSError* error) {
     if (output) {
         NSLog(@"%@", output);
@@ -2343,7 +2360,7 @@ ReplaceImageFileRequest *replaceImageFileRequest = ; //  (optional)
 var api = new OpenApiDefinition.ImageRestControllerApi()
 var id = 789; // {Long} 
 var opts = {
-  'replaceImageFileRequest':  // {ReplaceImageFileRequest} 
+  'uploadProfilePhotoRequest':  // {UploadProfilePhotoRequest} 
 };
 
 var callback = function(error, data, response) {
@@ -2377,10 +2394,10 @@ namespace Example
             // Create an instance of the API class
             var apiInstance = new ImageRestControllerApi();
             var id = 789;  // Long |  (default to null)
-            var replaceImageFileRequest = new ReplaceImageFileRequest(); // ReplaceImageFileRequest |  (optional) 
+            var uploadProfilePhotoRequest = new UploadProfilePhotoRequest(); // UploadProfilePhotoRequest |  (optional) 
 
             try {
-                Object result = apiInstance.replaceImageFile(id, replaceImageFileRequest);
+                Object result = apiInstance.replaceImageFile(id, uploadProfilePhotoRequest);
                 Debug.WriteLine(result);
             } catch (Exception e) {
                 Debug.Print("Exception when calling ImageRestControllerApi.replaceImageFile: " + e.Message );
@@ -2398,10 +2415,10 @@ require_once(__DIR__ . '/vendor/autoload.php');
 // Create an instance of the API class
 $api_instance = new OpenAPITools\Client\Api\ImageRestControllerApi();
 $id = 789; // Long | 
-$replaceImageFileRequest = ; // ReplaceImageFileRequest | 
+$uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
 
 try {
-    $result = $api_instance->replaceImageFile($id, $replaceImageFileRequest);
+    $result = $api_instance->replaceImageFile($id, $uploadProfilePhotoRequest);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ImageRestControllerApi->replaceImageFile: ', $e->getMessage(), PHP_EOL;
@@ -2417,10 +2434,10 @@ use WWW::OPenAPIClient::ImageRestControllerApi;
 # Create an instance of the API class
 my $api_instance = WWW::OPenAPIClient::ImageRestControllerApi->new();
 my $id = 789; # Long | 
-my $replaceImageFileRequest = WWW::OPenAPIClient::Object::ReplaceImageFileRequest->new(); # ReplaceImageFileRequest | 
+my $uploadProfilePhotoRequest = WWW::OPenAPIClient::Object::UploadProfilePhotoRequest->new(); # UploadProfilePhotoRequest | 
 
 eval {
-    my $result = $api_instance->replaceImageFile(id => $id, replaceImageFileRequest => $replaceImageFileRequest);
+    my $result = $api_instance->replaceImageFile(id => $id, uploadProfilePhotoRequest => $uploadProfilePhotoRequest);
     print Dumper($result);
 };
 if ($@) {
@@ -2438,10 +2455,10 @@ from pprint import pprint
 # Create an instance of the API class
 api_instance = openapi_client.ImageRestControllerApi()
 id = 789 # Long |  (default to null)
-replaceImageFileRequest =  # ReplaceImageFileRequest |  (optional)
+uploadProfilePhotoRequest =  # UploadProfilePhotoRequest |  (optional)
 
 try:
-    api_response = api_instance.replace_image_file(id, replaceImageFileRequest=replaceImageFileRequest)
+    api_response = api_instance.replace_image_file(id, uploadProfilePhotoRequest=uploadProfilePhotoRequest)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling ImageRestControllerApi->replaceImageFile: %s\n" % e)</code></pre>
@@ -2452,10 +2469,10 @@ except ApiException as e:
 
 pub fn main() {
     let id = 789; // Long
-    let replaceImageFileRequest = ; // ReplaceImageFileRequest
+    let uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest
 
     let mut context = ImageRestControllerApi::Context::default();
-    let result = client.replaceImageFile(id, replaceImageFileRequest, &context).wait();
+    let result = client.replaceImageFile(id, uploadProfilePhotoRequest, &context).wait();
 
     println!("{:?}", result);
 }
@@ -2508,7 +2525,7 @@ pub fn main() {
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                <tr><td style="width:150px;">replaceImageFileRequest </td>
+                                <tr><td style="width:150px;">uploadProfilePhotoRequest </td>
 <td>
 <p class="marked"></p>
 <script>
@@ -2517,7 +2534,7 @@ $(document).ready(function() {
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/replaceImageFile_request"
+        "$ref" : "#/components/schemas/uploadProfilePhoto_request"
       }
     }
   }
@@ -2539,12 +2556,12 @@ $(document).ready(function() {
   }
 
   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_replaceImageFile_replaceImageFileRequest');
+  var result = $('#d2e199_replaceImageFile_uploadProfilePhotoRequest');
   result.empty();
   result.append(view.render());
 });
 </script>
-<div id="d2e199_replaceImageFile_replaceImageFileRequest"></div>
+<div id="d2e199_replaceImageFile_uploadProfilePhotoRequest"></div>
 </td>
 </tr>
 
@@ -16577,6 +16594,395 @@ $(document).ready(function() {
                         </article>
                       </div>
                       <hr>
+                    <div id="api-UserRestController-getMe">
+                      <article id="api-UserRestController-getMe-0" data-group="User" data-name="getMe" data-version="0">
+                        <div class="pull-left">
+                          <h1>getMe</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/api/v1/users/me</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-UserRestController-getMe-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-java">Java</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-UserRestController-getMe-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-UserRestController-getMe-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-UserRestController-getMe-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-UserRestController-getMe-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-python">Python</a></li>
+                          <li class=""><a href="#examples-UserRestController-getMe-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-UserRestController-getMe-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET \
+ -H "Accept: */*" \
+ "https://localhost:8443/api/v1/users/me"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-UserRestController-getMe-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.UserRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class UserRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        UserRestControllerApi apiInstance = new UserRestControllerApi();
+
+        try {
+            UserBasicDTO result = apiInstance.getMe();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UserRestControllerApi#getMe");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-UserRestController-getMe-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.getMe();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->getMe: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-UserRestController-getMe-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.UserRestControllerApi;
+
+public class UserRestControllerApiExample {
+    public static void main(String[] args) {
+        UserRestControllerApi apiInstance = new UserRestControllerApi();
+
+        try {
+            UserBasicDTO result = apiInstance.getMe();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UserRestControllerApi#getMe");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-UserRestController-getMe-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-UserRestController-getMe-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+UserRestControllerApi *apiInstance = [[UserRestControllerApi alloc] init];
+
+[apiInstance getMeWithCompletionHandler: 
+              ^(UserBasicDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-getMe-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.UserRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getMe(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-UserRestController-getMe-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-UserRestController-getMe-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class getMeExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new UserRestControllerApi();
+
+            try {
+                UserBasicDTO result = apiInstance.getMe();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling UserRestControllerApi.getMe: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-getMe-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\UserRestControllerApi();
+
+try {
+    $result = $api_instance->getMe();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UserRestControllerApi->getMe: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-getMe-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::UserRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::UserRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->getMe();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling UserRestControllerApi->getMe: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-getMe-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.UserRestControllerApi()
+
+try:
+    api_response = api_instance.get_me()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling UserRestControllerApi->getMe: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-getMe-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate UserRestControllerApi;
+
+pub fn main() {
+
+    let mut context = UserRestControllerApi::Context::default();
+    let result = client.getMe(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-UserRestController-getMe-title-404"></h3>
+                            <p id="examples-UserRestController-getMe-description-404" class="marked"></p>
+                            <script>
+                              var responseUserRestController404_description = `Not Found`;
+                              var responseUserRestController404_description_break = responseUserRestController404_description.indexOf('\n');
+                              if (responseUserRestController404_description_break == -1) {
+                                $("#examples-UserRestController-getMe-title-404").text("Status: 404 - " + responseUserRestController404_description);
+                              } else {
+                                $("#examples-UserRestController-getMe-title-404").text("Status: 404 - " + responseUserRestController404_description.substring(0, responseUserRestController404_description_break));
+                                $("#examples-UserRestController-getMe-description-404").html(responseUserRestController404_description.substring(responseUserRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserRestController-getMe-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserRestController-getMe-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-UserRestController-getMe-404-schema">
+                                <div id="responses-UserRestController-getMe-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-UserRestController-getMe-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-UserRestController-getMe-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-UserRestController-getMe-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-UserRestController-getMe-title-200"></h3>
+                            <p id="examples-UserRestController-getMe-description-200" class="marked"></p>
+                            <script>
+                              var responseUserRestController200_description = `OK`;
+                              var responseUserRestController200_description_break = responseUserRestController200_description.indexOf('\n');
+                              if (responseUserRestController200_description_break == -1) {
+                                $("#examples-UserRestController-getMe-title-200").text("Status: 200 - " + responseUserRestController200_description);
+                              } else {
+                                $("#examples-UserRestController-getMe-title-200").text("Status: 200 - " + responseUserRestController200_description.substring(0, responseUserRestController200_description_break));
+                                $("#examples-UserRestController-getMe-description-200").html(responseUserRestController200_description.substring(responseUserRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserRestController-getMe-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-UserRestController-getMe-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserRestController-getMe-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-UserRestController-getMe-200-schema">
+                                <div id="responses-UserRestController-getMe-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/UserBasicDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-UserRestController-getMe-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-UserRestController-getMe-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-UserRestController-getMe-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-UserRestController-getUser">
                       <article id="api-UserRestController-getUser-0" data-group="User" data-name="getUser" data-version="0">
                         <div class="pull-left">
@@ -17846,6 +18252,498 @@ $(document).ready(function() {
                                   </script>
                                 </div>
                                 <input id='responses-UserRestController-newUser-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-UserRestController-uploadProfilePhoto">
+                      <article id="api-UserRestController-uploadProfilePhoto-0" data-group="User" data-name="uploadProfilePhoto" data-version="0">
+                        <div class="pull-left">
+                          <h1>uploadProfilePhoto</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/api/v1/users/{id}/profile-photo</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-UserRestController-uploadProfilePhoto-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-java">Java</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-python">Python</a></li>
+                          <li class=""><a href="#examples-UserRestController-uploadProfilePhoto-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-UserRestController-uploadProfilePhoto-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
+ -H "Accept: */*" \
+ -H "Content-Type: application/json" \
+ "https://localhost:8443/api/v1/users/{id}/profile-photo" \
+ -d ''
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.UserRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class UserRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        UserRestControllerApi apiInstance = new UserRestControllerApi();
+        Long id = 789; // Long | 
+        UploadProfilePhotoRequest uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
+
+        try {
+            Object result = apiInstance.uploadProfilePhoto(id, uploadProfilePhotoRequest);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UserRestControllerApi#uploadProfilePhoto");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+final Long id = new Long(); // Long | 
+final UploadProfilePhotoRequest uploadProfilePhotoRequest = new UploadProfilePhotoRequest(); // UploadProfilePhotoRequest | 
+
+try {
+    final result = await api_instance.uploadProfilePhoto(id, uploadProfilePhotoRequest);
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->uploadProfilePhoto: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.UserRestControllerApi;
+
+public class UserRestControllerApiExample {
+    public static void main(String[] args) {
+        UserRestControllerApi apiInstance = new UserRestControllerApi();
+        Long id = 789; // Long | 
+        UploadProfilePhotoRequest uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
+
+        try {
+            Object result = apiInstance.uploadProfilePhoto(id, uploadProfilePhotoRequest);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UserRestControllerApi#uploadProfilePhoto");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+UserRestControllerApi *apiInstance = [[UserRestControllerApi alloc] init];
+Long *id = 789; //  (default to null)
+UploadProfilePhotoRequest *uploadProfilePhotoRequest = ; //  (optional)
+
+[apiInstance uploadProfilePhotoWith:id
+    uploadProfilePhotoRequest:uploadProfilePhotoRequest
+              completionHandler: ^(Object output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.UserRestControllerApi()
+var id = 789; // {Long} 
+var opts = {
+  'uploadProfilePhotoRequest':  // {UploadProfilePhotoRequest} 
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.uploadProfilePhoto(id, opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class uploadProfilePhotoExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new UserRestControllerApi();
+            var id = 789;  // Long |  (default to null)
+            var uploadProfilePhotoRequest = new UploadProfilePhotoRequest(); // UploadProfilePhotoRequest |  (optional) 
+
+            try {
+                Object result = apiInstance.uploadProfilePhoto(id, uploadProfilePhotoRequest);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling UserRestControllerApi.uploadProfilePhoto: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\UserRestControllerApi();
+$id = 789; // Long | 
+$uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
+
+try {
+    $result = $api_instance->uploadProfilePhoto($id, $uploadProfilePhotoRequest);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling UserRestControllerApi->uploadProfilePhoto: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::UserRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::UserRestControllerApi->new();
+my $id = 789; # Long | 
+my $uploadProfilePhotoRequest = WWW::OPenAPIClient::Object::UploadProfilePhotoRequest->new(); # UploadProfilePhotoRequest | 
+
+eval {
+    my $result = $api_instance->uploadProfilePhoto(id => $id, uploadProfilePhotoRequest => $uploadProfilePhotoRequest);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling UserRestControllerApi->uploadProfilePhoto: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.UserRestControllerApi()
+id = 789 # Long |  (default to null)
+uploadProfilePhotoRequest =  # UploadProfilePhotoRequest |  (optional)
+
+try:
+    api_response = api_instance.upload_profile_photo(id, uploadProfilePhotoRequest=uploadProfilePhotoRequest)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling UserRestControllerApi->uploadProfilePhoto: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-UserRestController-uploadProfilePhoto-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate UserRestControllerApi;
+
+pub fn main() {
+    let id = 789; // Long
+    let uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest
+
+    let mut context = UserRestControllerApi::Context::default();
+    let result = client.uploadProfilePhoto(id, uploadProfilePhotoRequest, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_uploadProfilePhoto_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Long
+                </span>
+                    <span class="format">
+                        (int64)
+                    </span>
+
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">uploadProfilePhotoRequest </td>
+<td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/uploadProfilePhoto_request"
+      }
+    }
+  }
+};
+
+  var schema = findNode('schema',schemaWrapper).schema;
+  if (!schema) {
+    schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else if (schema.items != null && schema.items.$ref != null) {
+    schema.items = defsParser.$refs.get(schema.items.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_uploadProfilePhoto_uploadProfilePhotoRequest');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_uploadProfilePhoto_uploadProfilePhotoRequest"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-UserRestController-uploadProfilePhoto-title-404"></h3>
+                            <p id="examples-UserRestController-uploadProfilePhoto-description-404" class="marked"></p>
+                            <script>
+                              var responseUserRestController404_description = `Not Found`;
+                              var responseUserRestController404_description_break = responseUserRestController404_description.indexOf('\n');
+                              if (responseUserRestController404_description_break == -1) {
+                                $("#examples-UserRestController-uploadProfilePhoto-title-404").text("Status: 404 - " + responseUserRestController404_description);
+                              } else {
+                                $("#examples-UserRestController-uploadProfilePhoto-title-404").text("Status: 404 - " + responseUserRestController404_description.substring(0, responseUserRestController404_description_break));
+                                $("#examples-UserRestController-uploadProfilePhoto-description-404").html(responseUserRestController404_description.substring(responseUserRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserRestController-uploadProfilePhoto-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserRestController-uploadProfilePhoto-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-UserRestController-uploadProfilePhoto-404-schema">
+                                <div id="responses-UserRestController-uploadProfilePhoto-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-UserRestController-uploadProfilePhoto-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-UserRestController-uploadProfilePhoto-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-UserRestController-uploadProfilePhoto-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-UserRestController-uploadProfilePhoto-title-200"></h3>
+                            <p id="examples-UserRestController-uploadProfilePhoto-description-200" class="marked"></p>
+                            <script>
+                              var responseUserRestController200_description = `OK`;
+                              var responseUserRestController200_description_break = responseUserRestController200_description.indexOf('\n');
+                              if (responseUserRestController200_description_break == -1) {
+                                $("#examples-UserRestController-uploadProfilePhoto-title-200").text("Status: 200 - " + responseUserRestController200_description);
+                              } else {
+                                $("#examples-UserRestController-uploadProfilePhoto-title-200").text("Status: 200 - " + responseUserRestController200_description.substring(0, responseUserRestController200_description_break));
+                                $("#examples-UserRestController-uploadProfilePhoto-description-200").html(responseUserRestController200_description.substring(responseUserRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserRestController-uploadProfilePhoto-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-UserRestController-uploadProfilePhoto-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserRestController-uploadProfilePhoto-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-UserRestController-uploadProfilePhoto-200-schema">
+                                <div id="responses-UserRestController-uploadProfilePhoto-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "*/*" : {
+      "schema" : {
+        "type" : "object"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-UserRestController-uploadProfilePhoto-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-UserRestController-uploadProfilePhoto-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-UserRestController-uploadProfilePhoto-200-schema-data' type='hidden' value=''></input>
                               </div>
                             </div>
                         </article>
@@ -19179,10 +20077,10 @@ public class VideoRestControllerApiExample {
         // Create an instance of the API class
         VideoRestControllerApi apiInstance = new VideoRestControllerApi();
         Long reviewId = 789; // Long | 
-        UploadVideoRequest uploadVideoRequest = ; // UploadVideoRequest | 
+        UploadProfilePhotoRequest uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
 
         try {
-            'String' result = apiInstance.uploadVideo(reviewId, uploadVideoRequest);
+            'String' result = apiInstance.uploadVideo(reviewId, uploadProfilePhotoRequest);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling VideoRestControllerApi#uploadVideo");
@@ -19199,10 +20097,10 @@ public class VideoRestControllerApiExample {
 final api_instance = DefaultApi();
 
 final Long reviewId = new Long(); // Long | 
-final UploadVideoRequest uploadVideoRequest = new UploadVideoRequest(); // UploadVideoRequest | 
+final UploadProfilePhotoRequest uploadProfilePhotoRequest = new UploadProfilePhotoRequest(); // UploadProfilePhotoRequest | 
 
 try {
-    final result = await api_instance.uploadVideo(reviewId, uploadVideoRequest);
+    final result = await api_instance.uploadVideo(reviewId, uploadProfilePhotoRequest);
     print(result);
 } catch (e) {
     print('Exception when calling DefaultApi->uploadVideo: $e\n');
@@ -19218,10 +20116,10 @@ public class VideoRestControllerApiExample {
     public static void main(String[] args) {
         VideoRestControllerApi apiInstance = new VideoRestControllerApi();
         Long reviewId = 789; // Long | 
-        UploadVideoRequest uploadVideoRequest = ; // UploadVideoRequest | 
+        UploadProfilePhotoRequest uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
 
         try {
-            'String' result = apiInstance.uploadVideo(reviewId, uploadVideoRequest);
+            'String' result = apiInstance.uploadVideo(reviewId, uploadProfilePhotoRequest);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling VideoRestControllerApi#uploadVideo");
@@ -19240,10 +20138,10 @@ public class VideoRestControllerApiExample {
 // Create an instance of the API class
 VideoRestControllerApi *apiInstance = [[VideoRestControllerApi alloc] init];
 Long *reviewId = 789; //  (default to null)
-UploadVideoRequest *uploadVideoRequest = ; //  (optional)
+UploadProfilePhotoRequest *uploadProfilePhotoRequest = ; //  (optional)
 
 [apiInstance uploadVideoWith:reviewId
-    uploadVideoRequest:uploadVideoRequest
+    uploadProfilePhotoRequest:uploadProfilePhotoRequest
               completionHandler: ^('String' output, NSError* error) {
     if (output) {
         NSLog(@"%@", output);
@@ -19262,7 +20160,7 @@ UploadVideoRequest *uploadVideoRequest = ; //  (optional)
 var api = new OpenApiDefinition.VideoRestControllerApi()
 var reviewId = 789; // {Long} 
 var opts = {
-  'uploadVideoRequest':  // {UploadVideoRequest} 
+  'uploadProfilePhotoRequest':  // {UploadProfilePhotoRequest} 
 };
 
 var callback = function(error, data, response) {
@@ -19296,10 +20194,10 @@ namespace Example
             // Create an instance of the API class
             var apiInstance = new VideoRestControllerApi();
             var reviewId = 789;  // Long |  (default to null)
-            var uploadVideoRequest = new UploadVideoRequest(); // UploadVideoRequest |  (optional) 
+            var uploadProfilePhotoRequest = new UploadProfilePhotoRequest(); // UploadProfilePhotoRequest |  (optional) 
 
             try {
-                'String' result = apiInstance.uploadVideo(reviewId, uploadVideoRequest);
+                'String' result = apiInstance.uploadVideo(reviewId, uploadProfilePhotoRequest);
                 Debug.WriteLine(result);
             } catch (Exception e) {
                 Debug.Print("Exception when calling VideoRestControllerApi.uploadVideo: " + e.Message );
@@ -19317,10 +20215,10 @@ require_once(__DIR__ . '/vendor/autoload.php');
 // Create an instance of the API class
 $api_instance = new OpenAPITools\Client\Api\VideoRestControllerApi();
 $reviewId = 789; // Long | 
-$uploadVideoRequest = ; // UploadVideoRequest | 
+$uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest | 
 
 try {
-    $result = $api_instance->uploadVideo($reviewId, $uploadVideoRequest);
+    $result = $api_instance->uploadVideo($reviewId, $uploadProfilePhotoRequest);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling VideoRestControllerApi->uploadVideo: ', $e->getMessage(), PHP_EOL;
@@ -19336,10 +20234,10 @@ use WWW::OPenAPIClient::VideoRestControllerApi;
 # Create an instance of the API class
 my $api_instance = WWW::OPenAPIClient::VideoRestControllerApi->new();
 my $reviewId = 789; # Long | 
-my $uploadVideoRequest = WWW::OPenAPIClient::Object::UploadVideoRequest->new(); # UploadVideoRequest | 
+my $uploadProfilePhotoRequest = WWW::OPenAPIClient::Object::UploadProfilePhotoRequest->new(); # UploadProfilePhotoRequest | 
 
 eval {
-    my $result = $api_instance->uploadVideo(reviewId => $reviewId, uploadVideoRequest => $uploadVideoRequest);
+    my $result = $api_instance->uploadVideo(reviewId => $reviewId, uploadProfilePhotoRequest => $uploadProfilePhotoRequest);
     print Dumper($result);
 };
 if ($@) {
@@ -19357,10 +20255,10 @@ from pprint import pprint
 # Create an instance of the API class
 api_instance = openapi_client.VideoRestControllerApi()
 reviewId = 789 # Long |  (default to null)
-uploadVideoRequest =  # UploadVideoRequest |  (optional)
+uploadProfilePhotoRequest =  # UploadProfilePhotoRequest |  (optional)
 
 try:
-    api_response = api_instance.upload_video(reviewId, uploadVideoRequest=uploadVideoRequest)
+    api_response = api_instance.upload_video(reviewId, uploadProfilePhotoRequest=uploadProfilePhotoRequest)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling VideoRestControllerApi->uploadVideo: %s\n" % e)</code></pre>
@@ -19371,10 +20269,10 @@ except ApiException as e:
 
 pub fn main() {
     let reviewId = 789; // Long
-    let uploadVideoRequest = ; // UploadVideoRequest
+    let uploadProfilePhotoRequest = ; // UploadProfilePhotoRequest
 
     let mut context = VideoRestControllerApi::Context::default();
-    let result = client.uploadVideo(reviewId, uploadVideoRequest, &context).wait();
+    let result = client.uploadVideo(reviewId, uploadProfilePhotoRequest, &context).wait();
 
     println!("{:?}", result);
 }
@@ -19427,7 +20325,7 @@ pub fn main() {
                                 <th width="150px">Name</th>
                                 <th>Description</th>
                               </tr>
-                                <tr><td style="width:150px;">uploadVideoRequest </td>
+                                <tr><td style="width:150px;">uploadProfilePhotoRequest </td>
 <td>
 <p class="marked"></p>
 <script>
@@ -19436,7 +20334,7 @@ $(document).ready(function() {
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/uploadVideo_request"
+        "$ref" : "#/components/schemas/uploadProfilePhoto_request"
       }
     }
   }
@@ -19458,12 +20356,12 @@ $(document).ready(function() {
   }
 
   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-  var result = $('#d2e199_uploadVideo_uploadVideoRequest');
+  var result = $('#d2e199_uploadVideo_uploadProfilePhotoRequest');
   result.empty();
   result.append(view.render());
 });
 </script>
-<div id="d2e199_uploadVideo_uploadVideoRequest"></div>
+<div id="d2e199_uploadVideo_uploadProfilePhotoRequest"></div>
 </td>
 </tr>
 
