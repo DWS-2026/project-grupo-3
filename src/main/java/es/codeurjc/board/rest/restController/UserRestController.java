@@ -79,8 +79,7 @@ public class UserRestController {
         return ResponseEntity.ok(
                 userService.findAll().stream()
                         .map(userMapper::basicToDTO)
-                        .toList()
-        );
+                        .toList());
     }
 
     @GetMapping("/{id}")
@@ -107,7 +106,8 @@ public class UserRestController {
 
         if (user == null) return ResponseEntity.notFound().build();
 
-        if (userService.getUserID(request) != id && !userService.isUserAdmin(request)) {
+        if (!userService.seeIfUserIsLoggedIn(request)||(userService.getUserID(request) != id)
+        || (userService.isUserAdmin(request))) {
             return ResponseEntity.status(403).body("Forbidden");
         }
 

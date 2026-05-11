@@ -1,10 +1,13 @@
 package es.codeurjc.board.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -13,19 +16,24 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import es.codeurjc.board.rest.dto.ApiErrorDTO;
 import es.codeurjc.board.security.jwt.JwtRequestFilter;
 import es.codeurjc.board.security.jwt.JwtTokenProvider;
-import es.codeurjc.board.security.jwt.UnauthorizedHandlerJwt;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
-    @Autowired
-    private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -52,14 +60,55 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationEntryPoint apiAuthenticationEntryPoint() {
+        return (request, response, authException) -> {
+            logger.warn("401 en filtro - {}: {}", request.getRequestURI(), authException.getMessage());
+
+            ApiErrorDTO error = new ApiErrorDTO(401, "UNAUTHORIZED",
+                "No autenticado. Token de sesión ausente o expirado.", request.getRequestURI());
+
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setStatus(401);
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+            response.getWriter().write(mapper.writeValueAsString(error));
+        };
+    }
+
+    @Bean
+    public AccessDeniedHandler apiAccessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            logger.warn("403 en filtro - {}: {}", request.getRequestURI(), accessDeniedException.getMessage());
+
+            ApiErrorDTO error = new ApiErrorDTO(403, "FORBIDDEN",
+                "Acceso denegado. No tienes permisos suficientes para este recurso.", request.getRequestURI());
+
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setStatus(403);
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+            response.getWriter().write(mapper.writeValueAsString(error));
+        };
+    }
+
+    @Bean
     @Order(1)
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
-
+        
         http.authenticationProvider(authenticationProvider());
 
         http
-                .securityMatcher("/api/v1/**")
-                .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
+            .securityMatcher("/api/v1/**")
+            .exceptionHandling(handling -> handling
+                .authenticationEntryPoint(apiAuthenticationEntryPoint())   
+                .accessDeniedHandler(apiAccessDeniedHandler())          
+            );
 
         http.authorizeHttpRequests(authorize -> authorize
                 // public
@@ -99,7 +148,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/users/").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/users/me").hasRole("USER")
-                .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole( "USER")
                 .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasAnyRole("ADMIN", "USER")
 
                 // images

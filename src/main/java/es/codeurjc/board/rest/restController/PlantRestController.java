@@ -98,7 +98,7 @@ public class PlantRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<PlantBasicDTO> newPlant(@Valid @RequestBody PlantBasicDTO plantDTO,  HttpServletRequest session){ //we
+    public ResponseEntity<PlantBasicDTO> newPlant(@Valid @RequestBody PlantBasicDTO plantDTO,  HttpServletRequest session){
        if(!plantService.validRequest(plantDTO.name(), plantDTO.species())){
         return ResponseEntity.badRequest().build();
        } else if(userService.seeIfUserIsLoggedIn(session) && userService.isUserUser(session)){
