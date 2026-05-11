@@ -106,8 +106,7 @@ public class UserRestController {
 
         if (user == null) return ResponseEntity.notFound().build();
 
-        if (!userService.seeIfUserIsLoggedIn(request)||(userService.getUserID(request) != id)
-        || (userService.isUserAdmin(request))) {
+        if (!userService.seeIfUserIsLoggedIn(request)||(userService.getUserID(request) != id)) {
             return ResponseEntity.status(403).body("Forbidden");
         }
 

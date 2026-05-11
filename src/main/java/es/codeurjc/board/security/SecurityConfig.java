@@ -148,7 +148,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/users/").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/api/v1/users/me").hasRole("USER")
-                .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole( "USER")
+                .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasAnyRole( "USER","ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasAnyRole("ADMIN", "USER")
 
                 // images
