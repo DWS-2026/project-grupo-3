@@ -508,7 +508,7 @@ Para esta parte de la prácica me he encargado de realizar todo lo relacionado c
 ## 🛠 **Práctica 3: Incorporación de una API REST a la aplicación web, análisis de vulnerabilidades y contramedidas**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/VLJ0921523I)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Documentación de la API REST**
@@ -531,9 +531,9 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | Admin | admin |
+| Usuario Registrado | Pepe | pepe |
+| Usuario Registrado | Holi | hola |
 
 ### **Participación de Miembros en la Práctica 3**
 
@@ -593,4 +593,3 @@ Video, la cual he diseñado e implementado desde cero.
 | 2  |       [rest Controller y DTO para las reviews](https://github.com/DWS-2026/project-grupo-3/commit/c03bc3641720712a1819771a117a55c9016e1512)        | [ReviewsRestController](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/ReviewRestController.java) |
 | 3  |        [Rest Controller y DTO para los videos](https://github.com/DWS-2026/project-grupo-3/commit/d31331fb8619c2ddc56dab1c97f701df416d8581)        |  [VideoRestController](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/rest/restController/VideoRestController.java)   |
 | 4  | [Implementación y sanitización del texto enriquecido](https://github.com/DWS-2026/project-grupo-3/commit/d4283f1f5f8ca3c577d90bdff4d6a0e866bd4504) |             [ReviewsService](https://github.com/DWS-2026/project-grupo-3/blob/main/src/main/java/es/codeurjc/board/service/ReviewsService.java)              |
-| 5  |                                                        [Descripción commit 5](URL_commit_5)                                                        |                                                                  [Archivo5](URL_archivo_5)                                                                   |
