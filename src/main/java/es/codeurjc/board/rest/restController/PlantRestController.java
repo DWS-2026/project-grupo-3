@@ -67,11 +67,10 @@ public class PlantRestController {
     }
 
     @DeleteMapping("/{id}")
-    
     public ResponseEntity<PlantBasicDTO> deletePlant(@PathVariable long id,HttpServletRequest session){
             Optional<Plant> plant = plantService.findById(id);
-            if(plant.isPresent() && (userService.seeIfUserIsLoggedIn(session) || 
-                plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session)) || userService.isUserAdmin(session))){
+            if(plant.isPresent() && ((userService.seeIfUserIsLoggedIn(session) && plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session)))
+                || userService.isUserAdmin(session))){
                 plantService.deleteById(id);
                 return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
             }else{
