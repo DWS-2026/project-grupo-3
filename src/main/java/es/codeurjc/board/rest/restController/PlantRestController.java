@@ -74,7 +74,7 @@ public class PlantRestController {
                 plantService.deleteById(id);
                 return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
             }else{
-                if(!userService.seeIfUserIsLoggedIn(session)){
+                if((!userService.seeIfUserIsLoggedIn(session)) || (!plantService.seeIfPlantBelongsToUser(plant.get(),userService.getUser(session)))){
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); 
                 }
                 return ResponseEntity.notFound().build();
@@ -115,18 +115,17 @@ public class PlantRestController {
 	@GetMapping("/{id}")
 	public ResponseEntity<PlantBasicDTO> getPlant(@PathVariable long id,  HttpServletRequest session) {
         if(userService.seeIfUserIsLoggedIn(session)){
-        Optional<Plant> plant = plantService.findById(id);
-        if(plant.isPresent()){
-            return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
+            Optional<Plant> plant = plantService.findById(id);
+            if(plant.isPresent()){
+                return ResponseEntity.ok(plantMapper.ToDTO(plant.get()));
+            }else{
+                return ResponseEntity.notFound().build();
+            }
         }else{
-            return ResponseEntity.notFound().build();
-        }}else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
         }
-            
-
-	}
+        
+    }
 
     @PostMapping("/{id}/image")
     public ResponseEntity<ImageDTO> addImageToPlant(@PathVariable long id,@RequestParam MultipartFile newImage, HttpServletRequest session) 

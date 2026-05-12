@@ -151,9 +151,8 @@ public class UserRestController {
             return ResponseEntity.notFound().build();
         }
 
-        // Solo el propio usuario o admin
-        if (userService.getUserID(request) != id &&
-                !userService.isUserAdmin(request)) {
+
+        if (!userService.seeIfUserIsLoggedIn(request) || (userService.getUserID(request) != id ) || userService.isUserAdmin(request)) {
 
             return ResponseEntity.status(403).body("Forbidden");
         }
